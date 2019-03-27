@@ -33,7 +33,11 @@ Roy Paulin Justo Nguetsop Kenfack Djouaka @s257855
 
 | Stakeholder name  | Description | 
 | ----------------- |:-----------:|
-|                   |             | 
+|    Employee               | there are the employees of the company and they can use the application LaTazza to buy capsules in other to make coffee           |
+| Visitor | they may be either clients of the company or friends or family of any employee which can buy a capsule to make coffee| 
+|Manager | He is also an employee of the company but have been designated by the colleagues to manage the sale and supply of capsules  |
+|Bank | in case the customer buy by credit card,the bank should take the opration in charge|
+|supply company | need an access to the app in order to monitor capsules supply activities to  the manager's company|
 
 # Context Diagram and interfaces
 
