@@ -44,6 +44,22 @@ Roy Paulin Justo Nguetsop Kenfack Djouaka @s257855
 ## Context Diagram
 \<Define here Context diagram using UML use case diagram>
 
+@startuml
+actor employee as e
+actor supply_company as sc
+actor visitor as v
+actor bank as b
+
+
+rectangle system{
+  (LaTazza) as lt
+
+     e-lt :"use"
+     lt-v
+     lt-b :"take in charge payment"
+     sc-lt:"supply"
+}
+@enduml
 \<actors are a subset of stakeholders>
 
 ## Interfaces
