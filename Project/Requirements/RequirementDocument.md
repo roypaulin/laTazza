@@ -1,6 +1,6 @@
 # Requirements Document Template
 
-**Authors:**	
+**Authors:**
 Elia Migliore @s228279,  
 Jean Thibaut Ndjekoua Sandjo @s256770,  
 Riccardo Mereu @s265599,  
@@ -15,8 +15,8 @@ Roy Paulin Justo Nguetsop Kenfack Djouaka @s257855
 - [Stakeholders](#stakeholders)
 - [Context Diagram and interfaces](#context-diagram-and-interfaces)
 	+ [Context Diagram](#context-diagram)
-	+ [Interfaces](#interfaces) 
-	
+	+ [Interfaces](#interfaces)
+
 - [Stories and personas](#stories-and-personas)
 - [Functional and non functional requirements](#functional-and-non-functional-requirements)
 	+ [Functional Requirements](#functional-requirements)
@@ -31,20 +31,19 @@ Roy Paulin Justo Nguetsop Kenfack Djouaka @s257855
 # Stakeholders
 
 
-| Stakeholder name  | Description | 
+| Stakeholder name  | Description |
 | ----------------- |:-----------:|
-|    Employee               | there are the employees of the company and they can use the application LaTazza to buy capsules in other to make coffee           |
-| Visitor | they may be either clients of the company or friends or family of any employee which can buy a capsule to make coffee| 
+|    Employee               | they are the employees of the company and they can use the application LaTazza to buy capsules in other to make coffee           |
+| Visitor | they may be either clients of the company or friends or family of any employee which can buy a capsule to make coffee|
 |Manager | He is also an employee of the company but have been designated by the colleagues to manage the sale and supply of capsules  |
-|Bank | in case the customer buy by credit card,the bank should take the opration in charge|
+|Bank | in case the customer buy by credit card, the bank should take the operation in charge|
 |supply company | need an access to the app in order to monitor capsules supply activities to  the manager's company|
 
 # Context Diagram and interfaces
 
 ## Context Diagram
 \<Define here Context diagram using UML use case diagram>
-
-@startuml
+```plantuml
 actor employee as e
 actor supply_company as sc
 actor visitor as v
@@ -53,13 +52,12 @@ actor bank as b
 
 rectangle system{
   (LaTazza) as lt
-
-     e-lt :"use"
-     lt-v
-     lt-b :"take in charge payment"
-     sc-lt:"supply"
+  e-lt :"use"
+  lt-v
+  lt-b :"take in charge payment"
+  sc-lt:"supply"
 }
-@enduml
+```
 \<actors are a subset of stakeholders>
 
 ## Interfaces
@@ -83,7 +81,7 @@ rectangle system{
 \<In the form DO SOMETHING, or VERB NOUN, describe high level capabilities of the system> <will match to high level use cases>
 
 | ID        | Description  |
-| ------------- |:-------------:| 
+| ------------- |:-------------:|
 |  FR1     |  |  
 |  FR2     |  |
 |  ...     |  |
@@ -110,7 +108,7 @@ rectangle system{
 
 ### Use case 1, UC1
 | Actors Involved        |  |
-| ------------- |:-------------:| 
+| ------------- |:-------------:|
 |  Precondition     | \<Boolean expression, must evaluate to true before the UC can start> |  
 |  Post condition     | \<Boolean expression, must evaluate to true after UC is finished> |
 |  Nominal Scenario     | \<Textual description of actions executed by the UC> |
@@ -130,7 +128,7 @@ State at which UC the scenario refers to
 ## Scenario 1
 
 | Scenario ID: SC1        | Corresponds to UC:  |
-| ------------- |:-------------:| 
+| ------------- |:-------------:|
 | Step#        | Description  |
 |  1     |  |  
 |  2     |  |
