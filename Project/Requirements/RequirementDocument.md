@@ -65,10 +65,10 @@ rectangle system{
 ## Interfaces
 | Actor | Logical Interface | Physical Interface  |
 | ------------- |:-------------:| -----:|
-| Employee      | GUI to give the possibility to the customer to check availabily of the capsules and to manage his account | no need |
-| Vistor |GUI wich may be used to check the availabily of cpsules before buying |no need|
+| Employee      | GUI to give the possibility to the customer to check availabily of the capsules and to manage his account | touch screen |
+| Vistor |GUI wich may be used to check the availabily of cpsules before buying |no need because will be served by the manager|
 | Bank|API to interact with the bank in order to perform the debit in case the customer buy by credit card;Date should be sent using a defined format(either json or xml) |
-| Supply company | GUI in order to check the supply requests,archive the accomplishment of a supply and access the list of previous supply in a certains time window |
+| Supply company | GUI in order to check the supply requests,archive the accomplishment of a supply and access the list of previous supply in a certains time window |touch sreen to manage the supply requests and access spply history
 
 # Stories and personas
 \<A Persona is a realistic impersonation of an actor. Define here a few personas and describe in plain text how a persona interacts with the system>
