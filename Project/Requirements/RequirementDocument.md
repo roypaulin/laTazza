@@ -108,7 +108,7 @@ rectangle system{
 |  NFR8     | Efficiency | F5 in less than 0.5sec | FR5 |
 |  NFR9     | Efficiency | F7 in less than 0.5sec  | FR7 |
 |  NFR19    | Efficiency | F8 in less than 10sec (time more hight because the interaction with the bank api| FR8 |
-|  NFR11    | Domain | the Currency is Euro € | FR\<y>|
+|  NFR11    | Domain | the Currency is Euro € | All |
 |  NFR12    | Domain | the credit must be always >= -10€  | All |
 |  NFR13    | Reiability | the software must check if at the end of buy the credit is >=-10€ | FR1 |
 |  NFR14    | Domain | at the end of month if the credit of a Employee is <0 the money to get a positive credit are taken automatically from the salaty | FR1 |
