@@ -90,7 +90,7 @@ rectangle system{
 |	FR5		|	Agent Manager check the inventory (product avaiability and product price) |
 |	FR6		| 	Agent Employee or Agent Visitor buy Capsule or Boxes  |
 |	FR7		|	Agent Employee get his/her balance |
-|	FR8		|	Employee buy credit throw money, credit card or retained on the pay slip |
+|	FR8		|	Employee buy credit by cash, credit card or retained on the pay slip |
 
 ## Non Functional Requirements
 
