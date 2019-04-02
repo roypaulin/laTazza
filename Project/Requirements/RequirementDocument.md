@@ -67,9 +67,9 @@ rectangle system{
 ## Interfaces
 | Actor | Logical Interface | Physical Interface  |
 | ------------- |:-------------:| -----:|
-| Employee      | GUI to give the possibility to the customer to check availabily of the capsules and to manage his account | Touch screen |
-| Vistor |GUI wich may be used to check the availabily of capsules before buying |no need because will be served by the manager|
-| Bank|API to interact with the bank in order to perform the debit in case the customer buy by credit card;Date should be sent using a defined format(either json or xml) |not needed
+| Employee      | GUI to give the possibility to the customer to check availabily of the capsules, view the prices and to manage his account (view remaining credit and charge it, view list of expenses) | Touch screen |
+| Vistor |GUI wich may be used to check the availabily of capsules before buying and the price of the products |no need because will be served by the manager|
+| Bank|API to interact with the bank in order to perform the debit in case the customer buy by credit card;Date should be sent using a defined format(either json or xml are good choices but xml is more easy to understand and reduces the errors due to the xmlsd that validates the data before the processing) |not needed
 | Supply company | Assuming the supply company has it own system to handle supplies,we should provide some API to interact with that system in order to facilitate supply activities. | not needed
 
 # Stories and personas
