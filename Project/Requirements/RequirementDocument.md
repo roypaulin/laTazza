@@ -83,14 +83,14 @@ rectangle system{
 ## Functional Requirements
 | 	ID		|	Description	|
 | ------------- |:-------------|
-|	FR1		|	Manager shall be able to sell capsules |  
-|	FR2		|	Manager shall be able to buy boxes of capsule |
-|	FR3		|	Manager shall be able to manage credit of an Employee |
-|	FR4		| 	Manager shall be able to manage debt of an Employee |
-|	FR5		|	Manafer shall be able to check the inventory |
-|	FR6		| 	Employee shall be able to buy Capsule |
-|	FR7		|	Employee shall be able to check his/her balance |
-|	FR8		|	Employee shall be able to buy credit |
+|	FR1		|	Agent Manager sell capsules to agent employee or to agent visitor |  
+|	FR2		|	Agent Manager buy boxes of capsule from supply company |
+|	FR3		|	Agent Manager increment or decrement credit of an Employee |
+|	FR4		| 	Agent Manager increment or decrement the debt of an Employee |
+|	FR5		|	Agent Manager check the inventory (product avaiability and product price) |
+|	FR6		| 	Agent Employee or Agent Visitor buy Capsule or Boxes  |
+|	FR7		|	Agent Employee get his/her balance |
+|	FR8		|	Employee buy credit throw money, credit card or retained on the pay slip |
 
 ## Non Functional Requirements
 
@@ -98,9 +98,27 @@ rectangle system{
 
 | ID        | Type (efficiency, reliability, ..)           | Description  | Refers to |
 | ------------- |:-------------:| :-----:| -----:|
-|  NFR1     |  |  | FR\<x>|
-|  NFR2     |  |  | FR\<y>|
-|  ...     |  |  | FR\<x>|
+|  NFR1     | Efficiency | F1 less than 1sec  | FR1 |
+|  NFR2     | Reiability |  | FR |
+|  NFR3     | Usability |  | FR |
+|  NFR4     | Maintanability |  | FR |
+|  NFR5     | Portability | the code has to be written in java, so it is
+indipendent from the machine  | All |
+|  NFR6     | Efficiency  | F3 in less than 1sec  | FR3 |
+|  NFR7     | Efficiency | F4 in less than 1sec | FR4 |
+|  NFR8     | Efficiency | F5 in less than 1sec | FR5 |
+|  NFR9     | Efficiency | F7 in less than 1sec  | FR7 |
+|  NFR19    | Efficiency | F8 in less than 10sec (time more hight because the interaction with the bank api| FR8 |
+|  NFR11    |  |  | FR\<y>|
+|  NFR12    |  |  | FR\<y>|
+|  NFR13    |  |  | FR\<y>|
+|  NFR14    |  |  | FR\<y>|
+|  NFR15    |  |  | FR\<y>|
+|  NFR16    |  |  | FR\<y>|
+|  NFR17    |  |  | FR\<y>|
+|  NFR18    |  |  | FR\<y>|
+|  NFR19    |  |  | FR\<y>|
+|  NFR20    |  |  | FR\<y>|
 
 
 # Use case diagram and use cases
