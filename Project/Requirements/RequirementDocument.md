@@ -36,10 +36,10 @@ Roy Paulin Justo Nguetsop Kenfack Djouaka @s257855
 |	Manager	    | He is also an employee of the company but have been designated by the colleagues to manage the sale and supply of capsules  |
 |	Supply Company	| Need an access to the app in order to monitor capsules supply activities to the Manager's company |
 
-####Supply Company
+#### Supply Company
 We assume that the Supply Company offers a limited set of products, the capsules listed in the Informal Description Document, i.e. Coffee, Arabic Cofee, etc. These products can be acquired directly using LaTazza through an API System.
 
-# Context Diagram and interfaces
+# Context Digram and interfaces
 
 ## Context Diagram
 \<Define here Context diagram using UML use case diagram>
