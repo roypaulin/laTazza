@@ -81,14 +81,16 @@ rectangle system{
 # Functional and non functional requirements
 
 ## Functional Requirements
-
-\<In the form DO SOMETHING, or VERB NOUN, describe high level capabilities of the system> <will match to high level use cases>
-
-| ID        | Description  |
-| ------------- |:-------------:|
-|  FR1     |  |  
-|  FR2     |  |
-|  ...     |  |
+| 	ID		|	Description	|
+| ------------- |:-------------|
+|	FR1		|	Manager shall be able to sell capsules |  
+|	FR2		|	Manager shall be able to buy boxes of capsule |
+|	FR3		|	Manager shall be able to manage credit of an Employee |
+|	FR4		| 	Manager shall be able to manage debt of an Employee |
+|	FR5		|	Manafer shall be able to check the inventory |
+|	FR6		| 	Employee shall be able to buy Capsule |
+|	FR7		|	Employee shall be able to check his/her balance |
+|	FR8		|	Employee shall be able to buy credit |
 
 ## Non Functional Requirements
 
