@@ -97,28 +97,23 @@ rectangle system{
 \<Describe constraints on functional requirements>
 
 | ID        | Type (efficiency, reliability, ..)           | Description  | Refers to |
-| ------------- |:-------------:| :-----:| -----:|
+| ------------- |:-------------:| :-----:| :-----:|
 |  NFR1     | Efficiency | F1 less than 1sec  | FR1 |
-|  NFR2     | Reiability |  | FR |
-|  NFR3     | Usability |  | FR |
-|  NFR4     | Maintanability |  | FR |
-|  NFR5     | Portability | the code has to be written in java, so it is
-indipendent from the machine  | All |
-|  NFR6     | Efficiency  | F3 in less than 1sec  | FR3 |
-|  NFR7     | Efficiency | F4 in less than 1sec | FR4 |
-|  NFR8     | Efficiency | F5 in less than 1sec | FR5 |
-|  NFR9     | Efficiency | F7 in less than 1sec  | FR7 |
+|  NFR2     | Reiability | the number of capsule must never be less thant 0 | FR1 |
+|  NFR3     | Usability | the action to be done must require less than 3 screen changes  | All |
+|  NFR4     | Maintanability | the interaction with the bank for the credit card must me done with REST paradigma  | FR8 |
+|  NFR5     | Portability | the code has to be written in java, so it is indipendent from the machine  | All |
+|  NFR6     | Efficiency  | F3 in less than 0.5sec  | FR3 |
+|  NFR7     | Efficiency | F4 in less than 0.5sec | FR4 |
+|  NFR8     | Efficiency | F5 in less than 0.5sec | FR5 |
+|  NFR9     | Efficiency | F7 in less than 0.5sec  | FR7 |
 |  NFR19    | Efficiency | F8 in less than 10sec (time more hight because the interaction with the bank api| FR8 |
-|  NFR11    |  |  | FR\<y>|
-|  NFR12    |  |  | FR\<y>|
-|  NFR13    |  |  | FR\<y>|
-|  NFR14    |  |  | FR\<y>|
-|  NFR15    |  |  | FR\<y>|
-|  NFR16    |  |  | FR\<y>|
-|  NFR17    |  |  | FR\<y>|
-|  NFR18    |  |  | FR\<y>|
-|  NFR19    |  |  | FR\<y>|
-|  NFR20    |  |  | FR\<y>|
+|  NFR11    | Domain | the Currency is Euro € | FR\<y>|
+|  NFR12    | Domain | the credit must be always >= -10€  | All |
+|  NFR13    | Reiability | the software must check if at the end of buy the credit is >=-10€ | FR1 |
+|  NFR14    | Domain | at the end of month if the credit of a Employee is <0 the money to get a positive credit are taken automatically from the salaty | FR1 |
+|  NFR15    | Reiability | if the Employee buy credit throw credit card the system must check that the card is valid  | FR8 |
+|  NFR16    | Reiability  | the agent Employee and the agent Manager can't be the same phisical person | FR1 |
 
 
 # Use case diagram and use cases
