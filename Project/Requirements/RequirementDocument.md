@@ -29,15 +29,15 @@ Roy Paulin Justo Nguetsop Kenfack Djouaka @s257855
 - [System design](#system-design)
 
 # Stakeholders
-
-
 | Stakeholder name  | Description |
 | ----------------- |:-----------:|
-|    Employee               | they are the employees of the company and they can use the application LaTazza to buy capsules in other to make coffee           |
-| Visitor | they may be either clients of the company or friends or family of any employee which can buy a capsule to make coffee|
-|Manager | He is also an employee of the company but have been designated by the colleagues to manage the sale and supply of capsules  |
-|Bank | in case the customer buy by credit card, the bank should take the operation in charge|
-|supply company | need an access to the app in order to monitor capsules supply activities to  the manager's company|
+|	Employee	| They are the employees of the company and they can use the application LaTazza to buy capsules in order to make coffee|
+|	Visitor	    | They may be either clients of the company or friends or family of any employee which can buy a capsule to make coffee|
+|	Manager	    | He is also an employee of the company but have been designated by the colleagues to manage the sale and supply of capsules  |
+|	Supply Company	| Need an access to the app in order to monitor capsules supply activities to the Manager's company |
+
+####Supply Company
+We assume that the Supply Company offers a limited set of products, the capsules listed in the Informal Description Document, i.e. Coffee, Arabic Cofee, etc. These products can be acquired directly using LaTazza through an API System.
 
 # Context Diagram and interfaces
 
