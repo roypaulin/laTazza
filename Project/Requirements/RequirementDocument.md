@@ -37,8 +37,7 @@ Roy Paulin Justo Nguetsop Kenfack Djouaka @s257855
 |	Manager	    | He is also an employee of the company but have been designated by the colleagues to manage the sale and supply of capsules  |
 |	Supply Company	| Need an access to the app in order to monitor capsules supply activities to the Manager's company |
 
-#### Supply Company
-We assume that the Supply Company offers a limited set of products, the capsules listed in the Informal Description Document, i.e. Coffee, Arabic Cofee, etc. These products can be acquired directly using LaTazza through an API System.
+**nb:** We assume that the Supply Company offers a limited set of products, the capsules listed in the Informal Description Document, i.e. Coffee, Arabic Cofee, etc. These products can be acquired directly using LaTazza through an API System.
 
 # Context Digram and interfaces
 
@@ -54,7 +53,7 @@ actor Employee as e
 actor "Supply Company" as sc
 actor Visitor as v
 actor Bank as b
-
+actor Manager as m
 
 rectangle system{
   (LaTazza) as lt
@@ -62,6 +61,7 @@ rectangle system{
   lt--v   
   lt--b 
   sc--lt
+  m--lt
 }
 ```
 
