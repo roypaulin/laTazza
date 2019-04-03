@@ -77,8 +77,8 @@ rectangle system{
 \<A Persona is a realistic impersonation of an actor. Define here a few personas and describe in plain text how a persona interacts with the system>
 
 \<Persona is-an-instance-of actor>  \<stories will be formalized later as use cases>
-###Persona 1
-Paolo Capaldo  
+### Persona 1  
+**Paolo Capaldo**  
 53, Manager and CEO of Riesbinaria, father of six children
 
 As a Software Architect, Paolo has the duty of grant coffee to his employees and has to monitor and manage the finance related to the coffee maker.  
