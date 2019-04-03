@@ -307,28 +307,20 @@ balance
 class Client{
 }
 
+class "Supply Company"{
+}
 
 class Manager{
-ID
-name
-surname
 }
 
-
-class Sale{
-date
+class Credit{
 }
-
-class Purchase{
-date
-}
-
 class Capsule{
 price
-type
 }
 
-
+class "Capsule Type"{
+}
 class Box {
 price
 }
@@ -337,19 +329,32 @@ price
 class Inventory{
 }
 
+class Sale{
+date
+}
 
+class Order{
+date
+}
+
+Order "*" -- Manager: performs
+Order -- "1..*" Box
+"Supply Company" "1" -- "*" Order 
+
+Sale "*" -- "1" Manager: performs
+Sale -- Client: to
+Sale -- "1..*" Capsule 
+
+Credit -- Employee: has
 Box o-- “50” Capsule
 Inventory o-- Capsule
 
 Client <|-- Employee
 Client <|-- Visitor
 
-Sale -- Client: buys
-Sale -- Capsule
-Sale -- Manager: sells
+Employee <|-- Manager
 
-Purchase -- Box
-Purchase “*” --  Manager
+Capsule -- "Capsule Type": is of
 ```
 
 # System Design
