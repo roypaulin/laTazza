@@ -150,10 +150,14 @@ actor bank as b
 (supply capsules ) as sca
 (send deliverer) as sd
 (check local account) as cla
+(buy credits from account) as bcfa
 
 m -- sc
 m -- bbc
 m -- mcd
+e -- mcd
+b -- bcfa
+e -- bcfa
 
 e <|-- m
 sc .> se : include
@@ -171,7 +175,6 @@ sc -- e
 bbc -- s
 sc -- v
 b -- bbc
-b -- mcd
 s -- sca
 sca -- b
 e -- cla
