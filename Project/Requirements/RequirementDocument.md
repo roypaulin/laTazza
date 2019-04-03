@@ -77,11 +77,14 @@ rectangle system{
 \<A Persona is a realistic impersonation of an actor. Define here a few personas and describe in plain text how a persona interacts with the system>
 
 \<Persona is-an-instance-of actor>  \<stories will be formalized later as use cases>
-
-Paolo Capaldo
+###Persona 1
+Paolo Capaldo  
 53, Manager and CEO of Riesbinaria, father of six children
 
-As a software architect, Paolo has the duty of grant coffie to his employeesbut each employees has a different taste on coffie (in italy coffie is very important! And a developer without coffie cannot produce valid and correct code). Paolo has also the duty to monitorate and manage the finance related to the "lavazza a modo mio", each year some money related to the capsule go lost and Paolo must pay from his own poket. Frustrated from this situation want to find a software that help's him to manage the coffie extending also the use of that machine to the occasional visitor of the agency.
+As a Software Architect, Paolo has the duty of grant coffee to his employees and has to monitor and manage the finance related to the coffee maker.  
+Each employee has a different taste on coffee, in Italy coffee is very important and a developer without coffee cannot produce valid and correct code.  
+Each year some money related to the capsules go lost and Paolo must pay from his own pocket. This situation is really frustrating, so he wants to find a software that helps him to manage the coffee extending also the use of that machine to the occasional visitor of the agency.
+
 
 
 
