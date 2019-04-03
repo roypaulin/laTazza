@@ -109,16 +109,16 @@ Each year some money related to the capsules go lost and Paolo must pay from his
 | ------------- |:-------------:| :-----:| :-----:|
 |  NFR1     | Efficiency | F1 less than 1sec  | FR1 |
 |  NFR2     | Reiability | the number of capsule must never be less thant 0 | FR1 |
-|  NFR3     | Usability | the action to be done must require less than 3 screen changes  | All |
+|  NFR3     | Usability | the action to be done must require less than 3 screen changes  | FR1,FR2,FR2,FR3,FR4,FR5,FR6,FR7,FR8 |
 |  NFR4     | Maintanability | the interaction with the bank for the credit card must me done with REST paradigma  | FR8 |
-|  NFR5     | Portability | the code has to be written in java, so it is indipendent from the machine  | All |
+|  NFR5     | Portability | the code has to be written in java, so it is indipendent from the machine  | FR1,FR2,FR2,FR3,FR4,FR5,FR6,FR7,FR8 |
 |  NFR6     | Efficiency  | F3 in less than 0.5sec  | FR3 |
 |  NFR7     | Efficiency | F4 in less than 0.5sec | FR4 |
 |  NFR8     | Efficiency | F5 in less than 0.5sec | FR5 |
 |  NFR9     | Efficiency | F7 in less than 0.5sec  | FR7 |
 |  NFR19    | Efficiency | F8 in less than 10sec (time more hight because the interaction with the bank api| FR8 |
-|  NFR11    | Domain | the Currency is Euro € | All |
-|  NFR12    | Domain | the credit must be always >= -10€  | All |
+|  NFR11    | Domain | the Currency is Euro € | FR1,FR2,FR2,FR3,FR4,FR5,FR6,FR7,FR8 |
+|  NFR12    | Domain | the credit must be always >= -10€  | FR1,FR2,FR2,FR3,FR4,FR5,FR6,FR7,FR8 |
 |  NFR13    | Reiability | the software must check if at the end of buy the credit is >=-10€ | FR1 |
 |  NFR14    | Domain | at the end of month if the credit of a Employee is <0 the money to get a positive credit are taken automatically from the salaty | FR1 |
 |  NFR15    | Reiability | if the Employee buy credit throw credit card the system must check that the card is valid  | FR8 |
