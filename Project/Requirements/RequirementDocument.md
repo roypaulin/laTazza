@@ -223,7 +223,7 @@ e -- cla
 |  Nominal Scenario     |the employee can have a personal account on LaTazza and can access through an interface, watch the updated details about his credits, his payments history, and the last log in  date   |
 |  Variants     |  the supply company sends the wrong order, so it has to cancel the previous delivery, and  rechecks the order |
 
-### Use case 5, Buy credits from account
+### Use case 6, Buy credits from account
 | Actors Involved        | employee,bank |
 | ------------- |:-------------:| 
 |  Precondition     |the employee has a local account |  
@@ -299,17 +299,29 @@ e -- cla
 
 ## Scenario 5
 
-| Scenario ID: SC5        | Corresponds to UC: Manage credit and debt|
+| Scenario ID: SC5        | Corresponds to UC: Manage credits and debt|
 | ------------- |:-------------:| 
 | Step#        | Description  |
 |  1     | the manager clicks on "charge credits" |
-|  2     | the manager selects the client |
-|  3     | the manager puts the amount |
-|  4     | the manager clicks on "charge" |
-|  5     | the system shows the charging operation details  |
-|  6     | the system updates the employee's balance|
+|  2     | the manager takes the cash from the employee |
+|  3     | the manager selects the client |
+|  4     | the manager puts the amount |
+|  5     | the manager clicks on "charge" |
+|  6     | the system shows the charging operation details  |
+|  7     | the system updates the employee's balance|
 
+## Scenario 6
 
+| Scenario ID: SC6        | Corresponds to UC: Buy credit from account|
+| ------------- |:-------------:| 
+| Step#        | Description  |
+|  1     | the employee clicks on "charge credits" |
+|  2     | the employee fills the relevant fields with his credit card details |
+|  3     | the employee puts the amount |
+|  4     | the employee clicks on "charge" |
+|  5     | the bank handles the payment |
+|  6     | the system shows the charging operation details  |
+|  7     | the system updates the employee's balance|
 
 # Glossary
 
