@@ -227,28 +227,41 @@ e -- cla
 
 # Relevant scenarios
 ## Scenario 1
-
 | Scenario ID: SC1        | Corresponds to UC: Sell capsule |
 | ------------- |:-------------:| 
 | Step#        | Description  |
 |  1     | the customer orders some capsules to the manager |  
 |  2     | the manager clicks on "start a sell operation"  |
-|  3     | the manager chooses the customer's type |
-|  4     | the system shows the inventory, the local  account data(if employee) and a form to fill whose content depends on the customer's type |
+|  3     | the manager select  "employee" as customer's type |
+|  4     | the system shows the inventory, the local  account data and a form to fill  |
 |  5     | the manager checks the inventory |
-|  6     | the manager selects the employee(if customer==employee) |
+|  6     | the manager selects the employee |
 |  7     | the manager selects number of capsules|
 |  8     | the manager selects beverage type|
-|  9     | the manager selects the payment method (only for the employee) |
+|  9     | the manager selects the payment method  |
+|  10     | the manager clicks on "sell" |
+|  11     | system considers the capsules as sold and updates the remaining number |
+
+## Scenario 2
+
+| Scenario ID: SC2        | Corresponds to UC: Sell capsule |
+| ------------- |:-------------:| 
+| Step#        | Description  |
+|  1     | the customer orders some capsules to the manager |  
+|  2     | the manager clicks on "start a sell operation"  |
+|  3     | the manager select  "visitor" as customer's type |
+|  3     | the system shows the inventory and a form to fill  |
+|  4     | the manager checks the inventory |
+|  7     | the manager selects number of capsules|
+|  8     | the manager selects beverage type|
+|  9     | the manager takes the cash from the visitor  |
 |  10     | the manager clicks on "sell" |
 |  11     | system considers the capsules as sold and updates the remaining number |
 
 
+## Scenario 3
 
-
-## Scenario 2
-
-| Scenario ID: SC2        | Corresponds to UC: Buy boxes of capsules |
+| Scenario ID: SC3        | Corresponds to UC: Buy boxes of capsules |
 | ------------- |:-------------:| 
 | Step#        | Description  |
 |  1     | the manager clicks on "buy capsules"  |
@@ -263,9 +276,9 @@ e -- cla
 |  10     | the  order is sent to the supply company |
 
 
-## Scenario 3
+## Scenario 4
 
-| Scenario ID: SC3        | Corresponds to UC: Supply capsules |
+| Scenario ID: SC4        | Corresponds to UC: Supply capsules |
 | ------------- |:-------------:| 
 | Step#        | Description  |
 |  1     | the supply company manager clicks on "show orders"  |
@@ -277,9 +290,9 @@ e -- cla
 |  7     | a deliverer is sent|
 |  8    | the order is set as  done|
 
-## Scenario 3
+## Scenario 5
 
-| Scenario ID: SC4        | Corresponds to UC: Manage credit and debt|
+| Scenario ID: SC5        | Corresponds to UC: Manage credit and debt|
 | ------------- |:-------------:| 
 | Step#        | Description  |
 |  1     | the bank handles the payment |
