@@ -191,12 +191,12 @@ e -- cla
 |  Variants         | An Employee initially wants to pay using Credit, but after he changes idea / A Visitor wants to buy some capsules, but notice after he/she does not have cash, so the Manager must cancel the operation/ The debt threshold is reached so the operation is stopped |
 
 ### Use case 2, Buy boxes of capsules
-| Actors Involved        | manager(employee), supply company |
+| Actors Involved        | Manager, Supply Company |
 | ------------- |:-------------:| 
-|  Precondition     | at least one beverage type with less than one remaining box (less than 50 capsules) |  
-|  Post condition     | the order is sent to the supplier |
-|  Nominal Scenario     | the system shows a summary about the inventory, the manager fills a small form with details about the quantity and the type of beverage to buy and bank data about the cash account , and then clicks on buy to send the order to the supplier database and the bank handles the money transaction |
-|  Variants     | there is not enough money to buy so the system cancel the order and the manager has first to go put some money in the bank account   |
+|  Precondition     | At least one capsule type with less than one remaining box (less than 50 capsules) |  
+|  Post condition   | The order is sent to the Supply Company |
+|  Nominal Scenario | The system shows a summary about the inventory and LaTazza balance. The manager fills a small form with details about the quantity and the type of capsule to buy, then he clicks on 'Buy' to send the order to the Supply Company database and the Bank handles the money transaction |
+|  Variants         | There is not enough money on LaTazza balance to do the order, so the system cancel the order and the manager must put some money in the bank account. |
 
 
 ### Use case 3, Manage credit and debt
