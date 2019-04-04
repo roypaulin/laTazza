@@ -304,7 +304,6 @@ class Employee{
 ID
 name
 surname
-balance
 }
 
 class Client{
@@ -317,12 +316,14 @@ class Manager{
 }
 
 class Credit{
+balance
 }
 class Capsule{
 price
 }
 
 class "Capsule Type"{
+name
 }
 class Box {
 price
@@ -340,26 +341,26 @@ class Order{
 date
 }
 
-Order "*" -- Manager: performs
-Order -- "1..*" Box
+Order "*" -- "1" Manager: performs
+Order "1" -- "1..*" Box
 "Supply Company" "1" -- "*" Order 
 
-Sale "*" -- "1" Manager: performs
-Sale -- Client: to
-Sale -- "1..*" Capsule 
+Sale "1..*" -- "1" Manager: performs <
+Sale "1..*" -- "1" Client: to >
+Sale "1..*" -- "1..*" Capsule 
 
-Credit -- Employee: has
+Credit "1" -- "1" Employee: has <
 Box o-- “50” Capsule
-Inventory o-- Capsule
+Inventory o-- "*" Capsule
 
 Client <|-- Employee
 Client <|-- Visitor
 
 Employee <|-- Manager
 
-Capsule -- "Capsule Type": is of
+Capsule "0..*" -- "1" "Capsule Type": is of
 
-note top of Inventory: It keeps track of the currently available Capsules 
+note top of Inventory: It keeps track of the currently available Capsules
 ```
 
 # System Design
