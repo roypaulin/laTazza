@@ -183,12 +183,12 @@ e -- cla
 \<describe here each use case in the UCD>
 
 ### Use case 1, Sell capsule
-| Actors Involved        | manager(employee), employee, visitor |
+| Actors Involved   | Manager, Employee, Visitor |
 | ------------- |:-------------:| 
-|  Precondition     | at least one capsule is available for the requested type |  
-|  Post condition     | the number of capsules for the selected type is updated |
-|  Nominal Scenario     | the system shows details about the sell, the manager fill the empty fields with the information given by the customer, he/she clicks Sell button and the system automatically updates all data  |
-|  Variants     | an employee type client initially want to pay through the account but after change idea / a visitor want to buy some capsules but notice after he/she does not have cash so the manager must cancel the operation/ the debt threshold is reached so the operation is stopped |
+|  Precondition     | At least one capsule is available for the requested type |  
+|  Post condition   | The number of capsules for the selected type is updated |
+|  Nominal Scenario | The system shows details about the Sale, the Manager fill the empty fields with the information given by the client (Employee/Visitor), he/she clicks 'Sell' button and the system automatically updates the number of capsules and the balance  |
+|  Variants         | An Employee initially wants to pay using Credit, but after he changes idea / A Visitor wants to buy some capsules, but notice after he/she does not have cash, so the Manager must cancel the operation/ The debt threshold is reached so the operation is stopped |
 
 ### Use case 2, Buy boxes of capsules
 | Actors Involved        | manager(employee), supply company |
