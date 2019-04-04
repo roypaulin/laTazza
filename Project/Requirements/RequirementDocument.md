@@ -362,3 +362,55 @@ Capsule -- "Capsule Type": is of
 
 # System Design
 \<describe here system design> <must be consistent with Context diagram>
+```plantuml
+class LaTazza{
+
+}
+
+class Server{
+  /' management Capsule '/
+  +sellCapsule()
+  +showInventory()
+  /' SupplyCompany related functions '/
+  +processOrder()
+  +makeOrder()
+  /' management Credit '/
+  +buyCredit()
+  +chargeCredit()
+  +showBalanceEmployee()
+  /' LaTazza balance'/
+  +showBalance()
+  /' BankingSystem related functions '/
+  +processPayment()
+
+}
+
+class BankGateway{
+  +processPayment()
+}
+
+class SupplyCompanyGateway{
+  +processOrder()
+}
+
+class ManagerInterface{
+  +sellCapsule()
+  +chargeCredit()
+  +showBalance()
+  +showBalanceEmployee()
+  +showInventory()
+  +makeOrder()
+}
+
+class EmployeeInterface{
+  +buyCredit()
+  +showBalanceEmployee()
+}
+
+LaTazza o--  Server
+Server -- BankGateway
+Server -- ManagerInterface
+Server -- EmployeeInterface
+Server -- SupplyCompanyGateway
+```
+
