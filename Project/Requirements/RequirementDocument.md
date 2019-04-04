@@ -358,6 +358,8 @@ Client <|-- Visitor
 Employee <|-- Manager
 
 Capsule -- "Capsule Type": is of
+
+note top of Inventory: It keeps track of the currently available Capsules 
 ```
 
 # System Design
