@@ -58,10 +58,10 @@ actor Manager as m
 rectangle system{
   (LaTazza) as lt
   e--lt 
-  lt--v   
-  lt--b 
-  sc--lt
+  v--lt
   m--lt
+  lt--b 
+  lt--sc
 }
 ```
 
