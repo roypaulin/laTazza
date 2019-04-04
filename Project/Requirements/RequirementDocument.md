@@ -58,10 +58,10 @@ actor Manager as m
 rectangle system{
   (LaTazza) as lt
   e--lt 
-  lt--v   
-  lt--b 
-  sc--lt
+  v--lt
   m--lt
+  lt--b 
+  lt--sc
 }
 ```
 
@@ -149,10 +149,14 @@ actor bank as b
 (supply capsules ) as sca
 (send deliverer) as sd
 (check local account) as cla
+(buy credits from account) as bcfa
 
 m -- sc
 m -- bbc
 m -- mcd
+e -- mcd
+b -- bcfa
+e -- bcfa
 
 e <|-- m
 sc .> se : include
@@ -170,7 +174,6 @@ sc -- e
 bbc -- s
 sc -- v
 b -- bbc
-b -- mcd
 s -- sca
 sca -- b
 e -- cla
@@ -179,28 +182,28 @@ e -- cla
 \<describe here each use case in the UCD>
 
 ### Use case 1, Sell capsule
-| Actors Involved        | manager(employee), employee, visitor |
+| Actors Involved   | Manager, Employee, Visitor |
 | ------------- |:-------------:| 
-|  Precondition     | at least one capsule is available for the requested type |  
-|  Post condition     | the number of capsules for the selected type is updated |
-|  Nominal Scenario     | the system shows details about the sell, the manager fill the empty fields with the information given by the customer, he/she clicks Sell button and the system automatically updates all data  |
-|  Variants     | an employee type client initially want to pay through the account but after change idea / a visitor want to buy some capsules but notice after he/she does not have cash so the manager must cancel the operation/ the debt threshold is reached so the operation is stopped |
+|  Precondition     | At least one capsule is available for the requested type |  
+|  Post condition   | The number of capsules for the selected type is updated |
+|  Nominal Scenario | The system shows details about the Sale, the Manager fill the empty fields with the information given by the client (Employee/Visitor), he/she clicks 'Sell' button and the system automatically updates the number of capsules and the balance  |
+|  Variants         | An Employee initially wants to pay using Credit, but after he changes idea / A Visitor wants to buy some capsules, but notice after he/she does not have cash, so the Manager must cancel the operation/ The debt threshold is reached so the operation is stopped |
 
 ### Use case 2, Buy boxes of capsules
-| Actors Involved        | manager(employee), supply company |
+| Actors Involved        | Manager, Supply Company |
 | ------------- |:-------------:| 
-|  Precondition     | at least one beverage type with less than one remaining box (less than 50 capsules) |  
-|  Post condition     | the order is sent to the supplier |
-|  Nominal Scenario     | the system shows a summary about the inventory, the manager fills a small form with details about the quantity and the type of beverage to buy and bank data about the cash account , and then clicks on buy to send the order to the supplier database and the bank handles the money transaction |
-|  Variants     | there is not enough money to buy so the system cancel the order and the manager has first to go put some money in the bank account   |
+|  Precondition     | At least one capsule type with less than one remaining box (less than 50 capsules) |  
+|  Post condition   | The order is sent to the Supply Company |
+|  Nominal Scenario | The system shows a summary about the inventory and LaTazza balance. The manager fills a small form with details about the quantity and the type of capsule to buy, then he clicks on 'Buy' to send the order to the Supply Company database and the Bank handles the money transaction |
+|  Variants         | There is not enough money on LaTazza balance to do the order, so the system cancel the order and the manager must put some money in the bank account. |
 
 
 ### Use case 3, Manage credit and debt
-| Actors Involved        | manager, employee,bank |
+| Actors Involved        | manager, employee |
 | ------------- |:-------------:| 
 |  Precondition     | employee has an account |  
 |  Post condition     | the employee's balance is updated |
-|  Nominal Scenario     | the employee wants to buy credits  , the manager takes the cash or the payment is handled by the employee's bank, fills a form with the employee's data, put the amount to add to the balance and when he has finished the system updates the employee's data   |
+|  Nominal Scenario     | the employee wants to buy credits by cash , the manager takes the cash , fills a form with the employee's data, put the amount to add to the balance and when he has finished the system updates the employee's data   |
 |  Variants     | the manager chose the wrong employee or the employee does not have enough money  |
 
 ### Use case 4, Supply capsules
@@ -219,32 +222,52 @@ e -- cla
 |  Nominal Scenario     |the employee can have a personal account on LaTazza and can access through an interface, watch the updated details about his credits, his payments history, and the last log in  date   |
 |  Variants     |  the supply company sends the wrong order, so it has to cancel the previous delivery, and  rechecks the order |
 
+### Use case 6, Buy credits from account
+| Actors Involved        | employee,bank |
+| ------------- |:-------------:| 
+|  Precondition     |the employee has a local account |  
+|  Post condition     | the employee balance is updated |
+|  Nominal Scenario     |the employee wants to buy some credits online,he accesses his local account , fill a form directly connected to the bank with his card number.the bank handles the payment and notifies the system which updates the employee's balance  watch the updated details about his credits, his payments history, and the last log in  date   |
+|  Variants     |  the employee put the wrong card number so needs to go back |
 
 
 # Relevant scenarios
 ## Scenario 1
-
 | Scenario ID: SC1        | Corresponds to UC: Sell capsule |
 | ------------- |:-------------:| 
 | Step#        | Description  |
 |  1     | the customer orders some capsules to the manager |  
 |  2     | the manager clicks on "start a sell operation"  |
-|  3     | the manager chooses the customer's type |
-|  4     | the system shows the inventory, the local  account data(if employee) and a form to fill whose content depends on the customer's type |
+|  3     | the manager select  "employee" as customer's type |
+|  4     | the system shows the inventory, the local  account data and a form to fill  |
 |  5     | the manager checks the inventory |
-|  6     | the manager selects the employee(if customer==employee) |
+|  6     | the manager selects the employee |
 |  7     | the manager selects number of capsules|
 |  8     | the manager selects beverage type|
-|  9     | the manager selects the payment method (only for the employee) |
+|  9     | the manager selects the payment method  |
+|  10     | the manager clicks on "sell" |
+|  11     | system considers the capsules as sold and updates the remaining number |
+
+## Scenario 2
+
+| Scenario ID: SC2        | Corresponds to UC: Sell capsule |
+| ------------- |:-------------:| 
+| Step#        | Description  |
+|  1     | the customer orders some capsules to the manager |  
+|  2     | the manager clicks on "start a sell operation"  |
+|  3     | the manager select  "visitor" as customer's type |
+|  3     | the system shows the inventory and a form to fill  |
+|  4     | the manager checks the inventory |
+|  7     | the manager selects number of capsules|
+|  8     | the manager selects beverage type|
+|  9     | the manager takes the cash from the visitor  |
 |  10     | the manager clicks on "sell" |
 |  11     | system considers the capsules as sold and updates the remaining number |
 
 
+## Scenario 3
 
-
-## Scenario 2
-
-| Scenario ID: SC2        | Corresponds to UC: Buy boxes of capsules |
+| Scenario ID: SC3        | Corresponds to UC: Buy boxes of capsules |
 | ------------- |:-------------:| 
 | Step#        | Description  |
 |  1     | the manager clicks on "buy capsules"  |
@@ -259,9 +282,9 @@ e -- cla
 |  10     | the  order is sent to the supply company |
 
 
-## Scenario 3
+## Scenario 4
 
-| Scenario ID: SC3        | Corresponds to UC: Supply capsules |
+| Scenario ID: SC4        | Corresponds to UC: Supply capsules |
 | ------------- |:-------------:| 
 | Step#        | Description  |
 |  1     | the supply company manager clicks on "show orders"  |
@@ -273,20 +296,31 @@ e -- cla
 |  7     | a deliverer is sent|
 |  8    | the order is set as  done|
 
-## Scenario 3
+## Scenario 5
 
-| Scenario ID: SC4        | Corresponds to UC: Manage credit and debt|
+| Scenario ID: SC5        | Corresponds to UC: Manage credits and debt|
 | ------------- |:-------------:| 
 | Step#        | Description  |
-|  1     | the bank handles the payment |
-|  2     | the manager clicks on "charge credits" |
+|  1     | the manager clicks on "charge credits" |
+|  2     | the manager takes the cash from the employee |
 |  3     | the manager selects the client |
 |  4     | the manager puts the amount |
 |  5     | the manager clicks on "charge" |
 |  6     | the system shows the charging operation details  |
 |  7     | the system updates the employee's balance|
 
+## Scenario 6
 
+| Scenario ID: SC6        | Corresponds to UC: Buy credit from account|
+| ------------- |:-------------:| 
+| Step#        | Description  |
+|  1     | the employee clicks on "charge credits" |
+|  2     | the employee fills the relevant fields with his credit card details |
+|  3     | the employee puts the amount |
+|  4     | the employee clicks on "charge" |
+|  5     | the bank handles the payment |
+|  6     | the system shows the charging operation details  |
+|  7     | the system updates the employee's balance|
 
 # Glossary
 
@@ -300,34 +334,27 @@ class Employee{
 ID
 name
 surname
-balance
 }
 
 class Client{
 }
 
+class "Supply Company"{
+}
 
 class Manager{
-ID
-name
-surname
 }
 
-
-class Sale{
-date
+class Credit{
+balance
 }
-
-class Purchase{
-date
-}
-
 class Capsule{
 price
-type
 }
 
-
+class "Capsule Type"{
+name
+}
 class Box {
 price
 }
@@ -336,20 +363,87 @@ price
 class Inventory{
 }
 
+class Sale{
+date
+}
 
+class Order{
+date
+}
+
+Order "*" -- "1" Manager: performs
+Order "1" -- "1..*" Box
+"Supply Company" "1" -- "*" Order 
+
+Sale "1..*" -- "1" Manager: performs <
+Sale "1..*" -- "1" Client: to >
+Sale "1..*" -- "1..*" Capsule 
+
+Credit "1" -- "1" Employee: has <
 Box o-- “50” Capsule
-Inventory o-- Capsule
+Inventory o-- "*" Capsule
 
 Client <|-- Employee
 Client <|-- Visitor
 
-Sale -- Client: buys
-Sale -- Capsule
-Sale -- Manager: sells
+Employee <|-- Manager
 
-Purchase -- Box
-Purchase “*” --  Manager
+Capsule "0..*" -- "1" "Capsule Type": is of
+
+note top of Inventory: It keeps track of the currently available Capsules
 ```
 
 # System Design
 \<describe here system design> <must be consistent with Context diagram>
+```plantuml
+class LaTazza{
+
+}
+
+class Server{
+  /' management Capsule '/
+  +sellCapsule()
+  +showInventory()
+  /' SupplyCompany related functions '/
+  +processOrder()
+  +makeOrder()
+  /' management Credit '/
+  +buyCredit()
+  +chargeCredit()
+  +showBalanceEmployee()
+  /' LaTazza balance'/
+  +showBalance()
+  /' BankingSystem related functions '/
+  +processPayment()
+
+}
+
+class BankGateway{
+  +processPayment()
+}
+
+class SupplyCompanyGateway{
+  +processOrder()
+}
+
+class ManagerInterface{
+  +sellCapsule()
+  +chargeCredit()
+  +showBalance()
+  +showBalanceEmployee()
+  +showInventory()
+  +makeOrder()
+}
+
+class EmployeeInterface{
+  +buyCredit()
+  +showBalanceEmployee()
+}
+
+LaTazza o--  Server
+Server -- BankGateway
+Server -- ManagerInterface
+Server -- EmployeeInterface
+Server -- SupplyCompanyGateway
+```
+
