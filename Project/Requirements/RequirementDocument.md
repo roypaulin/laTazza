@@ -116,13 +116,12 @@ Each year some money related to the capsules go lost and Paolo must pay from his
 |  NFR7     | Efficiency | F4 in less than 0.5sec | FR4 |
 |  NFR8     | Efficiency | F5 in less than 0.5sec | FR5 |
 |  NFR9     | Efficiency | F7 in less than 0.5sec  | FR7 |
-|  NFR19    | Efficiency | F8 in less than 10sec (time more hight because the interaction with the bank api| FR8 |
+|  NFR10    | Efficiency | F8 in less than 10sec (time more hight because the interaction with the bank api| FR8 |
 |  NFR11    | Domain | the Currency is Euro € | FR1,FR2,FR2,FR3,FR4,FR5,FR6,FR7,FR8 |
 |  NFR12    | Domain | the credit must be always >= -10€  | FR1,FR2,FR2,FR3,FR4,FR5,FR6,FR7,FR8 |
 |  NFR13    | Reiability | the software must check if at the end of buy the credit is >=-10€ | FR1 |
 |  NFR14    | Domain | at the end of month if the credit of a Employee is <0 the money to get a positive credit are taken automatically from the salaty | FR1 |
 |  NFR15    | Reiability | if the Employee buy credit throw credit card the system must check that the card is valid  | FR8 |
-|  NFR16    | Reiability  | the agent Employee and the agent Manager can't be the same phisical person | FR1 |
 
 
 # Use case diagram and use cases
