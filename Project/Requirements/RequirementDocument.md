@@ -200,11 +200,11 @@ e -- cla
 
 
 ### Use case 3, Manage credit and debt
-| Actors Involved        | manager, employee,bank |
+| Actors Involved        | manager, employee |
 | ------------- |:-------------:| 
 |  Precondition     | employee has an account |  
 |  Post condition     | the employee's balance is updated |
-|  Nominal Scenario     | the employee wants to buy credits  , the manager takes the cash or the payment is handled by the employee's bank, fills a form with the employee's data, put the amount to add to the balance and when he has finished the system updates the employee's data   |
+|  Nominal Scenario     | the employee wants to buy credits by cash , the manager takes the cash , fills a form with the employee's data, put the amount to add to the balance and when he has finished the system updates the employee's data   |
 |  Variants     | the manager chose the wrong employee or the employee does not have enough money  |
 
 ### Use case 4, Supply capsules
