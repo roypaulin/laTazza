@@ -415,7 +415,13 @@ class Server{
   +showBalance()
   /' BankingSystem related functions '/
   +processPayment()
-
+  +login()
+  +logout()
+  +createUser()
+  +deleteUser()
+  +updateCapsule()
+  +showInventory()
+  +accessSupplyHistory()
 }
 
 class BankGateway{
@@ -433,6 +439,9 @@ class ManagerInterface{
   +showBalanceEmployee()
   +showInventory()
   +makeOrder()
+  +createUser()
+  +deleteUser()
+  +showSupplyHistory()
 }
 
 class EmployeeInterface{
@@ -440,10 +449,18 @@ class EmployeeInterface{
   +showBalanceEmployee()
 }
 
+class Database{
+  +updateCapsule()
+  +showCapsule()
+  +showSupplyHistory()
+}
+
+
 LaTazza o--  Server
 Server -- BankGateway
 Server -- ManagerInterface
 Server -- EmployeeInterface
 Server -- SupplyCompanyGateway
+Server -- Database
 ```
 
