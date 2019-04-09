@@ -1,6 +1,6 @@
 # Requirements Document Template
 
-**Authors:**
+**Authors:**  
 Elia Migliore @s228279,  
 Jean Thibaut Ndjekoua Sandjo @s256770,  
 Riccardo Mereu @s265599,  
@@ -32,10 +32,10 @@ Roy Paulin Justo Nguetsop Kenfack Djouaka @s257855
 # Stakeholders
 | Stakeholder name  | Description |
 | ----------------- |:-----------:|
-|	Employee	| They are the employees of the company and they can use the application LaTazza to buy capsules in order to make coffee|
-|	Visitor	    | They may be either clients of the company or friends or family of any employee which can buy a capsule to make coffee|
-|	Manager	    | He is also an employee of the company but have been designated by the colleagues to manage the sale and supply of capsules  |
-|	Supply Company	| Need an access to the app in order to monitor capsules supply activities to the Manager's company |
+|	Employee	| They are the employees of the company and they can use the application LaTazza to manage their credit in order to buy capsules and check the inventory|
+|	Visitor	    | They may be either clients of the company or friends or family of any employee which can buy a capsule to make coffee |
+|	Manager	    | He is also an employee of the company but have been designated by the colleagues to manage the sale and supply of capsules |
+|	Supply Company	| Need an access to the application in order to monitor orders of boxes of capsules from the Manager's company |
 
 **nb:** We assume that the Supply Company offers a limited set of products, the capsules listed in the Informal Description Document, i.e. Coffee, Arabic Cofee, etc. These products can be acquired directly using LaTazza through an API System.
 
@@ -57,10 +57,10 @@ actor Manager as m
 
 rectangle system{
   (LaTazza) as lt
-  e--lt 
+  e--lt
   v--lt
   m--lt
-  lt--b 
+  lt--b
   lt--sc
 }
 ```
@@ -183,38 +183,38 @@ e -- cla
 
 ### Use case 1, Sell capsule
 | Actors Involved   | Manager, Employee, Visitor |
-| ------------- |:-------------:| 
+| ------------- |:-------------:|
 |  Nominal Scenario | The system shows details about the Sale, the Manager fill the empty fields with the information given by the client (Employee/Visitor), he/she clicks 'Sell' button and the system automatically updates the number of capsules and the balance  |
 |  Variants         | An Employee initially wants to pay using Credit, but after he changes idea / A Visitor wants to buy some capsules, but notice after he/she does not have cash, so the Manager must cancel the operation/ The debt threshold is reached so the operation is stopped |
 
 ### Use case 2, Buy boxes of capsules
 | Actors Involved        | Manager, Supply Company |
-| ------------- |:-------------:| 
+| ------------- |:-------------:|
 |  Nominal Scenario | The system shows a summary about the inventory and LaTazza balance. The manager fills a small form with details about the quantity and the type of capsule to buy, then he clicks on 'Buy' to send the order to the Supply Company database and the Bank handles the money transaction |
 |  Variants         | There is not enough money on LaTazza balance to do the order, so the system cancel the order and the manager must put some money in the bank account. |
 
 
 ### Use case 3, Manage credit and debt
 | Actors Involved        | manager, employee |
-| ------------- |:-------------:| 
+| ------------- |:-------------:|
 |  Nominal Scenario     | the employee wants to buy credits by cash , the manager takes the cash , fills a form with the employee's data, put the amount to add to the balance and when he has finished the system updates the employee's data   |
 |  Variants     | the manager chose the wrong employee or the employee does not have enough money  |
 
 ### Use case 4, Supply capsules
 | Actors Involved        | supply company, bank,manager |
-| ------------- |:-------------:| 
+| ------------- |:-------------:|
 |  Nominal Scenario     |the supply company  has its own LaTazza interface, logs in, checks if capsule boxes have been ordered.Supply company send a deliverer to the manager accordingly to the order after receiving the payment notification from the bank.The supply company changes the state of the order request from "in process" to "sent".The manager receives the order. The order state passes from "sent" to "received". The Manager checks if everything is ok and changes the order state from "received" to "completed" |
 |  Variants     |  The supply company sends an order which is not compliant with the manager request,so we should start the recorvery procedure. The Supply company did not received the payment so the order should be canceled.
 
 ### Use case 5, Check local account
 | Actors Involved        | employee |
-| ------------- |:-------------:| 
+| ------------- |:-------------:|
 |  Nominal Scenario     |the employee can have a personal account on LaTazza and can access through an interface, watch the updated details about his credits, his payments history, and the last log in  date   |
 |  Variants     |  the supply company sends the wrong order, so it has to cancel the previous delivery, and  rechecks the order |
 
 ### Use case 6, Buy credits from account
 | Actors Involved        | employee,bank |
-| ------------- |:-------------:| 
+| ------------- |:-------------:|
 |  Nominal Scenario     |the employee wants to buy some credits online,he accesses his local account , fill a form directly connected to the bank with his card number.the bank handles the payment and notifies the system which updates the employee's balance  watch the updated details about his credits, his payments history, and the last log in  date   |
 |  Variants     |  the employee put the wrong card number so needs to go back |
 
@@ -222,7 +222,7 @@ e -- cla
 # Relevant scenarios
 ## Scenario 1
 | Scenario ID: SC1        | Corresponds to UC: Sell capsule |
-| ------------- |:-------------:| 
+| ------------- |:-------------:|
 | Step#        | Description  |
 |  Precondition     | At least one capsule is available for the requested type |  
 |  Post condition   | The number of capsules for the selected type is updated |
@@ -241,7 +241,7 @@ e -- cla
 ## Scenario 2
 
 | Scenario ID: SC2        | Corresponds to UC: Sell capsule |
-| ------------- |:-------------:| 
+| ------------- |:-------------:|
 | Step#        | Description  |
 |  Precondition     | At least one capsule is available for the requested type |  
 |  Post condition   | The number of capsules for the selected type is updated |
@@ -260,7 +260,7 @@ e -- cla
 ## Scenario 3
 
 | Scenario ID: SC3        | Corresponds to UC: Buy boxes of capsules |
-| ------------- |:-------------:| 
+| ------------- |:-------------:|
 | Step#        | Description  |
 |  Precondition     | At least one capsule type with less than one remaining box (less than 50 capsules) |  
 |  Post condition   | The order is sent to the Supply Company |
@@ -279,7 +279,7 @@ e -- cla
 ## Scenario 4
 
 | Scenario ID: SC4        | Corresponds to UC: Supply capsules |
-| ------------- |:-------------:| 
+| ------------- |:-------------:|
 | Step#        | Description  |
 |  Precondition     |the company has an account |  
 |  Post condition     | the order is done |
@@ -295,7 +295,7 @@ e -- cla
 ## Scenario 5
 
 | Scenario ID: SC5        | Corresponds to UC: Manage credits and debt|
-| ------------- |:-------------:| 
+| ------------- |:-------------:|
 | Step#        | Description  |
 |  Precondition     | employee has an account |  
 |  Post condition     | the employee's balance is updated |
@@ -310,7 +310,7 @@ e -- cla
 ## Scenario 6
 
 | Scenario ID: SC6        | Corresponds to UC: Buy credit from account|
-| ------------- |:-------------:| 
+| ------------- |:-------------:|
 | Step#        | Description  |
 |  Precondition     |the employee has a local account |  
 |  Post condition     | the employee balance is updated |
@@ -377,11 +377,11 @@ state
 
 Order "*" -- "1" Manager: performs
 Order "1" -- "1..*" Box
-"Supply Company" "1" -- "*" Order 
+"Supply Company" "1" -- "*" Order
 
 Sale "1..*" -- "1" Manager: performs <
 Sale "1..*" -- "1" Client: to >
-Sale "1..*" -- "1..*" Capsule 
+Sale "1..*" -- "1..*" Capsule
 
 Credit "1" -- "1" Employee: has <
 Box -- “50” Capsule
@@ -473,4 +473,3 @@ Server -- SupplyCompanyInterface
 Server -- Database
 
 ```
-
