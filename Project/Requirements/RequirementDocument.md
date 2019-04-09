@@ -468,7 +468,7 @@ LaTazza o--  Server
 Server -- BankGateway
 Server -- ManagerInterface
 Server -- EmployeeInterface
-Server -- SupplyCompanyGateway
+Server -- SupplyCompanyInterface
 Server -- Database
 ```
 
