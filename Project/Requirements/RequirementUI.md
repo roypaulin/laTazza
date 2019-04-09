@@ -45,4 +45,9 @@ necessary for the actions
 
 an example of page of supply that can delete,see or sent a request of order
 
+## the user page
 
+![](images/img_04.png)
+
+the page that the user see when login, it contains the invenctory and the
+options for reload the credit.
