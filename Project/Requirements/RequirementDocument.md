@@ -207,12 +207,12 @@ e -- cla
 |  Variants     | the manager chose the wrong employee or the employee does not have enough money  |
 
 ### Use case 4, Supply capsules
-| Actors Involved        | supply company, bank |
+| Actors Involved        | supply company, bank,manager |
 | ------------- |:-------------:| 
 |  Precondition     |the company has an account |  
 |  Post condition     | the order is done |
-|  Nominal Scenario     |the company  has its own LaTazza interface, logs in, checks if capsule boxes have been ordered, send a deliverer to the clients accordingly after receiving the payment notification from the bank   |
-|  Variants     |  the supply company sends the wrong order, so it has to cancel the previous delivery, and  rechecks the order |
+|  Nominal Scenario     |the supply company  has its own LaTazza interface, logs in, checks if capsule boxes have been ordered.Supply company send a deliverer to the manager accordingly to the order after receiving the payment notification from the bank.The supply company changes the state of the order request from "in process" to "sent".The manager receives the order. The order state passes from "sent" to "received". The Manager checks if everything is ok and changes the order state from "received" to "completed" |
+|  Variants     |  the supply company sends an order which is not compliant with the manager request,or is not able to satisfy the current request so it cancel the order.
 
 ### Use case 5, Check local account
 | Actors Involved        | employee |
@@ -368,11 +368,7 @@ date
 }
 
 class Order{
-requestDate
-sentDate
-receiveDate
-completedDate
-state
+date
 }
 
 Order "*" -- "1" Manager: performs
@@ -426,16 +422,13 @@ class Server{
   +updateCapsule()
   +showInventory()
   +accessSupplyHistory()
-  +changeOrderStatus()
 }
 
 class BankGateway{
   +processPayment()
 }
 
-class SupplyCompanyInterface{
-  +checkOrder()
-  +changeOrderStatus()
+class SupplyCompanyGateway{
   +processOrder()
 }
 
@@ -449,7 +442,6 @@ class ManagerInterface{
   +createUser()
   +deleteUser()
   +showSupplyHistory()
-  +changeOrderStatus()
 }
 
 class EmployeeInterface{
@@ -468,7 +460,7 @@ LaTazza o--  Server
 Server -- BankGateway
 Server -- ManagerInterface
 Server -- EmployeeInterface
-Server -- SupplyCompanyInterface
+Server -- SupplyCompanyGateway
 Server -- Database
 ```
 
