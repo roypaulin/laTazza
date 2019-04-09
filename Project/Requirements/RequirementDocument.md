@@ -401,58 +401,62 @@ class LaTazza{
 }
 
 class Server{
-  /' management Capsule '/
-  +sellCapsule()
-  +showInventory()
-  /' SupplyCompany related functions '/
-  +processOrder()
-  +makeOrder()
-  /' management Credit '/
-  +buyCredit()
-  +chargeCredit()
-  +showBalanceEmployee()
-  /' LaTazza balance'/
-  +showBalance()
-  /' BankingSystem related functions '/
-  +processPayment()
-  +login()
-  +logout()
-  +createUser()
-  +deleteUser()
-  +updateCapsule()
-  +showInventory()
-  +accessSupplyHistory()
+/' management Capsule '/
++sellCapsule()
++showInventory()
+/' SupplyCompany related functions '/
++checkPendingOrder()
++changeOrderStatus()
++makeOrder()
+/' management Credit '/
++buyCredit()
++chargeCredit()
++showBalanceEmployee()
+/' LaTazza balance'/
++showBalance()
+/' BankingSystem related functions '/
++processPayment()
++login()
++logout()
++createUser()
++deleteUser()
++updateCapsule()
++showInventory()
++accessSupplyHistory()
++changeOrderStatus()
 }
 
 class BankGateway{
-  +processPayment()
++processPayment()
 }
 
-class SupplyCompanyGateway{
-  +processOrder()
+class SupplyCompanyInterface{
++checkPendingOrder()
++changeOrderStatus()
 }
 
 class ManagerInterface{
-  +sellCapsule()
-  +chargeCredit()
-  +showBalance()
-  +showBalanceEmployee()
-  +showInventory()
-  +makeOrder()
-  +createUser()
-  +deleteUser()
-  +showSupplyHistory()
++sellCapsule()
++chargeCredit()
++showBalance()
++showBalanceEmployee()
++showInventory()
++makeOrder()
++createUser()
++deleteUser()
++showSupplyHistory()
++changeOrderStatus()
 }
 
 class EmployeeInterface{
-  +buyCredit()
-  +showBalanceEmployee()
++buyCredit()
++showBalanceEmployee()
 }
 
 class Database{
-  +updateCapsule()
-  +showCapsule()
-  +showSupplyHistory()
++updateCapsule()
++showCapsule()
++showSupplyHistory()
 }
 
 
@@ -460,7 +464,8 @@ LaTazza o--  Server
 Server -- BankGateway
 Server -- ManagerInterface
 Server -- EmployeeInterface
-Server -- SupplyCompanyGateway
+Server -- SupplyCompanyInterface
 Server -- Database
+
 ```
 
