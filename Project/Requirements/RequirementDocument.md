@@ -81,6 +81,11 @@ As the oldest employee of the company, Paolo has been chosen by his colleagues t
 Each employee has a different taste on coffee, in Italy coffee is very important and a developer without coffee cannot produce valid and correct code.  
 Each year some money related to the capsules go lost and Paolo must pay from his own pocket. Also, the supply process is now handled by email and Paolo loses so much time in doing this. He also needs a way to reuse the previous order requests in order to reduce the time spent doing this job and increase the efficiency.
 
+### Persona 2
+**Franco Ruggieri**        
+ 26,Developer in the company,bachelor and has nor children
+
+As a developer in the company,Franco drinks a coffee every morning in order to be awake during the day.He also takes another cup of coffee after the break in the afternoon for a better digestion and may be another one in the evening to fight against the tiredness.The only way to buy capsule now in order to make coffee is by cash and doing this way,Franco is not able to control how much he spends on coffee in a month. Futhermore since capsules are bougth to the manager,sometimes it happens that Franco want to buy a capsule but they are finished.So he would like to have a way to control his coffee's expenses and also to check the avilability of capules before going to the manager in order to not waste his time if thre are not available.
 ### Persona 3
 **Gianfranco Fantozzi**  
 37, Employee at CoffeeHouse's sales department
