@@ -226,7 +226,7 @@ e -- cla
 
 
 # Relevant scenarios
-## Scenario 1
+## Scenario 1, Successful sale of Capsule to an Employee
 | Scenario ID: SC1        | Corresponds to UC: Sell capsule |
 | ------------- |:-------------:|
 | Step#        | Description  |
@@ -244,7 +244,7 @@ e -- cla
 |  10     | the manager clicks on "sell" |
 |  11     | system considers the capsules as sold and updates the remaining number |
 
-## Scenario 2
+## Scenario 2, Successful sale of Capsule to a Visitor
 
 | Scenario ID: SC2        | Corresponds to UC: Sell capsule |
 | ------------- |:-------------:|
@@ -263,7 +263,7 @@ e -- cla
 |  11     | system considers the capsules as sold and updates the remaining number |
 
 
-## Scenario 3
+## Scenario 3, Successful order from Supply Company done by Manager
 
 | Scenario ID: SC3        | Corresponds to UC: Buy boxes of capsules |
 | ------------- |:-------------:|
@@ -282,7 +282,7 @@ e -- cla
 |  10     | the  order is sent to the supply company |
 
 
-## Scenario 4
+## Scenario 4, Successful Order dispatch
 
 | Scenario ID: SC4        | Corresponds to UC: Supply capsules |
 | ------------- |:-------------:|
@@ -301,7 +301,7 @@ e -- cla
 |  10     | the system notifies the supply company|
 |  11    | the order is set as  done in the supply company side|
 
-## Scenario 5
+## Scenario 5, Successful Employee's Credit update with cash
 
 | Scenario ID: SC5        | Corresponds to UC: Manage credits and debt|
 | ------------- |:-------------:|
@@ -316,7 +316,7 @@ e -- cla
 |  6     | the system shows the charging operation details  |
 |  7     | the system updates the employee's balance|
 
-## Scenario 6
+## Scenario 6, Successful Employee's Credit update from account 
 
 | Scenario ID: SC6        | Corresponds to UC: Buy credit from account|
 | ------------- |:-------------:|
