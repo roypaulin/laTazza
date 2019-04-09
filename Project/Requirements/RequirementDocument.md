@@ -81,7 +81,17 @@ As the oldest employee of the company, Paolo has been chosen by his colleagues t
 Each employee has a different taste on coffee, in Italy coffee is very important and a developer without coffee cannot produce valid and correct code.  
 Each year some money related to the capsules go lost and Paolo must pay from his own pocket. Also, the supply process is now handled by email and Paolo loses so much time in doing this. He also needs a way to reuse the previous order requests in order to reduce the time spent doing this job and increase the efficiency.
 
+### Persona 3
+**Gianfranco Fantozzi**  
+37, Employee at CoffeeHouse's sales department
 
+Gianfranco works at the sales department of CoffeeHouse, and his main task is to manage the orders from small companies who want to buy their capsules. Right now the company manages the orders through emails, so he has to check frequently the email to process every single order.
+The clients usually are not very detailed in their orders so he has to reply with other emails in order to clarify the items in the order or even call them.
+
+**Goal:**  
+* Wants to check all the orders in a single easy to use interface.  
+* Wants an unambiguous order with the real names of the products.  
+* Wants to avoid to use email and phone calls as much as possible
 
 
 # Functional and non functional requirements
