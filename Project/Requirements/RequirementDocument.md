@@ -368,7 +368,11 @@ date
 }
 
 class Order{
-date
+requestDate
+sentDate
+receiveDate
+completedDate
+state
 }
 
 Order "*" -- "1" Manager: performs
@@ -391,6 +395,7 @@ Employee <|-- Manager
 Capsule "0..*" -- "1" "Capsule Type": is of
 
 note top of Inventory: It keeps track of the currently available Capsules
+
 ```
 
 # System Design
