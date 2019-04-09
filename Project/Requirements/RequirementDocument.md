@@ -93,6 +93,8 @@ The clients usually are not very detailed in their orders so he has to reply wit
 * Wants an unambiguous order with the real names of the products.  
 * Wants to avoid to use email and phone calls as much as possible
 
+**Story**
+It's Monday morning and Gianfranco logs in the system. In the LaTazza interface, he is able to see the pending orders to prepare. Then, he begins to process the first order and, in the same interface, he can read which and how many boxes prepare. He collects all the capsules' boxes and prepares the shipment. When all the boxes are ready to be sent, he can close the shipping package and mark the order as sent.
 
 # Functional and non functional requirements
 
