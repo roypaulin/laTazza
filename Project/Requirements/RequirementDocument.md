@@ -79,11 +79,11 @@ rectangle system{
 \<Persona is-an-instance-of actor>  \<stories will be formalized later as use cases>
 ### Persona 1  
 **Paolo Capaldo**  
-53, Manager and CEO of Riesbinaria, father of six children
+53,Software Architect in the company, father of six children
 
-As a Software Architect working for the company, Paolo has the duty of grant coffee to his coleagues and has to monitor and manage the finance related to the coffee maker.  
+As the oldest employee of the company, Paolo has been chosen by his coleagues to monitor and manage the finance related to the coffee maker.  
 Each employee has a different taste on coffee, in Italy coffee is very important and a developer without coffee cannot produce valid and correct code.  
-Each year some money related to the capsules go lost and Paolo must pay from his own pocket. This situation is really frustrating, so he wants to find a software that helps him to manage the coffee extending also the use of that machine to the occasional visitor of the agency.
+Each year some money related to the capsules go lost and Paolo must pay from his own pocket.Also the supply process is now handle by email and paolo looses so much time in doing this. He also need a way to reuse the previous order requests in order to reduce the time spent doing this job and increase the efficiency.
 
 
 
