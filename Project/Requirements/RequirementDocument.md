@@ -368,7 +368,11 @@ date
 }
 
 class Order{
-date
+requestDate
+sentDate
+receiveDate
+completedDate
+state
 }
 
 Order "*" -- "1" Manager: performs
