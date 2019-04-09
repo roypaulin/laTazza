@@ -105,7 +105,7 @@ It's Monday morning and Gianfranco logs in the system. In the LaTazza interface,
 |	FR2		|	Agent Manager buy boxes of capsule from supply company |
 |	FR3		|	Agent Manager increment or decrement credit of an Employee |
 |	FR4		| 	Agent Manager increment or decrement the debt of an Employee |
-|	FR5		|	Agent Manager check the inventory (product avaiability and product price) |
+|	FR5		|	Agent Manager check the inventory (product availability and product price) |
 |	FR6		| 	Agent Employee or Agent Visitor buy Capsule or Boxes  |
 |	FR7		|	Agent Employee get his/her balance |
 |	FR8		|	Employee buy credit by cash, credit card or retained on the pay slip |
@@ -116,10 +116,10 @@ It's Monday morning and Gianfranco logs in the system. In the LaTazza interface,
 | ID        | Type (efficiency, reliability, ..)           | Description  | Refers to |
 | ------------- |:-------------:| :-----:| :-----:|
 |  NFR1     | Efficiency | F1 less than 1sec  | FR1 |
-|  NFR2     | Reiability | the number of capsule must never be less thant 0 | FR1 |
+|  NFR2     | Reliability | the number of capsule must never be less than 0 | FR1 |
 |  NFR3     | Usability | the action to be done must require less than 3 screen changes  | FR1,FR2,FR3,FR4,FR5,FR6,FR7,FR8 |
-|  NFR4     | Maintanability | the interaction with the bank for the credit card must me done with REST paradigma  | FR8 |
-|  NFR5     | Portability | the code has to be written in java, so it is indipendent from the machine  | FR1,FR2,FR3,FR4,FR5,FR6,FR7,FR8 |
+|  NFR4     | Maintainability | the interaction with the bank for the credit card must me done with REST paradigm | FR8 |
+|  NFR5     | Portability | the code has to be written in java, so it is independent from the machine  | FR1,FR2,FR3,FR4,FR5,FR6,FR7,FR8 |
 |  NFR6     | Efficiency  | F3 in less than 0.5sec  | FR3 |
 |  NFR7     | Efficiency | F4 in less than 0.5sec | FR4 |
 |  NFR8     | Efficiency | F5 in less than 0.5sec | FR5 |
@@ -127,9 +127,9 @@ It's Monday morning and Gianfranco logs in the system. In the LaTazza interface,
 |  NFR10    | Efficiency | F8 in less than 10sec (time more hight because the interaction with the bank api| FR8 |
 |  NFR11    | Domain | the Currency is Euro € | FR1,FR2,FR3,FR4,FR5,FR6,FR7,FR8 |
 |  NFR12    | Domain | the credit must be always >= -10€  | FR1,FR2,FR3,FR4,FR5,FR6,FR7,FR8 |
-|  NFR13    | Reiability | the software must check if at the end of buy the credit is >=-10€ | FR1 |
-|  NFR14    | Domain | at the end of month if the credit of a Employee is <0 the money to get a positive credit are taken automatically from the salaty | FR1 |
-|  NFR15    | Reiability | if the Employee buy credit throw credit card the system must check that the card is valid  | FR8 |
+|  NFR13    | Reliability | the software must check if at the end of buy the credit is >=-10€ | FR1 |
+|  NFR14    | Domain | at the end of month if the credit of a Employee is <0 the money to get a positive credit are taken automatically from the salary | FR1 |
+|  NFR15    | Reliability | if the Employee buy credit throw credit card the system must check that the card is valid  | FR8 |
 
 
 # Use case diagram and use cases
