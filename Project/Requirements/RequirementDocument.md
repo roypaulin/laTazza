@@ -184,16 +184,12 @@ e -- cla
 ### Use case 1, Sell capsule
 | Actors Involved   | Manager, Employee, Visitor |
 | ------------- |:-------------:| 
-|  Precondition     | At least one capsule is available for the requested type |  
-|  Post condition   | The number of capsules for the selected type is updated |
 |  Nominal Scenario | The system shows details about the Sale, the Manager fill the empty fields with the information given by the client (Employee/Visitor), he/she clicks 'Sell' button and the system automatically updates the number of capsules and the balance  |
 |  Variants         | An Employee initially wants to pay using Credit, but after he changes idea / A Visitor wants to buy some capsules, but notice after he/she does not have cash, so the Manager must cancel the operation/ The debt threshold is reached so the operation is stopped |
 
 ### Use case 2, Buy boxes of capsules
 | Actors Involved        | Manager, Supply Company |
 | ------------- |:-------------:| 
-|  Precondition     | At least one capsule type with less than one remaining box (less than 50 capsules) |  
-|  Post condition   | The order is sent to the Supply Company |
 |  Nominal Scenario | The system shows a summary about the inventory and LaTazza balance. The manager fills a small form with details about the quantity and the type of capsule to buy, then he clicks on 'Buy' to send the order to the Supply Company database and the Bank handles the money transaction |
 |  Variants         | There is not enough money on LaTazza balance to do the order, so the system cancel the order and the manager must put some money in the bank account. |
 
@@ -201,32 +197,24 @@ e -- cla
 ### Use case 3, Manage credit and debt
 | Actors Involved        | manager, employee |
 | ------------- |:-------------:| 
-|  Precondition     | employee has an account |  
-|  Post condition     | the employee's balance is updated |
 |  Nominal Scenario     | the employee wants to buy credits by cash , the manager takes the cash , fills a form with the employee's data, put the amount to add to the balance and when he has finished the system updates the employee's data   |
 |  Variants     | the manager chose the wrong employee or the employee does not have enough money  |
 
 ### Use case 4, Supply capsules
 | Actors Involved        | supply company, bank,manager |
 | ------------- |:-------------:| 
-|  Precondition     |the company has an account |  
-|  Post condition     | the order is done |
 |  Nominal Scenario     |the supply company  has its own LaTazza interface, logs in, checks if capsule boxes have been ordered.Supply company send a deliverer to the manager accordingly to the order after receiving the payment notification from the bank.The supply company changes the state of the order request from "in process" to "sent".The manager receives the order. The order state passes from "sent" to "received". The Manager checks if everything is ok and changes the order state from "received" to "completed" |
 |  Variants     |  the supply company sends an order which is not compliant with the manager request,or is not able to satisfy the current request so it cancel the order.
 
 ### Use case 5, Check local account
 | Actors Involved        | employee |
 | ------------- |:-------------:| 
-|  Precondition     |the employee has a local account |  
-|  Post condition     | the last login  date is updated |
 |  Nominal Scenario     |the employee can have a personal account on LaTazza and can access through an interface, watch the updated details about his credits, his payments history, and the last log in  date   |
 |  Variants     |  the supply company sends the wrong order, so it has to cancel the previous delivery, and  rechecks the order |
 
 ### Use case 6, Buy credits from account
 | Actors Involved        | employee,bank |
 | ------------- |:-------------:| 
-|  Precondition     |the employee has a local account |  
-|  Post condition     | the employee balance is updated |
 |  Nominal Scenario     |the employee wants to buy some credits online,he accesses his local account , fill a form directly connected to the bank with his card number.the bank handles the payment and notifies the system which updates the employee's balance  watch the updated details about his credits, his payments history, and the last log in  date   |
 |  Variants     |  the employee put the wrong card number so needs to go back |
 
@@ -236,6 +224,8 @@ e -- cla
 | Scenario ID: SC1        | Corresponds to UC: Sell capsule |
 | ------------- |:-------------:| 
 | Step#        | Description  |
+|  Precondition     | At least one capsule is available for the requested type |
+|  Post condition   | The number of capsules for the selected type is updated |
 |  1     | the customer orders some capsules to the manager |  
 |  2     | the manager clicks on "start a sell operation"  |
 |  3     | the manager select  "employee" as customer's type |
@@ -253,6 +243,8 @@ e -- cla
 | Scenario ID: SC2        | Corresponds to UC: Sell capsule |
 | ------------- |:-------------:| 
 | Step#        | Description  |
+|  Precondition     | At least one capsule is available for the requested type |
+|  Post condition   | The number of capsules for the selected type is updated |
 |  1     | the customer orders some capsules to the manager |  
 |  2     | the manager clicks on "start a sell operation"  |
 |  3     | the manager select  "visitor" as customer's type |
@@ -270,6 +262,8 @@ e -- cla
 | Scenario ID: SC3        | Corresponds to UC: Buy boxes of capsules |
 | ------------- |:-------------:| 
 | Step#        | Description  |
+|  Precondition     | At least one capsule type with less than one remaining box (less than 50 capsules) |  
+|  Post condition   | The order is sent to the Supply Company |
 |  1     | the manager clicks on "buy capsules"  |
 |  2     | the manager checks the inventory |
 |  3     | the system shows the inventory and the cash account |
@@ -287,6 +281,8 @@ e -- cla
 | Scenario ID: SC4        | Corresponds to UC: Supply capsules |
 | ------------- |:-------------:| 
 | Step#        | Description  |
+|  Precondition     |the company has an account |  
+|  Post condition     | the order is done |
 |  1     | the supply company manager clicks on "show orders"  |
 |  2     | the system displays the orders |
 |  3     | the manager chooses one |
@@ -301,6 +297,8 @@ e -- cla
 | Scenario ID: SC5        | Corresponds to UC: Manage credits and debt|
 | ------------- |:-------------:| 
 | Step#        | Description  |
+|  Precondition     | employee has an account |  
+|  Post condition     | the employee's balance is updated |
 |  1     | the manager clicks on "charge credits" |
 |  2     | the manager takes the cash from the employee |
 |  3     | the manager selects the client |
@@ -314,6 +312,8 @@ e -- cla
 | Scenario ID: SC6        | Corresponds to UC: Buy credit from account|
 | ------------- |:-------------:| 
 | Step#        | Description  |
+|  Precondition     |the employee has a local account |  
+|  Post condition     | the employee balance is updated |
 |  1     | the employee clicks on "charge credits" |
 |  2     | the employee fills the relevant fields with his credit card details |
 |  3     | the employee puts the amount |
