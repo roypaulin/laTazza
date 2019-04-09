@@ -42,8 +42,6 @@ Roy Paulin Justo Nguetsop Kenfack Djouaka @s257855
 # Context Digram and interfaces
 
 ## Context Diagram
-\<Define here Context diagram using UML use case diagram>
-\<actors are a subset of stakeholders>
 
 ```plantuml
 left to right direction
@@ -74,9 +72,7 @@ rectangle system{
 | Supply company | Assuming the supply company has it own system to handle supplies,we should provide some API to interact with that system in order to facilitate supply activities. | not needed
 
 # Stories and personas
-\<A Persona is a realistic impersonation of an actor. Define here a few personas and describe in plain text how a persona interacts with the system>
 
-\<Persona is-an-instance-of actor>  \<stories will be formalized later as use cases>
 ### Persona 1  
 **Paolo Capaldo**  
 53,Software Architect in the company, father of six children
@@ -125,7 +121,6 @@ Each year some money related to the capsules go lost and Paolo must pay from his
 
 
 # Use case diagram and use cases
-
 
 ## Use case diagram
 ```plantuml
@@ -179,7 +174,6 @@ sca -- b
 e -- cla
 ```
 ## Use Cases
-\<describe here each use case in the UCD>
 
 ### Use case 1, Sell capsule
 | Actors Involved   | Manager, Employee, Visitor |
@@ -324,8 +318,6 @@ e -- cla
 
 # Glossary
 
-\<use UML class diagram to define important concepts in the domain of the system, and their relationships>  <concepts are used consistently all over the document, ex in use cases, requirements etc>
-
 ```plantuml
 class Visitor{
 }
@@ -399,7 +391,6 @@ note top of Inventory: It keeps track of the currently available Capsules
 ```
 
 # System Design
-\<describe here system design> <must be consistent with Context diagram>
 ```plantuml
 class LaTazza{
 
