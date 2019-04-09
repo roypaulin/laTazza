@@ -380,8 +380,8 @@ Sale "1..*" -- "1" Client: to >
 Sale "1..*" -- "1..*" Capsule 
 
 Credit "1" -- "1" Employee: has <
-Box o-- “50” Capsule
-Inventory o-- "*" Capsule
+Box -- “50” Capsule
+Inventory -- "*" Capsule
 
 Client <|-- Employee
 Client <|-- Visitor
