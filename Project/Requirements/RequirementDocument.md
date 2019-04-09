@@ -75,11 +75,11 @@ rectangle system{
 
 ### Persona 1  
 **Paolo Capaldo**  
-53,Software Architect in the company, father of six children
+53, Software Architect in the company, father of six children
 
-As the oldest employee of the company, Paolo has been chosen by his coleagues to monitor and manage the finance related to the coffee maker.  
+As the oldest employee of the company, Paolo has been chosen by his colleagues to monitor and manage the finance related to the coffee maker.  
 Each employee has a different taste on coffee, in Italy coffee is very important and a developer without coffee cannot produce valid and correct code.  
-Each year some money related to the capsules go lost and Paolo must pay from his own pocket.Also the supply process is now handle by email and paolo looses so much time in doing this. He also need a way to reuse the previous order requests in order to reduce the time spent doing this job and increase the efficiency.
+Each year some money related to the capsules go lost and Paolo must pay from his own pocket. Also, the supply process is now handled by email and Paolo loses so much time in doing this. He also needs a way to reuse the previous order requests in order to reduce the time spent doing this job and increase the efficiency.
 
 
 
