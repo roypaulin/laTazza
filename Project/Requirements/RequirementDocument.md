@@ -426,13 +426,16 @@ class Server{
   +updateCapsule()
   +showInventory()
   +accessSupplyHistory()
+  +changeOrderStatus()
 }
 
 class BankGateway{
   +processPayment()
 }
 
-class SupplyCompanyGateway{
+class SupplyCompanyInterface{
+  +checkOrder()
+  +changeOrderStatus()
   +processOrder()
 }
 
@@ -446,6 +449,7 @@ class ManagerInterface{
   +createUser()
   +deleteUser()
   +showSupplyHistory()
+  +changeOrderStatus()
 }
 
 class EmployeeInterface{
