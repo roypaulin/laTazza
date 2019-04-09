@@ -279,12 +279,15 @@ e -- cla
 |  Post condition     | the order is done |
 |  1     | the supply company manager clicks on "show orders"  |
 |  2     | the system displays the orders |
-|  3     | the manager chooses one |
+|  3     | the supply company manager chooses one |
 |  4     | the system shows details about the chosen order |
 |  5     | the bank handles the payment |
 |  6     | the order  is set as "ongoing" |
 |  7     | a deliverer is sent|
-|  8    | the order is set as  done|
+|  8     | the manager checks the delevery|
+|  9     | the manager updates the order's state to completed|
+|  10     | the system notifies the supply company|
+|  11    | the order is set as  done in the supply company side|
 
 ## Scenario 5
 
