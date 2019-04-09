@@ -20,10 +20,29 @@ the first administrative page, it ask to the manager witch action want to do.
 
 this page allow the administrator to inseert orders for new capsules
 
-[](images/img_04.png)
-![](images/img_05.png)
-![](images/img_06.png)
+#### account amministrator page
+
 ![](images/img_07.png)
+
+this page is for managing the credit of the employee and manage the sell of the
+capsule and boxes
+
+#### types of error:
+
 ![](images/img_08.png)
+
+error retrived when a user has not enought credit for buy with credit the
+coffee
+
 ![](images/img_09.png)
+
+error retrived when the software cannot correct connect itself to the webapi
+necessary for the actions
+
+## the Supply page
+
 ![](images/img_10.png)
+
+an example of page of supply that can delete,see or sent a request of order
+
+
