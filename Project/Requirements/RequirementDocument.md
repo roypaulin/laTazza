@@ -239,8 +239,8 @@ e -- cla
 | Scenario ID: SC1        | Corresponds to UC: Sell capsule |
 | ------------- |:-------------:|
 | Step#        | Description  |
-|  Precondition     | At least one capsule is available for the requested type |  
-|  Post condition   | The number of capsules for the selected type is updated |
+|  Precondition     | At least one capsule is available for the requested type and the credit and debt are updated (balance) |  
+|  Post condition   | The number of capsules for the selected type is updated and also the credit and the debt (balance) |
 |  1     | the customer orders some capsules to the manager |  
 |  2     | the manager clicks on "start a sell operation"  |
 |  3     | the manager select  "employee" as customer's type |
