@@ -116,8 +116,7 @@ It's Monday morning and Gianfranco logs in the system. In the LaTazza interface,
 
 | ID        | Type (efficiency, reliability, ..)           | Description  | Refers to |
 | ------------- |:-------------:| :-----:| :-----:|
-|  NFR1     | Efficiency | F1, the interaction with the db in this function
-must be less than 1sec  | FR1 |
+|  NFR1     | Efficiency | F1, the interaction with the db in this function must be less than 1sec  | FR1 |
 |  NFR2     | Reliability | the number of capsule must never be less than 0 | FR1 |
 |  NFR3     | Usability | the action to be done must require less than 3 screen changes  | FR1,FR2,FR3,FR4,FR5,FR6,FR7,FR8 |
 |  NFR4     | Maintainability | the interaction with the bank for the credit card must me done with REST paradigm | FR8 |
