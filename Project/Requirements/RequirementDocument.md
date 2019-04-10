@@ -158,7 +158,6 @@ actor bank as b
 (select number of capsule) as snc
 (check order) as co
 (check debt) as cd
-(check credit) as cc
 (check balance) as cb
 (supply capsules ) as sca
 (send deliverer) as sd
@@ -183,7 +182,7 @@ sc .> cb : include
 sca .> co : include
 sca .> sd : include
 cb .> cd : extend
-cb .> cc : extend
+cb .> cca : extend
 
 sc -- e
 bbc -- s
