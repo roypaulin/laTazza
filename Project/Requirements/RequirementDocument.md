@@ -141,6 +141,7 @@ manager can force the transaction making a dept for the account | FR4 |
 
 ## Use case diagram
 ```plantuml
+
 actor Manager as m
 actor Employee as e
 actor "supply company" as s
@@ -192,6 +193,7 @@ s -- sca
 sca -- b
 e -- cla
 ```
+
 ## Use Cases
 
 ### Use case 1, Sell capsule
