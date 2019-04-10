@@ -106,7 +106,7 @@ It's Monday morning and Gianfranco logs in the system. In the LaTazza interface,
 |	FR3		|	Agent Manager increment or decrement credit of an Employee |
 |	FR4		| 	Agent Manager increment or decrement the debt of an Employee |
 |	FR5		|	Agent Manager check the inventory (product availability and product price) |
-|	FR6		| 	Agent Employee or Agent Visitor buy Capsule or Boxes  |
+|	FR6		| 	Agent Employee or Agent Visitor buy Capsule  |
 |	FR7		|	Agent Employee get his/her balance |
 |	FR8		|	Employee buy credit by cash, credit card |
 
@@ -128,11 +128,14 @@ must be less than 1sec  | FR1 |
 |  NFR9     | Efficiency | F7 in less than 0.5sec  | FR7 |
 |  NFR10    | Efficiency | F8 in less than 10sec (time more hight because the interaction with the bank api| FR8 |
 |  NFR11    | Domain | the Currency is Euro € | FR1,FR2,FR3,FR4,FR5,FR6,FR7,FR8 |
-|  NFR12    | Domain | the credit must be always >= -10€  | FR1,FR2,FR3,FR4,FR5,FR6,FR7,FR8 |
+|  NFR12    | Reiability | the credit must be always >= 0€  | FR1,FR2,FR3,FR4,FR5,FR6,FR7,FR8 |
 |  NFR13    | Reliability | the software must check if at the end of buy the credit is >=-10€ | FR1 |
-|  NFR14    | Domain | at the end of month if the credit of a Employee is <0 the money to get a positive credit are taken automatically from the salary | FR1 |
-|  NFR15    | Reliability | if the Employee buy credit throw credit card the system must check that the card is valid  | FR8 |
-
+|  NFR14    | Reliability | if the Employee buy credit throw credit card the system must check that the card is valid  | FR8 |
+| NFR15 | Domain | if for conclude a transaction the credit is not enought the
+manager can force the transaction making a dept for the account | FR4 |
+| NFR16 | Domain | before increment the credit the system must check that the debt is 0€ | FR3 |
+| NFR17 | Domain | the debt must be always >=0€ and always <=10€ | FR4 |
+| NFR18 | Usability | the debt must be shown in the UI as negative number in the same place where the credit is shown  | FR1,FR2,FR3,FR4,FR5,FR6,FR7,FR8 | 
 
 # Use case diagram and use cases
 
@@ -154,6 +157,8 @@ actor bank as b
 (choose beverage type) as cbt
 (select number of capsule) as snc
 (check order) as co
+(check debt) as cd
+(check credit) cc
 (check balance) as cb
 (supply capsules ) as sca
 (send deliverer) as sd
@@ -177,7 +182,8 @@ sc .> ci : include
 sc .> cb : include
 sca .> co : include
 sca .> sd : include
-
+cb .> cd : extend
+cb .> cc : extend
 
 sc -- e
 bbc -- s
