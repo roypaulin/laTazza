@@ -260,7 +260,7 @@ e -- cla
 |  Precondition     | At least one capsule is available for the requested type |  
 |  Post condition   | The number of capsules for the selected type is updated |
 |  1     | the customer orders some capsules to the manager |  
-|  2     | the manager clicks on "start a sell operation"  |
+|  2     | the manager clicks on "Manage Account and Sell Capsule"  |
 |  3     | the manager select  "visitor" as customer's type |
 |  3     | the system shows the inventory and a form to fill  |
 |  4     | the manager checks the inventory |
@@ -278,7 +278,7 @@ e -- cla
 | Step#        | Description  |
 |  Precondition     | At least one capsule type with less than one remaining box (less than 50 capsules) |  
 |  Post condition   | The order is sent to the Supply Company |
-|  1     | the manager clicks on "buy capsules"  |
+|  1     | the manager clicks on "Buy New Capsules for Inventory"  |
 |  2     | the manager checks the inventory |
 |  3     | the system shows the inventory and the cash account |
 |  4     | the manager checks the cash account |
