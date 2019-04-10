@@ -393,6 +393,12 @@ ID
 typePayment
 date
 }
+class Account {
+    ID
+    creationDate
+    userName
+    password
+}
 
 class Order{
 ID
@@ -418,7 +424,7 @@ Client <|-- Employee
 Client <|-- Visitor
 
 Employee <|-- Manager
-
+Account -- Employee: has <
 Manager "1" -- "0..*" Credit: manage
 
 Capsule "0..*" -- "1" "Capsule Type": is of
@@ -436,7 +442,6 @@ class LaTazza{
 class Server{
 /' management Capsule '/
 +sellCapsule()
-+showInventory()
 /' SupplyCompany related functions '/
 +checkPendingOrder()
 +changeOrderStatus()
@@ -486,6 +491,7 @@ class ManagerInterface{
 class EmployeeInterface{
 +buyCredit()
 +showBalanceEmployee()
++showInventory()
 }
 
 class Database{
