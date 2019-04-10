@@ -37,8 +37,6 @@ Roy Paulin Justo Nguetsop Kenfack Djouaka @s257855
 |	Manager	    | He is also an employee of the company but have been designated by the colleagues to manage the sale and supply of capsules |
 |	Supply Company	| Need an access to the application in order to monitor orders of boxes of capsules from the Manager's company |
 
-**nb:** We assume that the Supply Company offers a limited set of products, the capsules listed in the Informal Description Document, i.e. Coffee, Arabic Cofee, etc. These products can be acquired directly using LaTazza through an API System.
-
 # Context Digram and interfaces
 
 ## Context Diagram
@@ -49,14 +47,12 @@ skinparam packageStyle rectangle
 
 actor Employee as e
 actor "Supply Company" as sc
-actor Visitor as v
 actor Bank as b
 actor Manager as m
 
 rectangle system{
   (LaTazza) as lt
   e--lt
-  v--lt
   m--lt
   lt--b
   lt--sc
@@ -67,7 +63,6 @@ rectangle system{
 | Actor | Logical Interface | Physical Interface  |
 | ------------- |:-------------:| -----:|
 | Employee      | GUI to give the possibility to the customer to check availabily of the capsules, view the prices and to manage his account (view remaining credit and charge it, view list of expenses) | Touch screen |
-| Vistor |GUI wich may be used to check the availabily of capsules before buying and the price of the products |no need because will be served by the manager|
 | Bank|API to interact with the bank in order to perform the debit in case the customer buy by credit card;Date should be sent using a defined format(either json or xml are good choices but xml is more easy to understand and reduces the errors due to the xmlsd that validates the data before the processing) |not needed
 | Supply company | Assuming the supply company has it own system to handle supplies,we should provide some API to interact with that system in order to facilitate supply activities. | not needed
 
@@ -113,14 +108,16 @@ It's Monday morning and Gianfranco logs in the system. In the LaTazza interface,
 |	FR5		|	Agent Manager check the inventory (product availability and product price) |
 |	FR6		| 	Agent Employee or Agent Visitor buy Capsule or Boxes  |
 |	FR7		|	Agent Employee get his/her balance |
-|	FR8		|	Employee buy credit by cash, credit card or retained on the pay slip |
+|	FR8		|	Employee buy credit by cash, credit card |
+
 
 ## Non Functional Requirements
 
 
 | ID        | Type (efficiency, reliability, ..)           | Description  | Refers to |
 | ------------- |:-------------:| :-----:| :-----:|
-|  NFR1     | Efficiency | F1 less than 1sec  | FR1 |
+|  NFR1     | Efficiency | F1, the interaction with the db in this function
+must be less than 1sec  | FR1 |
 |  NFR2     | Reliability | the number of capsule must never be less than 0 | FR1 |
 |  NFR3     | Usability | the action to be done must require less than 3 screen changes  | FR1,FR2,FR3,FR4,FR5,FR6,FR7,FR8 |
 |  NFR4     | Maintainability | the interaction with the bank for the credit card must me done with REST paradigm | FR8 |
@@ -376,6 +373,7 @@ class Inventory{
 }
 
 class Sale{
+typePayment
 date
 }
 
@@ -403,6 +401,8 @@ Client <|-- Employee
 Client <|-- Visitor
 
 Employee <|-- Manager
+
+Manager "1" -- "0..*" Credit: manage
 
 Capsule "0..*" -- "1" "Capsule Type": is of
 
@@ -434,6 +434,7 @@ class Server{
 +processPayment()
 +login()
 +logout()
++updateTotalBalance()
 +createUser()
 +deleteUser()
 +updateCapsule()
@@ -453,6 +454,7 @@ class SupplyCompanyInterface{
 
 class ManagerInterface{
 +sellCapsule()
++updateTotalBalance()
 +chargeCredit()
 +showBalance()
 +showBalanceEmployee()
