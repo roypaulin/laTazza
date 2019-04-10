@@ -252,7 +252,7 @@ e -- cla
 |  8     | the manager selects beverage type|
 |  9     | the manager selects the payment method  |
 |  10     | the manager clicks on "sell" |
-|  11     | system considers the capsules as sold and updates the remaining number |
+|  11     | system considers the capsules as sold, updates the remaining number and the credit and debt aswell |
 
 ## Scenario 2, Successful sale of Capsule to a Visitor
 
