@@ -102,13 +102,16 @@ It's Monday morning and Gianfranco logs in the system. In the LaTazza interface,
 | 	ID		|	Description	|
 | ------------- |:-------------|
 |	FR1		|	Agent Manager sell capsules to agent employee or to agent visitor |  
-|	FR2		|	Agent Manager buy boxes of capsule from supply company |
+|	FR2		|	Agent Manager order boxes of capsule from supply company |
 |	FR3		|	Agent Manager increment or decrement credit of an Employee |
 |	FR4		| 	Agent Manager increment or decrement the debt of an Employee |
 |	FR5		|	Agent Manager check the inventory (product availability and product price) |
 |	FR6		| 	Agent Employee or Agent Visitor buy Capsule  |
 |	FR7		|	Agent Employee get his/her balance |
 |	FR8		|	Employee buy credit by cash, credit card |
+|   FR9     |   Agent Manager update the status of an order|
+|   FR10    |   Agent Manager logs in and check pending orders|
+|   FR11    |   Agent Manager Create or delete a user|
 
 
 ## Non Functional Requirements
@@ -130,9 +133,8 @@ It's Monday morning and Gianfranco logs in the system. In the LaTazza interface,
 |  NFR12    | Reiability | the credit must be always >= 0€  | FR1,FR2,FR3,FR4,FR5,FR6,FR7,FR8 |
 |  NFR13    | Reliability | the software must check if at the end of buy the credit is >=-10€ | FR1 |
 |  NFR14    | Reliability | if the Employee buy credit throw credit card the system must check that the card is valid  | FR8 |
-| NFR15 | Domain | if for conclude a transaction the credit is not enought the
-manager can force the transaction making a dept for the account | FR4 |
-| NFR16 | Domain | before increment the credit the system must check that the debt is 0€ | FR3 |
+| NFR15 | Performance| if for conclude a transaction the credit is not enought the manager can force the transaction making a dept for the account | FR4 |
+| NFR16 | Reliability | before increment the credit the system must check that the debt is 0€ | FR3 |
 | NFR17 | Domain | the debt must be always >=0€ and always <=10€ | FR4 |
 | NFR18 | Usability | the debt must be shown in the UI as negative number in the same place where the credit is shown  | FR1,FR2,FR3,FR4,FR5,FR6,FR7,FR8 | 
 
