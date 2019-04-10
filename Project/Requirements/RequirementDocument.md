@@ -343,34 +343,44 @@ e -- cla
 
 ```plantuml
 class Visitor{
+first name
+last name
 }
 
 class Employee{
 ID
-name
-surname
+first name
+last surname
 }
 
 class Client{
 }
 
 class "Supply Company"{
+ID
+companyName
+address
 }
 
 class Manager{
 }
 
 class Credit{
+ID
+lastUpdate
 balance
 }
 class Capsule{
+ID
 price
 }
 
 class "Capsule Type"{
+ID
 name
 }
 class Box {
+ID
 price
 }
 
@@ -379,11 +389,13 @@ class Inventory{
 }
 
 class Sale{
+ID
 typePayment
 date
 }
 
 class Order{
+ID
 requestDate
 sentDate
 receiveDate
@@ -402,7 +414,6 @@ Sale "1..*" -- "1..*" Capsule
 Credit "1" -- "1" Employee: has <
 Box -- “50” Capsule
 Inventory -- "*" Capsule
-
 Client <|-- Employee
 Client <|-- Visitor
 
