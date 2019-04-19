@@ -2,9 +2,17 @@
 
 Authors: Maurizio Morisio, Luca Ardito, Riccardo Coppola
 
-Date: 11/04/2019
+Date: 19/04/2019
 
-Version: 1
+Version: 2
+
+Change history
+
+| Version | Changes | 
+| ----------------- |:-----------|
+| 2 | Fixed defect in [scenario 2](#scenario-2): precondition was wrong  |
+| | Fixed defect in scenario [format](#relevant-scenarios): added post conditions |
+| | Fixed defect in [use case 2](#use-cases): variants text canceled |
 
 # Contents
 - [Abstract](#abstract)
@@ -127,7 +135,7 @@ a -- (FR6 Produce report on all consumptions)
 |  Post condition     | T.quantity_post < T.quantity_pre |
 | | LaTazzaAccount.amount_post > LaTazzaAccount.amount_pre |
 |  Nominal Scenario     | Administrator selects capsule type T, Deduce quantity for capsule T, add price of T on LaTazzaAccount.amount|
-|  Variants     | Account of colleague C has not enough money, issue warning |
+|  Variants     |  |
 
 ### Use case 3, UC3 - FR3 Record recharge of account of colleague
 
@@ -172,9 +180,11 @@ a -- (FR6 Produce report on all consumptions)
 ## Scenario 1
 
 | Scenario ID: SC1        | Corresponds to UC1  |
-| ------------- |:-------------:| 
-| | Precondition: account of C has enough money to buy capsule T|
-| Step#        | Description  - Colleague uses one capsule of type T  |
+| ------------- |:-------------| 
+| Description | Colleague uses one capsule of type T|
+| Precondition |  account of C has enough money to buy capsule T|
+| Postcondition |  account of C updated, count of T updated |
+| Step#        |  Step description   |
 |  1     | Administrator selects capsule type T |  
 |  2     |  Administrator selects colleague C |
 |  3     | Deduce one for quantity of capsule T |
@@ -183,11 +193,13 @@ a -- (FR6 Produce report on all consumptions)
 ## Scenario 2
 
 | Scenario ID: SC2        | Corresponds to UC1  |
-| ------------- |:-------------:| 
-| | Precondition: account of C has enough money to buy capsule T|
-| Step#        | Description  - Colleague uses one capsule of type T|
+| ------------- |:-------------| 
+| Description | Colleague uses one capsule of type T, account negative|
+|Precondition |  account of C has not enough money to buy capsule T|
+|Postcondition |  account of C updated, count of T updated |
+| Step#        | Step description  |
 |  1     | Administrator selects capsule type T |  
-|  2     | Administrator selects colleague C, |
+|  2     | Administrator selects colleague C |
 |  3     | Deduce one for quantity of capsule T  |
 |  4     | Deduce price of T from account of C  |
 |  5     | Account of C is negative, issue warning  |
