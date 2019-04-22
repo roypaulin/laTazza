@@ -17,6 +17,19 @@ public class DataImpl implements DataInterface {
 	@Override
 	public Integer sellCapsules(Integer employeeId, Integer beverageId, Integer numberOfCapsules, Boolean fromAccount)
 			throws EmployeeException, BeverageException, NotEnoughCapsules {
+		
+		/*
+		 * getEmployeeData()
+		 * updatecredit() // same as updateBeveragequantity()
+		 * getBevarageData()
+		 * getQauntityavailable()
+		 * getBevaragePrice()
+		 * updateCapsuleQuantity() // try to increment or decrement th capsules's quantity and throws exeptionin case of error
+		 * updateBeverageQauntity()// done on the database
+		 * if fromAccount==true => updateBalance() from LaTazza on the database
+		 * updateEmployeeCredit() // done on the data base
+		 * create a new object transaction of type consumption
+		 * */
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -25,13 +38,18 @@ public class DataImpl implements DataInterface {
 	public void sellCapsulesToVisitor(Integer beverageId, Integer numberOfCapsules)
 			throws BeverageException, NotEnoughCapsules {
 		// TODO Auto-generated method stub
-		
+		/*Same as before with the only difference that the transaction that will be created will have some 
+		 * attributes set to NULL*/
 	}
 
 	@Override
 	public Integer rechargeAccount(Integer id, Integer amountInCents) throws EmployeeException {
 		// TODO Auto-generated method stub
 		return 0;
+		/*
+		 * getEmployeeData()
+		 * updatecredit()
+		 * */
 	}
 
 	@Override
