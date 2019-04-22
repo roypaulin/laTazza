@@ -94,7 +94,8 @@ class Employee {
    - float credit
    + float getEmployeecredit()
    + int getEmployeeID()
-   + Employee(id,name,surname,credit)
+   + String getName()
+   + String getSurname()
    + void updateCredit(float amount) throw EmployeeException /' the amount can be eighter positive (recharge credit) and negative (buy capsules) '/
 }
 class Beverage {
@@ -148,10 +149,10 @@ class Recharge {
    -int employeeId
 }'/
 class Database {
-   + List<Integer> getListEmployee()
+   + List<Employee> getListEmployee()
    + Employee getEmployeeData(int id) throws EmployeeException
    + void updateEmployeeCredit(Int employeeId,float amount) 
-   + List<Integer> getListOfBeverage()
+   + List<Beverage> getListOfBeverage()
    + Beverage getBeverageData(int id) throws BeverageException
    + void updateBeverageQauntity(int id,int quanity) /' save in the db the beverage updated '/
    + float getBalance()
@@ -162,7 +163,9 @@ class Database {
    + void addBeverage(Beverage bev) throw BeverageException
    + void addEmployee(Employee emp) throw EmployeeException
    + void truncateTables()
-   + void updateBeverageAttributes(Integer id, String name, Integer capsulesPerBox, Integer boxPrice) throw BeverageException
+   + void updateBeverageAttributes(Integer id, String name, Integer capsulesPerBox, Integer boxPrice) throws BeverageException
+   + void updateEmployeeAttributes(Integer id, String name,  String surname) throws EmployeeException
+		 
 }
 LaTazza -- DataImpl
 Exception -- DataImpl
