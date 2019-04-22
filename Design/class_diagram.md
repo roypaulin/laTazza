@@ -1,4 +1,4 @@
-@startuml
+```plantuml
 class DataImpl [[java:it.polito.latazza.data.DataImpl]] {
     +Integer sellCapsules(Integer employeeId, Integer beverageId, Integer numberOfCapsules, Boolean fromAccount)
     +void sellCapsulesToVisitor(Integer beverageId, Integer numberOfCapsules)
@@ -143,4 +143,4 @@ class Database {
 LaTazza -- DataImpl
 Exception -- DataImpl
 DataImpl -- Database
-@enduml
+```
