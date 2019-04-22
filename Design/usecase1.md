@@ -1,4 +1,4 @@
-@startuml
+```plantuml
 skinparam sequenceArrowThickness 2
 skinparam roundcorner 20
 skinparam maxmessagesize 60
@@ -25,4 +25,4 @@ di -> db : updateBalance(updatedBalance)
 di -> tazza : creditUpdated
 tazza -> ad : creditUpdated
 ad -> em : creditUpdated
-@enduml
+```
