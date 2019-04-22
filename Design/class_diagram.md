@@ -126,7 +126,7 @@ class Transaction {
    -boolean fromAccount
 }
 
-/*class Purchase {
+/'class Purchase {
    -int id
    -int boxQuantity
    +int beverageId
@@ -144,7 +144,7 @@ class Recharge {
    -int id
    -float amount
    -int employeeId
-}*/
+}'/
 class Database {
    + List<Integer> getListEmployee()
    + Employee getEmployeeData(int id) throws EmployeeException
