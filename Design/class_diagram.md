@@ -107,8 +107,10 @@ class Beverage {
    - String name
    + Beverage(float price,String name,int capsulePerBox)
    + void setPrice(float price) throws BeverageException
+   + String getName()
    + void setName(String name) throws BeverageException
    + void setCapsulesPerBox(int caps)
+   + int getCapsulesPerBox()
    + String getBeverageName()
    + int getBeverageCapsule()/*what is the meaning??*/
    + float getBevaragePrice();
@@ -158,8 +160,9 @@ class Database {
    + List<Transaction> getReport(Date startDate,Date endDate)
    + void registerTransaction(Transaction transaction)
    + void addBeverage(Beverage bev) throw BeverageException
-   + void addEmployee(Beverage bev) throw EmployeeException
+   + void addEmployee(Employee emp) throw EmployeeException
    + void truncateTables()
+   + void updateBeverageAttributes(Integer id, String name, Integer capsulesPerBox, Integer boxPrice) throw BeverageException
 }
 LaTazza -- DataImpl
 Exception -- DataImpl
