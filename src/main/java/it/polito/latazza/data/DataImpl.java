@@ -28,7 +28,7 @@ public class DataImpl implements DataInterface {
 		 * updateBeverageQauntity()// done on the database
 		 * if fromAccount==true => updateBalance() from LaTazza on the database
 		 * updateEmployeeCredit() // done on the data base
-		 * create a new object transaction of type consumption
+		 * create a new object transaction of type consumption and insert it in the databas
 		 * */
 		// TODO Auto-generated method stub
 		return 0;
@@ -48,32 +48,46 @@ public class DataImpl implements DataInterface {
 		return 0;
 		/*
 		 * getEmployeeData()
-		 * updatecredit()
+		 * updateEmployeeCredit()
+		 * create a new object transaction of type recharge and insert it in the database
 		 * */
 	}
 
 	@Override
 	public void buyBoxes(Integer beverageId, Integer boxQuantity) throws BeverageException, NotEnoughBalance {
 		// TODO Auto-generated method stub
-		
+		/*
+		  getBeverageData()
+		  getBalance()
+		  updateBalance()
+		  updateBeverageQuantity()
+		*/ 
 	}
 
 	@Override
 	public List<String> getEmployeeReport(Integer employeeId, Date startDate, Date endDate)
 			throws EmployeeException, DateException {
 		// TODO Auto-generated method stub
+		/*getEmployeeReport() //which returns a list of transactions to be formated
+		 */
 		return new ArrayList<String>();
 	}
 
 	@Override
 	public List<String> getReport(Date startDate, Date endDate) throws DateException {
 		// TODO Auto-generated method stub
+
+		/*getReport() //which returns a list of transactions to be formated
+		 */
 		return new ArrayList<String>();
 	}
 
 	@Override
 	public Integer createBeverage(String name, Integer capsulesPerBox, Integer boxPrice) throws BeverageException {
 		// TODO Auto-generated method stub
+		/*call constructor to create a beverage object
+		  addBeverage()
+		 */
 		return 0;
 	}
 
@@ -81,24 +95,32 @@ public class DataImpl implements DataInterface {
 	public void updateBeverage(Integer id, String name, Integer capsulesPerBox, Integer boxPrice)
 			throws BeverageException {
 		// TODO Auto-generated method stub
+		/* updateBeverageAttributes
+		 */
 		
 	}
 
 	@Override
 	public String getBeverageName(Integer id) throws BeverageException {
 		// TODO Auto-generated method stub
+		/*getBeverageData().getName()
+		 */
 		return "";
 	}
 
 	@Override
 	public Integer getBeverageCapsulesPerBox(Integer id) throws BeverageException {
 		// TODO Auto-generated method stub
+		/*getBeverageData().getCapsulesPerBox()
+		 */
 		return 0;
 	}
 
 	@Override
 	public Integer getBeverageBoxPrice(Integer id) throws BeverageException {
 		// TODO Auto-generated method stub
+		/*getBeverageData().getBeverageBoxPrice()
+		 */
 		return 0;
 	}
 
