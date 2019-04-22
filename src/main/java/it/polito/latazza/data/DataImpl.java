@@ -127,72 +127,95 @@ public class DataImpl implements DataInterface {
 	@Override
 	public List<Integer> getBeveragesId() {
 		// TODO Auto-generated method stub
+		/*getBeverageData().getId()
+		 */
 		return new ArrayList<Integer>();
 	}
 
 	@Override
 	public Map<Integer, String> getBeverages() {
 		// TODO Auto-generated method stub
+		/*getListOfBeverage() //then transforms in Map
+		 */
 		return new HashMap<Integer, String>();
 	}
 
 	@Override
 	public Integer getBeverageCapsules(Integer id) throws BeverageException {
 		// TODO Auto-generated method stub
+		/*getBeverageData().getCapsulesAvailable()
+		 */
 		return 0;
 	}
 
 	@Override
 	public Integer createEmployee(String name, String surname) throws EmployeeException {
 		// TODO Auto-generated method stub
+		/*call constructor to create a employee object
+		addEmployee()
+		 */
 		return 0;
 	}
 
 	@Override
 	public void updateEmployee(Integer id, String name, String surname) throws EmployeeException {
 		// TODO Auto-generated method stub
-		
+		/* updateEmployeeAttributes
+		 */
 	}
 
 	@Override
 	public String getEmployeeName(Integer id) throws EmployeeException {
 		// TODO Auto-generated method stub
+		/*getEmployeeData().getName()
+		 */
 		return "";
 	}
 
 	@Override
 	public String getEmployeeSurname(Integer id) throws EmployeeException {
 		// TODO Auto-generated method stub
+		/*getEmployeeData().getSurname()
+		 */
 		return "";
 	}
 
 	@Override
 	public Integer getEmployeeBalance(Integer id) throws EmployeeException {
 		// TODO Auto-generated method stub
+	   /*getEmployeeData().getEmployeecredit()
+		 */
 		return 0;
 	}
 
 	@Override
 	public List<Integer> getEmployeesId() {
 		// TODO Auto-generated method stub
+		  /*getEmployeeData().getEmployeeID()
+		 */
 		return new ArrayList<Integer>();
 	}
 
 	@Override
 	public Map<Integer, String> getEmployees() {
 		// TODO Auto-generated method stub
+		/*getListOfEmployee() //then transforms in Map
+		 */
 		return new HashMap<Integer, String>();
 	}
 
 	@Override
 	public Integer getBalance() {
 		// TODO Auto-generated method stub
+		// getBalance()
 		return 0;
 	}
 
 	@Override
 	public void reset() {
 		// TODO Auto-generated method stub
+		/*truncateTables()
+		 */
 		
 	}
 
