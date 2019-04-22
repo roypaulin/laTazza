@@ -42,11 +42,17 @@ UML diagrams **MUST** be written using plantuml notation.
 \<for each functional requirement from the requirement document, list which classes concur to implement it>
 
 
-|  | Class x | Class y  | .. |
-| ------------- |:-------------:| -----:| -----:|
-| Functional requirement x  |  |  | |
-| Functional requirement y  |  |  | |
-| .. |  |  | |
+|  | Beverage | Transaction  | Employee  | DataImpl | Database   | LaTazza |  Exception|
+| ------------- |:-------------:| -----:| -----:| -------:|-------:|-------:| -------:|
+| Functional requirement 1  | x | x  | x | x| x| x | x|
+| Functional requirement 2  |  x|  x| |x |x |x | x|
+| Functional requirement 3  |  | x |x |x |x | |x |
+| Functional requirement 4  |  x| x | | x|x |x |x |
+| Functional requirement 5  |  |  x| x| x| x| | x|
+| Functional requirement 6  |  | x | | x| x| | x|
+| Functional requirement 7  | x |  | |x |x | |x |
+| Functional requirement 8  |  |  |x | x| x| | x|
+
 
 # Verification sequence diagrams 
 \<select key scenarios from the requirement document. For each of them define a sequence diagram showing that the scenario can be implemented by the classes and methods in the design>
