@@ -26,4 +26,7 @@ CREATE TABLE `Beverage` (
 CREATE TABLE `LaTazza` (
 	`balance`	REAL NOT NULL DEFAULT 0 CHECK(balance>=0)
 );
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1416d90b65cf74039ccc56d1b9607d945b5745d8
