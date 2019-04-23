@@ -13,6 +13,7 @@ import it.polito.latazza.exceptions.NotEnoughCapsules;
 public interface DataInterface {
 
 	// --------------- FR1 --------------- //
+	
 	/**
 	 * Record that an employee has used some capsules of a certain beverage.
 	 * 
@@ -28,7 +29,7 @@ public interface DataInterface {
 	 */
 	public Integer sellCapsules(Integer employeeId, Integer beverageId, Integer numberOfCapsules, Boolean fromAccount)
 			throws EmployeeException, BeverageException, NotEnoughCapsules;
-
+    //TODO: create object transaction and add it to the DB
 	// --------------- FR2 --------------- //
 	/**
 	 * Record that a visitor has used some capsules of a certain beverage.
@@ -40,7 +41,7 @@ public interface DataInterface {
 	 */
 	public void sellCapsulesToVisitor(Integer beverageId, Integer numberOfCapsules)
 			throws BeverageException, NotEnoughCapsules;
-
+   //TODO: create an object transaction with the attribute isEmployye==false and employeeId==-1
 	// --------------- FR3 --------------- //
 	/**
 	 * Record that an employee has recharged on her account a certain amount in
@@ -63,7 +64,7 @@ public interface DataInterface {
 	 * @throws NotEnoughBalance  if the shared balance is insufficient
 	 */
 	public void buyBoxes(Integer beverageId, Integer boxQuantity) throws BeverageException, NotEnoughBalance;
-
+      //TODO: update balance.
 	// --------------- FR5 --------------- //
 	/**
 	 * Produce a report about consumption and recharges of an employee.
@@ -133,7 +134,7 @@ public interface DataInterface {
 	 * @throws BeverageException if the beverage cannot be created
 	 */
 	public Integer createBeverage(String name, Integer capsulesPerBox, Integer boxPrice) throws BeverageException;
-
+     //TODO: we should initialize all the others atributes
 	/**
 	 * Update the name, the number of capsules per box, and the box price of a
 	 * beverage.
@@ -146,7 +147,7 @@ public interface DataInterface {
 	 */
 	public void updateBeverage(Integer id, String name, Integer capsulesPerBox, Integer boxPrice)
 			throws BeverageException;
-
+      //TODO: throws exption if price is greater or equal to 0 or the beverage does not exist. if in the db exist another beverage with the same name exception
 	/**
 	 * Get the name of a beverage.
 	 * 
@@ -247,7 +248,7 @@ public interface DataInterface {
 	 * @throws EmployeeException if the identifier is not valid
 	 */
 	public Integer getEmployeeBalance(Integer id) throws EmployeeException;
-
+     //TODO: we read the object inside the class Employye by calling method getEmployeeData() and then we return the balance;
 	/**
 	 * Get a list containing the identifiers of the employees.
 	 * 
@@ -269,12 +270,12 @@ public interface DataInterface {
 	 * @return the shared balance in cents
 	 */
 	public Integer getBalance();
-
+      //TODO: get the value directly from the DB
 	/**
 	 * Clear all data structures and restore the initial status of the application,
 	 * with no beverages and no employees. The shared balance must be zero and the
 	 * log empty. This method is only used for testing purposes.
 	 */
 	public void reset();
-
+    //TODO: Truncate table
 }

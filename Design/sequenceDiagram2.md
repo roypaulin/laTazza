@@ -1,4 +1,4 @@
-@startuml
+```plantuml
 skinparam sequenceArrowThickness 2
 skinparam roundcorner 20
 skinparam maxmessagesize 60
@@ -22,4 +22,4 @@ db -> di : EmployeeException, ROLLBACK
 di -> tazza : EmployeeException
 tazza -> ad : EmployeeException
 ad -> em : Not enought credit
-@enduml
+```
