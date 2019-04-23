@@ -34,15 +34,21 @@ class latazza {
 
 }
 
-class latazza.data{
+class data{
 
 }
 
-class latazza.exeptions{
+class exeptions {
 
 }
-latazza -- latazza.data
-latazza -- latazza.exeptions
+
+class jdbc {
+    
+    
+}
+latazza -- data
+latazza -- exeptions
+latazza -- jdbc
 ```
 
 
@@ -223,6 +229,9 @@ class Database {
 LaTazza -- DataImpl
 Exception -- DataImpl
 DataImpl -- Database
+DataImpl -- Transaction
+DataImpl -- Beverage
+DataImpl -- Employee
 ```
 
 
