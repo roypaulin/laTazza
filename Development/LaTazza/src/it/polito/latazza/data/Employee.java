@@ -21,5 +21,22 @@ public class Employee {
 		this.credit = d;
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getSurname() {
+		return surname;
+	}
+
+	public double getCredit() {
+		return credit;
+	}
+
+	
 	
 }

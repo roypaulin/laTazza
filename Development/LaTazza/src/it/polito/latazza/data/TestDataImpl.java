@@ -19,13 +19,15 @@ public class TestDataImpl {
 	
 	@Test
 	public void testDatabase() throws ClassNotFoundException, SQLException, Exception {
+		
 		Database database = null;
 		
 		database = new Database();
+		database.truncateTables();
+		
+		database.addEmployee(new Employee(-1,"Morisio","Maurizio",1000000.99));
 		
 		assertNotEquals(null, database);
-
-		database.connect();
 		
 		List<Employee> list = null;
 
@@ -40,14 +42,12 @@ public class TestDataImpl {
 		database.updateCredit(1,1.1);
 		database.getListOfBeverage();
 		database.getBeverageData();
-		database.updateBeverageQuantity();
 		database.getBalance();
 		database.getBalance();
 		database.getEmployeeReport(1,new Date(12, 10, 2010),new Date(12, 10, 2011));
 		database.getReport(new Date(12, 10, 2010),new Date(12, 10, 2011));
-		database.registerTransaction(new Transaction(new Date(12, 10, 2011),'P',1,1,1.0,true));
-		database.addBeverage(new Beverage(-1,10,10.1,50,"Kaffè"));
-		database.addEmployee(new Employee(-1,"Morisio","Maurizio",1000000.99));
+		database.addBeverage(new Beverage(-1,10,10.1,50,"do you wanna a Kaffè"));
+		database.registerTransaction(new Transaction(1, new Date(12, 10, 2011),'P',1,1,1, 1.0,true));
 		database.truncateTables();
 		database.updateBeverageAttributes(new Beverage(-1,0,1.4,50,"do you wanna a Kaffè!?!!!"));
 		database.updateEmployeeAttributes(new Employee(-1,"Morisio","Maurizio",1.99));
