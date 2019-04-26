@@ -166,7 +166,13 @@ public class DataImpl implements DataInterface {
 		// TODO Auto-generated method stub
 		/*getBeverageData().getBeverageBoxPrice()
 		 */
-		
+		/*try {
+		   Integerm price = d.getBeverageData(id).getBoxPrice();
+		}
+		catch(BeverageException be) {
+			
+			throw new BeverageException() ;
+		}*/
 		return 0;
 	}
 
@@ -176,7 +182,13 @@ public class DataImpl implements DataInterface {
 		// TODO Auto-generated method stub
 		/*getBeverageData().getId()
 		 */
-		return new ArrayList<Integer>();
+		List<Integer> beveragesId = new ArrayList<>();
+		List<Beverage> beverages = new ArrayList<>();
+		//beverages = d.getListOfBeverages();
+		for(Beverage b : beverages) {
+			beveragesId.add(b.getId());
+		}
+		return beveragesId;
 	}
 
 	@Override
@@ -185,6 +197,7 @@ public class DataImpl implements DataInterface {
 		// TODO Auto-generated method stub
 		/*getListOfBeverage() //then transforms in Map
 		 */
+		
 		return new HashMap<Integer, String>();
 	}
 
