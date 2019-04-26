@@ -18,6 +18,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
+import it.polito.latazza.exceptions.EmployeeException;
+
 /**
  * @author elia
  *
@@ -26,9 +28,6 @@ import java.util.Locale;
 public class Database {
 	
 	Connection connection = null;
-	
-	public Database() {
-	}
 	
 	private void connect() throws Exception {
 		try {
@@ -88,8 +87,34 @@ public class Database {
 		super.finalize();
 	}
 
-	public void getEmployeeData(int i) {
+	public Employee getEmployeeData(int i) throws Exception {
+		connect();
 		
+		String sql = "SELECT * FROM Employee WHERE id = ?";
+		
+		PreparedStatement prep = connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+		prep.setInt(1, i);
+		ResultSet rs = prep.executeQuery();
+		
+		int id = 0;
+		String name = null,surname = null;
+		float credit = 0;
+		boolean result = false;
+		
+		while (rs.next()) {
+			id = rs.getInt("id");
+			name = rs.getString("name");
+			surname = rs.getString("surname");
+			credit = rs.getFloat("credit");
+			result = true;
+		}
+		
+		closeConnection();
+		
+		if (!result)
+			throw new EmployeeException();
+		
+		return new Employee(id,name,surname,credit);
 	}
 
 	public void updateCredit(int i, double d) {
