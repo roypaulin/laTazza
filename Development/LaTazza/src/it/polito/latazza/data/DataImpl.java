@@ -133,7 +133,7 @@ public class DataImpl implements DataInterface {
 		  addBeverage()
 		 */
 		Integer id=0;
-		Beverage b= new Beverage(-1,name,0,capsulesPerBox,boxPrice);
+		Beverage b= new Beverage(-1,0,boxPrice,capsulesPerBox,name);
 		/*try{
 			id=d.addBeverage(b);
 			}catch(BeverageException be) {

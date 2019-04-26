@@ -1,0 +1,100 @@
+/**
+ * 
+ */
+package it.polito.latazza.data;
+import java.sql.SQLException;
+
+import it.polito.latazza.data.DataImpl;
+import it.polito.latazza.data.DataInterface;
+import it.polito.latazza.data.Database;
+/**
+ * @author pauli
+ *
+ */
+public class Beverage {
+<<<<<<< HEAD
+	int id,quantityAvaiable;
+	double boxPrice;
+	int capsulePerBox;
+=======
+	/**
+	 * @param id
+	 * @param name
+	 * @param quantiyAvailable
+	 * @param capsulePerBox
+	 * @param boxPrice
+	 */
+	public Beverage(int id, String name, int quantiyAvailable, int capsulePerBox, float boxPrice) {
+		//super();
+		this.id = id;
+		this.name = name;
+		this.quantiyAvailable = quantiyAvailable;
+		this.CapsulePerBox = capsulePerBox;
+		this.boxPrice = boxPrice;
+	}
+	private int id;
+	private String name;
+	private int quantiyAvailable;// exact number of capsules available
+	private int CapsulePerBox; //number of capsules per box
+	private float boxPrice; //price of a capsule box
+>>>>>>> 0372be5b9490f44e51f7820b402059901068715a
+	
+	public int getId() {
+		return id;
+	}
+<<<<<<< HEAD
+	public int getQuantityAvaiable() {
+		return quantityAvaiable;
+	}
+	public double getBoxPrice() {
+		return boxPrice;
+	}
+	public int getCapsulePerBox() {
+		return capsulePerBox;
+=======
+	public void setId(int id) {
+		this.id = id;
+>>>>>>> 0372be5b9490f44e51f7820b402059901068715a
+	}
+	public String getName() {
+		return name;
+	}
+<<<<<<< HEAD
+	
+	String name;
+	public Beverage(int id, int quantityAvaiable, double d, int capsulePerBox, String name) {
+		super();
+		this.id = id;
+		this.quantityAvaiable = quantityAvaiable;
+		this.boxPrice = d;
+		this.capsulePerBox = capsulePerBox;
+		this.name = name;
+	}
+	
+	
+=======
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getQuantiyAvailable() {
+		return quantiyAvailable;
+	}
+	public void setQuantiyAvailable(int quantiyAvailable) {
+		this.quantiyAvailable = quantiyAvailable;
+	}
+	public int getCapsulePerBox() {
+		return CapsulePerBox;
+	}
+	public void setCapsulePerBox(int capsulePerBox) {
+		CapsulePerBox = capsulePerBox;
+	}
+	public float getBoxPrice() {
+		return boxPrice;
+	}
+	public void setBoxPrice(float boxPrice) {
+		this.boxPrice = boxPrice;
+	}
+>>>>>>> 0372be5b9490f44e51f7820b402059901068715a
+
+	
+}

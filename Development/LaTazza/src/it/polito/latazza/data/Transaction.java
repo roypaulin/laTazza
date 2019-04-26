@@ -3,43 +3,66 @@ package it.polito.latazza.data;
 import java.util.*;
 
 /**
- * @author pauli
+ * @author elia
  *
  */
 
 public class Transaction {
-   private Date date;
-   char type;
-   int beverageId;
-   int employeeId;
-   float amount;
-   boolean fromAccount;
-public Date getDate() {
-	return date;
-}
-public Transaction(Date date, char type, int beverageId, int employeeId, float amount, boolean fromAccount) {
-	//super();
-	this.date = date;
-	this.type = type;
-	this.beverageId = beverageId;
-	this.employeeId = employeeId;
-	this.amount = amount;
-	this.fromAccount = fromAccount;
-}
-public char getType() {
-	return type;
-}
-public int getBeverageId() {
-	return beverageId;
-}
-public int getEmployeeId() {
-	return employeeId;
-}
-public float getAmount() {
-	return amount;
-}
-public boolean isFromAccount() {
-	return fromAccount;
-}
+
+	int id;
+	Date transactionDate;
+	char type;
+	int boxQuantity;
+	int employeeID;
+	int beverageID;
+	double amount;
+	boolean fromAccount;
+	
+	public Transaction(int id, Date transactionDate, char type, int boxQuantity, int employeeID, int beverageID,
+			double amount, boolean fromAccount) {
+		super();
+		this.id = id;
+		this.transactionDate = transactionDate;
+		this.type = type;
+		this.boxQuantity = boxQuantity;
+		this.employeeID = employeeID;
+		this.beverageID = beverageID;
+		this.amount = amount;
+		this.fromAccount = fromAccount;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public Date getTransactionDate() {
+		return transactionDate;
+	}
+
+	public char getType() {
+		return type;
+	}
+
+	public int getBoxQuantity() {
+		return boxQuantity;
+	}
+
+	public int getEmployeeID() {
+		return employeeID;
+	}
+
+	public int getBeverageID() {
+		return beverageID;
+	}
+
+	public double getAmount() {
+		return amount;
+	}
+
+	public boolean isFromAccount() {
+		return fromAccount;
+	}
+	
+
    
 }

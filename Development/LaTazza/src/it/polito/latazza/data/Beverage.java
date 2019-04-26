@@ -2,75 +2,58 @@
  * 
  */
 package it.polito.latazza.data;
-import java.sql.SQLException;
+
 
 import it.polito.latazza.data.DataImpl;
 import it.polito.latazza.data.DataInterface;
 import it.polito.latazza.data.Database;
 import it.polito.latazza.exceptions.BeverageException;
+
 /**
- * @author pauli
+ * @author elia
  *
  */
 public class Beverage {
-	/**
-	 * @param id
-	 * @param name
-	 * @param quantiyAvailable
-	 * @param capsulePerBox
-	 * @param boxPrice
-	 */
-	public Beverage(int id, String name, int quantiyAvailable, int capsulePerBox, float boxPrice) {
-		//super();
-		this.id = id;
-		this.name = name;
-		this.quantiyAvailable = quantiyAvailable;
-		this.CapsulePerBox = capsulePerBox;
-		this.boxPrice = boxPrice;
-	}
-	private int id;
-	private String name;
-	private int quantiyAvailable;// exact number of capsules available
-	private int CapsulePerBox; //number of capsules per box
-	private float boxPrice; //price of a capsule box
+	int id,quantityAvailable;
+	double boxPrice;
+	int capsulePerBox;
 	
 	public int getId() {
 		return id;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public int getQuantityAvailable() {
+		return quantityAvailable;
+	}
+	public double getBoxPrice() {
+		return boxPrice;
+	}
+	public int getCapsulePerBox() {
+		return capsulePerBox;
 	}
 	public String getName() {
 		return name;
 	}
-	public void setName(String name) {
+	
+	String name;
+	public Beverage(int id, int quantityAvailable, double boxPrice, int capsulePerBox, String name) {
+		super();
+		this.id = id;
+		this.quantityAvailable = quantityAvailable;
+		this.boxPrice = boxPrice;
+		this.capsulePerBox = capsulePerBox;
 		this.name = name;
 	}
-	public int getQuantiyAvailable() {
-		return quantiyAvailable;
-	}
-	public void setQuantiyAvailable(int quantiyAvailable) {
-		this.quantiyAvailable = quantiyAvailable;
-	}
-	public int getCapsulePerBox() {
-		return CapsulePerBox;
-	}
-	public void setCapsulePerBox(int capsulePerBox) {
-		CapsulePerBox = capsulePerBox;
-	}
-	public float getBoxPrice() {
-		return boxPrice;
-	}
-	public void setBoxPrice(float boxPrice) {
-		this.boxPrice = boxPrice;
-	}
+
     /*The Quantity can be either positive buying capsules or negative selling*/
 	public void updateCapsuleQuantity(int quantity)throws BeverageException {
-		if((this.quantiyAvailable +quantity)< 0) {
+		if((this.quantityAvailable +quantity)< 0) {
 			throw new BeverageException() ;
 		}
-		 this.quantiyAvailable += quantity ;
+		 this.quantityAvailable += quantity ;
 		 return ;
 	}
+
 	
+	
+
 }
