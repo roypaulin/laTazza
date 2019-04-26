@@ -133,7 +133,7 @@ public class DataImpl implements DataInterface {
 		 */
 		
 		/*try {
-		   Beverage b = d.getBeverageData(id).getName();
+		   String name = d.getBeverageData(id).getName();
 		}
 		catch(BeverageException be) {
 			
@@ -149,6 +149,14 @@ public class DataImpl implements DataInterface {
 		// TODO Auto-generated method stub
 		/*getBeverageData().getCapsulesPerBox()
 		 */
+		
+		/*try {
+		   Integer = d.getBeverageData(id).getCapsulePerBox();
+		}
+		catch(BeverageException be) {
+			
+			throw new BeverageException() ;
+		}*/
 		return 0;
 	}
 
@@ -158,6 +166,7 @@ public class DataImpl implements DataInterface {
 		// TODO Auto-generated method stub
 		/*getBeverageData().getBeverageBoxPrice()
 		 */
+		
 		return 0;
 	}
 
