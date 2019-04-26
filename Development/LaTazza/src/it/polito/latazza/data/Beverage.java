@@ -2,7 +2,11 @@
  * 
  */
 package it.polito.latazza.data;
+import java.sql.SQLException;
 
+import it.polito.latazza.data.DataImpl;
+import it.polito.latazza.data.DataInterface;
+import it.polito.latazza.data.Database;
 /**
  * @author pauli
  *
@@ -40,4 +44,6 @@ public class Beverage {
 	
 	
 
+}
+	
 }

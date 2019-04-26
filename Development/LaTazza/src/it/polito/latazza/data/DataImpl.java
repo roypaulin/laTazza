@@ -11,9 +11,12 @@ import it.polito.latazza.exceptions.DateException;
 import it.polito.latazza.exceptions.EmployeeException;
 import it.polito.latazza.exceptions.NotEnoughBalance;
 import it.polito.latazza.exceptions.NotEnoughCapsules;
+import it.polito.latazza.data.Beverage;
+import it.polito.latazza.data.Database;
+import it.polito.latazza.data.Transaction;
 
 public class DataImpl implements DataInterface {
-
+     Database d = new Database();
 	@Override
 	/* @author roy paulin */
 	public Integer sellCapsules(Integer employeeId, Integer beverageId, Integer numberOfCapsules, Boolean fromAccount)
@@ -95,13 +98,32 @@ public class DataImpl implements DataInterface {
 		/*call constructor to create a beverage object
 		  addBeverage()
 		 */
-		return 0;
+		Integer id=0;
+		Beverage b= new Beverage(-1,name,0,capsulesPerBox,boxPrice);
+		/*try{
+			id=d.addBeverage(b);
+			}catch(BeverageException be) {
+				throw new BeverageException();
+			}*/
+		
+		return id;
 	}
 
 	@Override
 	/* @author jean thibaut */
 	public void updateBeverage(Integer id, String name, Integer capsulesPerBox, Integer boxPrice)
 			throws BeverageException {
+		/*try {
+		 * Beverage bev = d.getBeverageData(id);
+		 * bev.setName(name);
+		 * bev.setcapsulePerBox(capsulesPerBox);
+		 * bev.setBoxPrice(boxPrice);
+		 * d.updateBeverage(bev);
+			//d.updateBevarageAttributes(id,name,capsulesPerbox,boxPrice);
+		}catch(BeverageException be) {
+			throw new BeverageException() ;
+			
+		}*/
 		// TODO Auto-generated method stub
 		/* updateBeverageAttributes
 		 */
@@ -114,6 +136,15 @@ public class DataImpl implements DataInterface {
 		// TODO Auto-generated method stub
 		/*getBeverageData().getName()
 		 */
+		
+		/*try {
+		   String name = d.getBeverageData(id).getName();
+		}
+		catch(BeverageException be) {
+			
+			throw new BeverageException() ;
+		}*/
+		
 		return "";
 	}
 
@@ -123,6 +154,14 @@ public class DataImpl implements DataInterface {
 		// TODO Auto-generated method stub
 		/*getBeverageData().getCapsulesPerBox()
 		 */
+		
+		/*try {
+		   Integer = d.getBeverageData(id).getCapsulePerBox();
+		}
+		catch(BeverageException be) {
+			
+			throw new BeverageException() ;
+		}*/
 		return 0;
 	}
 
@@ -132,6 +171,13 @@ public class DataImpl implements DataInterface {
 		// TODO Auto-generated method stub
 		/*getBeverageData().getBeverageBoxPrice()
 		 */
+		/*try {
+		   Integer price = d.getBeverageData(id).getBoxPrice();
+		}
+		catch(BeverageException be) {
+			
+			throw new BeverageException() ;
+		}*/
 		return 0;
 	}
 
@@ -141,7 +187,13 @@ public class DataImpl implements DataInterface {
 		// TODO Auto-generated method stub
 		/*getBeverageData().getId()
 		 */
-		return new ArrayList<Integer>();
+		List<Integer> beveragesId = new ArrayList<>();
+		List<Beverage> beverages = new ArrayList<>();
+		//beverages = d.getListOfBeverages();
+		for(Beverage b : beverages) {
+			beveragesId.add(b.getId());
+		}
+		return beveragesId;
 	}
 
 	@Override
@@ -150,7 +202,13 @@ public class DataImpl implements DataInterface {
 		// TODO Auto-generated method stub
 		/*getListOfBeverage() //then transforms in Map
 		 */
-		return new HashMap<Integer, String>();
+		Map<Integer, String> mapBeverages = new HashMap<>();
+		List<Beverage> beverages = new ArrayList<>();
+		//beverages = d.getListOfBeverages();
+		for(Beverage b : beverages) {
+			mapBeverages.put(b.getId(),b.getName());
+		}
+		return mapBeverages;
 	}
 
 	@Override
@@ -159,6 +217,15 @@ public class DataImpl implements DataInterface {
 		// TODO Auto-generated method stub
 		/*getBeverageData().getCapsulesAvailable()
 		 */
+		 
+			
+		 /*try {
+			   Integer quantityAvailable = d.getBeverageData(id).getQuantityAvailable();
+			}
+			catch(BeverageException be) {
+				
+				throw new BeverageException() ;
+			}*/
 		return 0;
 	}
 
