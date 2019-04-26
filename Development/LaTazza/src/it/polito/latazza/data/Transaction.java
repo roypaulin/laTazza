@@ -8,6 +8,7 @@ import java.util.*;
  */
 
 public class Transaction {
+
 	int id;
 	Date transactionDate;
 	char type;
@@ -62,7 +63,6 @@ public class Transaction {
 		return fromAccount;
 	}
 	
-	
-	
+
    
 }

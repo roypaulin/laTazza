@@ -3,20 +3,26 @@
  */
 package it.polito.latazza.data;
 
+
+import it.polito.latazza.data.DataImpl;
+import it.polito.latazza.data.DataInterface;
+import it.polito.latazza.data.Database;
+import it.polito.latazza.exceptions.BeverageException;
+
 /**
  * @author elia
  *
  */
 public class Beverage {
-	int id,quantityAvaiable;
+	int id,quantityAvailable;
 	double boxPrice;
 	int capsulePerBox;
 	
 	public int getId() {
 		return id;
 	}
-	public int getQuantityAvaiable() {
-		return quantityAvaiable;
+	public int getQuantityAvailable() {
+		return quantityAvailable;
 	}
 	public double getBoxPrice() {
 		return boxPrice;
@@ -29,14 +35,24 @@ public class Beverage {
 	}
 	
 	String name;
-	public Beverage(int id, int quantityAvaiable, double d, int capsulePerBox, String name) {
+	public Beverage(int id, int quantityAvailable, double boxPrice, int capsulePerBox, String name) {
 		super();
 		this.id = id;
-		this.quantityAvaiable = quantityAvaiable;
-		this.boxPrice = d;
+		this.quantityAvailable = quantityAvailable;
+		this.boxPrice = boxPrice;
 		this.capsulePerBox = capsulePerBox;
 		this.name = name;
 	}
+
+    /*The Quantity can be either positive buying capsules or negative selling*/
+	public void updateCapsuleQuantity(int quantity)throws BeverageException {
+		if((this.quantityAvailable +quantity)< 0) {
+			throw new BeverageException() ;
+		}
+		 this.quantityAvailable += quantity ;
+		 return ;
+	}
+
 	
 	
 

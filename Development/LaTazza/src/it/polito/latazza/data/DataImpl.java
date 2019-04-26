@@ -1,5 +1,6 @@
 package it.polito.latazza.data;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -11,6 +12,7 @@ import it.polito.latazza.exceptions.DateException;
 import it.polito.latazza.exceptions.EmployeeException;
 import it.polito.latazza.exceptions.NotEnoughBalance;
 import it.polito.latazza.exceptions.NotEnoughCapsules;
+import it.polito.latazza.LaTazza;
 import it.polito.latazza.data.Beverage;
 import it.polito.latazza.data.Database;
 import it.polito.latazza.data.Transaction;
@@ -69,6 +71,38 @@ public class DataImpl implements DataInterface {
 		  updateBalance()
 		  updateBeverageQuantity()
 		*/ 
+		/*i first update by increasing the total number of capsules available*/
+		/*Beverage bev ;
+		LaTazza latazza = new LaTazza();
+		float amount;
+		try {
+			 bev = d.getBeverageData(beverageId);
+			bev.updateCapsuleQuantity(boxQuantity);
+			
+		}catch(BeverageException be) {
+			
+			throw new BeverageException();
+		}
+		//then i update latazza account
+		try {
+			//bev.updateCapsuleQuantity(boxQuantity);
+			//float balance = d.getBalance();
+			float boxPrice = bev.getBoxPrice();
+			 amount = boxPrice * boxQuantity;
+			latazza.updateBalance(amount);
+		}catch(BeverageException be) {
+			
+			throw new BeverageException();
+		}
+		d.updateBeverage(bev);
+		d.updateBalance(amount);
+		//i create the object transaction
+		Date date = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");  
+		System.out.println(formatter.format(date));
+		Transaction transaction = new Transaction(date,'P',beverageId,-1,boxQuantity,false);
+		d.registerTransaction(transaction);*/
+		return ;
 	}
 
 	@Override
@@ -99,7 +133,7 @@ public class DataImpl implements DataInterface {
 		  addBeverage()
 		 */
 		Integer id=0;
-		Beverage b= new Beverage(-1,name,0,capsulesPerBox,boxPrice);
+		Beverage b= new Beverage(-1,0,boxPrice,capsulesPerBox,name);
 		/*try{
 			id=d.addBeverage(b);
 			}catch(BeverageException be) {
@@ -119,7 +153,6 @@ public class DataImpl implements DataInterface {
 		 * bev.setcapsulePerBox(capsulesPerBox);
 		 * bev.setBoxPrice(boxPrice);
 		 * d.updateBeverage(bev);
-			//d.updateBevarageAttributes(id,name,capsulesPerbox,boxPrice);
 		}catch(BeverageException be) {
 			throw new BeverageException() ;
 			

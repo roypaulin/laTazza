@@ -331,8 +331,13 @@ public class Database {
 		int last_inserted_id = -1;
 		String sql = "INSERT INTO Beverage VALUES (NULL,?,?,?,?);";
 		
+<<<<<<< HEAD
 		PreparedStatement prep = connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
 		prep.setInt(1, beverage.getQuantityAvaiable());
+=======
+		PreparedStatement prep = connection.prepareStatement(sql);
+		prep.setInt(1, beverage.getQuantityAvailable());
+>>>>>>> 085059669aead61bba7550c6af1aec75a31b5239
 		prep.setDouble(2, beverage.getBoxPrice());
 		prep.setInt(3, beverage.getCapsulePerBox());
 		prep.setString(4, beverage.getName());
