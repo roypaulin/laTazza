@@ -160,7 +160,7 @@ class Employee {
 class Beverage {
    - int id
    - int quantityAvaiable
-   - float BoxPrice
+   - float boxPrice
    + int getNumberOfBoxes()
    + int getQuantityAvaiable()
    - int capsulePerBox
@@ -172,13 +172,13 @@ class Beverage {
    + void setCapsulesPerBox(int caps)
    + int getCapsulesPerBox()
    + String getBeverageName()
-   + int getBeverageCapsule()/*what is the meaning??*/
    + float getBevaragePrice();
    + float getBeverageBoxPrice()
    + int getQuantityAvaiable()
    + void updateCapsuleQuantity(int quantity) throws BeverageException /' the number can be eighter positive (buy capsules) and negative (sell capsules) '/
 }
 class Transaction {
+   - int id
    - Date transationDate
    -char type /*can be P=Purchase C=consumption R=Recharge*/
    -int boxQuantity
@@ -210,10 +210,8 @@ class Recharge {
 class Database {
    + List<Employee> getListEmployee()
    + Employee getEmployeeData(int id) throws EmployeeException
-   + void updateEmployeeCredit(Int employeeId,float amount) 
    + List<Beverage> getListOfBeverage()
    + Beverage getBeverageData(int id) throws BeverageException
-   + void updateBeverageQauntity(int id,int quanity) /' save in the db the beverage updated '/
    + float getBalance()
    + void updateBalance(float balance)
    + List<Transaction> getEmployeeReport(int idEmployee,Date startDate,Date endDate)
@@ -222,8 +220,8 @@ class Database {
    + void addBeverage(Beverage bev) throw BeverageException
    + void addEmployee(Employee emp) throw EmployeeException
    + void truncateTables()
-   + void updateBeverageAttributes(Integer id, String name, Integer capsulesPerBox, Integer boxPrice) throws BeverageException
-   + void updateEmployeeAttributes(Integer id, String name,  String surname) throws EmployeeException
+   + void updateBeverage(Beverage bev) throws BeverageException
+   + void updateEmployee(Employee emp) throws EmployeeException
 		 
 }
 LaTazza -- DataImpl
