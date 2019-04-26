@@ -197,8 +197,13 @@ public class DataImpl implements DataInterface {
 		// TODO Auto-generated method stub
 		/*getListOfBeverage() //then transforms in Map
 		 */
-		
-		return new HashMap<Integer, String>();
+		Map<Integer, String> mapBeverages = new HashMap<>();
+		List<Beverage> beverages = new ArrayList<>();
+		//beverages = d.getListOfBeverages();
+		for(Beverage b : beverages) {
+			mapBeverages.put(b.getId(),b.getName());
+		}
+		return mapBeverages;
 	}
 
 	@Override
