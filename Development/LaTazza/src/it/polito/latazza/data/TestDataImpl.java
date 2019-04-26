@@ -20,6 +20,8 @@ public class TestDataImpl {
 	@Test
 	public void testDatabase() throws ClassNotFoundException, SQLException, Exception {
 		
+		System.out.println("ciao mondo");
+		
 		Database database = null;
 		
 		database = new Database();
@@ -38,7 +40,8 @@ public class TestDataImpl {
 			e.printStackTrace();
 		}
 		
-		database.getEmployeeData(1);
+		Employee emp = database.getEmployeeData(1);
+		
 		database.updateCredit(1,1.1);
 		database.getListOfBeverage();
 		database.getBeverageData();
