@@ -72,19 +72,31 @@ public class DataImpl implements DataInterface {
 			 bev = d.getBeverageData(beverageId);
 			bev.updateCapsuleQuantity(boxQuantity);
 			
-		}catch(BeverageException be) {
+		}catch(Exception be) {
 			
 			throw new BeverageException();
 		}
 		//then i update latazza account
 			float boxPrice = (float)bev.getBoxPrice();
 			 amount = boxPrice * boxQuantity;
-			 float balance = (float)d.getBalance();
+			 float balance;
+			 try {
+				 balance = (float)d.getBalance();
+			 }catch(Exception e){
+				 throw new NotEnoughBalance();
+			 }
+			 //float balance = (float)d.getBalance();
 			 if((balance-amount)< 0) {
 				 throw new NotEnoughBalance();
 			 }
-		d.updateBeverage(bev);
-		d.updateBalance(amount);
+			 
+			 try {
+					d.updateBeverage(bev);
+			 }catch(Exception e) {
+				 throw new BeverageException();
+			 }
+	
+       //d.updateBalance(amount);
 		//i create the object transaction
 		Date date = new Date();
 		SimpleDateFormat formatter = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");  
@@ -145,7 +157,7 @@ public class DataImpl implements DataInterface {
 		 bev.setCapsulePerBox(capsulesPerBox);
 		 bev.setBoxPrice(boxPrice);
 		 d.updateBeverage(bev);
-		}catch(BeverageException be) {
+		}catch(Exception be) {
 			throw new BeverageException() ;
 			
 		}
@@ -165,7 +177,7 @@ public class DataImpl implements DataInterface {
 		try {
 		    name = d.getBeverageData(id).getName();
 		}
-		catch(BeverageException be) {
+		catch(Exception be) {
 			
 			throw new BeverageException() ;
 		}
@@ -183,7 +195,7 @@ public class DataImpl implements DataInterface {
 		try {
 		   capsulesPerBox = d.getBeverageData(id).getCapsulePerBox();
 		}
-		catch(BeverageException be) {
+		catch(Exception be) {
 			
 			throw new BeverageException() ;
 		}
@@ -200,7 +212,7 @@ public class DataImpl implements DataInterface {
 		try {
 		    price = (float)d.getBeverageData(id).getBoxPrice();
 		}
-		catch(BeverageException be) {
+		catch(Exception be) {
 			
 			throw new BeverageException() ;
 		}
@@ -215,7 +227,12 @@ public class DataImpl implements DataInterface {
 		 */
 		List<Integer> beveragesId = new ArrayList<>();
 		List<Beverage> beverages = new ArrayList<>();
-		beverages = d.getListOfBeverages();
+		try{
+			beverages = d.getListOfBeverages();
+		}
+		catch(Exception e){
+			System.out.println("canno get the list of beverages");
+		}
 		for(Beverage b : beverages) {
 			beveragesId.add(b.getId());
 		}
@@ -230,7 +247,11 @@ public class DataImpl implements DataInterface {
 		 */
 		Map<Integer, String> mapBeverages = new HashMap<>();
 		List<Beverage> beverages = new ArrayList<>();
-		beverages = d.getListOfBeverages();
+		try{
+			beverages = d.getListOfBeverages();
+		}catch(Exception e) {
+			
+		}
 		for(Beverage b : beverages) {
 			mapBeverages.put(b.getId(),b.getName());
 		}
@@ -248,7 +269,7 @@ public class DataImpl implements DataInterface {
 		 try {
 			   quantityAvailable = d.getBeverageData(id).getQuantityAvailable();
 			}
-			catch(BeverageException be) {
+			catch(Exception e) {
 				
 				throw new BeverageException() ;
 			}
