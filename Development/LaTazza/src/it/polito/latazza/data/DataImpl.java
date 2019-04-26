@@ -212,6 +212,15 @@ public class DataImpl implements DataInterface {
 		// TODO Auto-generated method stub
 		/*getBeverageData().getCapsulesAvailable()
 		 */
+		 
+			
+		 /*try {
+			   Integer quantityAvailable = d.getBeverageData(id).getQuantityAvailable();
+			}
+			catch(BeverageException be) {
+				
+				throw new BeverageException() ;
+			}*/
 		return 0;
 	}
 
