@@ -11,9 +11,12 @@ import it.polito.latazza.exceptions.DateException;
 import it.polito.latazza.exceptions.EmployeeException;
 import it.polito.latazza.exceptions.NotEnoughBalance;
 import it.polito.latazza.exceptions.NotEnoughCapsules;
+import it.polito.latazza.data.Beverage;
+import it.polito.latazza.data.Database;
+import it.polito.latazza.data.Transaction;
 
 public class DataImpl implements DataInterface {
-
+     Database d = new Database();
 	@Override
 	/* @author roy paulin */
 	public Integer sellCapsules(Integer employeeId, Integer beverageId, Integer numberOfCapsules, Boolean fromAccount)
@@ -95,7 +98,15 @@ public class DataImpl implements DataInterface {
 		/*call constructor to create a beverage object
 		  addBeverage()
 		 */
-		return 0;
+		Integer id=0;
+		Beverage b= new Beverage(-1,name,0,capsulesPerBox,boxPrice);
+		/*try{
+			id=d.addBeverage(b);
+			}catch(BeverageException be) {
+				throw new BeverageException();
+			}*/
+		
+		return id;
 	}
 
 	@Override
