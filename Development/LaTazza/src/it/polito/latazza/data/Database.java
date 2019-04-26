@@ -13,11 +13,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
+import it.polito.latazza.exceptions.BeverageException;
 import it.polito.latazza.exceptions.EmployeeException;
 
 /**
@@ -117,24 +119,24 @@ public class Database {
 		return new Employee(id,name,surname,credit);
 	}
 
-	public void updateCredit(int i, double d) {
+	public void updateCredit(int i, double amount) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public void getListOfBeverage() {
+	public List<Beverage> getListOfBeverages() {
 		// TODO Auto-generated method stub
-		
+		return new ArrayList<Beverage>();
 	}
 
-	public void getBeverageData() {
+	public Beverage getBeverageData(Integer id)throws BeverageException {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
-	public void getBalance() {
+	public double getBalance() {
 		// TODO Auto-generated method stub
-		
+		return 0;
 	}
 
 	public void getEmployeeReport(int i, Date date, Date date2) {
@@ -188,7 +190,7 @@ public class Database {
 		return last_inserted_id;
 	}
 
-	public void addBeverage(Beverage beverage) throws Exception {
+	public Integer addBeverage(Beverage beverage) throws Exception {
 		connect();
 		
 		String sql = "INSERT INTO Beverage VALUES (NULL,?,?,?,?);";
@@ -203,7 +205,7 @@ public class Database {
 		prep.close();
 		
 		closeConnection();
-		
+		return 0;
 	}
 
 	public void addEmployee(Employee employee) throws Exception {
@@ -272,16 +274,19 @@ public class Database {
 		
 	}
 
-	public void updateBeverageAttributes(Beverage beverage) {
+	public void updateBeverage(Beverage beverage)throws BeverageException {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public void updateEmployeeAttributes(Employee employee) {
+	public void updateEmployee(Employee employee)throws EmployeeException {
 		// TODO Auto-generated method stub
 		
 	}
 	
+	public void updateBalance(double amount) {
+		
+	}
 }
 /*
  * USED QUERY

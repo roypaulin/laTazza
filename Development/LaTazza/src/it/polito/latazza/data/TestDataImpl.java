@@ -43,8 +43,8 @@ public class TestDataImpl {
 		Employee emp = database.getEmployeeData(1);
 		
 		database.updateCredit(1,1.1);
-		database.getListOfBeverage();
-		database.getBeverageData();
+		database.getListOfBeverages();
+		database.getBeverageData(1);
 		database.getBalance();
 		database.getBalance();
 		database.getEmployeeReport(1,new Date(12, 10, 2010),new Date(12, 10, 2011));
@@ -52,8 +52,8 @@ public class TestDataImpl {
 		database.addBeverage(new Beverage(-1,10,10.1,50,"do you wanna a Kaffè"));
 		database.registerTransaction(new Transaction(1, new Date(12, 10, 2011),'P',1,1,1, 1.0,true));
 		database.truncateTables();
-		database.updateBeverageAttributes(new Beverage(-1,0,1.4,50,"do you wanna a Kaffè!?!!!"));
-		database.updateEmployeeAttributes(new Employee(-1,"Morisio","Maurizio",1.99));
+		database.updateBeverage(new Beverage(-1,0,1.4,50,"do you wanna a Kaffè!?!!!"));
+		database.updateEmployee(new Employee(-1,"Morisio","Maurizio",1.99));
 		
 
 		assertNotEquals(null, list);

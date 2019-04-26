@@ -34,6 +34,22 @@ public class Beverage {
 		return name;
 	}
 	
+	public void setId(int id) {
+		this.id = id;
+	}
+	public void setQuantityAvailable(int quantityAvailable) {
+		this.quantityAvailable = quantityAvailable;
+	}
+	public void setBoxPrice(Integer boxPrice) {
+		this.boxPrice = boxPrice;
+	}
+	public void setCapsulePerBox(int capsulePerBox) {
+		this.capsulePerBox = capsulePerBox;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	String name;
 	public Beverage(int id, int quantityAvailable, double boxPrice, int capsulePerBox, String name) {
 		super();

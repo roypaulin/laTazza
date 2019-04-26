@@ -9,7 +9,7 @@ import it.polito.latazza.exceptions.NotEnoughBalance;
 //import it.polito.latazza.gui.MainSwing;
 
 public class LaTazza {
-	float balance=0;
+	double balance=0;
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		
 		DataInterface data = new DataImpl();
@@ -19,7 +19,7 @@ public class LaTazza {
 		Database database = new Database();
 	}
 
-	public void updateBalance(float amount) throws NotEnoughBalance{
+	public void updateBalance(double amount) throws NotEnoughBalance{
 		if((this.balance +amount)<0) {
 			throw new NotEnoughBalance();
 		}

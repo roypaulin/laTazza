@@ -65,15 +65,8 @@ public class DataImpl implements DataInterface {
 	/* @author jean thibaut */
 	public void buyBoxes(Integer beverageId, Integer boxQuantity) throws BeverageException, NotEnoughBalance {
 		// TODO Auto-generated method stub
-		/*
-		  getBeverageData()
-		  getBalance()
-		  updateBalance()
-		  updateBeverageQuantity()
-		*/ 
 		/*i first update by increasing the total number of capsules available*/
-		/*Beverage bev ;
-		LaTazza latazza = new LaTazza();
+		Beverage bev ;
 		float amount;
 		try {
 			 bev = d.getBeverageData(beverageId);
@@ -84,24 +77,24 @@ public class DataImpl implements DataInterface {
 			throw new BeverageException();
 		}
 		//then i update latazza account
-		try {
-			//bev.updateCapsuleQuantity(boxQuantity);
-			//float balance = d.getBalance();
-			float boxPrice = bev.getBoxPrice();
+			float boxPrice = (float)bev.getBoxPrice();
 			 amount = boxPrice * boxQuantity;
-			latazza.updateBalance(amount);
-		}catch(BeverageException be) {
-			
-			throw new BeverageException();
-		}
+			 float balance = (float)d.getBalance();
+			 if((balance-amount)< 0) {
+				 throw new NotEnoughBalance();
+			 }
 		d.updateBeverage(bev);
 		d.updateBalance(amount);
 		//i create the object transaction
 		Date date = new Date();
 		SimpleDateFormat formatter = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");  
 		System.out.println(formatter.format(date));
-		Transaction transaction = new Transaction(date,'P',beverageId,-1,boxQuantity,false);
-		d.registerTransaction(transaction);*/
+		Transaction transaction = new Transaction(-1,date,'P',boxQuantity,-1,beverageId,amount,false);
+		try {
+		d.registerTransaction(transaction);
+		}catch(Exception e) {
+			System.out.println("Unable to regsiter the transaction");
+		}
 		return ;
 	}
 
@@ -134,12 +127,11 @@ public class DataImpl implements DataInterface {
 		 */
 		Integer id=0;
 		Beverage b= new Beverage(-1,0,boxPrice,capsulesPerBox,name);
-		/*try{
+		try{
 			id=d.addBeverage(b);
-			}catch(BeverageException be) {
+			}catch( Exception e) {
 				throw new BeverageException();
-			}*/
-		
+			}
 		return id;
 	}
 
@@ -147,16 +139,16 @@ public class DataImpl implements DataInterface {
 	/* @author jean thibaut */
 	public void updateBeverage(Integer id, String name, Integer capsulesPerBox, Integer boxPrice)
 			throws BeverageException {
-		/*try {
-		 * Beverage bev = d.getBeverageData(id);
-		 * bev.setName(name);
-		 * bev.setcapsulePerBox(capsulesPerBox);
-		 * bev.setBoxPrice(boxPrice);
-		 * d.updateBeverage(bev);
+		try {
+		 Beverage bev = d.getBeverageData(id);
+         bev.setName(name);
+		 bev.setCapsulePerBox(capsulesPerBox);
+		 bev.setBoxPrice(boxPrice);
+		 d.updateBeverage(bev);
 		}catch(BeverageException be) {
 			throw new BeverageException() ;
 			
-		}*/
+		}
 		// TODO Auto-generated method stub
 		/* updateBeverageAttributes
 		 */
@@ -169,16 +161,16 @@ public class DataImpl implements DataInterface {
 		// TODO Auto-generated method stub
 		/*getBeverageData().getName()
 		 */
-		
-		/*try {
-		   String name = d.getBeverageData(id).getName();
+		String name;
+		try {
+		    name = d.getBeverageData(id).getName();
 		}
 		catch(BeverageException be) {
 			
 			throw new BeverageException() ;
-		}*/
+		}
 		
-		return "";
+		return name;
 	}
 
 	@Override
@@ -187,15 +179,15 @@ public class DataImpl implements DataInterface {
 		// TODO Auto-generated method stub
 		/*getBeverageData().getCapsulesPerBox()
 		 */
-		
-		/*try {
-		   Integer = d.getBeverageData(id).getCapsulePerBox();
+		Integer capsulesPerBox;
+		try {
+		   capsulesPerBox = d.getBeverageData(id).getCapsulePerBox();
 		}
 		catch(BeverageException be) {
 			
 			throw new BeverageException() ;
-		}*/
-		return 0;
+		}
+		return capsulesPerBox;
 	}
 
 	@Override
@@ -204,14 +196,15 @@ public class DataImpl implements DataInterface {
 		// TODO Auto-generated method stub
 		/*getBeverageData().getBeverageBoxPrice()
 		 */
-		/*try {
-		   Integer price = d.getBeverageData(id).getBoxPrice();
+		float price;
+		try {
+		    price = (float)d.getBeverageData(id).getBoxPrice();
 		}
 		catch(BeverageException be) {
 			
 			throw new BeverageException() ;
-		}*/
-		return 0;
+		}
+		return Math.round(price);
 	}
 
 	@Override
@@ -222,7 +215,7 @@ public class DataImpl implements DataInterface {
 		 */
 		List<Integer> beveragesId = new ArrayList<>();
 		List<Beverage> beverages = new ArrayList<>();
-		//beverages = d.getListOfBeverages();
+		beverages = d.getListOfBeverages();
 		for(Beverage b : beverages) {
 			beveragesId.add(b.getId());
 		}
@@ -237,7 +230,7 @@ public class DataImpl implements DataInterface {
 		 */
 		Map<Integer, String> mapBeverages = new HashMap<>();
 		List<Beverage> beverages = new ArrayList<>();
-		//beverages = d.getListOfBeverages();
+		beverages = d.getListOfBeverages();
 		for(Beverage b : beverages) {
 			mapBeverages.put(b.getId(),b.getName());
 		}
@@ -251,15 +244,15 @@ public class DataImpl implements DataInterface {
 		/*getBeverageData().getCapsulesAvailable()
 		 */
 		 
-			
-		 /*try {
-			   Integer quantityAvailable = d.getBeverageData(id).getQuantityAvailable();
+		Integer quantityAvailable;	
+		 try {
+			   quantityAvailable = d.getBeverageData(id).getQuantityAvailable();
 			}
 			catch(BeverageException be) {
 				
 				throw new BeverageException() ;
-			}*/
-		return 0;
+			}
+		return quantityAvailable;
 	}
 
 	@Override
