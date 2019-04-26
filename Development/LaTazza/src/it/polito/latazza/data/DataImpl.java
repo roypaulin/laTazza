@@ -1,5 +1,6 @@
 package it.polito.latazza.data;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -95,7 +96,13 @@ public class DataImpl implements DataInterface {
 		}
 		d.updateBeverage(bev);
 		d.updateBalance(amount);
-		return ;*/
+		//i create the object transaction
+		Date date = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");  
+		System.out.println(formatter.format(date));
+		Transaction transaction = new Transaction(date,'P',beverageId,-1,boxQuantity,false);
+		d.registerTransaction(transaction);*/
+		return ;
 	}
 
 	@Override
