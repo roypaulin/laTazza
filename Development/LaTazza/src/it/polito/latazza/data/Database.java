@@ -103,7 +103,7 @@ public class Database {
 		float credit = 0;
 		boolean result = false;
 		
-		while (rs.next()) {
+		if (rs.next()) {
 			id = rs.getInt("id");
 			name = rs.getString("name");
 			surname = rs.getString("surname");
@@ -119,34 +119,179 @@ public class Database {
 		return new Employee(id,name,surname,credit);
 	}
 
-	public void updateCredit(int i, double amount) {
-		// TODO Auto-generated method stub
+
+	public void updateCredit(double d) throws Exception {
+		String sql = "update LaTazza set balance=?";
+		connect();
 		
-	}
-
-	public List<Beverage> getListOfBeverages() {
-		// TODO Auto-generated method stub
-		return new ArrayList<Beverage>();
-	}
-
-	public Beverage getBeverageData(Integer id)throws BeverageException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public double getBalance() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public void getEmployeeReport(int i, Date date, Date date2) {
-		// TODO Auto-generated method stub
+		PreparedStatement prep = connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+		prep.setDouble(1, d);
+		prep.execute();
 		
+		closeConnection();
 	}
 
-	public void getReport(Date date, Date date2) {
-		// TODO Auto-generated method stub
+	public List<Beverage> getListOfBeverages() throws Exception {
+		List<Beverage> returnList = new ArrayList<Beverage>();
 		
+		connect();
+		
+		String sql = "SELECT * FROM Beverage";
+		
+		Statement stmt = connection.createStatement();
+		ResultSet rs = stmt.executeQuery(sql);
+		
+		while (rs.next()) {
+			int id = rs.getInt("id");
+			String name = rs.getString("name");
+			int capsulePerBox = rs.getInt("capsulePerBox");
+			float credit = rs.getFloat("credit");
+			int quantityAvaiable = rs.getInt("quantityAvaiable");
+			float price = rs.getFloat("price");
+			
+			returnList.add(new Beverage(id,quantityAvaiable,price,capsulePerBox,name));
+			
+		}
+		
+		rs.close();
+		stmt.close();
+		
+		closeConnection();
+		
+		return returnList;
+	}
+
+	public Beverage getBeverageData(int id) throws Exception {
+		connect();
+		
+		String sql = "SELECT * FROM Beverage WHERE id = ?";
+		
+		PreparedStatement prep = connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+		prep.setInt(1, id);
+		ResultSet rs = prep.executeQuery();
+		
+
+		int id_u = 0;
+		String name = null;
+		int capsulePerBox = 0;
+		float credit;
+		int quantityAvaiable = 0;
+		float price = 0;
+		boolean result=false;
+		
+		if (rs.next()) {
+			id_u = rs.getInt("id");
+			name = rs.getString("name");
+			capsulePerBox = rs.getInt("capsulePerBox");
+			quantityAvaiable = rs.getInt("quantityAvaiable");
+			price = rs.getFloat("price");
+			
+			result=true;
+		}
+		
+		closeConnection();
+		
+		if (!result)
+			throw new BeverageException();
+		
+		return new Beverage(id_u,quantityAvaiable,price,capsulePerBox,name);
+	}
+
+	public double getBalance() throws Exception {
+		connect();
+		
+		String sql = "SELECT * FROM LaTazza";
+		
+		PreparedStatement prep = connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+		ResultSet rs = prep.executeQuery();
+		
+		double balance = -1;
+		
+		while (rs.next()) {
+			balance = rs.getDouble("balance");
+		}
+		
+		closeConnection();
+		
+		return balance;
+
+	}
+
+	public List<Transaction> getReport(Date date_init, Date date_final) throws Exception {
+		String sql = "SELECT * FROM Transactions WHERE transactionDate BETWEEN ? and ?";
+		
+		List<Transaction> returnList = new ArrayList<Transaction>();
+		
+		connect();
+		
+		PreparedStatement stmt = connection.prepareStatement(sql);
+		stmt.setString(1, convDate(date_init));
+		stmt.setString(2, convDate(date_final));
+		ResultSet rs = stmt.executeQuery();
+		
+		while (rs.next()) {
+			int id_m = rs.getInt("id");
+			String transactionDate = rs.getString("transactionDate");
+			Date myDate = new SimpleDateFormat("YYYY-MM-dd").parse(transactionDate);
+			char type = rs.getString("type").charAt(0);
+			int boxQuantity = rs.getInt("boxQuantity");
+			int employeeID = rs.getInt("employeeID");
+			int beverageID = rs.getInt("beverageID");
+			float amount = rs.getFloat("amount");
+			int fr_account = rs.getInt("fromAccount");
+			boolean from_account = fr_account==1;
+			
+			returnList.add(new Transaction(id_m, myDate, type, boxQuantity, employeeID, beverageID, amount, from_account));
+			
+		}
+		
+		rs.close();
+		stmt.close();
+		
+		closeConnection();
+		
+		return returnList;
+	}
+
+	public List<Transaction> getEmployeeReport(int id, Date date_init, Date date_final) throws Exception {
+		String sql = "SELECT * FROM Transactions WHERE employeeID=? AND transactionDate < ? and transactionDate > ?";
+		
+		List<Transaction> returnList = new ArrayList<Transaction>();
+		
+		connect();
+		
+		PreparedStatement stmt = connection.prepareStatement(sql);
+		stmt.setInt(1, id);
+		stmt.setString(2, convDate(date_init));
+		stmt.setString(3, convDate(date_final));
+		ResultSet rs = stmt.executeQuery();
+		
+		while (rs.next()) {
+			int id_m = rs.getInt("id");
+			String transactionDate = rs.getString("transactionDate");
+			Date myDate = new SimpleDateFormat("YYYY-MM-dd").parse(transactionDate);
+			char type = rs.getString("type").charAt(0);
+			int boxQuantity = rs.getInt("boxQuantity");
+			int employeeID = rs.getInt("employeeID");
+			int beverageID = rs.getInt("beverageID");
+			float amount = rs.getFloat("amount");
+			int fr_account = rs.getInt("fromAccount");
+			boolean from_account = fr_account==1;
+			
+			returnList.add(new Transaction(id_m, myDate, type, boxQuantity, employeeID, beverageID, amount, from_account));
+			
+		}
+		
+		rs.close();
+		stmt.close();
+		
+		closeConnection();
+		
+		return returnList;
+	}
+
+	private String convDate(Date date_init) {
+		return new SimpleDateFormat("YYYY-MM-dd", Locale.ENGLISH).format(date_init);
 	}
 
 	public int registerTransaction(Transaction transaction) throws Exception {
@@ -158,8 +303,7 @@ public class Database {
 		String sql = "INSERT INTO Transactions VALUES (NULL,?,?,?,?,?,?,?);";
 		
 		PreparedStatement prep = connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
-		String dat = new SimpleDateFormat("YYYY-MM-dd", Locale.ENGLISH).format(transaction.getTransactionDate());
-		prep.setString(1, dat);
+		prep.setString(1, convDate(transaction.getTransactionDate()));
 		prep.setString(2, String.valueOf(transaction.getType()));
 		prep.setInt(3, transaction.getBoxQuantity());
 		prep.setInt(4, transaction.getEmployeeID());
@@ -167,13 +311,6 @@ public class Database {
 		prep.setDouble(6, transaction.getAmount());
 		prep.setBoolean(7, transaction.isFromAccount());
 		
-		/**
-		 * translated into:
-		 *  
-		int is_from_account = (transaction.isFromAccount())? 1 : 0;
-		prep.setInt(7, is_from_account);
-		 *
-		 */
 		
 		prep.executeUpdate();
 		
@@ -190,10 +327,15 @@ public class Database {
 		return last_inserted_id;
 	}
 
-	public Integer addBeverage(Beverage beverage) throws Exception {
+
+
+	public int addBeverage(Beverage beverage) throws Exception {
+
 		connect();
-		
+		int last_inserted_id = -1;
 		String sql = "INSERT INTO Beverage VALUES (NULL,?,?,?,?);";
+		
+
 		
 		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setInt(1, beverage.getQuantityAvailable());
@@ -201,27 +343,46 @@ public class Database {
 		prep.setInt(3, beverage.getCapsulePerBox());
 		prep.setString(4, beverage.getName());
 		prep.executeUpdate();
-		
+
+		ResultSet rs = prep.getGeneratedKeys();
+        if(rs.next())
+        {
+            last_inserted_id = rs.getInt(1);
+        }
+        
+        
 		prep.close();
 		
 		closeConnection();
-		return 0;
+		
+		return last_inserted_id;
+
 	}
 
-	public void addEmployee(Employee employee) throws Exception {
+	public int addEmployee(Employee employee) throws Exception {
 		connect();
+		
+		int last_inserted_id=-1;
 		
 		String sql = "INSERT INTO Employee VALUES (NULL,?,?,?);";
 		
-		PreparedStatement prep = connection.prepareStatement(sql);
+		PreparedStatement prep = connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
 		prep.setString(1, employee.getName());
 		prep.setString(2, employee.getSurname());
 		prep.setDouble(3, employee.getCredit());
 		prep.executeUpdate();
 		
+		ResultSet rs = prep.getGeneratedKeys();
+        if(rs.next())
+        {
+            last_inserted_id = rs.getInt(1);
+        }
+		
 		prep.close();
 		
 		closeConnection();
+		
+		return last_inserted_id;
 	}
 
 	public void truncateTables() throws Exception {
@@ -274,19 +435,46 @@ public class Database {
 		
 	}
 
-	public void updateBeverage(Beverage beverage)throws BeverageException {
-		// TODO Auto-generated method stub
+	public void updateBeverage(Beverage beverage) throws Exception {
+		connect();
+		int last_inserted_id = -1;
+		String sql = "UPDATE `Beverage` SET `quantityAvaiable`=?,`price`=?,`capsulePerBox`=?,`name`=? WHERE id=?;";
+
 		
+		PreparedStatement prep = connection.prepareStatement(sql);
+		prep.setInt(1, beverage.getQuantityAvailable());
+		prep.setDouble(2, beverage.getBoxPrice());
+		prep.setInt(3, beverage.getCapsulePerBox());
+		prep.setString(4, beverage.getName());
+		prep.setInt(5, beverage.getId());
+		prep.executeUpdate();
+        
+		prep.close();
+		
+		closeConnection();
 	}
 
-	public void updateEmployee(Employee employee)throws EmployeeException {
-		// TODO Auto-generated method stub
+	public void updateEmployee(Employee employee) throws Exception {
+		connect();
 		
+		int last_inserted_id=-1;
+		
+		String sql = "UPDATE `Employee` SET `name`=?,`surname`=?,`credit`=? WHERE id=?;";
+		
+		PreparedStatement prep = connection.prepareStatement(sql);
+		prep.setString(1, employee.getName());
+		prep.setString(2, employee.getSurname());
+		prep.setDouble(3, employee.getCredit());
+		prep.setDouble(4, employee.getId());
+		prep.executeUpdate();
+		
+		prep.close();
+		
+		closeConnection();
 	}
 	
-	public void updateBalance(double amount) {
-		
-	}
+
+	
 }
 /*
  * USED QUERY
