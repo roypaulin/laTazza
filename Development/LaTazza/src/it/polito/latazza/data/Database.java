@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -69,6 +70,75 @@ public class Database {
 		connection.close();
 		connection = null;
 		super.finalize();
+	}
+
+	public void getEmployeeData(int i) {
+		
+	}
+
+	public void updateCredit(int i, double d) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void getListOfBeverage() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void getBeverageData() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void updateBeverageQuantity() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void getBalance() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void getEmployeeReport(int i, Date date, Date date2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void getReport(Date date, Date date2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void registerTransaction(Transaction transaction) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addBeverage(Beverage beverage) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addEmployee(Employee employee) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void truncateTables() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void updateBeverageAttributes(Beverage beverage) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void updateEmployeeAttributes(Employee employee) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

@@ -1,13 +1,15 @@
 /* table Transitions definitions */
+/* table Transitions definitions */
 CREATE TABLE `Transactions` (
 	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	`transactionDate`	TEXT NOT NULL CHECK(date(transactionDate) IS NOT NULL),
+	`type`	CHAR NOT NULL CHECK(type='R' OR type='C' OR type='P'),
+	`boxQuantity`	INTEGER NOT NULL,
 	`employeeID`	INTEGER NOT NULL,
+	`beverageID`	INTEGER NOT NULL,
 	`amount`	REAL NOT NULL,
-	`isEmployee`	NUMERIC NOT NULL CHECK(isEmployee=0 OR isEmployee=1),
-	`startDate`	TEXT NOT NULL CHECK(date(startDate) IS NOT NULL),
-	`endDate`	TEXT NOT NULL CHECK(date(endDate) IS NOT NULL)
-);
-/* table Employee definitions */
+	`fromAccount`	NUMERIC NOT NULL CHECK(fromAccount=0 OR fromAccount=1)
+);/* table Employee definitions */
 CREATE TABLE `Employee` (
 	`id`	INTEGER PRIMARY KEY AUTOINCREMENT,
 	`name`	TEXT NOT NULL,

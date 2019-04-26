@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
@@ -34,6 +35,22 @@ public class TestDataImpl {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		database.getEmployeeData(1);
+		database.updateCredit(1,1.1);
+		database.getListOfBeverage();
+		database.getBeverageData();
+		database.updateBeverageQuantity();
+		database.getBalance();
+		database.getBalance();
+		database.getEmployeeReport(1,new Date(12, 10, 2010),new Date(12, 10, 2011));
+		database.getReport(new Date(12, 10, 2010),new Date(12, 10, 2011));
+		database.registerTransaction(new Transaction(new Date(12, 10, 2011),'P',1,1,1.0,true));
+		database.addBeverage(new Beverage(-1,10,10.1,50,"Kaffè"));
+		database.addEmployee(new Employee(-1,"Morisio","Maurizio",1000000.99));
+		database.truncateTables();
+		database.updateBeverageAttributes(new Beverage(-1,0,1.4,50,"do you wanna a Kaffè!?!!!"));
+		database.updateEmployeeAttributes(new Employee(-1,"Morisio","Maurizio",1.99));
 		
 
 		assertNotEquals(null, list);

@@ -3,7 +3,7 @@ package it.polito.latazza.data;
 import java.util.*;
 
 /**
- * @author pauli
+ * @author elia
  *
  */
 
@@ -12,12 +12,12 @@ public class Transaction {
    char type;
    int beverageId;
    int employeeId;
-   float amount;
+   double amount;
    boolean fromAccount;
 public Date getDate() {
 	return date;
 }
-public Transaction(Date date, char type, int beverageId, int employeeId, float amount, boolean fromAccount) {
+public Transaction(Date date, char type, int beverageId, int employeeId, double amount, boolean fromAccount) {
 	super();
 	this.date = date;
 	this.type = type;
@@ -35,7 +35,7 @@ public int getBeverageId() {
 public int getEmployeeId() {
 	return employeeId;
 }
-public float getAmount() {
+public double getAmount() {
 	return amount;
 }
 public boolean isFromAccount() {
