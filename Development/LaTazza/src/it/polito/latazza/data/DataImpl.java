@@ -114,7 +114,12 @@ public class DataImpl implements DataInterface {
 	public void updateBeverage(Integer id, String name, Integer capsulesPerBox, Integer boxPrice)
 			throws BeverageException {
 		/*try {
-			d.updateBevarageAttributes(id,name,capsulesPerbox,boxPrice);
+		 * Beverage bev = d.getBeverageData(id);
+		 * bev.setName(name);
+		 * bev.setcapsulePerBox(capsulesPerBox);
+		 * bev.setBoxPrice(boxPrice);
+		 * d.updateBeverage(bev);
+			//d.updateBevarageAttributes(id,name,capsulesPerbox,boxPrice);
 		}catch(BeverageException be) {
 			throw new BeverageException() ;
 			
@@ -167,7 +172,7 @@ public class DataImpl implements DataInterface {
 		/*getBeverageData().getBeverageBoxPrice()
 		 */
 		/*try {
-		   Integerm price = d.getBeverageData(id).getBoxPrice();
+		   Integer price = d.getBeverageData(id).getBoxPrice();
 		}
 		catch(BeverageException be) {
 			
