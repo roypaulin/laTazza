@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import it.polito.latazza.data.DataImpl;
 import it.polito.latazza.data.DataInterface;
 import it.polito.latazza.data.Database;
+import it.polito.latazza.exceptions.BeverageException;
 /**
  * @author pauli
  *
@@ -63,6 +64,13 @@ public class Beverage {
 	public void setBoxPrice(float boxPrice) {
 		this.boxPrice = boxPrice;
 	}
-
+    /*The Quantity can be either positive buying capsules or negative selling*/
+	public void updateCapsuleQuantity(int quantity)throws BeverageException {
+		if((this.quantiyAvailable +quantity)< 0) {
+			throw new BeverageException() ;
+		}
+		 this.quantiyAvailable += quantity ;
+		 return ;
+	}
 	
 }

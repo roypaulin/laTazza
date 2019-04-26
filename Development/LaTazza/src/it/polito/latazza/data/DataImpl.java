@@ -11,6 +11,7 @@ import it.polito.latazza.exceptions.DateException;
 import it.polito.latazza.exceptions.EmployeeException;
 import it.polito.latazza.exceptions.NotEnoughBalance;
 import it.polito.latazza.exceptions.NotEnoughCapsules;
+import it.polito.latazza.LaTazza;
 import it.polito.latazza.data.Beverage;
 import it.polito.latazza.data.Database;
 import it.polito.latazza.data.Transaction;
@@ -69,6 +70,32 @@ public class DataImpl implements DataInterface {
 		  updateBalance()
 		  updateBeverageQuantity()
 		*/ 
+		/*i first update by increasing the total number of capsules available*/
+		/*Beverage bev ;
+		LaTazza latazza = new LaTazza();
+		float amount;
+		try {
+			 bev = d.getBeverageData(beverageId);
+			bev.updateCapsuleQuantity(boxQuantity);
+			
+		}catch(BeverageException be) {
+			
+			throw new BeverageException();
+		}
+		//then i update latazza account
+		try {
+			//bev.updateCapsuleQuantity(boxQuantity);
+			//float balance = d.getBalance();
+			float boxPrice = bev.getBoxPrice();
+			 amount = boxPrice * boxQuantity;
+			latazza.updateBalance(amount);
+		}catch(BeverageException be) {
+			
+			throw new BeverageException();
+		}
+		d.updateBeverage(bev);
+		d.updateBalance(amount);
+		return ;*/
 	}
 
 	@Override
@@ -119,7 +146,6 @@ public class DataImpl implements DataInterface {
 		 * bev.setcapsulePerBox(capsulesPerBox);
 		 * bev.setBoxPrice(boxPrice);
 		 * d.updateBeverage(bev);
-			//d.updateBevarageAttributes(id,name,capsulesPerbox,boxPrice);
 		}catch(BeverageException be) {
 			throw new BeverageException() ;
 			

@@ -18,7 +18,7 @@ public Date getDate() {
 	return date;
 }
 public Transaction(Date date, char type, int beverageId, int employeeId, float amount, boolean fromAccount) {
-	super();
+	//super();
 	this.date = date;
 	this.type = type;
 	this.beverageId = beverageId;
