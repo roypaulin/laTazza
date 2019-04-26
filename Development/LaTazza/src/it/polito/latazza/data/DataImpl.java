@@ -113,6 +113,12 @@ public class DataImpl implements DataInterface {
 	/* @author jean thibaut */
 	public void updateBeverage(Integer id, String name, Integer capsulesPerBox, Integer boxPrice)
 			throws BeverageException {
+		/*try {
+			d.updateBevarageAttributes(id,name,capsulesPerbox,boxPrice);
+		}catch(BeverageException be) {
+			throw new BeverageException() ;
+			
+		}*/
 		// TODO Auto-generated method stub
 		/* updateBeverageAttributes
 		 */
@@ -125,6 +131,13 @@ public class DataImpl implements DataInterface {
 		// TODO Auto-generated method stub
 		/*getBeverageData().getName()
 		 */
+		/*try {
+		   Beverage b = d.getBeverageData(id).getName();
+		}
+		catch(BeverageException be) {
+			
+			throw new BeverageException() ;
+		}*/
 		return "";
 	}
 
