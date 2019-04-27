@@ -12,12 +12,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
 
 import it.polito.latazza.exceptions.BeverageException;
 import it.polito.latazza.exceptions.EmployeeException;
@@ -120,7 +121,7 @@ public class Database {
 	}
 
 
-	public void updateCredit(double d) throws Exception {
+	public void updateBalance(double d) throws Exception {
 		String sql = "update LaTazza set balance=?";
 		connect();
 		
@@ -145,7 +146,6 @@ public class Database {
 			int id = rs.getInt("id");
 			String name = rs.getString("name");
 			int capsulePerBox = rs.getInt("capsulePerBox");
-			float credit = rs.getFloat("credit");
 			int quantityAvaiable = rs.getInt("quantityAvaiable");
 			float price = rs.getFloat("price");
 			
@@ -205,7 +205,7 @@ public class Database {
 		PreparedStatement prep = connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
 		ResultSet rs = prep.executeQuery();
 		
-		double balance = -1;
+		double balance = 0;
 		
 		while (rs.next()) {
 			balance = rs.getDouble("balance");
@@ -232,7 +232,7 @@ public class Database {
 		while (rs.next()) {
 			int id_m = rs.getInt("id");
 			String transactionDate = rs.getString("transactionDate");
-			Date myDate = new SimpleDateFormat("YYYY-MM-dd").parse(transactionDate);
+			Date myDate = parseDate(transactionDate);
 			char type = rs.getString("type").charAt(0);
 			int boxQuantity = rs.getInt("boxQuantity");
 			int employeeID = rs.getInt("employeeID");
@@ -254,7 +254,7 @@ public class Database {
 	}
 
 	public List<Transaction> getEmployeeReport(int id, Date date_init, Date date_final) throws Exception {
-		String sql = "SELECT * FROM Transactions WHERE employeeID=? AND transactionDate < ? and transactionDate > ?";
+		String sql = "SELECT * FROM Transactions WHERE employeeID=? AND transactionDate BETWEEN ? and ?";
 		
 		List<Transaction> returnList = new ArrayList<Transaction>();
 		
@@ -269,7 +269,7 @@ public class Database {
 		while (rs.next()) {
 			int id_m = rs.getInt("id");
 			String transactionDate = rs.getString("transactionDate");
-			Date myDate = new SimpleDateFormat("YYYY-MM-dd").parse(transactionDate);
+			Date myDate = parseDate(transactionDate);
 			char type = rs.getString("type").charAt(0);
 			int boxQuantity = rs.getInt("boxQuantity");
 			int employeeID = rs.getInt("employeeID");
@@ -289,9 +289,24 @@ public class Database {
 		
 		return returnList;
 	}
-
+	
+	private Date parseDate(String datePassed) throws ParseException {
+		System.out.println("converting: " + datePassed);
+		String[] parts = datePassed.split("-");
+		
+		System.out.println("Date is "+ Integer.valueOf(parts[0]) + " " + (Integer.valueOf(parts[1])) + " " + Integer.valueOf(parts[2]));
+		
+		return new GregorianCalendar(Integer.valueOf(parts[0]),Integer.valueOf(parts[1])-1,Integer.valueOf(parts[2])).getTime();
+		
+		//return new Date(Integer.valueOf(parts[2]), Integer.valueOf(parts[1]), Integer.valueOf(parts[0]));
+		
+		//return new SimpleDateFormat("YYYY-MM-dd", Locale.ENGLISH).parse(datePassed);
+	}
+	
 	private String convDate(Date date_init) {
-		return new SimpleDateFormat("YYYY-MM-dd", Locale.ENGLISH).format(date_init);
+		String newDate = new SimpleDateFormat("yyyy-MM-dd").format(date_init);
+		System.out.println("created: " + newDate);
+		return newDate;
 	}
 
 	public int registerTransaction(Transaction transaction) throws Exception {
@@ -411,6 +426,8 @@ public class Database {
 				"	`capsulePerBox`	INTEGER NOT NULL CHECK(capsulePerBox > 0),\n" + 
 				"	`name`	TEXT NOT NULL UNIQUE\n" + 
 				");";
+	    
+	    String sql_create_4 = "insert into LaTazza values(0.0)";
 		
 		String sqlDelete_1 = "drop table IF EXISTS `Transactions`;";
 		String sqlDelete_2 = "drop table IF EXISTS `Employee`;";
@@ -428,6 +445,7 @@ public class Database {
 		stmt_create_tables.addBatch(sql_create_1);
 		stmt_create_tables.addBatch(sql_create_2);
 		stmt_create_tables.addBatch(sql_create_3);
+		stmt_create_tables.addBatch(sql_create_4);
 		stmt_create_tables.executeBatch();
 		
 		
@@ -447,11 +465,14 @@ public class Database {
 		prep.setInt(3, beverage.getCapsulePerBox());
 		prep.setString(4, beverage.getName());
 		prep.setInt(5, beverage.getId());
-		prep.executeUpdate();
+		int count = prep.executeUpdate();
         
 		prep.close();
 		
 		closeConnection();
+		
+		if (count <= 0)
+			throw new BeverageException();
 	}
 
 	public void updateEmployee(Employee employee) throws Exception {
@@ -466,18 +487,17 @@ public class Database {
 		prep.setString(2, employee.getSurname());
 		prep.setDouble(3, employee.getCredit());
 		prep.setDouble(4, employee.getId());
-		prep.executeUpdate();
+		int count = prep.executeUpdate();
 		
 		prep.close();
 		
 		closeConnection();
+		
+
+		if (count <= 0)
+			throw new EmployeeException();
 	}
 	
 
 	
 }
-/*
- * USED QUERY
- insert into Employee values (null,"Franco", "Ruggieriii", 0)
- 
-*/
