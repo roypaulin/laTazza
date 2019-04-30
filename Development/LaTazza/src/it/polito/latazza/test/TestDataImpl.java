@@ -67,7 +67,7 @@ public class TestDataImpl {
 		assertEquals(id>=0, true);
 		
 		try {
-			database.updateBeverage(new Beverage(-1,0,1.4,50,"do you wanna a Kaffè!?!!!"));
+			database.updateBeverage(new Beverage(-1,0,1.4,50,"do you want a Kaffè!?!!!"));
 		} catch(BeverageException e) {
 			System.out.println("works correctly, it launch an exception if id is wrong!");
 		}

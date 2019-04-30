@@ -1,6 +1,9 @@
 package it.polito.latazza;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import it.polito.latazza.data.DataImpl;
 import it.polito.latazza.data.DataInterface;
@@ -17,6 +20,9 @@ public class LaTazza {
        //System.console().printf("prova");
 		System.out.println("Good Test\n");
 		Database database = new Database();
+		Date date = new Date();
+		System.out.println("the date is "+date);
+		System.out.println("the converted date is  "+ new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date));
 	}
 
 	public void updateBalance(double amount) throws NotEnoughBalance{

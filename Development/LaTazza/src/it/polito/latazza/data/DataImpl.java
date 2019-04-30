@@ -18,7 +18,7 @@ import it.polito.latazza.data.Database;
 import it.polito.latazza.data.Transaction;
 
 public class DataImpl implements DataInterface {
-     Database d = new Database();
+     Database database = new Database();
 	@Override
 	/* @author roy paulin */
 	public Integer sellCapsules(Integer employeeId, Integer beverageId, Integer numberOfCapsules, Boolean fromAccount)
@@ -69,7 +69,7 @@ public class DataImpl implements DataInterface {
 		Beverage bev ;
 		float amount;
 		try {
-			 bev = d.getBeverageData(beverageId);
+			 bev = database.getBeverageData(beverageId);
 			bev.updateCapsuleQuantity(boxQuantity);
 			
 		}catch(Exception be) {
@@ -79,11 +79,13 @@ public class DataImpl implements DataInterface {
 		//then i update latazza account
 			float boxPrice = (float)bev.getBoxPrice();
 			 amount = boxPrice * boxQuantity;
-			 float balance;
+			 float balance = 0;
 			 try {
-				 balance = (float)d.getBalance();
+				 balance = (float)database.getBalance();
 			 }catch(Exception e){
-				 throw new NotEnoughBalance();
+				 System.out.println("Unable to get la laTazza balance");
+				throw new NotEnoughBalance();
+				
 			 }
 			 //float balance = (float)d.getBalance();
 			 if((balance-amount)< 0) {
@@ -91,19 +93,25 @@ public class DataImpl implements DataInterface {
 			 }
 			 
 			 try {
-					d.updateBeverage(bev);
+					database.updateBeverage(bev);
 			 }catch(Exception e) {
 				 throw new BeverageException();
 			 }
 	
-       //d.updateBalance(amount);
+            try {
+		       database.updateBalance(-amount);
+	       } catch (Exception e1) {
+		      // TODO Auto-generated catch block
+	    	   System.out.println("unable to update la tazza balance");
+		    e1.printStackTrace();
+	      }
 		//i create the object transaction
 		Date date = new Date();
 		SimpleDateFormat formatter = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");  
 		System.out.println(formatter.format(date));
 		Transaction transaction = new Transaction(-1,date,'P',boxQuantity,-1,beverageId,amount,false);
 		try {
-		d.registerTransaction(transaction);
+		database.registerTransaction(transaction);
 		}catch(Exception e) {
 			System.out.println("Unable to regsiter the transaction");
 		}
@@ -117,7 +125,55 @@ public class DataImpl implements DataInterface {
 		// TODO Auto-generated method stub
 		/*getEmployeeReport() //which returns a list of transactions to be formated
 		 */
-		return new ArrayList<String>();
+		
+		if(startDate.compareTo(endDate) < 0) {
+			throw new DateException();
+		}
+		List<Transaction> transactionList = new ArrayList<>();
+		List<String> returnList = new ArrayList<>();
+		Employee emp;
+		Beverage bev = null;
+		String s;
+		// i first get the list of transactions for this employee
+		try {
+			transactionList = database.getEmployeeReport(employeeId,startDate, endDate);
+		} catch (Exception e) {
+			throw new EmployeeException();
+		}
+		// i get the employee data 
+		try {
+			emp= database.getEmployeeData(employeeId);
+		} catch (Exception e) {
+			throw new EmployeeException();
+		}
+		
+		// i now build the returnList
+		for(Transaction t : transactionList) {
+			 s="";
+			 
+			 if(t.getType()=='C') {
+				 s= s+t.getTransactionDate();
+				 try {
+						bev = database.getBeverageData(t.getBeverageID());
+					} catch (Exception e) {
+						//if this happens, it's an internal error which means we did not well registered the transaction
+						System.out.println("unable to get beverage data for id"+t.getBeverageID());
+					}
+				 if(t.isFromAccount()==true) {
+					 s= s+"BALANCE";
+				 }
+				 else {
+					 s=s+"CASH";
+				 }
+				 s=s+emp.getName()+emp.getSurname()+bev.getName();
+				 //s = s+t.getNumberOfCapsules; remmber to add this at the end
+			 }
+			 else {//the transaction is for sure of type R=recharge
+				 s= s+t.getTransactionDate()+"RECHARGE"+emp.getName()+emp.getSurname()+t.getAmount();
+			 }
+			returnList.add(s);
+		}
+		return returnList;
 	}
 
 	@Override
@@ -127,7 +183,87 @@ public class DataImpl implements DataInterface {
 
 		/*getReport() //which returns a list of transactions to be formated
 		 */
-		return new ArrayList<String>();
+		if(startDate.compareTo(endDate) < 0) {
+			throw new DateException();
+		}
+		List<Transaction> transactionList = new ArrayList<>();
+		List<String> returnList = new ArrayList<>();
+		Employee emp = null;
+		Beverage bev = null;
+		String s;
+		
+       try {
+		transactionList = database.getReport(startDate, endDate);
+	  } catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	  }
+       
+       
+    // i now build the returnList
+    		for(Transaction t : transactionList) {
+    			 s="";
+    			 
+    			 if(t.getType()=='C') {
+    				 //get the beverage object
+    				 try {
+    						bev = database.getBeverageData(t.getBeverageID());
+    					} catch (Exception e) {
+    						//if this happens, it's an internal error which means we did not well registered the transaction
+    						System.out.println("unable to get beverage data for id"+t.getBeverageID());
+    					}
+    				 
+    				 s= s+t.getTransactionDate();
+    				 
+    				   if(t.getEmployeeID() != -1) {//this transaction is related to an employee
+    					   try {
+    							emp= database.getEmployeeData(t.getEmployeeID());
+    						} catch (Exception e) {
+    							//this should never happen,otherwise we did an error creating the transaction
+    							System.out.println("unable to get employee data from getReport");
+    						}
+    					   if(t.isFromAccount()==true) {
+    	    					 s= s+"BALANCE";
+    	    				 }
+    	    				 else {
+    	    					 s=s+"CASH";
+    	    				 }
+    					   s=s+emp.getName()+emp.getSurname()+bev.getName();
+    					   //s=s+t.NumberOfCapsules; remember to do this after defining the attribute NumberOfCapsules
+    				   }
+    				   else {//the transaction is related to a visitor
+    					   s = s+"VISITOR"+bev.getName();
+    					  // s=s+t.getNumberOfCapsules; i should remenber to add this
+    				   }
+    				 
+    				 s=s+emp.getName()+emp.getSurname()+bev.getName();
+    				 //s = s+t.getNumberOfCapsules; remmber to add this at the end
+    			 }
+    			 
+    			 if(t.getType() == 'R') {
+    				 try {
+							emp= database.getEmployeeData(t.getEmployeeID());
+						} catch (Exception e) {
+							//this should never happen,otherwise we did an error creating the transaction
+							System.out.println("unable to get employee data from getReport");
+						}
+    				 s= s+t.getTransactionDate()+"RECHARGE"+emp.getName()+emp.getSurname()+t.getAmount();
+    			 }
+    			 
+    			 if(t.getType() == 'P') {
+    				 try {
+ 						bev = database.getBeverageData(t.getBeverageID());
+ 					} catch (Exception e) {
+ 						//if this happens, it's an internal error which means we did not well registered the transaction
+ 						System.out.println("unable to get beverage data for id"+t.getBeverageID());
+ 					}
+    				 s=s+t.getTransactionDate()+"BUY"+bev.getName()+t.getBoxQuantity();
+    				 
+    			 }
+    			 
+    			returnList.add(s);
+    		}
+    		return returnList;
 	}
 
 	@Override
@@ -140,7 +276,7 @@ public class DataImpl implements DataInterface {
 		Integer id=0;
 		Beverage b= new Beverage(-1,0,boxPrice,capsulesPerBox,name);
 		try{
-			id=d.addBeverage(b);
+			id=database.addBeverage(b);
 			}catch( Exception e) {
 				throw new BeverageException();
 			}
@@ -152,11 +288,11 @@ public class DataImpl implements DataInterface {
 	public void updateBeverage(Integer id, String name, Integer capsulesPerBox, Integer boxPrice)
 			throws BeverageException {
 		try {
-		 Beverage bev = d.getBeverageData(id);
+		 Beverage bev = database.getBeverageData(id);
          bev.setName(name);
 		 bev.setCapsulePerBox(capsulesPerBox);
 		 bev.setBoxPrice(boxPrice);
-		 d.updateBeverage(bev);
+		 database.updateBeverage(bev);
 		}catch(Exception be) {
 			throw new BeverageException() ;
 			
@@ -175,7 +311,7 @@ public class DataImpl implements DataInterface {
 		 */
 		String name;
 		try {
-		    name = d.getBeverageData(id).getName();
+		    name = database.getBeverageData(id).getName();
 		}
 		catch(Exception be) {
 			
@@ -193,7 +329,7 @@ public class DataImpl implements DataInterface {
 		 */
 		Integer capsulesPerBox;
 		try {
-		   capsulesPerBox = d.getBeverageData(id).getCapsulePerBox();
+		   capsulesPerBox = database.getBeverageData(id).getCapsulePerBox();
 		}
 		catch(Exception be) {
 			
@@ -210,7 +346,7 @@ public class DataImpl implements DataInterface {
 		 */
 		float price;
 		try {
-		    price = (float)d.getBeverageData(id).getBoxPrice();
+		    price = (float)database.getBeverageData(id).getBoxPrice();
 		}
 		catch(Exception be) {
 			
@@ -228,7 +364,7 @@ public class DataImpl implements DataInterface {
 		List<Integer> beveragesId = new ArrayList<>();
 		List<Beverage> beverages = new ArrayList<>();
 		try{
-			beverages = d.getListOfBeverages();
+			beverages = database.getListOfBeverages();
 		}
 		catch(Exception e){
 			System.out.println("canno get the list of beverages");
@@ -248,7 +384,7 @@ public class DataImpl implements DataInterface {
 		Map<Integer, String> mapBeverages = new HashMap<>();
 		List<Beverage> beverages = new ArrayList<>();
 		try{
-			beverages = d.getListOfBeverages();
+			beverages = database.getListOfBeverages();
 		}catch(Exception e) {
 			
 		}
@@ -267,7 +403,7 @@ public class DataImpl implements DataInterface {
 		 
 		Integer quantityAvailable;	
 		 try {
-			   quantityAvailable = d.getBeverageData(id).getQuantityAvailable();
+			   quantityAvailable = database.getBeverageData(id).getQuantityAvailable();
 			}
 			catch(Exception e) {
 				

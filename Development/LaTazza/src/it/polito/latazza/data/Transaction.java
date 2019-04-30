@@ -11,7 +11,7 @@ public class Transaction {
 
 	int id;
 	Date transactionDate;
-	char type;
+	char type;/*can be P=Purchase C=Consumption R= Recharge*/
 	int boxQuantity;
 	int employeeID;
 	int beverageID;
