@@ -8,7 +8,8 @@
 	</classpathentry>
 	<classpathentry exported="true" kind="lib" path="lib/sqlite-jdbc-3.8.7.jar"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
-	<classpathentry kind="lib" path="/mnt/0CF2591274564EA0/desktop/soft_eng/LaTazza/Development/LaTazza/lib/sqlite-jdbc-3.8.7.jar"/>
-	<classpathentry kind="lib" path="/mnt/0CF2591274564EA0/desktop/soft_eng/LaTazza/Development/LaTazza/lib/junit-4.13-beta-2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ntame/Desktop/Magistrale/primoAnno/SecondoPeriodo/softwareEngineering/workspace/LaTazza/Development/LaTazza/lib/sqlite-jdbc-3.8.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ntame/Desktop/Magistrale/primoAnno/SecondoPeriodo/softwareEngineering/workspace/LaTazza/Development/LaTazza/lib/junit-4.13-beta-2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ntame/Desktop/Magistrale/primoAnno/SecondoPeriodo/softwareEngineering/workspace/LaTazza/Development/LaTazza/lib/it/polito/latazza/latazza-gui/1.0.1/latazza-gui-1.0.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
