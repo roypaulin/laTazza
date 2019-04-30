@@ -13,13 +13,17 @@ import java.util.List;
 import org.junit.Test;
 
 import it.polito.latazza.data.Beverage;
+import it.polito.latazza.data.DataImpl;
 import it.polito.latazza.data.Database;
 import it.polito.latazza.data.Employee;
 import it.polito.latazza.data.Transaction;
 import it.polito.latazza.exceptions.BeverageException;
+import it.polito.latazza.exceptions.EmployeeException;
 
 public class TestDataImpl {
-
+	/*can be used by other developper, no need to redefine thm again*/
+	Database database = new Database();
+	DataImpl dataImpl = new DataImpl();
 	@Test
 	public void testExample() {
 		assertEquals(2, 1 + 1);
@@ -32,9 +36,7 @@ public class TestDataImpl {
 	
 	@Test
 	public void testDatabase() throws ClassNotFoundException, SQLException, Exception {
-		Database database = null;
 		
-		database = new Database();
 		database.truncateTables();
 		
 		int id = database.addEmployee(new Employee(-1,"Morisio","Maurizio",1000000.99));
@@ -84,6 +86,50 @@ public class TestDataImpl {
 		
 		assertNotEquals(null, list);
 
+	}
+	
+	@Test
+	public void testCreateBeverage() throws Exception{
+		
+		int id=-1;
+		id=dataImpl.createBeverage("coffee",10, 100);
+		assertNotEquals(id,-1);
+		Beverage bev = database.getBeverageData(id);
+		assertEquals("coffee",bev.getName());
+		assertEquals(10,bev.getCapsulePerBox());
+		assertEquals(100,bev.getBoxPrice());
+	}
+	
+	@Test
+	public void testUpdateBeverage() throws Exception {
+		int id =-1;
+		id=dataImpl.createBeverage("Tea",10, 100);
+	    Beverage bev = database.getBeverageData(id);
+	    bev.setBoxPrice(200);
+	    database.updateBeverage(bev);
+	    //evrything id correct so the object shoudl be updated
+	    assertEquals(200,database.getBeverageData(id).getBoxPrice());
+	    
+	    //i put and id that does not exist => i should catch the esception
+	    bev.setId(21);
+	    try {
+	    	database.updateBeverage(bev);
+	    	
+	    }catch(Exception e) {
+	    	System.out.println("thorws correctly the exception");
+	    	assertEquals(e instanceof BeverageException,true);
+	    }
+	    
+	    //the price is negative so i should catch an exception
+        bev.setId(id);	   
+	    bev.setBoxPrice(-10);
+	    try {
+	    	database.updateBeverage(bev);
+	    	
+	    }catch(Exception e) {
+	    	System.out.println("thorws correctly the exception");
+	    	assertEquals(e instanceof Exception,true);
+	    }
 	}
 
 }

@@ -70,7 +70,7 @@ public class DataImpl implements DataInterface {
 		float amount;
 		try {
 			 bev = database.getBeverageData(beverageId);
-			bev.updateCapsuleQuantity(boxQuantity);
+			bev.updateCapsuleQuantity(boxQuantity*bev.getCapsulePerBox());
 			
 		}catch(Exception be) {
 			
@@ -99,7 +99,7 @@ public class DataImpl implements DataInterface {
 			 }
 	
             try {
-		       database.updateBalance(-amount);
+		       database.updateBalance(balance-amount);
 	       } catch (Exception e1) {
 		      // TODO Auto-generated catch block
 	    	   System.out.println("unable to update la tazza balance");
