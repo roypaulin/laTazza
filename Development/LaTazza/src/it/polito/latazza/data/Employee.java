@@ -47,6 +47,11 @@ public class Employee {
 	public void setCredit(double c) {
 		this.credit=c;
 	}
+
+	public void updateCredit(Integer amountInCents) {
+		// TODO Auto-generated method stub
+		this.credit+=amountInCents;
+	}
 	
 	
 }

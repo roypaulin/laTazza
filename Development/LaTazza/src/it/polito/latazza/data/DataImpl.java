@@ -25,12 +25,27 @@ public class DataImpl implements DataInterface {
 	public Integer sellCapsules(Integer employeeId, Integer beverageId, Integer numberOfCapsules, Boolean fromAccount)
 			throws EmployeeException, BeverageException, NotEnoughCapsules {
 		Employee emp;
+		Beverage be;
 		try {
 			emp=database.getEmployeeData(employeeId);
-			if(fromAccount) {
-				//emp.s
-			}
+		
 		}catch(Exception e) {
+			throw new EmployeeException();
+		}
+		try {
+			be=database.getBeverageData(beverageId);
+		
+		}catch(Exception e) {
+			throw new BeverageException();
+		}
+		if(be.getQuantityAvailable()<numberOfCapsules) {
+			throw new NotEnoughCapsules();
+		}
+		if(fromAccount) {
+			//if(emp.getCredit()-(numberOfCapsules*(be.boxPrice/be.getCapsulePerBox()))<0) {
+			//	throw new NotEnoughBalance();
+			//}
+			//emp.setCredit();
 			
 		}
 		/*
@@ -64,7 +79,17 @@ public class DataImpl implements DataInterface {
 	/* @author roy paulin */
 	public Integer rechargeAccount(Integer id, Integer amountInCents) throws EmployeeException {
 		// TODO Auto-generated method stub
-		return 0;
+		Employee emp;
+		try {
+			emp=database.getEmployeeData(id);
+			emp.updateCredit(amountInCents);
+		}catch(Exception e) {
+			throw new EmployeeException();
+		}
+		//if()
+		Date date = new Date();
+		Transaction tr= new Transaction(-1,date,'R',-1,id,-1,amountInCents,false);
+		return (int)Math.round(emp.getCredit());
 		/*
 		 * getEmployeeData()
 		 * updateEmployeeCredit()
