@@ -37,6 +37,8 @@ public class DataImpl implements DataInterface {
 		 * create a new object transaction of type consumption and insert it in the databas
 		 * */
 		// TODO Auto-generated method stub
+		
+		
 		return 0;
 	}
 
@@ -419,12 +421,29 @@ public class DataImpl implements DataInterface {
 		/*call constructor to create a employee object
 		addEmployee()
 		 */
-		return 0;
+		Integer id=0;
+		Employee em= new Employee(-1,name,surname,0.0);
+		try{
+			id=database.addEmployee(em);
+			}catch( Exception e) {
+				throw new EmployeeException();
+			}
+		return id;
+		
 	}
 
 	@Override
 	/* @author roy paulin */
 	public void updateEmployee(Integer id, String name, String surname) throws EmployeeException {
+		try {
+			Employee emp = database.getEmployeeData(id);
+	         emp.setName(name);
+			 emp.setSurname(surname);
+			 database.updateEmployee(emp);
+			}catch(Exception e) {
+				throw new EmployeeException() ;
+				
+			}
 		// TODO Auto-generated method stub
 		/* updateEmployeeAttributes
 		 */
@@ -436,16 +455,30 @@ public class DataImpl implements DataInterface {
 		// TODO Auto-generated method stub
 		/*getEmployeeData().getName()
 		 */
-		return "";
+		Employee emp;
+		try {
+		 emp = database.getEmployeeData(id);
+		
+	}catch( Exception e) {
+		throw new EmployeeException();
+	}
+		return emp.getName();
 	}
 
 	@Override
 	/* @author roy paulin */
 	public String getEmployeeSurname(Integer id) throws EmployeeException {
+		Employee emp;
+		try {
+		 emp = database.getEmployeeData(id);
+		
+	}catch( Exception e) {
+		throw new EmployeeException();
+	}
 		// TODO Auto-generated method stub
 		/*getEmployeeData().getSurname()
 		 */
-		return "";
+		return emp.getSurname();
 	}
 
 	@Override
