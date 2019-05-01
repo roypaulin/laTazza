@@ -159,9 +159,33 @@ public class TestDataImpl {
 		dataImpl.reset();// used to clear everything before starting the Test
 		int id=-1;
 		id=dataImpl.createBeverage("coffee",10, 100);
+		//i get the beverageName of the created string
 		String bevName = dataImpl.getBeverageName(id);
 		assertEquals(bevName,"coffee");
-
+         
+		//this should throw a BeverageException because the Beverage does not exist
+		try {
+			bevName=dataImpl.getBeverageName(-1);
+		}catch(BeverageException be){
+			assertEquals(be instanceof BeverageException,true);
+		}
+	}
+	
+	@Test
+	public void testGetBeverageCapsulesPerBox() throws BeverageException {
+		dataImpl.reset();
+		int id=-1;
+		id=dataImpl.createBeverage("coffee",10, 100);
+		int capsulesPerBox = dataImpl.getBeverageCapsulesPerBox(id);
+		assertEquals(capsulesPerBox,10);
+		
+		 
+		//this should throw a BeverageException because the Beverage does not exist
+		try {
+			capsulesPerBox=dataImpl.getBeverageCapsulesPerBox(-1);
+		}catch(BeverageException be){
+			assertEquals(be instanceof BeverageException,true);
+		}
 	}
 
 }
