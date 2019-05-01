@@ -241,4 +241,20 @@ public class TestDataImpl {
 		returnMap= dataImpl.getBeverages();
 		assertEquals(expectedMap,returnMap);
     }
+    
+    @Test
+    public void testGetBeverageCapsules() throws Exception {
+    	dataImpl.reset();
+    	int id;
+		id=dataImpl.createBeverage("coffee",10, 100);
+		Beverage bev = database.getBeverageData(id);
+		//when we create a beverage, the nitial quantity is always 0
+		Integer capsulesQuantity = bev.getQuantityAvailable();
+		assertEquals(capsulesQuantity,0);
+		
+		bev.setQuantityAvailable(10);
+		database.updateBeverage(bev);
+		capsulesQuantity = bev.getQuantityAvailable();
+		assertEquals(capsulesQuantity,10);
+    }
 }
