@@ -21,6 +21,7 @@ import it.polito.latazza.data.Employee;
 import it.polito.latazza.data.Transaction;
 import it.polito.latazza.exceptions.BeverageException;
 import it.polito.latazza.exceptions.EmployeeException;
+import it.polito.latazza.exceptions.NotEnoughBalance;
 
 public class TestDataImpl {
 	/*can be used by other developper, no need to redefine thm again*/
@@ -203,8 +204,7 @@ public class TestDataImpl {
 		try {
 			boxPrice=dataImpl.getBeverageBoxPrice(-1);
 		}catch(BeverageException be){
-			//i can even omit this asser because the exception is for sure of type BeverageException.
-			//assertEquals(be instanceof BeverageException,true);
+			
 			System.out.println("correctly throws exception for dataImpl.getBeverageBoxPrice(-1) because id is not valid");
 		}
 	}
@@ -257,4 +257,45 @@ public class TestDataImpl {
 		capsulesQuantity = bev.getQuantityAvailable();
 		assertEquals(capsulesQuantity,10);
     }
+    
+    @Test
+    public void testBuyBoxes() throws Exception {
+    	dataImpl.reset();
+    	database.updateBalance(500);
+    	int id;
+		id=dataImpl.createBeverage("coffee",10, 100);
+		dataImpl.buyBoxes(id,3);// so i will spend 3*100cent to buy 3*10 capsules
+		
+		// check laTazza balance have been updated
+		double balance = database.getBalance();
+		assertEquals(balance,500-300);
+		
+		// check the Quantity available for this Beverage have been correctly updated
+		Integer quantityAvailable = database.getBeverageData(id).getQuantityAvailable();
+		assertEquals(quantityAvailable,30);
+		
+		 //check the Transaction have been created: wait untill we define the fianl format for the date.
+		 /**Date date = new Date();
+		  
+		   List<Transaction> transactionList = database.getReport(getDate(date.getYear()-1,date.getMonth(),date.getDay()),getDate(date.getYear(),date.getMonth(),date.getDay()));
+		   assertEquals(1,transactionList.size());**/
+		//now try to buyBoxes for an identifier which is not valid
+		       try{
+		         	dataImpl.buyBoxes(-1,3);
+		       }catch(BeverageException be) {
+		    	System.out.println("correctly throws exception for dataImpl.buyBoxes(-1,3) because id is not valid");
+			   }
+		       
+		 // now consider the case i do not have enough balance so i should thorw notEnoughBalnceException
+		        dataImpl.reset();
+		        database.updateBalance(100);
+		        id=dataImpl.createBeverage("Tea",10, 100);
+		        try {
+				dataImpl.buyBoxes(id,3);// so i will spend 3*100cent to buy 3*10 capsules
+		        }catch(NotEnoughBalance  e) {
+		        	System.out.println("correctly throws exception for dataImpl.buyBoxes(id,3) because there is not enough balance");
+		        }
+	  }
 }
+
+

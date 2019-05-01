@@ -3,6 +3,7 @@ package it.polito.latazza.data;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -107,8 +108,9 @@ public class DataImpl implements DataInterface {
 	      }
 		//i create the object transaction
 		Date date = new Date();
-		SimpleDateFormat formatter = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");  
-		System.out.println(formatter.format(date));
+		/*SimpleDateFormat formatter = new SimpleDateFormat("YYYY-MM-dd");  
+		System.out.println(formatter.format(date));*/
+		date = new GregorianCalendar(date.getYear(),date.getMonth()-1,date.getDay()).getTime();
 		Transaction transaction = new Transaction(-1,date,'P',boxQuantity,-1,beverageId,amount,false);
 		try {
 		database.registerTransaction(transaction);
