@@ -8,7 +8,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 
@@ -223,4 +225,20 @@ public class TestDataImpl {
 		assertEquals(returnList,expectedList);
 	}
 
+    @Test
+    public void testGetBeverages() throws BeverageException {
+    	dataImpl.reset();
+    	Map<Integer, String> returnMap = new HashMap<>();
+    	Map<Integer, String> expectedMap = new HashMap<>();
+    	int id,id1,id2;
+		id=dataImpl.createBeverage("coffee",10, 100);
+		id1=dataImpl.createBeverage("Tea",10, 100);
+		id2=dataImpl.createBeverage("Lemon", 20,150);
+		expectedMap.put(id, "coffee");
+		expectedMap.put(id1, "Tea");
+		expectedMap.put(id2, "Lemon");
+		
+		returnMap= dataImpl.getBeverages();
+		assertEquals(expectedMap,returnMap);
+    }
 }
