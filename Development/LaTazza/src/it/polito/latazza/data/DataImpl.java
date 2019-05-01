@@ -489,7 +489,12 @@ public class DataImpl implements DataInterface {
 		// TODO Auto-generated method stub
 		/*truncateTables()
 		 */
-		
+		try {
+			database.truncateTables();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

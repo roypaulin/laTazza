@@ -106,30 +106,52 @@ public class TestDataImpl {
 		id=dataImpl.createBeverage("Tea",10, 100);
 	    Beverage bev = database.getBeverageData(id);
 	    bev.setBoxPrice(200);
-	    database.updateBeverage(bev);
-	    //evrything id correct so the object shoudl be updated
+	    dataImpl.updateBeverage(id, bev.getName(),bev.getCapsulePerBox() , (int)Math.round(bev.getBoxPrice()));
+	    //everything is correct so the object should be updated
 	    assertEquals(200,database.getBeverageData(id).getBoxPrice());
 	    
-	    //i put and id that does not exist => i should catch the esception
-	    bev.setId(21);
+	    //i put and id that does not exist => i should catch the exception
+	  
 	    try {
-	    	database.updateBeverage(bev);
+	    	
+	    	dataImpl.updateBeverage(-1,"coffee",10,100);
 	    	
 	    }catch(Exception e) {
 	    	System.out.println("thorws correctly the exception");
 	    	assertEquals(e instanceof BeverageException,true);
 	    }
 	    
-	    //the price is negative so i should catch an exception
-        bev.setId(id);	   
-	    bev.setBoxPrice(-10);
+	    //the price and CapsulesPerBoxt are negative so i should catch a BeverageException
+        
 	    try {
-	    	database.updateBeverage(bev);
+	    	//database.updateBeverage(bev);
+	    	dataImpl.updateBeverage(id, bev.getName(),-10,-2);
 	    	
 	    }catch(Exception e) {
 	    	System.out.println("thorws correctly the exception");
-	    	assertEquals(e instanceof Exception,true);
+	    	assertEquals(e instanceof BeverageException,true); //
 	    }
+	}
+	@Test
+	public void testReset() throws Exception {
+		
+			database.addBeverage(new Beverage(10, 0, 10, 100, "Lemon"));
+			database.addEmployee(new Employee(10,"ndjekoua","sandjo",0));
+			database.updateBalance(10);
+		
+		//After calling this function, the databse should be empty
+           dataImpl.reset();
+		
+		    List<Employee> empList = null;
+		    List<Beverage> bevList = null;
+		    double balance =-1;
+	       empList=database.getListEmployee();
+		   bevList =database.getListOfBeverages();
+		   balance = database.getBalance();
+		
+		assertEquals(true,bevList.isEmpty());
+		assertEquals(true,empList.isEmpty());
+		assertEquals(balance,0);
 	}
 
 }
