@@ -24,7 +24,15 @@ public class DataImpl implements DataInterface {
 	/* @author roy paulin */
 	public Integer sellCapsules(Integer employeeId, Integer beverageId, Integer numberOfCapsules, Boolean fromAccount)
 			throws EmployeeException, BeverageException, NotEnoughCapsules {
-		
+		Employee emp;
+		try {
+			emp=database.getEmployeeData(employeeId);
+			if(fromAccount) {
+				//emp.s
+			}
+		}catch(Exception e) {
+			
+		}
 		/*
 		 * getEmployeeData()
 		 * updatecredit() // same as updateBeveragequantity()
