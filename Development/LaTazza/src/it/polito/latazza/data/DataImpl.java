@@ -507,7 +507,7 @@ public class DataImpl implements DataInterface {
 			employees = database.getListEmployee();
 		}
 		catch(Exception e){
-			System.out.println("cannot get the list of beverages");
+			System.out.println("cannot get the list of Employees");
 		}
 		for(Employee emp : employees) {
 			employeesId.add(emp.getId());
@@ -529,7 +529,7 @@ public class DataImpl implements DataInterface {
 			
 		}
 		for(Employee emp : employees) {
-			employeesMap.put(emp.getId(),emp.getName());
+			employeesMap.put(emp.getId(),emp.getName()+" "+emp.getSurname());
 		}
 		// TODO Auto-generated method stub
 		/*getListOfEmployee() //then transforms in Map
@@ -540,9 +540,15 @@ public class DataImpl implements DataInterface {
 	@Override
 	/* @author roy paulin */
 	public Integer getBalance() {
+		double  d=0;
+		try {
+		d=database.getBalance();
+		}catch(Exception e) {
+			System.out.println("cannot get the Latazza account");
+		}
 		// TODO Auto-generated method stub
 		// getBalance()
-		return 0;
+		return (int)Math.round(d);
 	}
 
 	@Override
