@@ -367,7 +367,7 @@ public class DataImpl implements DataInterface {
 			beverages = database.getListOfBeverages();
 		}
 		catch(Exception e){
-			System.out.println("canno get the list of beverages");
+			System.out.println("cannot get the list of beverages");
 		}
 		for(Beverage b : beverages) {
 			beveragesId.add(b.getId());

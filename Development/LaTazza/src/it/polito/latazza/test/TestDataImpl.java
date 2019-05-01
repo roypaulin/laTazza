@@ -187,5 +187,36 @@ public class TestDataImpl {
 			assertEquals(be instanceof BeverageException,true);
 		}
 	}
+	
+	@Test
+	public void getBeverageBoxPrice() throws BeverageException {
+		dataImpl.reset();
+		int id=-1;
+		id=dataImpl.createBeverage("coffee",10, 100);
+		Integer boxPrice = dataImpl.getBeverageBoxPrice(id);
+		assertEquals(boxPrice,100);
+		
+		//this should throw a BeverageException because the Beverage does not exist
+		try {
+			boxPrice=dataImpl.getBeverageBoxPrice(-1);
+		}catch(BeverageException be){
+			//i can even omit this asser because the exception is for sure of type BeverageException.
+			assertEquals(be instanceof BeverageException,true);
+		}
+	}
+	
+	@Test
+	public void testGetBeveragesId() throws BeverageException {
+		dataImpl.reset();
+		List<Integer> expectedList = new ArrayList<>();
+		List<Integer> returnList;
+		int id,id1;
+		id=dataImpl.createBeverage("coffee",10, 100);
+		id1=dataImpl.createBeverage("Tea",10, 100);
+		expectedList.add(id);
+		expectedList.add(id1);
+		returnList= dataImpl.getBeveragesId();
+		assertEquals(returnList,expectedList);
+	}
 
 }
