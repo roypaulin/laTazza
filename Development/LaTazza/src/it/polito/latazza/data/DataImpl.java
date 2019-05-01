@@ -501,10 +501,21 @@ public class DataImpl implements DataInterface {
 	@Override
 	/* @author roy paulin */
 	public List<Integer> getEmployeesId() {
+		List<Integer> employeesId = new ArrayList<>();
+		List<Employee>  employees= new ArrayList<>();
+		try{
+			employees = database.getListEmployee();
+		}
+		catch(Exception e){
+			System.out.println("cannot get the list of beverages");
+		}
+		for(Employee emp : employees) {
+			employeesId.add(emp.getId());
+		}
 		// TODO Auto-generated method stub
 		  /*getEmployeeData().getEmployeeID()
 		 */
-		return new ArrayList<Integer>();
+		return employeesId;
 	}
 
 	@Override
