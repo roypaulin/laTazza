@@ -90,7 +90,7 @@ public class TestDataImpl {
 	
 	@Test
 	public void testCreateBeverage() throws Exception{
-		
+		dataImpl.reset();
 		int id=-1;
 		id=dataImpl.createBeverage("coffee",10, 100);
 		assertNotEquals(id,-1);
@@ -102,6 +102,7 @@ public class TestDataImpl {
 	
 	@Test
 	public void testUpdateBeverage() throws Exception {
+		dataImpl.reset();
 		int id =-1;
 		id=dataImpl.createBeverage("Tea",10, 100);
 	    Beverage bev = database.getBeverageData(id);
@@ -128,7 +129,7 @@ public class TestDataImpl {
 	    	dataImpl.updateBeverage(id, bev.getName(),-10,-2);
 	    	
 	    }catch(Exception e) {
-	    	System.out.println("thorws correctly the exception");
+	    	System.out.println("throws correctly the exception");
 	    	assertEquals(e instanceof BeverageException,true); //
 	    }
 	}
@@ -140,18 +141,27 @@ public class TestDataImpl {
 			database.updateBalance(10);
 		
 		//After calling this function, the databse should be empty
-           dataImpl.reset();
+            dataImpl.reset();
 		
 		    List<Employee> empList = null;
 		    List<Beverage> bevList = null;
 		    double balance =-1;
-	       empList=database.getListEmployee();
-		   bevList =database.getListOfBeverages();
-		   balance = database.getBalance();
+	        empList=database.getListEmployee();
+		    bevList =database.getListOfBeverages();
+		    balance = database.getBalance();
 		
 		assertEquals(true,bevList.isEmpty());
 		assertEquals(true,empList.isEmpty());
 		assertEquals(balance,0);
+	}
+	@Test
+	public void testGetBeverageName() throws BeverageException {
+		dataImpl.reset();// used to clear everything before starting the Test
+		int id=-1;
+		id=dataImpl.createBeverage("coffee",10, 100);
+		String bevName = dataImpl.getBeverageName(id);
+		assertEquals(bevName,"coffee");
+
 	}
 
 }
