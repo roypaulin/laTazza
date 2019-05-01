@@ -63,7 +63,9 @@ public class DataImpl implements DataInterface {
 	}
 
 	@Override
-	/* @author jean thibaut */
+	/* @author jean thibaut 
+	 * 	@TODO AFTER @elia MODIFY THE DATE FORMAT, I SHOULD UPDATE THE DATE OF THE TRANSACTION CREATION
+	 * */
 	public void buyBoxes(Integer beverageId, Integer boxQuantity) throws BeverageException, NotEnoughBalance {
 		// TODO Auto-generated method stub
 		/*i first update by increasing the total number of capsules available*/
@@ -179,7 +181,9 @@ public class DataImpl implements DataInterface {
 	}
 
 	@Override
-	/* @author jean thibaut */
+	/* @author jean thibaut
+	 * @TODO AFTER @elia MODIFY THE DATE FORMAT, I SHOULD UPDATE THE DATE FORMAT I PASS TO GERPORT() AND GETREPORTEMPLOYEE
+	 *  */
 	public List<String> getReport(Date startDate, Date endDate) throws DateException {
 		// TODO Auto-generated method stub
 
