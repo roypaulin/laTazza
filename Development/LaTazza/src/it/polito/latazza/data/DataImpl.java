@@ -521,10 +521,20 @@ public class DataImpl implements DataInterface {
 	@Override
 	/* @author roy paulin */
 	public Map<Integer, String> getEmployees() {
+		Map<Integer, String> employeesMap=new HashMap<Integer, String>();
+		List<Employee> employees = new ArrayList<>();
+		try{
+			employees = database.getListEmployee();
+		}catch(Exception e) {
+			
+		}
+		for(Employee emp : employees) {
+			employeesMap.put(emp.getId(),emp.getName());
+		}
 		// TODO Auto-generated method stub
 		/*getListOfEmployee() //then transforms in Map
 		 */
-		return new HashMap<Integer, String>();
+		return employeesMap;
 	}
 
 	@Override
