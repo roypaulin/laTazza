@@ -1,6 +1,7 @@
 package it.polito.latazza.data;
 
 import java.text.SimpleDateFormat;
+import java.lang.Math;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -484,10 +485,17 @@ public class DataImpl implements DataInterface {
 	@Override
 	/* @author roy paulin */
 	public Integer getEmployeeBalance(Integer id) throws EmployeeException {
+		Employee emp;
+		try {
+		 emp = database.getEmployeeData(id);
+		
+	}catch( Exception e) {
+		throw new EmployeeException();
+	}
 		// TODO Auto-generated method stub
 	   /*getEmployeeData().getEmployeecredit()
 		 */
-		return 0;
+		return (int)Math.round(emp.getCredit());
 	}
 
 	@Override
