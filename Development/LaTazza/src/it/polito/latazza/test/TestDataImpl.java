@@ -118,19 +118,19 @@ public class TestDataImpl {
 	    	dataImpl.updateBeverage(-1,"coffee",10,100);
 	    	
 	    }catch(Exception e) {
-	    	System.out.println("thorws correctly the exception");
-	    	assertEquals(e instanceof BeverageException,true);
+	    	
+	    	System.out.println("correctly throws exception for dataImpl.updateBeverage(-1, bev.getName(),10,100) because id is not valid");
 	    }
 	    
-	    //the price and CapsulesPerBoxt are negative so i should catch a BeverageException
+	    //the price and CapsulesPerBox are negative so i should catch a BeverageException
         
 	    try {
 	    	//database.updateBeverage(bev);
 	    	dataImpl.updateBeverage(id, bev.getName(),-10,-2);
 	    	
 	    }catch(Exception e) {
-	    	System.out.println("throws correctly the exception");
-	    	assertEquals(e instanceof BeverageException,true); //
+	    	System.out.println("correctly throws exception for dataImpl.updateBeverage(id, bev.getName(),-10,-2) because boxPrice and price are <0");
+	    	//assertEquals(e instanceof BeverageException,true); //
 	    }
 	}
 	@Test
@@ -167,7 +167,7 @@ public class TestDataImpl {
 		try {
 			bevName=dataImpl.getBeverageName(-1);
 		}catch(BeverageException be){
-			assertEquals(be instanceof BeverageException,true);
+			System.out.println("correctly throws exception for dataImpl.getBeverageName(-1) because id is not valid");
 		}
 	}
 	
@@ -184,7 +184,8 @@ public class TestDataImpl {
 		try {
 			capsulesPerBox=dataImpl.getBeverageCapsulesPerBox(-1);
 		}catch(BeverageException be){
-			assertEquals(be instanceof BeverageException,true);
+			//assertEquals(be instanceof BeverageException,true);
+			System.out.println("correctly throws exception for dataImpl.getBeverageCapsulesPerBox(-1) because id is not valid");
 		}
 	}
 	
@@ -201,7 +202,8 @@ public class TestDataImpl {
 			boxPrice=dataImpl.getBeverageBoxPrice(-1);
 		}catch(BeverageException be){
 			//i can even omit this asser because the exception is for sure of type BeverageException.
-			assertEquals(be instanceof BeverageException,true);
+			//assertEquals(be instanceof BeverageException,true);
+			System.out.println("correctly throws exception for dataImpl.getBeverageBoxPrice(-1) because id is not valid");
 		}
 	}
 	
@@ -210,11 +212,13 @@ public class TestDataImpl {
 		dataImpl.reset();
 		List<Integer> expectedList = new ArrayList<>();
 		List<Integer> returnList;
-		int id,id1;
+		int id,id1,id2;
 		id=dataImpl.createBeverage("coffee",10, 100);
 		id1=dataImpl.createBeverage("Tea",10, 100);
+		id2=dataImpl.createBeverage("Lemon", 20,150);
 		expectedList.add(id);
 		expectedList.add(id1);
+		expectedList.add(id2);
 		returnList= dataImpl.getBeveragesId();
 		assertEquals(returnList,expectedList);
 	}

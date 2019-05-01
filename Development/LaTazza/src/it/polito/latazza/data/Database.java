@@ -42,7 +42,7 @@ public class Database {
 			Class.forName("org.sqlite.JDBC");
 			connection = DriverManager.getConnection("jdbc:sqlite:./db/db_se");
 			connection.createStatement().execute("PRAGMA foreign_keys=ON");
-			System.out.println("Database connection opened.");
+			//System.out.println("Database connection opened.");
 		} catch(SQLException | ClassNotFoundException e) {
 			System.err.println("erroreeeeee");
 			throw new Exception();
@@ -52,7 +52,7 @@ public class Database {
 	private void closeConnection() throws Exception {
 		connection.close();
 		connection = null;
-		System.out.println("Database connection closed.");
+		//System.out.println("Database connection closed.");
 	}
 	
 	public List<Employee> getListEmployee() throws Exception{
