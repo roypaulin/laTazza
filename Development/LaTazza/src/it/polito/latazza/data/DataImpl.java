@@ -115,13 +115,13 @@ public class DataImpl implements DataInterface {
 		}
 		//if()
 		Date date = new Date();
-		Transaction tr= new Transaction(-1,date,'R',-1,id,-1,amountInCents,false);
+		Transaction tr= new Transaction(-1,date,'R',-1,id,-1,-1,amountInCents, false);
 		try {
 		database.registerTransaction(tr);
 	}catch(Exception e) {
-		throw new EmployeeException();
+		System.out.println("Unable to regsiter the transaction");
 	}
-		return (int)Math.round(emp.getCredit());
+		return Math.round((float)emp.getCredit());
 		/*
 		 * getEmployeeData()
 		 * updateEmployeeCredit()
