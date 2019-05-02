@@ -74,7 +74,12 @@ public class DataImpl implements DataInterface {
 			    e1.printStackTrace();
 		      }
 		}
-		
+		Transaction tr=new Transaction(-1,new Date(),'C',-1,employeeId,beverageId,numberOfCapsules,-1,true);
+		try {
+			database.registerTransaction(tr);
+		}catch(Exception e) {
+			System.out.println("Unable to regsiter the transaction");
+		}
 		/*
 		 * getEmployeeData()
 		 * updatecredit() // same as updateBeveragequantity()
