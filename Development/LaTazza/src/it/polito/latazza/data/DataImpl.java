@@ -1,11 +1,21 @@
 package it.polito.latazza.data;
 
+import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+
 import java.lang.Math;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import it.polito.latazza.exceptions.BeverageException;
@@ -119,8 +129,11 @@ public class DataImpl implements DataInterface {
 		 * */
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
-	/* @author jean thibaut */
+	/* @author jean thibaut 
+	 * 	@TODO AFTER @elia MODIFY THE DATE FORMAT, I SHOULD UPDATE THE DATE OF THE TRANSACTION CREATION : DONE
+	 * */
 	public void buyBoxes(Integer beverageId, Integer boxQuantity) throws BeverageException, NotEnoughBalance {
 		// TODO Auto-generated method stub
 		/*i first update by increasing the total number of capsules available*/
@@ -165,9 +178,9 @@ public class DataImpl implements DataInterface {
 	      }
 		//i create the object transaction
 		Date date = new Date();
-		SimpleDateFormat formatter = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");  
-		System.out.println(formatter.format(date));
-		Transaction transaction = new Transaction(-1,date,'P',boxQuantity,-1,beverageId,amount,false);
+		// for transactions of Type P, the attribute numberOfCapsules is irrelevant
+		int numberOfCapsules = boxQuantity*bev.getCapsulePerBox();
+		Transaction transaction = new Transaction(-1,date,'P',boxQuantity,-1,beverageId,numberOfCapsules, amount,false);
 		try {
 		database.registerTransaction(transaction);
 		}catch(Exception e) {
@@ -224,10 +237,10 @@ public class DataImpl implements DataInterface {
 					 s=s+"CASH";
 				 }
 				 s=s+emp.getName()+emp.getSurname()+bev.getName();
-				 //s = s+t.getNumberOfCapsules; remmber to add this at the end
+				 s = s+t.getNumberOfCapsules(); //remmber to add this at the end
 			 }
 			 else {//the transaction is for sure of type R=recharge
-				 s= s+t.getTransactionDate()+"RECHARGE"+emp.getName()+emp.getSurname()+t.getAmount();
+				 s= s+this.convDate(t.getTransactionDate())+"RECHARGE"+emp.getName()+emp.getSurname()+this.convAmountWithCurrency(t.getAmount());
 			 }
 			returnList.add(s);
 		}
@@ -235,7 +248,9 @@ public class DataImpl implements DataInterface {
 	}
 
 	@Override
-	/* @author jean thibaut */
+	/* @author jean thibaut
+	 * @TODO AFTER @elia MODIFY THE DATE FORMAT, I SHOULD UPDATE THE DATE FORMAT I PASS TO GERPORT() AND GETREPORTEMPLOYEE
+	 *  */
 	public List<String> getReport(Date startDate, Date endDate) throws DateException {
 		// TODO Auto-generated method stub
 
@@ -287,15 +302,13 @@ public class DataImpl implements DataInterface {
     	    					 s=s+"CASH";
     	    				 }
     					   s=s+emp.getName()+emp.getSurname()+bev.getName();
-    					   //s=s+t.NumberOfCapsules; remember to do this after defining the attribute NumberOfCapsules
+    					   s=s+t.getNumberOfCapsules(); //remember to do this after defining the attribute NumberOfCapsules
     				   }
     				   else {//the transaction is related to a visitor
-    					   s = s+"VISITOR"+bev.getName();
-    					  // s=s+t.getNumberOfCapsules; i should remenber to add this
+    					   s = s+"VISITOR"+bev.getName()+t.getNumberOfCapsules();
     				   }
     				 
-    				 s=s+emp.getName()+emp.getSurname()+bev.getName();
-    				 //s = s+t.getNumberOfCapsules; remmber to add this at the end
+    				 s=s+emp.getName()+emp.getSurname()+bev.getName()+t.getNumberOfCapsules(); 
     			 }
     			 
     			 if(t.getType() == 'R') {
@@ -305,7 +318,7 @@ public class DataImpl implements DataInterface {
 							//this should never happen,otherwise we did an error creating the transaction
 							System.out.println("unable to get employee data from getReport");
 						}
-    				 s= s+t.getTransactionDate()+"RECHARGE"+emp.getName()+emp.getSurname()+t.getAmount();
+    				 s= s+this.convDate(t.getTransactionDate())+"RECHARGE"+emp.getName()+emp.getSurname()+this.convAmountWithCurrency(t.getAmount());
     			 }
     			 
     			 if(t.getType() == 'P') {
@@ -618,6 +631,20 @@ public class DataImpl implements DataInterface {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+    //This method is mainly usefull to have the right date format.
+	public  String convDate(Date date_init) {
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String newDate = dateFormat.format(date_init);
+		System.out.println("created: " + newDate);
+		return newDate;
+	}
+	
+	public String convAmountWithCurrency(double amount) {
+		DecimalFormat df = new DecimalFormat("#.##");
+		double a = Double.valueOf(df.format(amount));
+		return DecimalFormat.getCurrencyInstance(Locale.GERMANY).format(a);
 	}
 
 }

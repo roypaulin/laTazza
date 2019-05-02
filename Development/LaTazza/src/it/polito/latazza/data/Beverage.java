@@ -8,6 +8,7 @@ import it.polito.latazza.data.DataImpl;
 import it.polito.latazza.data.DataInterface;
 import it.polito.latazza.data.Database;
 import it.polito.latazza.exceptions.BeverageException;
+import it.polito.latazza.exceptions.NotEnoughCapsules;
 
 /**
  * @author elia
@@ -61,9 +62,9 @@ public class Beverage {
 	}
 
     /*The Quantity can be either positive buying capsules or negative selling*/
-	public void updateCapsuleQuantity(int quantity)throws BeverageException {
+	public void updateCapsuleQuantity(int quantity)throws NotEnoughCapsules {
 		if((this.quantityAvailable +quantity)< 0) {
-			throw new BeverageException() ;
+			throw new NotEnoughCapsules() ;
 		}
 		 this.quantityAvailable += quantity ;
 		 return ;

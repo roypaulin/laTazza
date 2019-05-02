@@ -17,9 +17,10 @@ public class Transaction {
 	int beverageID;
 	double amount;
 	boolean fromAccount;
+	int numberOfCapsules;
 	
 	public Transaction(int id, Date transactionDate, char type, int boxQuantity, int employeeID, int beverageID,
-			double amount, boolean fromAccount) {
+			int numberOfCapsules,double amount, boolean fromAccount) {
 		super();
 		this.id = id;
 		this.transactionDate = transactionDate;
@@ -29,6 +30,11 @@ public class Transaction {
 		this.beverageID = beverageID;
 		this.amount = amount;
 		this.fromAccount = fromAccount;
+		this.numberOfCapsules = numberOfCapsules;
+	}
+	
+	public int getNumberOfCapsules() {
+		return numberOfCapsules;
 	}
 
 	public int getId() {

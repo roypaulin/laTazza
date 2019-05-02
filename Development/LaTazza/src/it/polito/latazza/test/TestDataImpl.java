@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.rmi.registry.LocateRegistry;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -21,6 +24,7 @@ import it.polito.latazza.data.Employee;
 import it.polito.latazza.data.Transaction;
 import it.polito.latazza.exceptions.BeverageException;
 import it.polito.latazza.exceptions.EmployeeException;
+import it.polito.latazza.exceptions.NotEnoughBalance;
 
 public class TestDataImpl {
 	/*can be used by other developper, no need to redefine thm again*/
@@ -32,8 +36,13 @@ public class TestDataImpl {
 
 	}
 	
-	public Date getDate(int year,int month,int day) {
-		return new GregorianCalendar(year,month-1,day).getTime();
+	public Date getDate(int year,int month,int day,int hour,int minute,int sec) {
+		LocalDate d = LocalDateTime.of(year, month, day, hour, minute, sec).toLocalDate();
+		Date date = Date.from(d.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		date.setHours(hour);
+		date.setMinutes(minute);
+		date.setSeconds(sec);
+		return date;
 	}
 	
 	@Test
@@ -58,7 +67,6 @@ public class TestDataImpl {
 		
 
 		id = database.addBeverage(new Beverage(-1,10,10.1,50,"do you wanna a Kaffè"));
-		assertEquals(id>=0, true);
 		
 		ArrayList<Beverage> bev = (ArrayList<Beverage>) database.getListOfBeverages();
 		assertNotEquals(null, bev);
@@ -67,7 +75,7 @@ public class TestDataImpl {
 		Beverage bevan = database.getBeverageData(1);
 		assertNotEquals(bevan, null);
 		
-		id = database.registerTransaction(new Transaction(1,getDate(2011, 11, 10),'P',1,1,1, 1.0,true));
+		id = database.registerTransaction(new Transaction(1,getDate(2010, 8, 21, 10, 5, 3),'P',1,1,1,1, 1.0,true));
 		assertEquals(id>=0, true);
 		
 		try {
@@ -79,11 +87,11 @@ public class TestDataImpl {
 		
 		database.updateEmployee(new Employee(1,"Morisio","Maurizio",1.99));
 		
-		List<Transaction> trans = database.getEmployeeReport(1,getDate(2010, 12, 10),getDate(2011, 12, 10));
+		List<Transaction> trans = database.getEmployeeReport(1,getDate(2009, 8, 21, 10, 5, 3),getDate(2011, 8, 21, 10, 5, 3));
 		assertEquals(trans.size()>0, true);
-		assertEquals(trans.get(0).getTransactionDate().toLocaleString(),getDate(2011, 11, 10).toLocaleString());
+		assertEquals(trans.get(0).getTransactionDate().toLocaleString(),getDate(2010, 8, 21, 10, 5, 3).toLocaleString());
 		
-		trans = database.getReport(getDate(2020, 12, 10),getDate(2031, 12, 10));
+		trans = database.getReport(getDate(2011, 8, 21, 10, 5, 3),getDate(2013, 8, 21, 10, 5, 3));
 		assertEquals(trans.size()==0, true);
 		
 		assertNotEquals(null, list);
@@ -203,8 +211,7 @@ public class TestDataImpl {
 		try {
 			boxPrice=dataImpl.getBeverageBoxPrice(-1);
 		}catch(BeverageException be){
-			//i can even omit this asser because the exception is for sure of type BeverageException.
-			//assertEquals(be instanceof BeverageException,true);
+			
 			System.out.println("correctly throws exception for dataImpl.getBeverageBoxPrice(-1) because id is not valid");
 		}
 	}
@@ -257,4 +264,47 @@ public class TestDataImpl {
 		capsulesQuantity = bev.getQuantityAvailable();
 		assertEquals(capsulesQuantity,10);
     }
+    
+    @Test
+    public void testBuyBoxes() throws Exception {
+    	dataImpl.reset();
+    	database.updateBalance(500);
+    	int id;
+		id=dataImpl.createBeverage("coffee",10, 100);
+		dataImpl.buyBoxes(id,3);// so i will spend 3*100cent to buy 3*10 capsules
+		
+		// check laTazza balance have been updated
+		double balance = database.getBalance();
+		assertEquals(balance,500-300);
+		
+		// check the Quantity available for this Beverage have been correctly updated
+		Integer quantityAvailable = database.getBeverageData(id).getQuantityAvailable();
+		assertEquals(quantityAvailable,30);
+		
+		 //check the Transaction have been created: wait untill we define the fianl format for the date.
+		 /**Date date = new Date();
+		  
+		   List<Transaction> transactionList = database.getReport(getDate(date.getYear()-1,date.getMonth(),date.getDay()),getDate(date.getYear(),date.getMonth(),date.getDay()));
+		   assertEquals(1,transactionList.size());**/
+		//now try to buyBoxes for an identifier which is not valid
+		       try{
+		         	dataImpl.buyBoxes(-1,3);
+		       }catch(BeverageException be) {
+		    	System.out.println("correctly throws exception for dataImpl.buyBoxes(-1,3) because id is not valid");
+			   }
+		       
+		 // now consider the case i do not have enough balance so i should thorw notEnoughBalnceException
+		        dataImpl.reset();
+		        database.updateBalance(100);
+		        id=dataImpl.createBeverage("Tea",10, 100);
+		        try {
+				dataImpl.buyBoxes(id,3);// so i will spend 3*100cent to buy 3*10 capsules
+		        }catch(NotEnoughBalance  e) {
+		        	System.out.println("correctly throws exception for dataImpl.buyBoxes(id,3) because there is not enough balance");
+		        }
+	  }
+
+	
 }
+
+
