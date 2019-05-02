@@ -102,6 +102,26 @@ public class DataImpl implements DataInterface {
 	/* @author roy paulin */
 	public void sellCapsulesToVisitor(Integer beverageId, Integer numberOfCapsules)
 			throws BeverageException, NotEnoughCapsules {
+		Beverage be;
+		try {
+			be=database.getBeverageData(beverageId);
+		
+		}catch(Exception e) {
+			throw new BeverageException();
+		}
+		be.updateCapsuleQuantity(-1*numberOfCapsules);
+		try {
+			database.updateBeverage(be);
+			
+		}catch(Exception e) {
+			throw new BeverageException();
+		}
+		Transaction tr=new Transaction(-1,new Date(),'C',-1,-1,beverageId,numberOfCapsules,-1,false);
+		try {
+			database.registerTransaction(tr);
+		}catch(Exception e) {
+			System.out.println("Unable to regsiter the transaction");
+		}
 		// TODO Auto-generated method stub
 		/*Same as before with the only difference that the transaction that will be created will have some 
 		 * attributes set to NULL*/
