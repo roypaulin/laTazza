@@ -64,7 +64,7 @@ public class Beverage {
     /*The Quantity can be either positive buying capsules or negative selling*/
 	public void updateCapsuleQuantity(int quantity)throws NotEnoughCapsules {
 		if((this.quantityAvailable +quantity)< 0) {
-			//throw new NotEnoughCapsules() ;
+			throw new NotEnoughCapsules() ;
 		}
 		 this.quantityAvailable += quantity ;
 		 return ;
