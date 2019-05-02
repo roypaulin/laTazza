@@ -3,6 +3,8 @@
  */
 package it.polito.latazza.data;
 
+import it.polito.latazza.exceptions.EmployeeException;
+
 /**
  * @author pauli
  *
@@ -48,8 +50,11 @@ public class Employee {
 		this.credit=c;
 	}
 
-	public void updateCredit(Integer amountInCents) {
+	public void updateCredit(Integer amountInCents) throws EmployeeException{
 		// TODO Auto-generated method stub
+		if(this.credit+amountInCents<0) {
+			throw new EmployeeException();
+		}
 		this.credit+=amountInCents;
 	}
 	
