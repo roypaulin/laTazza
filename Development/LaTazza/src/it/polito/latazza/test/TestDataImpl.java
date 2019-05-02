@@ -25,6 +25,7 @@ import it.polito.latazza.data.Transaction;
 import it.polito.latazza.exceptions.BeverageException;
 import it.polito.latazza.exceptions.EmployeeException;
 import it.polito.latazza.exceptions.NotEnoughBalance;
+import it.polito.latazza.exceptions.NotEnoughCapsules;
 
 public class TestDataImpl {
 	/*can be used by other developper, no need to redefine thm again*/
@@ -303,7 +304,24 @@ public class TestDataImpl {
 		        	System.out.println("correctly throws exception for dataImpl.buyBoxes(id,3) because there is not enough balance");
 		        }
 	  }
-
+    
+    @Test
+    public void testSellCapsules()
+			throws Exception{
+    	dataImpl.reset();
+      int emp1=dataImpl.createEmployee("john","doe");
+      int emp2=dataImpl.createEmployee("jane","roberts");
+      int bev1=dataImpl.createBeverage("tea", 10, 10);
+      int bev2=dataImpl.createBeverage("lemon", 20, 15);
+      
+  	  database.updateBalance(400);
+      dataImpl.rechargeAccount(emp1, 10);
+      dataImpl.buyBoxes(bev1, 1);
+      dataImpl.sellCapsules(emp1, bev1, 1, true);
+      
+      double balance=database.getBalance();
+      assertEquals(balance,391);
+    }
 	
 }
 

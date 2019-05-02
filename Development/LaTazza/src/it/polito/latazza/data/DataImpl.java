@@ -67,7 +67,8 @@ public class DataImpl implements DataInterface {
 				throw new EmployeeException();
 			}
 			 try {
-			       database.updateBalance(d);
+				 double balance=database.getBalance();
+			       database.updateBalance(balance+d);
 		       } catch (Exception e1) {
 			      // TODO Auto-generated catch block
 		    	   System.out.println("unable to update la tazza balance");
@@ -139,13 +140,20 @@ public class DataImpl implements DataInterface {
 			throw new EmployeeException();
 		}
 		//if()
+		try {
+			database.updateEmployee(emp);
+		}catch(Exception e) {
+			throw new EmployeeException();
+		}
 		Date date = new Date();
 		Transaction tr= new Transaction(-1,date,'R',-1,id,-1,-1,amountInCents, false);
+		
 		try {
 		database.registerTransaction(tr);
 	}catch(Exception e) {
 		System.out.println("Unable to regsiter the transaction");
 	}
+		
 		return Math.round((float)emp.getCredit());
 		/*
 		 * getEmployeeData()
