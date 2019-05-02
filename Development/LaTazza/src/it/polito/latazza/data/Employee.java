@@ -50,12 +50,12 @@ public class Employee {
 		this.credit=c;
 	}
 
-	public void updateCredit(Integer amountInCents) throws EmployeeException{
+	public void updateCredit(double amount) throws EmployeeException{
 		// TODO Auto-generated method stub
-		if(this.credit+amountInCents<0) {
+		if(this.credit+amount<0) {
 			throw new EmployeeException();
 		}
-		this.credit+=amountInCents;
+		this.credit+=amount;
 	}
 	
 	

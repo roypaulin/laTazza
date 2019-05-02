@@ -22,6 +22,7 @@ public class DataImpl implements DataInterface {
      Database database = new Database();
 	@Override
 	/* @author roy paulin */
+	/*is it correct to throw the EmployeeException when the employee balance is not  enough to buy capsules?*/
 	public Integer sellCapsules(Integer employeeId, Integer beverageId, Integer numberOfCapsules, Boolean fromAccount)
 			throws EmployeeException, BeverageException, NotEnoughCapsules {
 		Employee emp;
@@ -38,16 +39,32 @@ public class DataImpl implements DataInterface {
 		}catch(Exception e) {
 			throw new BeverageException();
 		}
-		if(be.getQuantityAvailable()<numberOfCapsules) {
-			throw new NotEnoughCapsules();
+		double d=(numberOfCapsules*(be.getBoxPrice()/be.getCapsulePerBox()));
+		if(fromAccount) {
+			emp.updateCredit(-1.0*d);
+		}
+		be.updateCapsuleQuantity(-1*numberOfCapsules);
+		try {
+			database.updateBeverage(be);
+			
+		}catch(Exception e) {
+			throw new BeverageException();
 		}
 		if(fromAccount) {
-			//if(emp.getCredit()-(numberOfCapsules*(be.boxPrice/be.getCapsulePerBox()))<0) {
-			//	throw new NotEnoughBalance();
-			//}
-			//emp.setCredit();
-			
+			try {
+				database.updateEmployee(emp);
+			}catch(Exception e) {
+				throw new EmployeeException();
+			}
+			 try {
+			       database.updateBalance(d);
+		       } catch (Exception e1) {
+			      // TODO Auto-generated catch block
+		    	   System.out.println("unable to update la tazza balance");
+			    e1.printStackTrace();
+		      }
 		}
+		
 		/*
 		 * getEmployeeData()
 		 * updatecredit() // same as updateBeveragequantity()
@@ -63,7 +80,7 @@ public class DataImpl implements DataInterface {
 		// TODO Auto-generated method stub
 		
 		
-		return 0;
+		return Math.round((float)emp.getCredit());
 	}
 
 	@Override
