@@ -94,8 +94,8 @@ public class DataImpl implements DataInterface {
 				 balance = (float)database.getBalance();
 			 }catch(Exception e){
 				 System.out.println("Unable to get la laTazza balance");
-				throw new NotEnoughBalance();
-				
+				//throw new NotEnoughBalance();
+				//these are specifics errors: is it correct to throw this exception??o or it's better to do nothing
 			 }
 			 //float balance = (float)d.getBalance();
 			 if((balance-amount)< 0) {
@@ -105,7 +105,7 @@ public class DataImpl implements DataInterface {
 			 try {
 					database.updateBeverage(bev);
 			 }catch(Exception e) {
-				 throw new BeverageException();
+				 //throw new BeverageException();
 			 }
 	
             try {
@@ -162,7 +162,7 @@ public class DataImpl implements DataInterface {
 			 s="";
 			 
 			 if(t.getType()=='C') {
-				 s= s+t.getTransactionDate();
+				 s= s+this.convDate(t.getTransactionDate());
 				 try {
 						bev = database.getBeverageData(t.getBeverageID());
 					} catch (Exception e) {
@@ -175,8 +175,7 @@ public class DataImpl implements DataInterface {
 				 else {
 					 s=s+"CASH";
 				 }
-				 s=s+emp.getName()+emp.getSurname()+bev.getName();
-				 s = s+t.getNumberOfCapsules(); //remmber to add this at the end
+				 s=s+emp.getName()+emp.getSurname()+bev.getName()+t.getNumberOfCapsules();
 			 }
 			 else {//the transaction is for sure of type R=recharge
 				 s= s+this.convDate(t.getTransactionDate())+"RECHARGE"+emp.getName()+emp.getSurname()+this.convAmountWithCurrency(t.getAmount());
@@ -225,7 +224,7 @@ public class DataImpl implements DataInterface {
     						System.out.println("unable to get beverage data for id"+t.getBeverageID());
     					}
     				 
-    				 s= s+t.getTransactionDate();
+    				 s= s+this.convDate(t.getTransactionDate());
     				 
     				   if(t.getEmployeeID() != -1) {//this transaction is related to an employee
     					   try {
@@ -240,8 +239,7 @@ public class DataImpl implements DataInterface {
     	    				 else {
     	    					 s=s+"CASH";
     	    				 }
-    					   s=s+emp.getName()+emp.getSurname()+bev.getName();
-    					   s=s+t.getNumberOfCapsules(); //remember to do this after defining the attribute NumberOfCapsules
+    					   s=s+emp.getName()+emp.getSurname()+bev.getName()+t.getNumberOfCapsules();
     				   }
     				   else {//the transaction is related to a visitor
     					   s = s+"VISITOR"+bev.getName()+t.getNumberOfCapsules();
@@ -267,7 +265,7 @@ public class DataImpl implements DataInterface {
  						//if this happens, it's an internal error which means we did not well registered the transaction
  						System.out.println("unable to get beverage data for id"+t.getBeverageID());
  					}
-    				 s=s+t.getTransactionDate()+"BUY"+bev.getName()+t.getBoxQuantity();
+    				 s=s+this.convDate(t.getTransactionDate())+"BUY"+bev.getName()+t.getBoxQuantity();
     				 
     			 }
     			 

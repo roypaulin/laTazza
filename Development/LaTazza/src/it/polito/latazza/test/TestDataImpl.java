@@ -279,21 +279,23 @@ public class TestDataImpl {
 		
 		// check the Quantity available for this Beverage have been correctly updated
 		Integer quantityAvailable = database.getBeverageData(id).getQuantityAvailable();
-		assertEquals(quantityAvailable,30);
+		assertEquals(quantityAvailable,0+30);
 		
-		 //check the Transaction have been created: wait untill we define the fianl format for the date.
-		 /**Date date = new Date();
-		  
-		   List<Transaction> transactionList = database.getReport(getDate(date.getYear()-1,date.getMonth(),date.getDay()),getDate(date.getYear(),date.getMonth(),date.getDay()));
-		   assertEquals(1,transactionList.size());**/
-		//now try to buyBoxes for an identifier which is not valid
+		 //check the Transaction have been created: wait untill we define the final format for the date.
+		 Date date = new Date();
+		   Date date1 = this.getDate(2018, 02, 12, 13,12, 20);
+		   //Date date2 = this.getDate(2018, 02, 12, 13,12, 20);
+		   List<Transaction> transactionList = database.getReport(date,new Date());
+		   //System.out.println("Transaction date "+transactionList.get(0).getTransactionDate());
+		   assertEquals(1,transactionList.size());
+		//now try to buyBoxes for an identifier which is not valid so i should catch a BeverageException
 		       try{
 		         	dataImpl.buyBoxes(-1,3);
 		       }catch(BeverageException be) {
 		    	System.out.println("correctly throws exception for dataImpl.buyBoxes(-1,3) because id is not valid");
 			   }
 		       
-		 // now consider the case i do not have enough balance so i should thorw notEnoughBalnceException
+		 // now consider the case i do not have enough balance so i should throw notEnoughBalnceException
 		        dataImpl.reset();
 		        database.updateBalance(100);
 		        id=dataImpl.createBeverage("Tea",10, 100);
