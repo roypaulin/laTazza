@@ -113,7 +113,9 @@ public class DataImpl implements DataInterface {
 		/*SimpleDateFormat formatter = new SimpleDateFormat("YYYY-MM-dd");  
 		System.out.println(formatter.format(date));*/
 		date = new GregorianCalendar(date.getYear(),date.getMonth()-1,date.getDay()).getTime();
-		Transaction transaction = new Transaction(-1,date,'P',boxQuantity,-1,beverageId,amount,false);
+		// TODO: set correct value to numberOfCapsules 
+		int numberOfCapsules = 1;
+		Transaction transaction = new Transaction(-1,date,'P',boxQuantity,-1,beverageId,numberOfCapsules, amount,false);
 		try {
 		database.registerTransaction(transaction);
 		}catch(Exception e) {

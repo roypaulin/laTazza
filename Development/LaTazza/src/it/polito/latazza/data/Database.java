@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,8 +36,9 @@ public class Database {
 	private void connect() throws Exception {
 		try {
 			if (connection != null) {
-				String msg = "Exception, called connect on a non void connect object";
-				throw new Exception(msg);
+				connection.close();
+				//String msg = "Exception, called connect on a non void connect object";
+				//throw new Exception(msg);
 			}
 				
 			Class.forName("org.sqlite.JDBC");
@@ -239,9 +241,10 @@ public class Database {
 			int beverageID = rs.getInt("beverageID");
 			float amount = rs.getFloat("amount");
 			int fr_account = rs.getInt("fromAccount");
+			int numberOfCapsules = rs.getInt("numberOfCapsules");
 			boolean from_account = fr_account==1;
 			
-			returnList.add(new Transaction(id_m, myDate, type, boxQuantity, employeeID, beverageID, amount, from_account));
+			returnList.add(new Transaction(id_m, myDate, type, boxQuantity, employeeID, beverageID,numberOfCapsules, amount, from_account));
 			
 		}
 		
@@ -276,9 +279,10 @@ public class Database {
 			int beverageID = rs.getInt("beverageID");
 			float amount = rs.getFloat("amount");
 			int fr_account = rs.getInt("fromAccount");
+			int numberOfCapsules = rs.getInt("numberOfCapsules");
 			boolean from_account = fr_account==1;
 			
-			returnList.add(new Transaction(id_m, myDate, type, boxQuantity, employeeID, beverageID, amount, from_account));
+			returnList.add(new Transaction(id_m, myDate, type, boxQuantity, employeeID, beverageID,numberOfCapsules, amount, from_account));
 			
 		}
 		
@@ -290,21 +294,18 @@ public class Database {
 		return returnList;
 	}
 	
-	private Date parseDate(String datePassed) throws ParseException {
+	public static Date parseDate(String datePassed) throws ParseException {
 		System.out.println("converting: " + datePassed);
-		String[] parts = datePassed.split("-");
 		
-		System.out.println("Date is "+ Integer.valueOf(parts[0]) + " " + (Integer.valueOf(parts[1])) + " " + Integer.valueOf(parts[2]));
+		java.util.Date temp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
+                .parse(datePassed);
 		
-		return new GregorianCalendar(Integer.valueOf(parts[0]),Integer.valueOf(parts[1])-1,Integer.valueOf(parts[2])).getTime();
-		
-		//return new Date(Integer.valueOf(parts[2]), Integer.valueOf(parts[1]), Integer.valueOf(parts[0]));
-		
-		//return new SimpleDateFormat("YYYY-MM-dd", Locale.ENGLISH).parse(datePassed);
+		return temp;	
 	}
 	
-	private String convDate(Date date_init) {
-		String newDate = new SimpleDateFormat("yyyy-MM-dd").format(date_init);
+	public static String convDate(Date date_init) {
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		String newDate = dateFormat.format(date_init);
 		System.out.println("created: " + newDate);
 		return newDate;
 	}
@@ -315,7 +316,7 @@ public class Database {
 		
 		int last_inserted_id = -1;
 		
-		String sql = "INSERT INTO Transactions VALUES (NULL,?,?,?,?,?,?,?);";
+		String sql = "INSERT INTO Transactions VALUES (NULL,?,?,?,?,?,?,?,?);";
 		
 		PreparedStatement prep = connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
 		prep.setString(1, convDate(transaction.getTransactionDate()));
@@ -323,8 +324,9 @@ public class Database {
 		prep.setInt(3, transaction.getBoxQuantity());
 		prep.setInt(4, transaction.getEmployeeID());
 		prep.setInt(5, transaction.getBeverageID());
-		prep.setDouble(6, transaction.getAmount());
-		prep.setBoolean(7, transaction.isFromAccount());
+		prep.setDouble(6, transaction.getNumberOfCapsules());
+		prep.setDouble(7, transaction.getAmount());
+		prep.setBoolean(8, transaction.isFromAccount());
 		
 		
 		prep.executeUpdate();
@@ -404,11 +406,12 @@ public class Database {
 		// TODO Auto-generated method stub
 		String sql_create_1 = "CREATE TABLE IF NOT EXISTS `Transactions` (\n" + 
 				"	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n" + 
-				"	`transactionDate`	TEXT NOT NULL CHECK(date ( transactionDate ) IS NOT NULL),\n" + 
+				"	`transactionDate`	TEXT NOT NULL ,\n" + // CHECK(date ( transactionDate ) IS NOT NULL),\n" + 
 				"	`type`	CHAR NOT NULL CHECK(type = 'R' OR type = 'C' OR type = 'P'),\n" + 
 				"	`boxQuantity`	INTEGER NOT NULL,\n" + 
 				"	`employeeID`	INTEGER NOT NULL,\n" + 
 				"	`beverageID`	INTEGER NOT NULL,\n" + 
+				"	`numberOfCapsules`	INTEGER NOT NULL," +
 				"	`amount`	REAL NOT NULL,\n" + 
 				"	`fromAccount`	NUMERIC NOT NULL CHECK(fromAccount = 0 OR fromAccount = 1)\n" + 
 				");";
