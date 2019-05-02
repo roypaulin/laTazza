@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import org.junit.platform.commons.util.StringUtils;
+
 import it.polito.latazza.exceptions.BeverageException;
 import it.polito.latazza.exceptions.DateException;
 import it.polito.latazza.exceptions.EmployeeException;
@@ -136,7 +138,7 @@ public class DataImpl implements DataInterface {
 		/*getEmployeeReport() //which returns a list of transactions to be formated
 		 */
 		
-		if(startDate.compareTo(endDate) < 0) {
+		if(startDate.compareTo(endDate) > 0) {
 			throw new DateException();
 		}
 		List<Transaction> transactionList = new ArrayList<>();
@@ -162,7 +164,7 @@ public class DataImpl implements DataInterface {
 			 s="";
 			 
 			 if(t.getType()=='C') {
-				 s= s+this.convDate(t.getTransactionDate());
+				 s=this.convDate(t.getTransactionDate());
 				 try {
 						bev = database.getBeverageData(t.getBeverageID());
 					} catch (Exception e) {
@@ -170,15 +172,15 @@ public class DataImpl implements DataInterface {
 						System.out.println("unable to get beverage data for id"+t.getBeverageID());
 					}
 				 if(t.isFromAccount()==true) {
-					 s= s+"BALANCE";
+					 s= s+" BALANCE";
 				 }
 				 else {
-					 s=s+"CASH";
+					 s=s+" CASH";
 				 }
-				 s=s+emp.getName()+emp.getSurname()+bev.getName()+t.getNumberOfCapsules();
+				 s=s+" "+emp.getName()+" "+emp.getSurname()+" "+bev.getName()+" "+t.getNumberOfCapsules();
 			 }
 			 else {//the transaction is for sure of type R=recharge
-				 s= s+this.convDate(t.getTransactionDate())+"RECHARGE"+emp.getName()+emp.getSurname()+this.convAmountWithCurrency(t.getAmount());
+				 s=this.convDate(t.getTransactionDate())+" RECHARGE"+" "+emp.getName()+" "+emp.getSurname()+" "+this.convAmountWithCurrency(t.getAmount());
 			 }
 			returnList.add(s);
 		}
@@ -194,7 +196,7 @@ public class DataImpl implements DataInterface {
 
 		/*getReport() //which returns a list of transactions to be formated
 		 */
-		if(startDate.compareTo(endDate) < 0) {
+		if(startDate.compareTo(endDate) > 0) {
 			throw new DateException();
 		}
 		List<Transaction> transactionList = new ArrayList<>();
@@ -213,8 +215,8 @@ public class DataImpl implements DataInterface {
        
     // i now build the returnList
     		for(Transaction t : transactionList) {
-    			 s="";
-    			 
+    			 s=new String();
+    			 //s.replaceAll(" ","");
     			 if(t.getType()=='C') {
     				 //get the beverage object
     				 try {
@@ -224,8 +226,7 @@ public class DataImpl implements DataInterface {
     						System.out.println("unable to get beverage data for id"+t.getBeverageID());
     					}
     				 
-    				 s= s+this.convDate(t.getTransactionDate());
-    				 
+    				 s= this.convDate(t.getTransactionDate());
     				   if(t.getEmployeeID() != -1) {//this transaction is related to an employee
     					   try {
     							emp= database.getEmployeeData(t.getEmployeeID());
@@ -234,18 +235,18 @@ public class DataImpl implements DataInterface {
     							System.out.println("unable to get employee data from getReport");
     						}
     					   if(t.isFromAccount()==true) {
-    	    					 s= s+"BALANCE";
+    	    					 s= s+" BALANCE";
     	    				 }
     	    				 else {
-    	    					 s=s+"CASH";
+    	    					 s=s+" CASH";
     	    				 }
-    					   s=s+emp.getName()+emp.getSurname()+bev.getName()+t.getNumberOfCapsules();
+    					   s=s+" "+emp.getName()+" "+emp.getSurname()+" "+bev.getName()+" "+t.getNumberOfCapsules();
     				   }
     				   else {//the transaction is related to a visitor
-    					   s = s+"VISITOR"+bev.getName()+t.getNumberOfCapsules();
+    					   s = s+" VISITOR"+" "+bev.getName()+" "+t.getNumberOfCapsules();
     				   }
     				 
-    				 s=s+emp.getName()+emp.getSurname()+bev.getName()+t.getNumberOfCapsules(); 
+    				 s=s+" "+emp.getName()+" "+emp.getSurname()+" "+bev.getName()+" "+t.getNumberOfCapsules(); 
     			 }
     			 
     			 if(t.getType() == 'R') {
@@ -255,7 +256,7 @@ public class DataImpl implements DataInterface {
 							//this should never happen,otherwise we did an error creating the transaction
 							System.out.println("unable to get employee data from getReport");
 						}
-    				 s= s+this.convDate(t.getTransactionDate())+"RECHARGE"+emp.getName()+emp.getSurname()+this.convAmountWithCurrency(t.getAmount());
+    				 s= this.convDate(t.getTransactionDate())+" RECHARGE"+" "+emp.getName()+" "+emp.getSurname()+" "+this.convAmountWithCurrency(t.getAmount());
     			 }
     			 
     			 if(t.getType() == 'P') {
@@ -265,7 +266,7 @@ public class DataImpl implements DataInterface {
  						//if this happens, it's an internal error which means we did not well registered the transaction
  						System.out.println("unable to get beverage data for id"+t.getBeverageID());
  					}
-    				 s=s+this.convDate(t.getTransactionDate())+"BUY"+bev.getName()+t.getBoxQuantity();
+    				 s=this.convDate(t.getTransactionDate())+" BUY"+" "+bev.getName()+" "+t.getBoxQuantity();
     				 
     			 }
     			 

@@ -23,6 +23,7 @@ import it.polito.latazza.data.Database;
 import it.polito.latazza.data.Employee;
 import it.polito.latazza.data.Transaction;
 import it.polito.latazza.exceptions.BeverageException;
+import it.polito.latazza.exceptions.DateException;
 import it.polito.latazza.exceptions.EmployeeException;
 import it.polito.latazza.exceptions.NotEnoughBalance;
 
@@ -195,7 +196,7 @@ public class TestDataImpl {
 			capsulesPerBox=dataImpl.getBeverageCapsulesPerBox(-1);
 		}catch(BeverageException be){
 			//assertEquals(be instanceof BeverageException,true);
-			System.out.println("correctly throws exception for dataImpl.getBeverageCapsulesPerBox(-1) because id is not valid");
+			System.out.println("correctly throws BeverageException for dataImpl.getBeverageCapsulesPerBox(-1) because id is not valid");
 		}
 	}
 	
@@ -212,7 +213,7 @@ public class TestDataImpl {
 			boxPrice=dataImpl.getBeverageBoxPrice(-1);
 		}catch(BeverageException be){
 			
-			System.out.println("correctly throws exception for dataImpl.getBeverageBoxPrice(-1) because id is not valid");
+			System.out.println("correctly throws BeverageException for dataImpl.getBeverageBoxPrice(-1) because id is not valid");
 		}
 	}
 	
@@ -283,7 +284,7 @@ public class TestDataImpl {
 		
 		 //check the Transaction have been created: wait untill we define the final format for the date.
 		 Date date = new Date();
-		   Date date1 = this.getDate(2018, 02, 12, 13,12, 20);
+		   //Date date1 = this.getDate(2018, 02, 12, 13,12, 20);
 		   //Date date2 = this.getDate(2018, 02, 12, 13,12, 20);
 		   List<Transaction> transactionList = database.getReport(date,new Date());
 		   //System.out.println("Transaction date "+transactionList.get(0).getTransactionDate());
@@ -292,7 +293,7 @@ public class TestDataImpl {
 		       try{
 		         	dataImpl.buyBoxes(-1,3);
 		       }catch(BeverageException be) {
-		    	System.out.println("correctly throws exception for dataImpl.buyBoxes(-1,3) because id is not valid");
+		    	System.out.println("correctly throws BeverageException for dataImpl.buyBoxes(-1,3) because id is not valid");
 			   }
 		       
 		 // now consider the case i do not have enough balance so i should throw notEnoughBalnceException
@@ -302,9 +303,41 @@ public class TestDataImpl {
 		        try {
 				dataImpl.buyBoxes(id,3);// so i will spend 3*100cent to buy 3*10 capsules
 		        }catch(NotEnoughBalance  e) {
-		        	System.out.println("correctly throws exception for dataImpl.buyBoxes(id,3) because there is not enough balance");
+		        	System.out.println("correctly throws NotEnoughBalancException for dataImpl.buyBoxes(id,3) because there is not enough balance");
 		        }
-	  }
+	    }
+    
+    @Test
+    public void TestGetReport() throws Exception {
+    	dataImpl.reset();
+    	Date date = new Date();
+    	database.updateBalance(500);
+    	int id,id1;
+		id=dataImpl.createBeverage("coffee",10, 100);
+		id1=dataImpl.createBeverage("Tea",10,100);
+		dataImpl.buyBoxes(id,2);// so i will spend 2*100cent to buy 2*10 capsules
+		dataImpl.buyBoxes(id1,1);
+    	List<String> returnReport = new ArrayList<>();
+    	List<String> excpectedReport = new ArrayList<>();
+    	List<Transaction> transactionList = database.getReport(date, new Date());
+    	
+    	//This will create 2 Transactions of Type Recharge ad should check to the return list
+    	String s= dataImpl.convDate(transactionList.get(0).getTransactionDate())+" BUY"+" coffee"+" 2";
+        excpectedReport.add(s);
+         s= dataImpl.convDate(transactionList.get(1).getTransactionDate())+" BUY"+" Tea"+" 1";
+        excpectedReport.add(s);
+    	returnReport = dataImpl.getReport(date, new Date());
+    	System.out.println("returnreport "+returnReport+"  excpected report"+excpectedReport);
+    	assertEquals(excpectedReport,returnReport);
+    	
+    	//pass wrong dates so i should catch an exception: startDate > endDate
+    	
+    	try {
+    		dataImpl.getReport(new Date(), date);
+    	}catch(DateException de) {
+    		System.out.println("correctly throws dateException for dataImpl.getReport(new Date(),date) because startDate> endDate");
+    	}
+    }
 
 	
 }
