@@ -9,6 +9,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -130,17 +132,17 @@ public class TestDataImpl {
 	    	
 	    }catch(Exception e) {
 	    	
-	    	System.out.println("correctly throws exception for dataImpl.updateBeverage(-1, bev.getName(),10,100) because id is not valid");
+	    	System.out.println("correctly throws Exception for dataImpl.updateBeverage(-1, bev.getName(),10,100) because id is not valid");
 	    }
 	    
 	    //the price and CapsulesPerBox are negative so i should catch a BeverageException
         
 	    try {
-	    	//database.updateBeverage(bev);
+	    
 	    	dataImpl.updateBeverage(id, bev.getName(),-10,-2);
 	    	
 	    }catch(Exception e) {
-	    	System.out.println("correctly throws exception for dataImpl.updateBeverage(id, bev.getName(),-10,-2) because boxPrice and price are <0");
+	    	System.out.println("correctly throws Exception for dataImpl.updateBeverage(id, bev.getName(),-10,-2) because boxPrice and price are <0");
 	    	//assertEquals(e instanceof BeverageException,true); //
 	    }
 	}
@@ -178,7 +180,7 @@ public class TestDataImpl {
 		try {
 			bevName=dataImpl.getBeverageName(-1);
 		}catch(BeverageException be){
-			System.out.println("correctly throws exception for dataImpl.getBeverageName(-1) because id is not valid");
+			System.out.println("correctly throws BeverageException for dataImpl.getBeverageName(-1) because id is not valid");
 		}
 	}
 	
@@ -311,21 +313,40 @@ public class TestDataImpl {
     public void TestGetReport() throws Exception {
     	dataImpl.reset();
     	Date date = new Date();
-    	database.updateBalance(500);
-    	int id,id1;
-		id=dataImpl.createBeverage("coffee",10, 100);
-		id1=dataImpl.createBeverage("Tea",10,100);
-		dataImpl.buyBoxes(id,2);// so i will spend 2*100cent to buy 2*10 capsules
-		dataImpl.buyBoxes(id1,1);
     	List<String> returnReport = new ArrayList<>();
     	List<String> excpectedReport = new ArrayList<>();
-    	List<Transaction> transactionList = database.getReport(date, new Date());
+    	List<Transaction> transactionList;
+    	String s;
+    	int id,empId;
+    	database.updateBalance(500);
+    	empId= dataImpl.createEmployee("ndjekoua", "sandjo");
+    	id=dataImpl.createBeverage("coffee",10, 100);
     	
-    	//This will create 2 Transactions of Type Recharge ad should check to the return list
-    	String s= dataImpl.convDate(transactionList.get(0).getTransactionDate())+" BUY"+" coffee"+" 2";
+    	//i make 5 transactions
+    	dataImpl.buyBoxes(id,2);// so i will spend 2*100cent to buy 2*10 capsules; Transaction of TYPE= P
+    	dataImpl.rechargeAccount(empId,500);// this should create a transaction of TYPE=R
+		dataImpl.sellCapsules(empId,id,10,true);//TransactionType=C fromAccount=yes
+		dataImpl.sellCapsules(empId,id,10,false);//TransactionType=C fromAccount=flase
+		dataImpl.sellCapsules(-1,id,10,false);//TransactionType=C TO VISITOR
+    	
+		//get all the 5 transactions from DB
+    	transactionList = database.getReport(date, new Date());
+    	//assertEquals(transactionList.size(),5); // to be uncommented after pasty has defined useful methods
+    	Collections.sort(transactionList, new sortById());//i order to  be sure that strings are as i expect
+    	
+    	//build now the excpected list of strings
+    	s=dataImpl.convDate(transactionList.get(0).getTransactionDate())+" BUY"+" coffee"+" 2";
         excpectedReport.add(s);
-         s= dataImpl.convDate(transactionList.get(1).getTransactionDate())+" BUY"+" Tea"+" 1";
+       /* s=dataImpl.convDate(transactionList.get(1).getTransactionDate())+" RECHARGE"+" ndjekoua"+" sandjo"+" "+dataImpl.convAmountWithCurrency(500);
         excpectedReport.add(s);
+        s=dataImpl.convDate(transactionList.get(2).getTransactionDate())+" BALANCE"+" ndjekoua"+" sandjo"+" coffee"+" "+10;
+        excpectedReport.add(s);
+        s=dataImpl.convDate(transactionList.get(3).getTransactionDate())+" CASH"+" ndjekoua"+" sandjo"+" coffee"+" "+10;
+        excpectedReport.add(s);
+        s=dataImpl.convDate(transactionList.get(4).getTransactionDate())+" VISITOR"+" coffee"+" "+10;
+        excpectedReport.add(s);*///will be uncommented when pasty will terminate methods like RechargeAccoun, sellCapsules, ect....
+        /* s= dataImpl.convDate(transactionList.get(1).getTransactionDate())+" BUY"+" Tea"+" 1";
+        excpectedReport.add(s);*/
     	returnReport = dataImpl.getReport(date, new Date());
     	System.out.println("returnreport "+returnReport+"  excpected report"+excpectedReport);
     	assertEquals(excpectedReport,returnReport);
@@ -339,7 +360,15 @@ public class TestDataImpl {
     	}
     }
 
-	
+	private class sortById implements Comparator<Transaction>{
+
+		@Override
+		public int compare(Transaction t1, Transaction t2) {
+			// TODO Auto-generated method stub
+			return t1.getId() -t2.getId();
+		}
+		
+	}
 }
 
 

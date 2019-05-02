@@ -69,8 +69,4 @@ public class Beverage {
 		 this.quantityAvailable += quantity ;
 		 return ;
 	}
-
-	
-	
-
 }
