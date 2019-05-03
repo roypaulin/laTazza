@@ -164,7 +164,7 @@ public class DataImpl implements DataInterface {
 		 * */
 	}
 
-	@SuppressWarnings("deprecation")
+	
 	@Override
 	/* @author jean thibaut 
 	 * 	@TODO AFTER @elia MODIFY THE DATE FORMAT, I SHOULD UPDATE THE DATE OF THE TRANSACTION CREATION : DONE
@@ -340,7 +340,7 @@ public class DataImpl implements DataInterface {
     					   s = s+" VISITOR"+" "+bev.getName()+" "+t.getNumberOfCapsules();
     				   }
     				 
-    				 s=s+" "+emp.getName()+" "+emp.getSurname()+" "+bev.getName()+" "+t.getNumberOfCapsules(); 
+    				 //s=s+" "+emp.getName()+" "+emp.getSurname()+" "+bev.getName()+" "+t.getNumberOfCapsules(); 
     			 }
     			 
     			 if(t.getType() == 'R') {
