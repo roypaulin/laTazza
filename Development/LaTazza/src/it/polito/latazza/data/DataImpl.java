@@ -669,7 +669,7 @@ public class DataImpl implements DataInterface {
 	public  String convDate(Date date_init) {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String newDate = dateFormat.format(date_init);
-		System.out.println("created: " + newDate);
+		//System.out.println("created: " + newDate);
 		return newDate;
 	}
 	
