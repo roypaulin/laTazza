@@ -451,6 +451,22 @@ public class TestDataImpl {
 	}
     
     @Test
+	public void testUpdateEmployee() throws Exception {
+		dataImpl.reset();
+		int id =-1;
+		id=dataImpl.createEmployee("john","doe");
+	    
+	  
+	    dataImpl.updateEmployee(id, "jane", "mary");
+	    
+	    //check if the object has been updated
+	    Employee emp = database.getEmployeeData(id);
+	    assertEquals("jane",emp.getName());
+	    assertEquals("mary",emp.getSurname());
+	    
+	   
+	}
+    @Test
     public void TestGetReport() throws Exception {
     	dataImpl.reset();
     	Date date = new Date();
