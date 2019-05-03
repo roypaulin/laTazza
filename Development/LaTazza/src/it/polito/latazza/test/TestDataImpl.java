@@ -342,7 +342,7 @@ public class TestDataImpl {
       assertEquals(d,10-1);
       
       //check that a transaction has been created for the employee
-      List<Transaction> transactionList=database.getReport(date, new Date());
+      List<Transaction> transactionList=database.getReport(shiftDate(-1), shiftDate(1));
       assertEquals(transactionList.size(),3);
       
       //dataImpl.rechargeAccount(emp2, 20);
@@ -388,7 +388,7 @@ public class TestDataImpl {
     @Test
      public void testsellCapsulesToVisitor() throws Exception {
     	dataImpl.reset();
-    	Date date=new Date();
+    	
     	int bev1=dataImpl.createBeverage("tea", 20, 40);
     	database.updateBalance(100);
     	dataImpl.buyBoxes(bev1, 2);
@@ -402,7 +402,7 @@ public class TestDataImpl {
     	assertEquals(database.getBalance(),100-80);
     	
     	//check transactions have been created
-    	 List<Transaction> transactionList=database.getReport(date, new Date());
+    	 List<Transaction> transactionList=database.getReport(shiftDate(-1), shiftDate(1));
          assertEquals(transactionList.size(),2);
          
          //try to sell capsules whose available quantity is not enough
@@ -418,7 +418,6 @@ public class TestDataImpl {
     @Test
     public void testRechargeAccount() throws Exception{
     	dataImpl.reset();
-    	Date date=new Date();
     	int emp1=dataImpl.createEmployee("john","doe");
     	
     	int credit=dataImpl.rechargeAccount(emp1, 10);
@@ -428,7 +427,7 @@ public class TestDataImpl {
     	assertEquals(emp.getCredit(),10);
     	assertEquals(credit,10);
     	//check that transactions hav been created 
-        List<Transaction> transactionList=database.getReport(date, new Date());
+        List<Transaction> transactionList=database.getReport(shiftDate(-1), shiftDate(1));
         assertEquals(transactionList.size(),1);
         
         //try recharge account with an invalid employee Id
