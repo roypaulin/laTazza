@@ -295,7 +295,7 @@ public class Database {
 	}
 	
 	public static Date parseDate(String datePassed) throws ParseException {
-		System.out.println("converting: " + datePassed);
+		//System.out.println("converting: " + datePassed);
 		
 		java.util.Date temp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
                 .parse(datePassed);
@@ -306,7 +306,7 @@ public class Database {
 	public static String convDate(Date date_init) {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		String newDate = dateFormat.format(date_init);
-		System.out.println("created: " + newDate);
+		//System.out.println("created: " + newDate);
 		return newDate;
 	}
 
