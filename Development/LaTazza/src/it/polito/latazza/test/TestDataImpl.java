@@ -382,6 +382,35 @@ public class TestDataImpl {
     	  System.out.println("correctly throws exception because there in not enough capsules for this beverage");
       }
     }
+    
+    @Test
+     public void testsellCapsulesToVisitor() throws Exception {
+    	dataImpl.reset();
+    	int bev1=dataImpl.createBeverage("tea", 20, 40);
+    	database.updateBalance(100);
+    	dataImpl.buyBoxes(bev1, 2);
+    	dataImpl.sellCapsulesToVisitor(bev1, 2);
+    	
+    	//check available quantity
+    	Beverage bev=database.getBeverageData(bev1);
+    	assertEquals(bev.getQuantityAvailable(),38);
+    	
+    	// check the LaTazza Account
+    	assertEquals(database.getBalance(),100-80);
+    	
+    	//check transactions have been created
+    	 List<Transaction> transactionList=database.getReport(new Date(), new Date());
+         assertEquals(transactionList.size(),2);
+         
+         //try to sell capsules whose available quantity is not enough
+         
+         try {
+       	  dataImpl.sellCapsulesToVisitor(bev1, 40);
+         }catch(NotEnoughCapsules e) {
+       	  System.out.println("correctly throws exception because there in not enough capsules for this beverage");
+         }
+    	
+    }
 	
     @Test
     public void testRechargeAccount() throws Exception{
@@ -408,7 +437,35 @@ public class TestDataImpl {
     	
     }
 	    
+    @Test
+	public void testCreateEmployee() throws Exception{
+		dataImpl.reset();
+		int id=-1;
+		id=dataImpl.createEmployee("john", "doe");
+		assertNotEquals(id,-1);
+		Employee emp = database.getEmployeeData(id);
+		assertEquals("john",emp.getName());
+		assertEquals("doe",emp.getSurname());
+		assertEquals(0,emp.getCredit());
+		
+	}
     
+    @Test
+	public void testUpdateEmployee() throws Exception {
+		dataImpl.reset();
+		int id =-1;
+		id=dataImpl.createEmployee("john","doe");
+	    
+	  
+	    dataImpl.updateEmployee(id, "jane", "mary");
+	    
+	    //check if the object has been updated
+	    Employee emp = database.getEmployeeData(id);
+	    assertEquals("jane",emp.getName());
+	    assertEquals("mary",emp.getSurname());
+	    
+	   
+	}
     @Test
     public void TestGetReport() throws Exception {
     	dataImpl.reset();
