@@ -285,7 +285,7 @@ public class TestDataImpl {
 		Integer quantityAvailable = database.getBeverageData(id).getQuantityAvailable();
 		assertEquals(quantityAvailable,0+30);
 		
-		 //check the Transaction have been created: wait untill we define the final format for the date.
+		 //check the Transaction has been created: wait untill we define the final format for the date.
 		 Date date = new Date();
 		   //Date date1 = this.getDate(2018, 02, 12, 13,12, 20);
 		   //Date date2 = this.getDate(2018, 02, 12, 13,12, 20);
@@ -506,30 +506,28 @@ public class TestDataImpl {
     	id=dataImpl.createBeverage("coffee",10, 100);
     	
     	//i make 5 transactions
-    	dataImpl.buyBoxes(id,2);// so i will spend 2*100cent to buy 2*10 capsules; Transaction of TYPE= P
+    	dataImpl.buyBoxes(id,3);// so i will spend 2*100cent to buy 2*10 capsules; Transaction of TYPE= P
     	dataImpl.rechargeAccount(empId,500);// this should create a transaction of TYPE=R
 		dataImpl.sellCapsules(empId,id,10,true);//TransactionType=C fromAccount=yes
 		dataImpl.sellCapsules(empId,id,10,false);//TransactionType=C fromAccount=flase
-		dataImpl.sellCapsules(-1,id,10,false);//TransactionType=C TO VISITOR
+		dataImpl.sellCapsulesToVisitor(id,10);//TransactionType=C TO VISITOR
     	
 		//get all the 5 transactions from DB
     	transactionList = database.getReport(date, new Date());
-    	//assertEquals(transactionList.size(),5); // to be uncommented after pasty has defined useful methods
-    	Collections.sort(transactionList, new sortById());//i order to  be sure that strings are as i expect
+    	assertEquals(transactionList.size(),5); // to be uncommented after pasty has defined useful methods
+    	Collections.sort(transactionList, new sortById());//i order to  be sure that strings are as i expect in order to build expected list
     	
     	//build now the excpected list of strings
-    	s=dataImpl.convDate(transactionList.get(0).getTransactionDate())+" BUY"+" coffee"+" 2";
+    	s=dataImpl.convDate(transactionList.get(0).getTransactionDate())+" BUY"+" coffee"+" 3";
         excpectedReport.add(s);
-       /* s=dataImpl.convDate(transactionList.get(1).getTransactionDate())+" RECHARGE"+" ndjekoua"+" sandjo"+" "+dataImpl.convAmountWithCurrency(500);
+        s=dataImpl.convDate(transactionList.get(1).getTransactionDate())+" RECHARGE"+" ndjekoua"+" sandjo"+" "+dataImpl.convAmountWithCurrency(500);
         excpectedReport.add(s);
         s=dataImpl.convDate(transactionList.get(2).getTransactionDate())+" BALANCE"+" ndjekoua"+" sandjo"+" coffee"+" "+10;
         excpectedReport.add(s);
         s=dataImpl.convDate(transactionList.get(3).getTransactionDate())+" CASH"+" ndjekoua"+" sandjo"+" coffee"+" "+10;
         excpectedReport.add(s);
         s=dataImpl.convDate(transactionList.get(4).getTransactionDate())+" VISITOR"+" coffee"+" "+10;
-        excpectedReport.add(s);*///will be uncommented when pasty will terminate methods like RechargeAccoun, sellCapsules, ect....
-        /* s= dataImpl.convDate(transactionList.get(1).getTransactionDate())+" BUY"+" Tea"+" 1";
-        excpectedReport.add(s);*/
+        excpectedReport.add(s);//will be uncommented when pasty will terminate methods like RechargeAccoun, sellCapsules, ect....
     	returnReport = dataImpl.getReport(date, new Date());
     	System.out.println("returnreport "+returnReport+"  excpected report"+excpectedReport);
     	assertEquals(excpectedReport,returnReport);
@@ -542,6 +540,54 @@ public class TestDataImpl {
     		System.out.println("correctly throws dateException for dataImpl.getReport(new Date(),date) because startDate> endDate");
     	}
     }
+    
+    @Test
+    public void TestGetReportEmployee() throws Exception {
+    	dataImpl.reset();
+    	Date date = new Date();
+    	List<String> returnReport = new ArrayList<>();
+    	List<String> excpectedReport = new ArrayList<>();
+    	List<Transaction> transactionList;
+    	String s;
+    	int id,empId;
+    	database.updateBalance(500);
+    	empId= dataImpl.createEmployee("ndjekoua", "sandjo");
+    	id=dataImpl.createBeverage("coffee",10, 100);
+    	
+    	//i make 5 transactions
+    	dataImpl.buyBoxes(id,3);// so i will spend 2*100cent to buy 2*10 capsules; Transaction of TYPE= P
+    	dataImpl.rechargeAccount(empId,500);// this should create a transaction of TYPE=R
+		dataImpl.sellCapsules(empId,id,10,true);//TransactionType=C fromAccount=yes
+		dataImpl.sellCapsules(empId,id,10,false);//TransactionType=C fromAccount=flase
+		dataImpl.sellCapsulesToVisitor(id,10);//TransactionType=C TO VISITOR
+    	
+		//get all the 5 transactions from DB
+    	transactionList = database.getEmployeeReport(empId, date, new Date()); 
+    	assertEquals(transactionList.size(),3); // to be uncommented after pasty has defined useful methods
+    	Collections.sort(transactionList, new sortById());//i order to  be sure that strings are as i expect in order to build expected list
+    	
+    	//build now the excpected list of strings
+    	
+        s=dataImpl.convDate(transactionList.get(0).getTransactionDate())+" RECHARGE"+" ndjekoua"+" sandjo"+" "+dataImpl.convAmountWithCurrency(500);
+        excpectedReport.add(s);
+        s=dataImpl.convDate(transactionList.get(1).getTransactionDate())+" BALANCE"+" ndjekoua"+" sandjo"+" coffee"+" "+10;
+        excpectedReport.add(s);
+        s=dataImpl.convDate(transactionList.get(2).getTransactionDate())+" CASH"+" ndjekoua"+" sandjo"+" coffee"+" "+10;
+        excpectedReport.add(s);
+    
+    	returnReport = dataImpl.getEmployeeReport(empId,date,new Date());
+    	System.out.println("returnreport "+returnReport+"  excpected report"+excpectedReport);
+    	assertEquals(excpectedReport,returnReport);
+    	
+    	//pass wrong dates so i should catch an exception: startDate > endDate
+    	
+    	try {
+    		dataImpl.getReport(new Date(), date);
+    	}catch(DateException de) {
+    		System.out.println("correctly throws dateException for dataImpl.getReport(new Date(),date) because startDate> endDate");
+    	}
+    }
+
 
 	private class sortById implements Comparator<Transaction>{
 
