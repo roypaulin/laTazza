@@ -437,6 +437,18 @@ public class TestDataImpl {
     	
     }
 	    
+    @Test
+	public void testCreateEmployee() throws Exception{
+		dataImpl.reset();
+		int id=-1;
+		id=dataImpl.createEmployee("john", "doe");
+		assertNotEquals(id,-1);
+		Employee emp = database.getEmployeeData(id);
+		assertEquals("john",emp.getName());
+		assertEquals("doe",emp.getSurname());
+		assertEquals(0,emp.getCredit());
+		
+	}
     
     @Test
     public void TestGetReport() throws Exception {
