@@ -9,6 +9,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -23,6 +25,7 @@ import it.polito.latazza.data.Database;
 import it.polito.latazza.data.Employee;
 import it.polito.latazza.data.Transaction;
 import it.polito.latazza.exceptions.BeverageException;
+import it.polito.latazza.exceptions.DateException;
 import it.polito.latazza.exceptions.EmployeeException;
 import it.polito.latazza.exceptions.NotEnoughBalance;
 import it.polito.latazza.exceptions.NotEnoughCapsules;
@@ -130,17 +133,17 @@ public class TestDataImpl {
 	    	
 	    }catch(Exception e) {
 	    	
-	    	System.out.println("correctly throws exception for dataImpl.updateBeverage(-1, bev.getName(),10,100) because id is not valid");
+	    	System.out.println("correctly throws Exception for dataImpl.updateBeverage(-1, bev.getName(),10,100) because id is not valid");
 	    }
 	    
 	    //the price and CapsulesPerBox are negative so i should catch a BeverageException
         
 	    try {
-	    	//database.updateBeverage(bev);
+	    
 	    	dataImpl.updateBeverage(id, bev.getName(),-10,-2);
 	    	
 	    }catch(Exception e) {
-	    	System.out.println("correctly throws exception for dataImpl.updateBeverage(id, bev.getName(),-10,-2) because boxPrice and price are <0");
+	    	System.out.println("correctly throws Exception for dataImpl.updateBeverage(id, bev.getName(),-10,-2) because boxPrice and price are <0");
 	    	//assertEquals(e instanceof BeverageException,true); //
 	    }
 	}
@@ -178,7 +181,7 @@ public class TestDataImpl {
 		try {
 			bevName=dataImpl.getBeverageName(-1);
 		}catch(BeverageException be){
-			System.out.println("correctly throws exception for dataImpl.getBeverageName(-1) because id is not valid");
+			System.out.println("correctly throws BeverageException for dataImpl.getBeverageName(-1) because id is not valid");
 		}
 	}
 	
@@ -196,7 +199,7 @@ public class TestDataImpl {
 			capsulesPerBox=dataImpl.getBeverageCapsulesPerBox(-1);
 		}catch(BeverageException be){
 			//assertEquals(be instanceof BeverageException,true);
-			System.out.println("correctly throws exception for dataImpl.getBeverageCapsulesPerBox(-1) because id is not valid");
+			System.out.println("correctly throws BeverageException for dataImpl.getBeverageCapsulesPerBox(-1) because id is not valid");
 		}
 	}
 	
@@ -213,7 +216,7 @@ public class TestDataImpl {
 			boxPrice=dataImpl.getBeverageBoxPrice(-1);
 		}catch(BeverageException be){
 			
-			System.out.println("correctly throws exception for dataImpl.getBeverageBoxPrice(-1) because id is not valid");
+			System.out.println("correctly throws BeverageException for dataImpl.getBeverageBoxPrice(-1) because id is not valid");
 		}
 	}
 	
@@ -280,29 +283,32 @@ public class TestDataImpl {
 		
 		// check the Quantity available for this Beverage have been correctly updated
 		Integer quantityAvailable = database.getBeverageData(id).getQuantityAvailable();
-		assertEquals(quantityAvailable,30);
+		assertEquals(quantityAvailable,0+30);
 		
-		 //check the Transaction have been created: wait untill we define the fianl format for the date.
-		 /**Date date = new Date();
-		  
-		   List<Transaction> transactionList = database.getReport(getDate(date.getYear()-1,date.getMonth(),date.getDay()),getDate(date.getYear(),date.getMonth(),date.getDay()));
-		   assertEquals(1,transactionList.size());**/
-		//now try to buyBoxes for an identifier which is not valid
+		 //check the Transaction have been created: wait untill we define the final format for the date.
+		 Date date = new Date();
+		   //Date date1 = this.getDate(2018, 02, 12, 13,12, 20);
+		   //Date date2 = this.getDate(2018, 02, 12, 13,12, 20);
+		   List<Transaction> transactionList = database.getReport(date,new Date());
+		   //System.out.println("Transaction date "+transactionList.get(0).getTransactionDate());
+		   assertEquals(1,transactionList.size());
+		//now try to buyBoxes for an identifier which is not valid so i should catch a BeverageException
 		       try{
 		         	dataImpl.buyBoxes(-1,3);
 		       }catch(BeverageException be) {
-		    	System.out.println("correctly throws exception for dataImpl.buyBoxes(-1,3) because id is not valid");
+		    	System.out.println("correctly throws BeverageException for dataImpl.buyBoxes(-1,3) because id is not valid");
 			   }
 		       
-		 // now consider the case i do not have enough balance so i should thorw notEnoughBalnceException
+		 // now consider the case i do not have enough balance so i should throw notEnoughBalnceException
 		        dataImpl.reset();
 		        database.updateBalance(100);
 		        id=dataImpl.createBeverage("Tea",10, 100);
 		        try {
 				dataImpl.buyBoxes(id,3);// so i will spend 3*100cent to buy 3*10 capsules
 		        }catch(NotEnoughBalance  e) {
-		        	System.out.println("correctly throws exception for dataImpl.buyBoxes(id,3) because there is not enough balance");
+		        	System.out.println("correctly throws NotEnoughBalancException for dataImpl.buyBoxes(id,3) because there is not enough balance");
 		        }
+
 	  }
     
     @Test
@@ -377,6 +383,70 @@ public class TestDataImpl {
       }
     }
 	
+
+	    
+    
+    @Test
+    public void TestGetReport() throws Exception {
+    	dataImpl.reset();
+    	Date date = new Date();
+    	List<String> returnReport = new ArrayList<>();
+    	List<String> excpectedReport = new ArrayList<>();
+    	List<Transaction> transactionList;
+    	String s;
+    	int id,empId;
+    	database.updateBalance(500);
+    	empId= dataImpl.createEmployee("ndjekoua", "sandjo");
+    	id=dataImpl.createBeverage("coffee",10, 100);
+    	
+    	//i make 5 transactions
+    	dataImpl.buyBoxes(id,2);// so i will spend 2*100cent to buy 2*10 capsules; Transaction of TYPE= P
+    	dataImpl.rechargeAccount(empId,500);// this should create a transaction of TYPE=R
+		dataImpl.sellCapsules(empId,id,10,true);//TransactionType=C fromAccount=yes
+		dataImpl.sellCapsules(empId,id,10,false);//TransactionType=C fromAccount=flase
+		dataImpl.sellCapsules(-1,id,10,false);//TransactionType=C TO VISITOR
+    	
+		//get all the 5 transactions from DB
+    	transactionList = database.getReport(date, new Date());
+    	//assertEquals(transactionList.size(),5); // to be uncommented after pasty has defined useful methods
+    	Collections.sort(transactionList, new sortById());//i order to  be sure that strings are as i expect
+    	
+    	//build now the excpected list of strings
+    	s=dataImpl.convDate(transactionList.get(0).getTransactionDate())+" BUY"+" coffee"+" 2";
+        excpectedReport.add(s);
+       /* s=dataImpl.convDate(transactionList.get(1).getTransactionDate())+" RECHARGE"+" ndjekoua"+" sandjo"+" "+dataImpl.convAmountWithCurrency(500);
+        excpectedReport.add(s);
+        s=dataImpl.convDate(transactionList.get(2).getTransactionDate())+" BALANCE"+" ndjekoua"+" sandjo"+" coffee"+" "+10;
+        excpectedReport.add(s);
+        s=dataImpl.convDate(transactionList.get(3).getTransactionDate())+" CASH"+" ndjekoua"+" sandjo"+" coffee"+" "+10;
+        excpectedReport.add(s);
+        s=dataImpl.convDate(transactionList.get(4).getTransactionDate())+" VISITOR"+" coffee"+" "+10;
+        excpectedReport.add(s);*///will be uncommented when pasty will terminate methods like RechargeAccoun, sellCapsules, ect....
+        /* s= dataImpl.convDate(transactionList.get(1).getTransactionDate())+" BUY"+" Tea"+" 1";
+        excpectedReport.add(s);*/
+    	returnReport = dataImpl.getReport(date, new Date());
+    	System.out.println("returnreport "+returnReport+"  excpected report"+excpectedReport);
+    	assertEquals(excpectedReport,returnReport);
+    	
+    	//pass wrong dates so i should catch an exception: startDate > endDate
+    	
+    	try {
+    		dataImpl.getReport(new Date(), date);
+    	}catch(DateException de) {
+    		System.out.println("correctly throws dateException for dataImpl.getReport(new Date(),date) because startDate> endDate");
+    	}
+    }
+
+	private class sortById implements Comparator<Transaction>{
+
+		@Override
+		public int compare(Transaction t1, Transaction t2) {
+			// TODO Auto-generated method stub
+			return t1.getId() -t2.getId();
+		}
+		
+	}
+
 }
 
 
