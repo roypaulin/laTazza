@@ -383,7 +383,30 @@ public class TestDataImpl {
       }
     }
 	
-
+    @Test
+    public void testRechargeAccount() throws Exception{
+    	dataImpl.reset();
+    	int emp1=dataImpl.createEmployee("john","doe");
+    	
+    	int credit=dataImpl.rechargeAccount(emp1, 10);
+    	
+    	//check employee credit
+    	Employee emp=database.getEmployeeData(emp1);
+    	assertEquals(emp.getCredit(),10);
+    	assertEquals(credit,10);
+    	//check that transactions hav been created 
+        List<Transaction> transactionList=database.getReport(new Date(), new Date());
+        assertEquals(transactionList.size(),1);
+        
+        //try recharge account with an invalid employee Id
+        try {
+        	dataImpl.rechargeAccount(-1, 1);
+        }catch(EmployeeException e) {
+        	System.out.println("correctly throws exception because Employee id is not valid");
+        }
+        
+    	
+    }
 	    
     
     @Test
