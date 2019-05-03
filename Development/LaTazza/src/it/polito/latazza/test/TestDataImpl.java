@@ -315,6 +315,7 @@ public class TestDataImpl {
     public void testSellCapsules()
 			throws Exception{
     	dataImpl.reset();
+    	Date date=new Date();
       int emp1=dataImpl.createEmployee("john","doe");
       int emp2=dataImpl.createEmployee("jane","roberts");
       int bev1=dataImpl.createBeverage("tea", 10, 10);
@@ -340,7 +341,7 @@ public class TestDataImpl {
       assertEquals(d,10-1);
       
       //check that a transaction has been created for the employee
-      List<Transaction> transactionList=database.getReport(new Date(), new Date());
+      List<Transaction> transactionList=database.getReport(date, new Date());
       assertEquals(transactionList.size(),3);
       
       //dataImpl.rechargeAccount(emp2, 20);
@@ -386,6 +387,7 @@ public class TestDataImpl {
     @Test
      public void testsellCapsulesToVisitor() throws Exception {
     	dataImpl.reset();
+    	Date date=new Date();
     	int bev1=dataImpl.createBeverage("tea", 20, 40);
     	database.updateBalance(100);
     	dataImpl.buyBoxes(bev1, 2);
@@ -399,7 +401,7 @@ public class TestDataImpl {
     	assertEquals(database.getBalance(),100-80);
     	
     	//check transactions have been created
-    	 List<Transaction> transactionList=database.getReport(new Date(), new Date());
+    	 List<Transaction> transactionList=database.getReport(date, new Date());
          assertEquals(transactionList.size(),2);
          
          //try to sell capsules whose available quantity is not enough
@@ -415,6 +417,7 @@ public class TestDataImpl {
     @Test
     public void testRechargeAccount() throws Exception{
     	dataImpl.reset();
+    	Date date=new Date();
     	int emp1=dataImpl.createEmployee("john","doe");
     	
     	int credit=dataImpl.rechargeAccount(emp1, 10);
@@ -424,7 +427,7 @@ public class TestDataImpl {
     	assertEquals(emp.getCredit(),10);
     	assertEquals(credit,10);
     	//check that transactions hav been created 
-        List<Transaction> transactionList=database.getReport(new Date(), new Date());
+        List<Transaction> transactionList=database.getReport(date, new Date());
         assertEquals(transactionList.size(),1);
         
         //try recharge account with an invalid employee Id
@@ -481,7 +484,7 @@ public class TestDataImpl {
 		dataImpl.reset();// used to clear everything before starting the Test
 		int id=-1;
 		id=dataImpl.createEmployee("john","doe");
-		//i get the beverageName of the created string
+		//i get the name of the created string
 		String empName = dataImpl.getEmployeeName(id);
 		assertEquals(empName,"john");
          
@@ -498,7 +501,7 @@ public class TestDataImpl {
 		dataImpl.reset();// used to clear everything before starting the Test
 		int id=-1;
 		id=dataImpl.createEmployee("john","doe");
-		//i get the beverageName of the created string
+		//i get the Surname of the created string
 		String empSurname = dataImpl.getEmployeeSurname(id);
 		assertEquals(empSurname,"doe");
          
@@ -509,6 +512,26 @@ public class TestDataImpl {
 			System.out.println("correctly throws EmployeeException for dataImpl.getEmployeeSurname(-1) because id is not valid");
 		}
 	}
+    
+    @Test
+    public void testGetEmployeeBalance() throws EmployeeException {
+    	dataImpl.reset();// used to clear everything before starting the Test
+		int id=-1;
+		id=dataImpl.createEmployee("john","doe");
+		
+		// check employee balance
+		
+		assertEquals(0,dataImpl.getEmployeeBalance(id));
+		dataImpl.rechargeAccount(id, 10);
+		assertEquals(10,dataImpl.getEmployeeBalance(id));
+		
+		// throw an EmployeeException because the id is invalid
+		try {
+			dataImpl.getEmployeeBalance(-1);
+		}catch(EmployeeException e) {
+			System.out.println("correctly throws EmployeeException for dataImpl.getEmployeeBalance(-1) because id is not valid");
+		}
+    }
     @Test
     public void TestGetReport() throws Exception {
     	dataImpl.reset();
