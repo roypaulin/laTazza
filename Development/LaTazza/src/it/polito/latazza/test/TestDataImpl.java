@@ -492,6 +492,23 @@ public class TestDataImpl {
 			System.out.println("correctly throws EmployeeException for dataImpl.getEmployeeName(-1) because id is not valid");
 		}
 	}
+    
+    @Test
+	public void testGetEmployeeSurName() throws EmployeeException {
+		dataImpl.reset();// used to clear everything before starting the Test
+		int id=-1;
+		id=dataImpl.createEmployee("john","doe");
+		//i get the beverageName of the created string
+		String empSurname = dataImpl.getEmployeeSurname(id);
+		assertEquals(empSurname,"doe");
+         
+		// throw an EmployeeException because the id is invalid
+		try {
+			empSurname=dataImpl.getEmployeeSurname(-1);
+		}catch(EmployeeException e){
+			System.out.println("correctly throws EmployeeException for dataImpl.getEmployeeSurname(-1) because id is not valid");
+		}
+	}
     @Test
     public void TestGetReport() throws Exception {
     	dataImpl.reset();
