@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -487,7 +488,7 @@ public class TestDataImpl {
 		dataImpl.sellCapsulesToVisitor(id,10);//TransactionType=C TO VISITOR
     	
 		//get all the 5 transactions from DB
-    	transactionList = database.getReport(date, new Date());
+    	transactionList = database.getReport(shiftDate(-1), shiftDate(1));
     	assertEquals(transactionList.size(),5); // to be uncommented after pasty has defined useful methods
     	Collections.sort(transactionList, new sortById());//i order to  be sure that strings are as i expect in order to build expected list
     	
@@ -502,14 +503,14 @@ public class TestDataImpl {
         excpectedReport.add(s);
         s=dataImpl.convDate(transactionList.get(4).getTransactionDate())+" VISITOR"+" coffee"+" "+10;
         excpectedReport.add(s);//will be uncommented when pasty will terminate methods like RechargeAccoun, sellCapsules, ect....
-    	returnReport = dataImpl.getReport(date, new Date());
+    	returnReport = dataImpl.getReport(shiftDate(-1), shiftDate(+1));
     	System.out.println("returnreport "+returnReport+"  excpected report"+excpectedReport);
     	assertEquals(excpectedReport,returnReport);
     	
     	//pass wrong dates so i should catch an exception: startDate > endDate
     	
     	try {
-    		dataImpl.getReport(new Date(), date);
+    		dataImpl.getReport(shiftDate(-1), shiftDate(1));
     	}catch(DateException de) {
     		System.out.println("correctly throws dateException for dataImpl.getReport(new Date(),date) because startDate> endDate");
     	}
@@ -536,7 +537,7 @@ public class TestDataImpl {
 		dataImpl.sellCapsulesToVisitor(id,10);//TransactionType=C TO VISITOR
     	
 		//get all the 5 transactions from DB
-    	transactionList = database.getEmployeeReport(empId, date, new Date()); 
+    	transactionList = database.getEmployeeReport(empId, shiftDate(-1), shiftDate(1)); 
     	assertEquals(transactionList.size(),3); // to be uncommented after pasty has defined useful methods
     	Collections.sort(transactionList, new sortById());//i order to  be sure that strings are as i expect in order to build expected list
     	
@@ -549,14 +550,14 @@ public class TestDataImpl {
         s=dataImpl.convDate(transactionList.get(2).getTransactionDate())+" CASH"+" ndjekoua"+" sandjo"+" coffee"+" "+10;
         excpectedReport.add(s);
     
-    	returnReport = dataImpl.getEmployeeReport(empId,date,new Date());
+    	returnReport = dataImpl.getEmployeeReport(empId,shiftDate(-1),shiftDate(1));
     	System.out.println("returnreport "+returnReport+"  excpected report"+excpectedReport);
     	assertEquals(excpectedReport,returnReport);
     	
     	//pass wrong dates so i should catch an exception: startDate > endDate
     	
     	try {
-    		dataImpl.getReport(new Date(), date);
+    		dataImpl.getReport(shiftDate(-1), shiftDate(1));
     	}catch(DateException de) {
     		System.out.println("correctly throws dateException for dataImpl.getReport(new Date(),date) because startDate> endDate");
     	}
@@ -571,6 +572,15 @@ public class TestDataImpl {
 			return t1.getId() -t2.getId();
 		}
 		
+	}
+	/*@param dayNumber can be positive or negati and represent how much we want to shift
+	 * eg : shiftDate(-1) return the date of yesterday
+	 *       shiftDate(+1) return the date of tomorrow*/
+	public static Date shiftDate(int dayNumber) {
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DATE, dayNumber); // number represents number of days
+		Date shiftedDate = cal.getTime();
+		return shiftedDate;
 	}
 
 }
