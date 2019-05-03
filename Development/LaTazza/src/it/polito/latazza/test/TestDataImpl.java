@@ -382,6 +382,35 @@ public class TestDataImpl {
     	  System.out.println("correctly throws exception because there in not enough capsules for this beverage");
       }
     }
+    
+    @Test
+     public void testsellCapsulesToVisitor() throws Exception {
+    	dataImpl.reset();
+    	int bev1=dataImpl.createBeverage("tea", 20, 40);
+    	database.updateBalance(100);
+    	dataImpl.buyBoxes(bev1, 2);
+    	dataImpl.sellCapsulesToVisitor(bev1, 2);
+    	
+    	//check available quantity
+    	Beverage bev=database.getBeverageData(bev1);
+    	assertEquals(bev.getQuantityAvailable(),38);
+    	
+    	// check the LaTazza Account
+    	assertEquals(database.getBalance(),100-80);
+    	
+    	//check transactions have been created
+    	 List<Transaction> transactionList=database.getReport(new Date(), new Date());
+         assertEquals(transactionList.size(),2);
+         
+         //try to sell capsules whose available quantity is not enough
+         
+         try {
+       	  dataImpl.sellCapsulesToVisitor(bev1, 40);
+         }catch(NotEnoughCapsules e) {
+       	  System.out.println("correctly throws exception because there in not enough capsules for this beverage");
+         }
+    	
+    }
 	
     @Test
     public void testRechargeAccount() throws Exception{
