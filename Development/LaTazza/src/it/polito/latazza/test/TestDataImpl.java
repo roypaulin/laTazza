@@ -285,7 +285,7 @@ public class TestDataImpl {
 		Integer quantityAvailable = database.getBeverageData(id).getQuantityAvailable();
 		assertEquals(quantityAvailable,0+30);
 		
-		 //check the Transaction have been created: wait untill we define the final format for the date.
+		 //check the Transaction has been created: wait untill we define the final format for the date.
 		 Date date = new Date();
 		   //Date date1 = this.getDate(2018, 02, 12, 13,12, 20);
 		   //Date date2 = this.getDate(2018, 02, 12, 13,12, 20);
@@ -492,7 +492,7 @@ public class TestDataImpl {
     	Collections.sort(transactionList, new sortById());//i order to  be sure that strings are as i expect in order to build expected list
     	
     	//build now the excpected list of strings
-    	s=dataImpl.convDate(transactionList.get(0).getTransactionDate())+" BUY"+" coffee"+" 2";
+    	s=dataImpl.convDate(transactionList.get(0).getTransactionDate())+" BUY"+" coffee"+" 3";
         excpectedReport.add(s);
         s=dataImpl.convDate(transactionList.get(1).getTransactionDate())+" RECHARGE"+" ndjekoua"+" sandjo"+" "+dataImpl.convAmountWithCurrency(500);
         excpectedReport.add(s);
