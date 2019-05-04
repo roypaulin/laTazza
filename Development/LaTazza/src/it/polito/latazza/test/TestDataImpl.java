@@ -600,9 +600,17 @@ public class TestDataImpl {
     	//pass wrong dates so i should catch an exception: startDate > endDate
     	
     	try {
-    		dataImpl.getReport(shiftDate(-1), shiftDate(1));
+    		dataImpl.getReport(shiftDate(+1), new Date());
     	}catch(DateException de) {
-    		System.out.println("correctly throws dateException for dataImpl.getReport(new Date(),date) because startDate> endDate");
+    		System.out.println("correctly throws DateException for dataImpl.getReport(shiftDate(+1),date) because startDate> endDate");
+    	}
+    	
+          //pass null dates so i should catch an exception: startDate==null
+    	
+    	try {
+    		dataImpl.getReport(null, shiftDate(1));
+    	}catch(DateException de) {
+    		System.out.println("correctly throws DateException for dataImpl.getReport(null,date) because startDate> endDate");
     	}
     }
 
