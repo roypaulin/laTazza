@@ -34,7 +34,13 @@ public class DataImpl implements DataInterface {
      Database database = new Database();
 	@Override
 	/* @author roy paulin */
-	/*is it correct to throw the EmployeeException when the employee balance is not  enough to buy capsules?*/
+	/***is it correct to throw the EmployeeException when the employee balance is not  enough to buy capsules?
+	 * there are also some other cases where it's not clear if to throw exception or not, here in the code for those cases we just printed the stackTace
+	 ****how do we set or update laTazza balance from the GUI? it looks like there is not a method to update laTazza balance in DataImpl class??
+	 ****The amount of the recharge is in cent but in the report it should be printed in euros, is it correct to assume that all them operations related to amount
+	 *like(GetEmployeeBalance, buyCapsules ect..) are made in cent and only when we want to produce the report we have to divide by 100 to cnvert in euros rigth??
+	 ***** 
+	 * of the error*/
 	public Integer sellCapsules(Integer employeeId, Integer beverageId, Integer numberOfCapsules, Boolean fromAccount)
 			throws EmployeeException, BeverageException, NotEnoughCapsules {
 		Employee emp;
