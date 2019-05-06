@@ -566,6 +566,13 @@ public class TestDataImpl {
 		returnMap= dataImpl.getEmployees();
 		assertEquals(expectedMap,returnMap);
     }
+    
+    @Test
+    public void testGetBalance() throws Exception {
+    	assertEquals(dataImpl.getBalance(),0);
+    	database.updateBalance(100.50);
+    	assertEquals(dataImpl.getBalance(),Math.round((float)100.50));
+    }
     @Test
     public void TestGetReport() throws Exception {
     	dataImpl.reset();

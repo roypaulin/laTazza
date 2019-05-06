@@ -655,7 +655,7 @@ public class DataImpl implements DataInterface {
 		}
 		// TODO Auto-generated method stub
 		// getBalance()
-		return (int)Math.round(d);
+		return Math.round((float)d);
 	}
 
 	@Override
