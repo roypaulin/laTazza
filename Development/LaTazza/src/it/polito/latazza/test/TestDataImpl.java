@@ -549,6 +549,23 @@ public class TestDataImpl {
 		assertEquals(returnList,expectedList);
     	
     }
+    
+    @Test
+    public void testGetEmployees() throws EmployeeException {
+    	dataImpl.reset();
+    	Map<Integer, String> returnMap = new HashMap<>();
+    	Map<Integer, String> expectedMap = new HashMap<>();
+    	int id1,id2,id3;
+    	id1=dataImpl.createEmployee("john","doe");
+		id2=dataImpl.createEmployee("chris","paul");
+		id3=dataImpl.createEmployee("steven","adams");
+		expectedMap.put(id1, "john "+"doe" );
+		expectedMap.put(id2, "chris "+"paul");
+		expectedMap.put(id3, "steven "+"adams");
+		
+		returnMap= dataImpl.getEmployees();
+		assertEquals(expectedMap,returnMap);
+    }
     @Test
     public void TestGetReport() throws Exception {
     	dataImpl.reset();
