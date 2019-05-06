@@ -532,6 +532,23 @@ public class TestDataImpl {
 			System.out.println("correctly throws EmployeeException for dataImpl.getEmployeeBalance(-1) because id is not valid");
 		}
     }
+    
+    @Test
+    public void testGetEmployeesId() throws EmployeeException {
+    	dataImpl.reset();
+		List<Integer> expectedList = new ArrayList<>();
+		List<Integer> returnList;
+		int id1,id2,id3;
+		id1=dataImpl.createEmployee("john","doe");
+		id2=dataImpl.createEmployee("chris","paul");
+		id3=dataImpl.createEmployee("steven","adams");
+		expectedList.add(id1);
+		expectedList.add(id2);
+		expectedList.add(id3);
+		returnList= dataImpl.getEmployeesId();
+		assertEquals(returnList,expectedList);
+    	
+    }
     @Test
     public void TestGetReport() throws Exception {
     	dataImpl.reset();
