@@ -324,17 +324,21 @@ public class TestDataImpl {
       
   	  database.updateBalance(400);
       dataImpl.rechargeAccount(emp1, 10);
+      
       dataImpl.buyBoxes(bev1, 1);
       dataImpl.sellCapsules(emp1, bev1, 1, true);
       
       // check LaTazza balance
       double balance=database.getBalance();
-      assertEquals(balance,400 -10 +1);
+      assertEquals(balance,400 -10 +10);
+      dataImpl.sellCapsules(emp2, bev1, 1, false);
+      balance=database.getBalance();
+      assertEquals(balance,400 -10 +10 +1);
       
       // check the beverage available quantity
       Beverage bev=database.getBeverageData(bev1);
       int q=bev.getQuantityAvailable();
-      assertEquals(q,10-1);
+      assertEquals(q,10-1-1);
       
       //check the employee account
       Employee emp=database.getEmployeeData(emp1);
@@ -343,7 +347,7 @@ public class TestDataImpl {
       
       //check that a transaction has been created for the employee
       List<Transaction> transactionList=database.getReport(shiftDate(-1), shiftDate(1));
-      assertEquals(transactionList.size(),3);
+      assertEquals(transactionList.size(),4);
       
       //dataImpl.rechargeAccount(emp2, 20);
       //check that the employee account has not been updated given that he pays by cash
@@ -353,7 +357,7 @@ public class TestDataImpl {
       assertEquals(d,10-1);
       bev=database.getBeverageData(bev1);
       q=bev.getQuantityAvailable();
-      assertEquals(q,10-1-1);
+      assertEquals(q,10-1-1-1);
       
       //using a non valid beverage id to buy boxes
       try {
@@ -399,7 +403,7 @@ public class TestDataImpl {
     	assertEquals(bev.getQuantityAvailable(),38);
     	
     	// check the LaTazza Account
-    	assertEquals(database.getBalance(),100-80);
+    	assertEquals(database.getBalance(),100-80+4);
     	
     	//check transactions have been created
     	 List<Transaction> transactionList=database.getReport(shiftDate(-1), shiftDate(1));
