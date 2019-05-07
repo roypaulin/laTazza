@@ -74,6 +74,8 @@ public class DataImpl implements DataInterface {
 			}catch(Exception e) {
 				throw new EmployeeException();
 			}
+			
+		}else {
 			 try {
 				 double balance=database.getBalance();
 			       database.updateBalance(balance+d);
@@ -125,6 +127,15 @@ public class DataImpl implements DataInterface {
 		}catch(Exception e) {
 			throw new BeverageException();
 		}
+		double d=(numberOfCapsules*(be.getBoxPrice()/be.getCapsulePerBox()));
+		 try {
+			 double balance=database.getBalance();
+		       database.updateBalance(balance+d);
+	       } catch (Exception e1) {
+		      // TODO Auto-generated catch block
+	    	   System.out.println("unable to update la tazza balance");
+		    e1.printStackTrace();
+	      }
 		Transaction tr=new Transaction(-1,new Date(),'C',-1,-1,beverageId,numberOfCapsules,-1,false);
 		try {
 			database.registerTransaction(tr);
