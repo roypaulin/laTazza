@@ -164,6 +164,14 @@ public class DataImpl implements DataInterface {
 		}catch(Exception e) {
 			throw new EmployeeException();
 		}
+		try {
+			 double balance=database.getBalance();
+		       database.updateBalance(balance+amountInCents);
+	       } catch (Exception e1) {
+		      // TODO Auto-generated catch block
+	    	   System.out.println("unable to update la tazza balance");
+		    e1.printStackTrace();
+	      }
 		Date date = new Date();
 		Transaction tr= new Transaction(-1,date,'R',-1,id,-1,-1,amountInCents, false);
 		
