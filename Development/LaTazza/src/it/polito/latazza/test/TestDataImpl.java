@@ -638,7 +638,6 @@ public class TestDataImpl {
     @Test
     public void TestGetReport() throws Exception {
     	dataImpl.reset();
-    	Date date = new Date();
     	List<String> returnReport = new ArrayList<>();
     	List<String> excpectedReport = new ArrayList<>();
     	List<Transaction> transactionList;
@@ -672,10 +671,30 @@ public class TestDataImpl {
         s=dataImpl.convDate(transactionList.get(4).getTransactionDate())+" VISITOR"+" coffee"+" "+10;
         excpectedReport.add(s);//will be uncommented when pasty will terminate methods like RechargeAccoun, sellCapsules, ect....
     	returnReport = dataImpl.getReport(shiftDate(-1), shiftDate(+1));
-    	System.out.println("returnreport "+returnReport+"  excpected report"+excpectedReport);
+    	//System.out.println("returnreport "+returnReport+"  excpected report"+excpectedReport);
     	assertEquals(excpectedReport,returnReport);
     }
     
+    @Test
+    public void TestGetReportemptyList() throws Exception {
+    	dataImpl.reset();
+    	//for loop testing: i do no transaction so the returnList should contain not transaction.
+    		List<String> returnList=dataImpl.getReport(shiftDate(-1), shiftDate(+1));
+    		assertTrue(returnList.isEmpty());
+    	
+    }
+    public void TestGetReportOneElement() throws Exception {
+    	dataImpl.reset();
+    	database.updateBalance(500);
+    	Integer id=dataImpl.createBeverage("coffee",10, 100);
+    	
+    	//i make 1 transactions
+    	dataImpl.buyBoxes(id,3);// so i will spend 2*100cent to buy 2*10 capsules; Transaction of TYPE= P
+    	//for loop testing: i do 1 transaction so the returnList should contain not transaction.
+    		List<String> returnList=dataImpl.getReport(shiftDate(-1), shiftDate(+1));
+    		assertEquals(returnList.size(),1);
+    	
+    }
     @Test
     public void TestGetReportWrongDates() throws Exception {
     	dataImpl.reset();
@@ -704,7 +723,6 @@ public class TestDataImpl {
     @Test
     public void TestGetReportEmployee() throws Exception {
     	dataImpl.reset();
-    	Date date = new Date();
     	List<String> returnReport = new ArrayList<>();
     	List<String> excpectedReport = new ArrayList<>();
     	List<Transaction> transactionList;
@@ -736,29 +754,32 @@ public class TestDataImpl {
         excpectedReport.add(s);
     
     	returnReport = dataImpl.getEmployeeReport(empId,shiftDate(-1),shiftDate(1));
-    	System.out.println("returnreport "+returnReport+"  excpected report"+excpectedReport);
+    	//System.out.println("returnreport "+returnReport+"  excpected report"+excpectedReport);
     	assertEquals(excpectedReport,returnReport);
-    	
-    	//pass wrong dates so i should catch an exception: startDate > endDate
-    	
-    	try {
-    		dataImpl.getReport(shiftDate(+1), new Date());
-    	}catch(DateException de) {
-    		System.out.println("correctly throws DateException for dataImpl.getReport(shiftDate(+1),date) because startDate> endDate");
-    	}
-    	
-          //pass null dates so i should catch an exception: startDate==null
-    	
-    	try {
-    		dataImpl.getReport(null, shiftDate(1));
-    	}catch(DateException de) {
-    		System.out.println("correctly throws DateException for dataImpl.getReport(null,date) because startDate> endDate");
-    	}
+    }
+    
+    @Test
+    public void TestGetReportEmployeeEmptyList() throws Exception {
+    	dataImpl.reset();
+    	Integer empId= dataImpl.createEmployee("ndjekoua", "sandjo");
+    	//for loop testing: i do no transaction so the returnList should contain not transaction.
+    		List<String> returnList=dataImpl.getEmployeeReport(empId, shiftDate(-1), shiftDate(+1));
+    		assertTrue(returnList.isEmpty());
+    }
+    
+    @Test
+    public void TestGetReportEmployeeOneElement() throws Exception {
+    	dataImpl.reset();
+    	Integer empId= dataImpl.createEmployee("ndjekoua", "sandjo");
+    	dataImpl.rechargeAccount(empId,500);// this should create a transaction of TYPE=R
+    	//for loop testing: i do no transaction so the returnList should contain not transaction.
+    		List<String> returnList=dataImpl.getEmployeeReport(empId, shiftDate(-1), shiftDate(+1));
+    		assertEquals(returnList.size(),1);
     }
     @Test
     public void TestGetEmployeeReportWrongEmployee() throws Exception {
     	dataImpl.reset();
-    	//pass wrong employeed so i should catch an exception
+    	//pass wrong employeeId so i should catch an exception
     	
     	try {
     		dataImpl.getEmployeeReport(-1,shiftDate(-1), shiftDate(1));

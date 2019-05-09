@@ -4,10 +4,7 @@
 package it.polito.latazza.data;
 
 
-import it.polito.latazza.data.DataImpl;
-import it.polito.latazza.data.DataInterface;
-import it.polito.latazza.data.Database;
-import it.polito.latazza.exceptions.BeverageException;
+
 import it.polito.latazza.exceptions.NotEnoughCapsules;
 
 /**
