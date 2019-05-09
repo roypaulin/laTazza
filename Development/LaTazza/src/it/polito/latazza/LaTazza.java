@@ -21,8 +21,9 @@ public class LaTazza {
 	public static void main(String[] args) throws ClassNotFoundException, SQLException, Exception{
 		
 		DataInterface data = new DataImpl();
-		//data.reset();
+		data.reset();
 		data.createEmployee("ndjekoua", "sandjo");
+		data.createBeverage("coffee",10, 100);
 		new MainSwing(data);
        //System.console().printf("prova");
 		Database database = new Database();
