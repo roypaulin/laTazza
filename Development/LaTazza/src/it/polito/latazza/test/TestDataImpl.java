@@ -1,7 +1,10 @@
 package it.polito.latazza.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.rmi.registry.LocateRegistry;
 import java.sql.SQLException;
@@ -116,7 +119,7 @@ public class TestDataImpl {
 	}
 	
 	@Test
-	public void testUpdateBeverage() throws Exception {
+	public void testUpdateBeverageWithSuccess() throws Exception {
 		dataImpl.reset();
 		int id =-1;
 		id=dataImpl.createBeverage("Tea",10, 100);
@@ -125,27 +128,36 @@ public class TestDataImpl {
 	    dataImpl.updateBeverage(id, bev.getName(),bev.getCapsulePerBox() , (int)Math.round(bev.getBoxPrice()));
 	    //everything is correct so the object should be updated
 	    assertEquals(200,database.getBeverageData(id).getBoxPrice());
-	    
-	    //i put and id that does not exist => i should catch the exception
-	  
+	}
+	
+	@Test
+	public void testUpdateBeverageWrongId() throws Exception {
+		dataImpl.reset();
+	    //i put an id that does not exist => i should catch the exception
 	    try {
-	    	
 	    	dataImpl.updateBeverage(-1,"coffee",10,100);
-	    	
+	    	fail();
 	    }catch(Exception e) {
-	    	
-	    	System.out.println("correctly throws Exception for dataImpl.updateBeverage(-1, bev.getName(),10,100) because id is not valid");
+	    	assertTrue(true);
 	    }
-	    
+	}
+	
+	@Test
+	public void testUpdateBeverageAttributes() throws Exception {
+		dataImpl.reset();
+		int id =-1;
+		id=dataImpl.createBeverage("Tea",10, 100);
+	    Beverage bev = database.getBeverageData(id);
+	    bev.setBoxPrice(200);
+	    dataImpl.updateBeverage(id, bev.getName(),bev.getCapsulePerBox() , (int)Math.round(bev.getBoxPrice()));
+	   
 	    //the price and CapsulesPerBox are negative so i should catch a BeverageException
         
 	    try {
-	    
 	    	dataImpl.updateBeverage(id, bev.getName(),-10,-2);
-	    	
+	    	fail();
 	    }catch(Exception e) {
-	    	System.out.println("correctly throws Exception for dataImpl.updateBeverage(id, bev.getName(),-10,-2) because boxPrice and price are <0");
-	    	//assertEquals(e instanceof BeverageException,true); //
+	    	assertTrue(true);
 	    }
 	}
 	@Test
@@ -170,57 +182,68 @@ public class TestDataImpl {
 		assertEquals(balance,0);
 	}
 	@Test
-	public void testGetBeverageName() throws BeverageException {
+	public void testGetBeverageNameSuccess() throws BeverageException {
 		dataImpl.reset();// used to clear everything before starting the Test
 		int id=-1;
 		id=dataImpl.createBeverage("coffee",10, 100);
 		//i get the beverageName of the created string
 		String bevName = dataImpl.getBeverageName(id);
 		assertEquals(bevName,"coffee");
-         
-		//this should throw a BeverageException because the Beverage does not exist
-		try {
-			bevName=dataImpl.getBeverageName(-1);
-		}catch(BeverageException be){
-			System.out.println("correctly throws BeverageException for dataImpl.getBeverageName(-1) because id is not valid");
-		}
 	}
 	
 	@Test
-	public void testGetBeverageCapsulesPerBox() throws BeverageException {
+	public void testGetBeverageNameWrongId() throws BeverageException {
+		dataImpl.reset();// used to clear everything before starting the Test
+		
+		//this should throw a BeverageException because the Beverage does not exist
+		try {
+			dataImpl.getBeverageName(-1);
+			fail();
+		}catch(BeverageException be){
+			assertTrue(true);
+		}
+	}
+	@Test
+	public void testGetBeverageCapsulesPerBoxSuccess() throws BeverageException {
 		dataImpl.reset();
 		int id=-1;
 		id=dataImpl.createBeverage("coffee",10, 100);
 		int capsulesPerBox = dataImpl.getBeverageCapsulesPerBox(id);
 		assertEquals(capsulesPerBox,10);
-		
-		 
-		//this should throw a BeverageException because the Beverage does not exist
-		try {
-			capsulesPerBox=dataImpl.getBeverageCapsulesPerBox(-1);
-		}catch(BeverageException be){
-			//assertEquals(be instanceof BeverageException,true);
-			System.out.println("correctly throws BeverageException for dataImpl.getBeverageCapsulesPerBox(-1) because id is not valid");
-		}
 	}
 	
 	@Test
-	public void getBeverageBoxPrice() throws BeverageException {
+	public void testGetBeverageCapsulesPerBoxWrongId() throws BeverageException {
+		dataImpl.reset();
+		
+		//this should throw a BeverageException because the Beverage does not exist
+		try {
+			dataImpl.getBeverageCapsulesPerBox(-1);
+			fail();
+		}catch(BeverageException be){
+			assertTrue(true);		}
+	}
+	@Test
+	public void getBeverageBoxPriceSuccess() throws BeverageException {
 		dataImpl.reset();
 		int id=-1;
 		id=dataImpl.createBeverage("coffee",10, 100);
 		Integer boxPrice = dataImpl.getBeverageBoxPrice(id);
 		assertEquals(boxPrice,100);
+	}
+	
+	@Test
+	public void getBeverageBoxPriceWrongId() throws BeverageException {
+		dataImpl.reset();
 		
 		//this should throw a BeverageException because the Beverage does not exist
 		try {
-			boxPrice=dataImpl.getBeverageBoxPrice(-1);
+			dataImpl.getBeverageBoxPrice(-1);
+			fail();
 		}catch(BeverageException be){
-			
-			System.out.println("correctly throws BeverageException for dataImpl.getBeverageBoxPrice(-1) because id is not valid");
+			assertTrue(true);
 		}
 	}
-	
 	@Test
 	public void testGetBeveragesId() throws BeverageException {
 		dataImpl.reset();
@@ -255,7 +278,7 @@ public class TestDataImpl {
     }
     
     @Test
-    public void testGetBeverageCapsules() throws Exception {
+    public void testGetBeverageCapsulesZeroBoundary() throws Exception {
     	dataImpl.reset();
     	int id;
 		id=dataImpl.createBeverage("coffee",10, 100);
@@ -263,15 +286,21 @@ public class TestDataImpl {
 		//when we create a beverage, the nitial quantity is always 0
 		Integer capsulesQuantity = bev.getQuantityAvailable();
 		assertEquals(capsulesQuantity,0);
-		
+    }
+    @Test
+    public void testGetBeverageCapsules() throws Exception {
+    	dataImpl.reset();
+    	int id;
+		id=dataImpl.createBeverage("coffee",10, 100);
+		Beverage bev = database.getBeverageData(id);
 		bev.setQuantityAvailable(10);
 		database.updateBeverage(bev);
-		capsulesQuantity = bev.getQuantityAvailable();
+		Integer capsulesQuantity = bev.getQuantityAvailable();
 		assertEquals(capsulesQuantity,10);
     }
     
     @Test
-    public void testBuyBoxes() throws Exception {
+    public void testBuyBoxesSuccess() throws Exception {
     	dataImpl.reset();
     	database.updateBalance(500);
     	int id;
@@ -282,18 +311,15 @@ public class TestDataImpl {
 		double balance = database.getBalance();
 		assertEquals(balance,500-300);
 		
-		// check the Quantity available for this Beverage have been correctly updated
+		// check the Quantity available for this Beverage has been correctly updated
 		Integer quantityAvailable = database.getBeverageData(id).getQuantityAvailable();
 		assertEquals(quantityAvailable,0+30);
 		
-		 //check the Transaction has been created: wait untill we define the final format for the date.
+		 //check the Transaction has been created
 		 Date date = new Date();
-		   //Date date1 = this.getDate(2018, 02, 12, 13,12, 20);
-		   //Date date2 = this.getDate(2018, 02, 12, 13,12, 20);
 		   List<Transaction> transactionList = database.getReport(date,new Date());
-		   //System.out.println("Transaction date "+transactionList.get(0).getTransactionDate());
 		   assertEquals(1,transactionList.size());
-		//now try to buyBoxes for an identifier which is not valid so i should catch a BeverageException
+		/*//now try to buyBoxes for an identifier which is not valid so i should catch a BeverageException
 		       try{
 		         	dataImpl.buyBoxes(-1,3);
 		       }catch(BeverageException be) {
@@ -308,8 +334,40 @@ public class TestDataImpl {
 				dataImpl.buyBoxes(id,3);// so i will spend 3*100cent to buy 3*10 capsules
 		        }catch(NotEnoughBalance  e) {
 		        	System.out.println("correctly throws NotEnoughBalancException for dataImpl.buyBoxes(id,3) because there is not enough balance");
-		        }
+		        }*/
 
+	  }
+     
+    
+    @Test
+    public void testBuyBoxesWrongBeverageId() throws Exception {
+    	dataImpl.reset();
+    	database.updateBalance(500);
+		dataImpl.createBeverage("coffee",10, 100);
+		//now try to buyBoxes for an identifier which is not valid so i should catch a BeverageException
+		       try{
+		         	dataImpl.buyBoxes(-1,3);
+		         	fail();
+		       }catch(BeverageException be) {
+		    	 assertTrue(true);
+			   }
+	  }
+    
+    
+    @Test
+    public void testBuyBoxesNotEnoughBalance() throws Exception {
+    	dataImpl.reset();
+    	database.updateBalance(100);
+    	int id;
+		id=dataImpl.createBeverage("coffee",10, 100);     
+		 // now consider the case i do not have enough balance so i should throw notEnoughBalnceException
+		       
+		        try {
+				   dataImpl.buyBoxes(id,3);// so i will spend 3*100cent to buy 3*10 capsules
+				   fail();
+		        }catch(NotEnoughBalance  e) {
+		        	assertTrue(true);
+		        }
 	  }
     
     @Test
@@ -616,16 +674,33 @@ public class TestDataImpl {
     	returnReport = dataImpl.getReport(shiftDate(-1), shiftDate(+1));
     	System.out.println("returnreport "+returnReport+"  excpected report"+excpectedReport);
     	assertEquals(excpectedReport,returnReport);
-    	
+    }
+    
+    @Test
+    public void TestGetReportWrongDates() throws Exception {
+    	dataImpl.reset();
     	//pass wrong dates so i should catch an exception: startDate > endDate
     	
     	try {
-    		dataImpl.getReport(shiftDate(-1), shiftDate(1));
+    		dataImpl.getReport(shiftDate(1), shiftDate(-1));
+    		fail();
     	}catch(DateException de) {
-    		System.out.println("correctly throws dateException for dataImpl.getReport(new Date(),date) because startDate> endDate");
+    		assertTrue(true);
     	}
     }
-    
+    @Test
+    public void TestGetReportNullDates() throws Exception {
+    	dataImpl.reset();
+    	//pass wrong dates so i should catch an exception: startDate > endDate
+    	
+    	try {
+    		dataImpl.getReport(null, shiftDate(-1));
+    		fail();
+    	}catch(DateException de) {
+    		assertTrue(true);
+    		
+    	}
+    }
     @Test
     public void TestGetReportEmployee() throws Exception {
     	dataImpl.reset();
@@ -680,8 +755,44 @@ public class TestDataImpl {
     		System.out.println("correctly throws DateException for dataImpl.getReport(null,date) because startDate> endDate");
     	}
     }
+    @Test
+    public void TestGetEmployeeReportWrongEmployee() throws Exception {
+    	dataImpl.reset();
+    	//pass wrong employeed so i should catch an exception
+    	
+    	try {
+    		dataImpl.getEmployeeReport(-1,shiftDate(-1), shiftDate(1));
+    		fail();
+    	}catch(EmployeeException e) {
+    		assertTrue(true);
+    	}
+    }
+    
+    @Test
+    public void TestGetEmployeeReportNullDate() throws Exception {
+    	dataImpl.reset();
+    	//pass null dates so i should catch an exception: startDate==null
+    	
+    	try {
+    		dataImpl.getEmployeeReport(-1,null, shiftDate(1));
+    		fail();
+    	}catch(DateException e) {
+    		assertTrue(true);
+    	}
+    }
 
-
+    @Test
+    public void TestGetEmployeeReportWrongDate() throws Exception {
+    	dataImpl.reset();
+    	//pass null dates so i should catch an exception: startDate > endDate
+    	
+    	try {
+    		dataImpl.getEmployeeReport(-1,shiftDate(+2), shiftDate(-1));
+    		fail();
+    	}catch(DateException e) {
+    		assertTrue(true);
+    	}
+    }
 	private class sortById implements Comparator<Transaction>{
 
 		@Override

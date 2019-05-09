@@ -256,7 +256,7 @@ public class DataImpl implements DataInterface {
 		// TODO Auto-generated method stub
 		/*getEmployeeReport() //which returns a list of transactions to be formated
 		 */
-		
+		if( startDate==null | endDate==null) {throw new DateException();}
 		if(startDate.compareTo(endDate) > 0) {
 			throw new DateException();
 		}
