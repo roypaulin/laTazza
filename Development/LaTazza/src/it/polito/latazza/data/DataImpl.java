@@ -5,27 +5,17 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 
 import java.lang.Math;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-
-import org.junit.platform.commons.util.StringUtils;
-
 import it.polito.latazza.exceptions.BeverageException;
 import it.polito.latazza.exceptions.DateException;
 import it.polito.latazza.exceptions.EmployeeException;
 import it.polito.latazza.exceptions.NotEnoughBalance;
 import it.polito.latazza.exceptions.NotEnoughCapsules;
-import it.polito.latazza.LaTazza;
 import it.polito.latazza.data.Beverage;
 import it.polito.latazza.data.Database;
 import it.polito.latazza.data.Transaction;
