@@ -1,107 +1,1 @@
-
-# Unit Testing Documentation template
-
-Authors:
-
-Date:
-
-Version:
-
-# Contents
-
-- [Black Box Unit Tests](#black-box-unit-tests)
-
-
-
-
-- [White Box Unit Tests](#white-box-unit-tests)
-
-
-# Black Box Unit Tests
-
-    <Define here criteria, predicates and the combination of predicates for each function of each class.
-    Define test cases to cover all equivalence classes and boundary conditions.
-    In the table, report the description of the black box test case and the correspondence with the JUnit black box test case name/number>
-
- ### **Class *class_name* - method *name***
-
-
-
-**Criteria for method *name*:**
-	
-
- - 
- - 
-
-
-
-
-
-**Predicates for method *name*:**
-
-| Criteria | Predicate |
-| -------- | --------- |
-|          |           |
-|          |           |
-|          |           |
-|          |           |
-
-
-
-
-
-**Boundaries**:
-
-| Criteria | Boundary values |
-| -------- | --------------- |
-|          |                 |
-|          |                 |
-
-
-
-**Combination of predicates**:
-
-
-| Criteria 1 | Criteria 2 | ... | Valid / Invalid | Description of the test case | JUnit test case |
-|-------|-------|-------|-------|-------|-------|
-|||||||
-|||||||
-|||||||
-|||||||
-|||||||
-
-
-
-
-# White Box Unit Tests
-
-### Test cases definition
-
-    <Report here all the created JUnit test cases, and the units/classes they test >
-
-
-| Unit name | JUnit test case |
-|--|--|
-|||
-|||
-||||
-
-### Code coverage report
-
-    <Add here the screenshot report of the code and branch coverage obtained using
-    the Jacoco tool. >
-
-
-### Loop coverage analysis
-
-    <Identify significant loops in the units and reports the test cases
-    developed to cover zero, one or multiple iterations >
-
-|Unit name | Loop rows | Number of iterations | JUnit test case |
-|---|---|---|---|
-|||||
-|||||
-||||||
-
-
-
+﻿﻿- 1. - 1. - # Unit Testing Documentation templateAuthors:Date:Version:# Contents- [Black Box Unit Tests](#black-box-unit-tests)- [White Box Unit Tests](#white-box-unit-tests)# Black Box Unit Tests    <Define here criteria, predicates and the combination of predicates for each function of each class.    Define test cases to cover all equivalence classes and boundary conditions.    In the table, report the description of the black box test case and the correspondence with the JUnit black box test case name/number> ### **Class *DataImpl.java* - method getBeverageCapsules****Criteria for method getBeverageCapsules:**	 - id is valid **Predicates for method getBeveragesCapsules*:**| Criteria | Predicate || -------- | --------- ||     id is valid     |        yes   ||          |     no      | ### **Class *DataImpl.java* - method getBeverages****Criteria for method getBeverages:**	 - return value is correct **Predicates for method *getBeverages*:**| Criteria | Predicate || -------- | --------- ||     return value is correct     |        yes   ||          |     no      |**Boundaries**:| Criteria | Boundary values || -------- | --------------- ||     return value     |          empty map      | ### **Class *DataImpl.java* - method getBeveragesId****Criteria for method getBeverages:**	 - return value is correct **Predicates for method *getBeverages*:**| Criteria | Predicate || -------- | --------- ||     return value is correct     |        yes   ||          |     no      |**Boundaries**:| Criteria | Boundary values || -------- | --------------- ||     return value     |          empty List      | ### **Class *DataImpl.java* - method getBeverageBoxPrice****Criteria for method getBeverageBoxPrice:**	 - id is correct **Predicates for method *getBeverageBoxPrice*:**| Criteria | Predicate || -------- | --------- ||     id is correct     |        yes   ||          |     no      | ### **Class *DataImpl.java* - method getBeverageCapsulesPerBox****Criteria for method getBeverageCapsulesPerbox:**	 - id is correct **Predicates for method *getBeverageCapsulesPerBox*:**| Criteria | Predicate || -------- | --------- ||     id is correct     |        yes   ||          |     no      | ### **Class *DataImpl.java* - method getBeverageName****Criteria for method getBeverageName:**	 - id is correct **Predicates for method *getBeverageName*:**| Criteria | Predicate || -------- | --------- ||     id is correct     |        yes   ||          |     no      | ### **Class *DataImpl.java* - method updateBeverage****Criteria for method updateBeverage:**	 - id is valid - range of capsulesPerbox  - range of boxPrice **Predicates for method *updateBeverage*:**| Criteria | Predicate || -------- | --------- ||     id is valid     |        yes   ||          |     no      ||   range of capsulesPerbox     |   >0        ||          |        <0  || range of boxPrice        |    >0       ||          |    <0       |**Boundaries**:| Criteria | Boundary values || -------- | --------------- ||     range of capsulesPerBox     |         minint,0,maxint        ||     range of boxPrice     |      minint,0,maxint           |**Combination of predicates**:| id is valid | range of CapsulesPerBox | range of boxPrice | Valid / Invalid | Description of the test case | JUnit test case ||-------|-------|-------|-------|-------|-------||yes|>0|>0|Valid|everything is good so the beverage should be updated|testUpdateBeverageWithSuccess||yes|>0|<0|Invalid|The beverage should not be updated|testUpdateBeverageWrongAttributes||yes|<0|>0|Invalid|The beverage should not be unpdated|testUpdateBeverageWrongAttributes||yes|<0|<0|Invalid|The beverage should not be testUpdated|updateBeverageWrongAttributes||no|>0|>0|Invalid| the beverage should not be updated|testUpdateBeverageWrongId||no|>0|<0|Invalid|The beverage should not be updated|testUpdateBeverageWrongId||no|<0|>0|Invalid|The beverage should not be unpdated|testUpdateBeverageWrongId||no|>0|<0|Invalid|The beverage should not be updated|testUpdateBeverageWrongId| ### **Class *DataImpl.java* - method createBeverage****Criteria for method createBeverage:**	 - range of capsulesPerbox  - range of boxPrice **Predicates for method *createBeverage*:**| Criteria | Predicate || -------- | --------- ||   range of capsulesPerbox     |   >0        ||          |        <0  || range of boxPrice        |    >0       ||          |    <0       |**Boundaries**:| Criteria | Boundary values || -------- | --------------- ||     range of capsulesPerBox     |         minint,0,maxint        ||     range of boxPrice     |      minint,0,maxint           |**Combination of predicates**:| range of CapsulesPerBox | range of boxPrice | Valid / Invalid | Description of the test case | JUnit test case ||-------|-------|-------|-------|-------||>0|>0|Valid|everything is good so the beverage should be created|testCreateBeverage||>0|<0|Invalid|The beverage should not be created|testCreateBeverageWrongAttributes||<0|>0|Invalid|The beverage should not be created|testCreateBeverageWrongAttributes||<0|<0|Invalid|The beverage should not be created|testCreateBeverageWrongAttributes| ### **Class *DataImpl.java* - method getReport****Criteria for method getReport:**	 - startDate is valid - endDate is valid  - startDate < endDate ? **Predicates for method *getReport*:**| Criteria | Predicate || -------- | --------- ||   startDate is valid     |   yes        ||          |        no  || endDate is valid       |    yes       ||          |    no       ||    startDate < endDate ?     |       yes        |               |          |          no     |                      **Combination of predicates**:| startDate is valid | endDate is valid | startDate < endDate | Valid / Invalid | Description of the test case | JUnit test case ||-------|-------|-------|-------|-------|-------||yes|yes|yes|Valid|everything is good|tesgetReport||yes|yes|no|Invalid|we should throw a DateException|testGetReportWrongDate||yes|no|yes|Invalid|we should throw a DateException|testGetReportNullDate||yes|no|no|Invalid|we should throw a DateException|testGetReportNullDate||no|>0|>0|Invalid| the beverage should not be updated|testUpdateBeverageWrongId||no|>0|<0|Invalid|The beverage should not be updated|testUpdateBeverageWrongId||no|<0|>0|Invalid|The beverage should not be unpdated|testUpdateBeverageWrongId||no|>0|<0|Invalid|The beverage should not be updated|testUpdateBeverageWrongId|# White Box Unit Tests### Test cases definition    <Report here all the created JUnit test cases, and the units/classes they test >| Unit name | JUnit test case ||--|--|||||||||||### Code coverage report    <Add here the screenshot report of the code and branch coverage obtained using    the Jacoco tool. >### Loop coverage analysis    <Identify significant loops in the units and reports the test cases    developed to cover zero, one or multiple iterations >|Unit name | Loop rows | Number of iterations | JUnit test case ||---|---|---|---|||||||||||||||||

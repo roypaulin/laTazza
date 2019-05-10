@@ -185,8 +185,6 @@ public class DataImpl implements DataInterface {
 	 * 	@TODO AFTER @elia MODIFY THE DATE FORMAT, I SHOULD UPDATE THE DATE OF THE TRANSACTION CREATION : DONE
 	 * */
 	public void buyBoxes(Integer beverageId, Integer boxQuantity) throws BeverageException, NotEnoughBalance {
-		// TODO Auto-generated method stub
-		/*i first update by increasing the total number of capsules available*/
 		Beverage bev ;
 		float amount;
 		try {
@@ -208,7 +206,7 @@ public class DataImpl implements DataInterface {
 				//throw new NotEnoughBalance();
 				//these are specifics errors: is it correct to throw this exception??o or it's better to do nothing
 			 }
-			 //float balance = (float)d.getBalance();
+			 
 			 if((balance-amount)< 0) {
 				 throw new NotEnoughBalance();
 			 }
@@ -222,7 +220,7 @@ public class DataImpl implements DataInterface {
             try {
 		       database.updateBalance(balance-amount);
 	       } catch (Exception e1) {
-		      // TODO Auto-generated catch block
+		     
 	    	   System.out.println("unable to update la tazza balance");
 		    e1.printStackTrace();
 	      }
@@ -240,12 +238,10 @@ public class DataImpl implements DataInterface {
 	}
 
 	@Override
-	/* @author jean thibaut */
+	// @author jean thibaut 
 	public List<String> getEmployeeReport(Integer employeeId, Date startDate, Date endDate)
 			throws EmployeeException, DateException {
-		// TODO Auto-generated method stub
-		/*getEmployeeReport() //which returns a list of transactions to be formated
-		 */
+		
 		if( startDate==null | endDate==null) {throw new DateException();}
 		if(startDate.compareTo(endDate) > 0) {
 			throw new DateException();
@@ -297,9 +293,8 @@ public class DataImpl implements DataInterface {
 	}
 
 	@Override
-	/* @author jean thibaut
-	 * @TODO AFTER @elia MODIFY THE DATE FORMAT, I SHOULD UPDATE THE DATE FORMAT I PASS TO GERPORT() AND GETREPORTEMPLOYEE
-	 *  */
+	//@author jean thibaut
+	
 	public List<String> getReport(Date startDate, Date endDate) throws DateException {
 		// TODO Auto-generated method stub
 
@@ -318,7 +313,6 @@ public class DataImpl implements DataInterface {
        try {
 		transactionList = database.getReport(startDate, endDate);
 	  } catch (Exception e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	  }
        
@@ -355,8 +349,6 @@ public class DataImpl implements DataInterface {
     				   else {//the transaction is related to a visitor
     					   s = s+" VISITOR"+" "+bev.getName()+" "+t.getNumberOfCapsules();
     				   }
-    				 
-    				 //s=s+" "+emp.getName()+" "+emp.getSurname()+" "+bev.getName()+" "+t.getNumberOfCapsules(); 
     			 }
     			 
     			 if(t.getType() == 'R') {
@@ -388,11 +380,8 @@ public class DataImpl implements DataInterface {
 	@Override
 	/* @author jean thibaut */
 	public Integer createBeverage(String name, Integer capsulesPerBox, Integer boxPrice) throws BeverageException {
-		// TODO Auto-generated method stub
-		/*call constructor to create a beverage object
-		  addBeverage()
-		 */
-		Integer id=0;
+	
+		Integer id=-1;
 		Beverage b= new Beverage(-1,0,boxPrice,capsulesPerBox,name);
 		try{
 			id=database.addBeverage(b);
@@ -416,18 +405,11 @@ public class DataImpl implements DataInterface {
 			throw new BeverageException() ;
 			
 		}
-		// TODO Auto-generated method stub
-		/* updateBeverageAttributes
-		 */
-		
 	}
 
 	@Override
 	/* @author jean thibaut */
 	public String getBeverageName(Integer id) throws BeverageException {
-		// TODO Auto-generated method stub
-		/*getBeverageData().getName()
-		 */
 		String name;
 		try {
 		    name = database.getBeverageData(id).getName();
@@ -443,9 +425,6 @@ public class DataImpl implements DataInterface {
 	@Override
 	/* @author jean thibaut */
 	public Integer getBeverageCapsulesPerBox(Integer id) throws BeverageException {
-		// TODO Auto-generated method stub
-		/*getBeverageData().getCapsulesPerBox()
-		 */
 		Integer capsulesPerBox;
 		try {
 		   capsulesPerBox = database.getBeverageData(id).getCapsulePerBox();
@@ -460,9 +439,6 @@ public class DataImpl implements DataInterface {
 	@Override
 	/* @author jean thibaut */
 	public Integer getBeverageBoxPrice(Integer id) throws BeverageException {
-		// TODO Auto-generated method stub
-		/*getBeverageData().getBeverageBoxPrice()
-		 */
 		float price;
 		try {
 		    price = (float)database.getBeverageData(id).getBoxPrice();
@@ -477,9 +453,7 @@ public class DataImpl implements DataInterface {
 	@Override
 	/* @author jean thibaut */
 	public List<Integer> getBeveragesId() {
-		// TODO Auto-generated method stub
-		/*getBeverageData().getId()
-		 */
+		
 		List<Integer> beveragesId = new ArrayList<>();
 		List<Beverage> beverages = new ArrayList<>();
 		try{
@@ -497,9 +471,7 @@ public class DataImpl implements DataInterface {
 	@Override
 	/* @author jean thibaut */
 	public Map<Integer, String> getBeverages() {
-		// TODO Auto-generated method stub
-		/*getListOfBeverage() //then transforms in Map
-		 */
+		
 		Map<Integer, String> mapBeverages = new HashMap<>();
 		List<Beverage> beverages = new ArrayList<>();
 		try{
@@ -516,10 +488,7 @@ public class DataImpl implements DataInterface {
 	@Override
 	/* @author jean thibaut */
 	public Integer getBeverageCapsules(Integer id) throws BeverageException {
-		// TODO Auto-generated method stub
-		/*getBeverageData().getCapsulesAvailable()
-		 */
-		 
+		
 		Integer quantityAvailable;	
 		 try {
 			   quantityAvailable = database.getBeverageData(id).getQuantityAvailable();
@@ -534,10 +503,7 @@ public class DataImpl implements DataInterface {
 	@Override
 	/* @author roy paulin */
 	public Integer createEmployee(String name, String surname) throws EmployeeException {
-		// TODO Auto-generated method stub
-		/*call constructor to create a employee object
-		addEmployee()
-		 */
+		
 		Integer id=0;
 		Employee em= new Employee(-1,name,surname,0.0);
 		try{
@@ -561,9 +527,6 @@ public class DataImpl implements DataInterface {
 				throw new EmployeeException() ;
 				
 			}
-		// TODO Auto-generated method stub
-		/* updateEmployeeAttributes
-		 */
 	}
 
 	@Override

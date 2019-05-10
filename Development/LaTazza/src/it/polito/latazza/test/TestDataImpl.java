@@ -51,6 +51,24 @@ public class TestDataImpl {
 		assertEquals(100,bev.getBoxPrice());
 	}
 	
+	
+	@Test
+	public void testCreateBeverageWronAttributes() throws Exception{
+		dataImpl.reset();
+		int id=-1;
+		try {
+		id=dataImpl.createBeverage("coffee",10, -100);
+		fail();
+		}catch(BeverageException be) {
+			//the id should not be updated so it's value should be -1
+			assertEquals(id,-1);
+		}
+		
+		/*Beverage bev = database.getBeverageData(id);
+		assertEquals("coffee",bev.getName());
+		assertEquals(10,bev.getCapsulePerBox());
+		assertEquals(100,bev.getBoxPrice());*/
+	}
 	@Test
 	public void testUpdateBeverageWithSuccess() throws Exception {
 		dataImpl.reset();
@@ -210,6 +228,13 @@ public class TestDataImpl {
 		assertEquals(expectedMap,returnMap);
     }
     
+    @Test
+    public void testGetBeveragesEmptyList() throws BeverageException {
+    	dataImpl.reset();
+    	Map<Integer, String> returnMap = new HashMap<>();
+		returnMap= dataImpl.getBeverages();
+		assertTrue(returnMap.isEmpty());
+    }
     @Test
     public void testGetBeverageCapsulesZeroBoundary() throws Exception {
     	dataImpl.reset();
