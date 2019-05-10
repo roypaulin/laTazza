@@ -181,9 +181,9 @@ public class DataImpl implements DataInterface {
 
 	
 	@Override
-	/* @author jean thibaut 
-	 * 	@TODO AFTER @elia MODIFY THE DATE FORMAT, I SHOULD UPDATE THE DATE OF THE TRANSACTION CREATION : DONE
-	 * */
+	// @author jean thibaut 
+	
+	
 	public void buyBoxes(Integer beverageId, Integer boxQuantity) throws BeverageException, NotEnoughBalance {
 		Beverage bev ;
 		float amount;

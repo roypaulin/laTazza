@@ -745,10 +745,12 @@ public class TestDataImpl {
     @Test
     public void TestGetEmployeeReportWrongDate() throws Exception {
     	dataImpl.reset();
-    	//pass null dates so i should catch an exception: startDate > endDate
+    	Integer empId= dataImpl.createEmployee("ndjekoua", "sandjo");
+    	dataImpl.rechargeAccount(empId,500);// this should create a transaction of TYPE=R
+    	//: startDate > endDate
     	
     	try {
-    		dataImpl.getEmployeeReport(-1,shiftDate(+2), shiftDate(-1));
+    		dataImpl.getEmployeeReport(empId,shiftDate(+2), shiftDate(-1));
     		fail();
     	}catch(DateException e) {
     		assertTrue(true);
