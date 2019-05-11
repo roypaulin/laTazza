@@ -46,9 +46,6 @@ public class Employee {
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
-	public void setCredit(double c) {
-		this.credit=c;
-	}
 
 	public void updateCredit(double amount) throws EmployeeException{
 		// TODO Auto-generated method stub

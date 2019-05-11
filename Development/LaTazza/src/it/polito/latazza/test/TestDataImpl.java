@@ -252,6 +252,32 @@ public class TestDataImpl {
 		Integer capsulesQuantity = bev.getQuantityAvailable();
 		assertEquals(capsulesQuantity,10);
     }
+    @Test
+    public void testGetBeverageCapsulesSuccess() throws Exception {
+    	dataImpl.reset();
+    	int id;
+		id=dataImpl.createBeverage("coffee",10, 100);
+		Beverage bev = database.getBeverageData(id);
+		bev.setQuantityAvailable(10);
+		database.updateBeverage(bev);
+		Integer capsulesQuantity = dataImpl.getBeverageCapsules(id);
+		assertEquals(capsulesQuantity,10);
+    }
+    @Test
+    public void testGetBeverageCapsulesWrongId() throws Exception {
+    	dataImpl.reset();
+    	int id;
+		id=dataImpl.createBeverage("coffee",10, 100);
+		Beverage bev = database.getBeverageData(id);
+		bev.setQuantityAvailable(10);
+		database.updateBeverage(bev);
+		try {
+		 dataImpl.getBeverageCapsules(-2);
+		fail();
+		}catch(BeverageException be) {
+			assertTrue(true);
+		}
+    }
     
     @Test
     public void testBuyBoxesSuccess() throws Exception {
