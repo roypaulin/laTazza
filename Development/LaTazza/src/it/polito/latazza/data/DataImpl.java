@@ -505,7 +505,7 @@ public class DataImpl implements DataInterface {
 	public Integer createEmployee(String name, String surname) throws EmployeeException {
 		
 		Integer id=0;
-		if((name!="" && name!= null) && (surname!="" && surname!= null) ) { 
+		if((name!="") && (surname!="") ) { 
 		Employee em= new Employee(-1,name,surname,0.0);
 		try{
 			id=database.addEmployee(em);

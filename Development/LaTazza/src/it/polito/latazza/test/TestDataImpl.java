@@ -451,6 +451,20 @@ public class TestDataImpl {
 		
 	}
     
+    
+    @Test
+   	public void testCreateEmployeeMissingParameters() throws Exception{
+   		dataImpl.reset();
+   		int id=-1;
+   		id=dataImpl.createEmployee("john", "");
+   		assertEquals(id,-1);
+   		dataImpl.createEmployee("", "doe");
+   		dataImpl.createEmployee("", "");
+   		
+   		assertEquals(dataImpl.getEmployeesId().size(),0);
+   		
+   	}
+    
     @Test
 	public void testUpdateEmployee() throws Exception {
 		dataImpl.reset();
