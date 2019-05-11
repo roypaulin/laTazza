@@ -53,7 +53,7 @@ public class TestDataImpl {
 	
 	
 	@Test
-	public void testCreateBeverageWronAttributes() throws Exception{
+	public void testCreateBeverageWrongAttributes() throws Exception{
 		dataImpl.reset();
 		int id=-1;
 		try {
@@ -64,10 +64,6 @@ public class TestDataImpl {
 			assertEquals(id,-1);
 		}
 		
-		/*Beverage bev = database.getBeverageData(id);
-		assertEquals("coffee",bev.getName());
-		assertEquals(10,bev.getCapsulePerBox());
-		assertEquals(100,bev.getBoxPrice());*/
 	}
 	@Test
 	public void testUpdateBeverageWithSuccess() throws Exception {
