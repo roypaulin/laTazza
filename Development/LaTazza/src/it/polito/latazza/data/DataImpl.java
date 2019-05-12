@@ -132,16 +132,17 @@ public class DataImpl implements DataInterface {
 	@Override
 	/* @author roy paulin */
 	public Integer rechargeAccount(Integer id, Integer amountInCents) throws EmployeeException {
-		// TODO Auto-generated method stub
+		
 		Employee emp;
 		try {
 			emp=database.getEmployeeData(id);
-			emp.updateCredit(amountInCents);
+			
 		}catch(Exception e) {
 			throw new EmployeeException();
 		}
-		//if()
+		if(amountInCents>0) {
 		try {
+			emp.updateCredit(amountInCents);
 			database.updateEmployee(emp);
 		}catch(Exception e) {
 			throw new EmployeeException();
@@ -162,13 +163,9 @@ public class DataImpl implements DataInterface {
 	}catch(Exception e) {
 		System.out.println("Unable to regsiter the transaction");
 	}
-		
+	}
 		return Math.round((float)emp.getCredit());
-		/*
-		 * getEmployeeData()
-		 * updateEmployeeCredit()
-		 * create a new object transaction of type recharge and insert it in the database
-		 * */
+		
 	}
 
 	
