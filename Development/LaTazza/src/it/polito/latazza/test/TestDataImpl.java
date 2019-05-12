@@ -408,9 +408,76 @@ public class TestDataImpl {
     	  System.out.println("correctly throws exception because there in not enough capsules for this beverage");
       }
     }
+    @Test
+    public void testSellCapsulesNotEnoughCapsules() throws Exception{
+    	dataImpl.reset();
+        int id1=dataImpl.createEmployee("john","doe");
+        int id2=dataImpl.createBeverage("tea", 10, 10);
+        
+       dataImpl.rechargeAccount(id1, 10);
+        
+        try {
+        dataImpl.sellCapsules(id1, id2, 1, true);
+        } catch(NotEnoughCapsules e) {
+      	  System.out.println("correctly throws exception because there in not enough capsules for this beverage");
+        }
+        
+        try {
+            dataImpl.sellCapsules(id1, id2, 1, false);
+            } catch(NotEnoughCapsules e) {
+          	  System.out.println("correctly throws exception because there in not enough capsules for this beverage");
+            }
+    }
     
     @Test
-     public void testsellCapsulesToVisitor() throws Exception {
+    public void testSellCapsulesNotEnoughMoney() throws Exception{
+    	dataImpl.reset();
+        int id1=dataImpl.createEmployee("john","doe");
+        int id2=dataImpl.createBeverage("tea", 10, 10);
+    	database.updateBalance(400);
+        dataImpl.buyBoxes(id2, 1);
+        try {
+        	 dataImpl.sellCapsules(id1, id2, 1, true);
+        }catch(Exception e) {
+        	 System.out.println("unable to complte the operation because there is no enough credit in the employee account");
+			    e.printStackTrace();
+        }
+    }
+    @Test
+    public void testSellCapsulesWrongAttributes() throws Exception {
+    	
+    	dataImpl.reset();
+        int id1=dataImpl.createEmployee("john","doe");
+        int id2=dataImpl.createBeverage("tea", 10, 10);
+        database.updateBalance(400);
+        dataImpl.buyBoxes(id2, 1);
+        dataImpl.rechargeAccount(id1, 10);
+        try {
+        	 dataImpl.sellCapsules(-1, id2, 1, true);
+        }catch(EmployeeException em) {
+        	 System.out.println("correctly throws exception because Employee id is not valid");
+        }
+        
+        try {
+        	 dataImpl.sellCapsules(id1, -1, 1, true);
+        }catch(BeverageException be) {
+        	 System.out.println("correctly throws exception because Beverage id is not valid");
+        }
+    	
+        dataImpl.sellCapsules(id1, id2, -1, true);
+        Employee emp=database.getEmployeeData(id1);
+        Beverage bev=database.getBeverageData(id2);
+        assertEquals(emp.getCredit(),10);
+       assertEquals(bev.getQuantityAvailable(),10);
+       
+        dataImpl.sellCapsules(id1, id2, -1, false);
+        emp=database.getEmployeeData(id1);
+        bev=database.getBeverageData(id2);
+        assertEquals(emp.getCredit(),10);
+        assertEquals(bev.getQuantityAvailable(),10);
+    }
+    @Test 
+     public void testSellCapsulesToVisitor() throws Exception {
     	dataImpl.reset();
     	
     	int bev1=dataImpl.createBeverage("tea", 20, 40);

@@ -47,6 +47,7 @@ public class DataImpl implements DataInterface {
 		}catch(Exception e) {
 			throw new BeverageException();
 		}
+		if(numberOfCapsules>=0) {
 		double d=(numberOfCapsules*(be.getBoxPrice()/be.getCapsulePerBox()));
 		if(fromAccount) {
 			emp.updateCredit(-1.0*d);
@@ -81,6 +82,7 @@ public class DataImpl implements DataInterface {
 		}catch(Exception e) {
 			System.out.println("Unable to regsiter the transaction");
 		}
+	}
 		/*
 		 * getEmployeeData()
 		 * updatecredit() // same as updateBeveragequantity()
