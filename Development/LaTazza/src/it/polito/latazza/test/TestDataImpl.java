@@ -606,6 +606,13 @@ public class TestDataImpl {
     }
     
     @Test
+    public void testGetEmployeesEmptyMap() throws BeverageException {
+    	dataImpl.reset();
+    	Map<Integer, String> returnMap = new HashMap<>();
+		returnMap= dataImpl.getEmployees();
+		assertTrue(returnMap.isEmpty());
+    }
+    @Test
     public void testGetBalance() throws Exception {
     	assertEquals(dataImpl.getBalance(),0);
     	database.updateBalance(100.50);
