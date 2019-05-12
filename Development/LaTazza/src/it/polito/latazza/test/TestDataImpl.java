@@ -379,34 +379,6 @@ public class TestDataImpl {
       q=bev.getQuantityAvailable();
       assertEquals(q,10-1-1-1);
       
-      //using a non valid beverage id to buy boxes
-      try {
-    	  dataImpl.buyBoxes(-2, 1);
-      }catch(BeverageException e) {
-    	  System.out.println("correctly throws exception because Beverage id is not valid");
-      }
-      
-      //using a non valid employee id to recharge account
-      try {
-    	  dataImpl.rechargeAccount(-1, 10);
-      }catch(EmployeeException e) {
-    	  System.out.println("correctly throws exception because Employee id is not valid");
-      }
-      
-      //try to sell capsules to an employee with not enough credit
-      try {
-      dataImpl.sellCapsules(emp2, bev1, 1, true);
-      }catch(EmployeeException e) {
-    	  System.out.println("correctly throws exception because Employee account does not have enough credit");
-      }
-      
-      //try to sell capsules whose available quantity is not enough
-      dataImpl.rechargeAccount(emp2, 20);
-      try {
-    	  dataImpl.sellCapsules(emp2, bev1, 11, true);
-      }catch(NotEnoughCapsules e) {
-    	  System.out.println("correctly throws exception because there in not enough capsules for this beverage");
-      }
     }
     @Test
     public void testSellCapsulesNotEnoughCapsules() throws Exception{
@@ -495,17 +467,46 @@ public class TestDataImpl {
     	//check transactions have been created
     	 List<Transaction> transactionList=database.getReport(shiftDate(-1), shiftDate(1));
          assertEquals(transactionList.size(),2);
-         
-         //try to sell capsules whose available quantity is not enough
-         
-         try {
-       	  dataImpl.sellCapsulesToVisitor(bev1, 40);
-         }catch(NotEnoughCapsules e) {
-       	  System.out.println("correctly throws exception because there in not enough capsules for this beverage");
-         }
+        
     	
     }
 	
+    @Test 
+    public void testSellCapsulesToVisitorNotEnoughCapsules() throws Exception {
+   	dataImpl.reset();
+   	
+    int id1=dataImpl.createBeverage("tea", 10, 10);
+   	
+    try {
+        dataImpl.sellCapsulesToVisitor(id1,1);
+        } catch(NotEnoughCapsules e) {
+      	  System.out.println("correctly throws exception because there in not enough capsules for this beverage");
+        }
+    }
+    
+    @Test 
+    public void testSellCapsulesToVisitorWrongAttributes() throws Exception {
+   	dataImpl.reset();
+   	int id1=dataImpl.createBeverage("tea", 10, 10);
+   	database.updateBalance(100);
+   	dataImpl.buyBoxes(id1, 1);
+    try {
+    	 dataImpl.sellCapsulesToVisitor(-1,1);
+   }catch(BeverageException be) {
+   	 System.out.println("correctly throws exception because Beverage id is not valid");
+   }
+    
+    try {
+   	 dataImpl.sellCapsulesToVisitor(-1,-1);
+  }catch(BeverageException be) {
+  	 System.out.println("correctly throws exception because Beverage id is not valid");
+  }
+    
+    dataImpl.sellCapsulesToVisitor(id1, -1);
+    Beverage bev=database.getBeverageData(id1);
+   assertEquals(bev.getQuantityAvailable(),10);
+    }
+    
     @Test
     public void testRechargeAccount() throws Exception{
     	dataImpl.reset();

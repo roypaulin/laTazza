@@ -47,7 +47,7 @@ public class DataImpl implements DataInterface {
 		}catch(Exception e) {
 			throw new BeverageException();
 		}
-		if(numberOfCapsules>=0) {
+		if(numberOfCapsules>0) {
 		double d=(numberOfCapsules*(be.getBoxPrice()/be.getCapsulePerBox()));
 		if(fromAccount) {
 			emp.updateCredit(-1.0*d);
@@ -83,19 +83,7 @@ public class DataImpl implements DataInterface {
 			System.out.println("Unable to regsiter the transaction");
 		}
 	}
-		/*
-		 * getEmployeeData()
-		 * updatecredit() // same as updateBeveragequantity()
-		 * getBevarageData()
-		 * getQauntityavailable()
-		 * getBevaragePrice()
-		 * updateCapsuleQuantity() // try to increment or decrement th capsules's quantity and throws exeptionin case of error
-		 * updateBeverageQauntity()// done on the database
-		 * if fromAccount==true => updateBalance() from LaTazza on the database
-		 * updateEmployeeCredit() // done on the data base
-		 * create a new object transaction of type consumption and insert it in the databas
-		 * */
-		// TODO Auto-generated method stub
+		
 		
 		
 		return Math.round((float)emp.getCredit());
@@ -112,6 +100,7 @@ public class DataImpl implements DataInterface {
 		}catch(Exception e) {
 			throw new BeverageException();
 		}
+		if(numberOfCapsules>0) {
 		be.updateCapsuleQuantity(-1*numberOfCapsules);
 		try {
 			database.updateBeverage(be);
@@ -119,6 +108,8 @@ public class DataImpl implements DataInterface {
 		}catch(Exception e) {
 			throw new BeverageException();
 		}
+		
+		
 		double d=(numberOfCapsules*(be.getBoxPrice()/be.getCapsulePerBox()));
 		 try {
 			 double balance=database.getBalance();
@@ -134,9 +125,8 @@ public class DataImpl implements DataInterface {
 		}catch(Exception e) {
 			System.out.println("Unable to regsiter the transaction");
 		}
-		// TODO Auto-generated method stub
-		/*Same as before with the only difference that the transaction that will be created will have some 
-		 * attributes set to NULL*/
+	}
+		
 	}
 
 	@Override
