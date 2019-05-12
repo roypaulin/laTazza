@@ -22,21 +22,296 @@ Version:
     Define test cases to cover all equivalence classes and boundary conditions.
     In the table, report the description of the black box test case and the correspondence with the JUnit black box test case name/number>
 
+
+
+
+ ### **Class *TestDatabase.java* - method testDatabaseTruncate**
+
+
+
+**Criteria for method truncateTables:**
+
+
+ - exception does not occure
+
+
+
+
+
+
+**Predicates for method *truncateTables*:**
+
+| Criteria | Predicate |
+| -------- | --------- |
+|     exception does not occure     |        yes   |
+|          |     no      |
+
+
+
+ ### **Class *TestDatabase.java* - method testDatabaseAddEmployee**
+
+
+
+**Criteria for method addEmployee:**
+
+
+ - id is correct
+
+
+
+
+
+
+**Predicates for method *addEmployee*:**
+
+| Criteria | Predicate |
+| -------- | --------- |
+|     id is correct     |        yes   |
+|          |     no      |
+
+
+
+
+ ### **Class *TestDatabase.java* - method testDatabaseGetEmployee**
+
+
+
+**Criteria for method getListEmployee:**
+
+
+ - list is full
+
+
+
+
+
+
+**Predicates for method *getListEmployee*:**
+
+| Criteria | Predicate |
+| -------- | --------- |
+|     list is full     |        yes   |
+|          |     no      |
+
+
+ ### **Class *TestDatabase.java* - method testDatabaseUpdateBalance**
+
+
+
+**Criteria for method updateBalance:**
+
+
+ - balance is correct
+
+
+
+
+
+
+**Predicates for method *updateBalance*:**
+
+| Criteria | Predicate |
+| -------- | --------- |
+|     balance is correct     |        yes   |
+|          |     no      |
+
+ ### **Class *TestDatabase.java* - method testDatabaseAddBeverage**
+
+
+
+**Criteria for method addBeverage:**
+
+
+ - id is correct
+
+
+
+
+
+
+**Predicates for method *addBeverage*:**
+
+| Criteria | Predicate |
+| -------- | --------- |
+|     id is correct     |        yes   |
+|          |     no      |
+
+
+
+ ### **Class *TestDatabase.java* - method testDatabaseGetBeverage**
+
+
+
+**Criteria for method getBeverage:**
+
+
+ - beverage is correct
+
+
+
+
+
+
+**Predicates for method *getBeverage*:**
+
+| Criteria | Predicate |
+| -------- | --------- |
+|     beverage is correct     |        yes   |
+|          |     no      |
+
+
+
+
+ ### **Class *TestDatabase.java* - method testDatabaseGetListBeverage**
+
+
+
+**Criteria for method getListBeverage:**
+
+
+ - list is full
+
+
+
+
+
+
+**Predicates for method *getListBeverage*:**
+
+| Criteria | Predicate |
+| -------- | --------- |
+|     list is full     |        yes   |
+|          |     no      |
+
+
+ ### **Class *TestDatabase.java* - method testDatabaseAddTransaction**
+
+
+
+**Criteria for method AddTransaction:**
+
+
+ - id is correct
+
+
+
+
+
+
+**Predicates for method *AddTransaction*:**
+
+| Criteria | Predicate |
+| -------- | --------- |
+|     id is correct     |        yes   |
+|          |     no      |
+
+
+
+ ### **Class *TestDatabase.java* - method testDatabaseUpdateBeverage**
+
+
+
+**Criteria for method updateBeverage:**
+
+
+ - beverage is correct
+
+
+
+
+
+
+**Predicates for method *AddTransaction*:**
+
+| Criteria | Predicate |
+| -------- | --------- |
+|     beverage is correct     |        yes   |
+|          |     no      |
+
+
+### **Class *TestDatabase.java* - method testDatabaseUpdateEmployee**
+
+
+
+**Criteria for method updateEmployee:**
+
+
+ - employee is correct
+
+
+
+
+
+
+**Predicates for method *updateEmployee*:**
+
+| Criteria | Predicate |
+| -------- | --------- |
+|     employee is correct     |        yes   |
+|          |     no      |
+
+
+
+### **Class *TestDatabase.java* - method testDatabaseGetEmployeeRecord**
+
+
+
+**Criteria for method getEmployeeReport:**
+
+
+ - list of transaction is correct
+
+
+
+
+
+
+**Predicates for method *getEmployeeReport*:**
+
+| Criteria | Predicate |
+| -------- | --------- |
+|     list of transaction is correct     |        yes   |
+|          |     no      |
+
+
+### **Class *TestDatabase.java* - method testDatabaseGetListOfTransactions**
+
+
+
+**Criteria for method getListOfTransactions:**
+
+
+ - list of transaction is correct
+
+
+
+
+
+
+**Predicates for method *getEmployeeReport*:**
+
+| Criteria | Predicate |
+| -------- | --------- |
+|     list of transaction is correct     |        yes   |
+|          |     no      |
+
+
+
+
+
+
  ### **Class *DataImpl.java* - method getBeverageCapsules**
 
 
 
 **Criteria for method getBeverageCapsules:**
-	
+
 
  - id is valid
- 
 
 
 
-
-
-**Predicates for method getBeveragesCapsules*:**
+**Predicates for method *getBeveragesCapsules*:**
 
 | Criteria | Predicate |
 | -------- | --------- |
@@ -49,10 +324,10 @@ Version:
 
 
 **Criteria for method getBeverages:**
-	
+
 
  - return value is correct
- 
+
 
 
 
@@ -78,10 +353,10 @@ Version:
 
 
 **Criteria for method getBeverages:**
-	
+
 
  - return value is correct
- 
+
 
 
 
@@ -91,7 +366,8 @@ Version:
 
 | Criteria | Predicate |
 | -------- | --------- |
-|     return value is correct     |        yes   |
+|     return v
+alue is correct     |        yes   |
 |          |     no      |
 
 
@@ -107,10 +383,10 @@ Version:
 
 
 **Criteria for method getBeverageBoxPrice:**
-	
+
 
  - id is correct
- 
+
 
 
 
@@ -131,10 +407,10 @@ Version:
 
 
 **Criteria for method getBeverageCapsulesPerbox:**
-	
+
 
  - id is correct
- 
+
 
 
 
@@ -153,10 +429,10 @@ Version:
 
 
 **Criteria for method getBeverageName:**
-	
+
 
  - id is correct
- 
+
 
 
 
@@ -177,11 +453,11 @@ Version:
 
 
 **Criteria for method updateBeverage:**
-	
+
 
  - id is valid
- - range of capsulesPerbox 
- - range of boxPrice 
+ - range of capsulesPerbox
+ - range of boxPrice
 
 
 
@@ -230,10 +506,10 @@ Version:
 
 
 **Criteria for method createBeverage:**
-	
 
- - range of capsulesPerbox 
- - range of boxPrice 
+
+ - range of capsulesPerbox
+ - range of boxPrice
 
 
 
@@ -274,11 +550,11 @@ Version:
 
 
 **Criteria for method getReport:**
-	
+
 
  - startDate is valid
- - endDate is valid 
- - startDate < endDate ? 
+ - endDate is valid
+ - startDate < endDate ?
 
 
 
@@ -292,8 +568,8 @@ Version:
 |          |        no  |
 | endDate is valid       |    yes       |
 |          |    no       |
-|    startDate < endDate ?     |       yes        |               
-|          |          no     |                      
+|    startDate < endDate ?     |       yes        |
+|          |          no     |
 
 
 **Combination of predicates**:
@@ -318,11 +594,11 @@ Version:
 
 
 **Criteria for method getEmployeeReport:**
-	
+
 
  - startDate is valid
- - endDate is valid 
- - startDate < endDate ? 
+ - endDate is valid
+ - startDate < endDate ?
  - employeeId is valid
 
 
@@ -336,8 +612,8 @@ Version:
 |          |        no  |
 | endDate is valid       |    yes       |
 |          |    no       |
-|    startDate < endDate ?     |       yes        |               
-|          |          no     |                      
+|    startDate < endDate ?     |       yes        |
+|          |          no     |
 |employeeId is valid|yes|
 ||no|
 
@@ -370,9 +646,9 @@ Version:
 
 
 **Criteria for method buyBoxes:**
-	
 
- - beverageId is valid 
+
+ - beverageId is valid
  - balance is enough for boxQuantity
 
 
@@ -414,10 +690,10 @@ Version:
 
 
 **Criteria for method getEmployeeName:**
-	
+
 
  - id is correct
- 
+
 
 
 
@@ -434,10 +710,10 @@ Version:
 
 
 **Criteria for method getEmployeeSurname:**
-	
+
 
  - id is correct
- 
+
 
 
 
@@ -455,10 +731,10 @@ Version:
 
 
 **Criteria for method getEmployeeBalance:**
-	
+
 
  - id is correct
- 
+
 
 
 
@@ -477,10 +753,10 @@ Version:
 
 
 **Criteria for method getEmployees:**
-	
+
 
  - return value is correct
- 
+
 
 
 
@@ -506,10 +782,10 @@ Version:
 
 
 **Criteria for method getEmployeesId:**
-	
+
 
  - return value is correct
- 
+
 
 
 
@@ -532,7 +808,7 @@ Version:
  ### **Class *DataImpl.java* - method updateEmployee**
 
 **Criteria for method updateEmployee:**
-	
+
 
  - id is valid
  - name is empty or null
@@ -576,10 +852,10 @@ Version:
 
 
 **Criteria for method createEmployee:**
-	
+
 
  - name is empty or null
- - surname is empty or null 
+ - surname is empty or null
 
 
 
@@ -698,7 +974,7 @@ Version:
 **Criteria for method rechargeAccount:**
 
 - Employee id is valid
-- range of amountInCents 
+- range of amountInCents
 
 **Predicates for method *rechargeAccount*:**
 
@@ -706,6 +982,8 @@ Version:
 | -------- | --------- |
 | Employee  id is valid        |    yes       |
 |          |    no      |
+
+
 |    range of amountInCents       |    >0     |
 |          |    <0     |
 
@@ -736,6 +1014,18 @@ Version:
 
 | Unit name | JUnit test case |
 |--|--|
+|TestDatabase|testDatabaseTruncate|
+|TestDatabase|testDatabaseAddEmployee|
+|TestDatabase|testDatabaseGetEmployee|
+|TestDatabase|testDatabaseUpdateBalance|
+|TestDatabase|testDatabaseAddBeverage|
+|TestDatabase|testDatabaseGetBeverage|
+|TestDatabase|testDatabaseGetBeverage|
+|TestDatabase|testDatabaseAddTransaction|
+|TestDatabase|testDatabaseupdateVeverage|
+|TestDatabase|testDatabaseUpdateEmployee|
+|TestDatabase|testDatabaseGetEmployeeRecord|
+|TestDatabase|testDatabaseListOfTransactions|
 |DataImpl|testCreateBeverage|
 |DataImpl|testCreateBeverageWrongAttributes|
 |DataImpl|testUpdateBeverageWithSuccess|
