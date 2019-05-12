@@ -558,8 +558,6 @@ public class TestDataImpl {
 		id=dataImpl.createEmployee("john","doe");
 		
 		// check employee balance
-		
-		assertEquals(0,dataImpl.getEmployeeBalance(id));
 		dataImpl.rechargeAccount(id, 10);
 		assertEquals(10,dataImpl.getEmployeeBalance(id));
 		
@@ -571,6 +569,17 @@ public class TestDataImpl {
 		}
     }
     
+    @Test
+    public void testGetEmployeeBalanceZeroBoundary() throws Exception {
+    	dataImpl.reset();
+    	int id;
+		id=dataImpl.createEmployee("john","doe");
+		Employee emp = database.getEmployeeData(id);
+		//check that the initial employee balance is zero
+	
+		double credit = emp.getCredit();
+		assertEquals(credit,0);
+    }
     @Test
     public void testGetEmployeesId() throws EmployeeException {
     	dataImpl.reset();
