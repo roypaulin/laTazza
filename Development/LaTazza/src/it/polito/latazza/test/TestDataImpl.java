@@ -518,16 +518,9 @@ public class TestDataImpl {
     	Employee emp=database.getEmployeeData(emp1);
     	assertEquals(emp.getCredit(),10);
     	assertEquals(credit,10);
-    	//check that transactions hav been created 
+    	//check that transactions have been created 
         List<Transaction> transactionList=database.getReport(shiftDate(-1), shiftDate(1));
         assertEquals(transactionList.size(),1);
-        
-        //try recharge account with an invalid employee Id
-        try {
-        	dataImpl.rechargeAccount(-1, 1);
-        }catch(EmployeeException e) {
-        	System.out.println("correctly throws exception because Employee id is not valid");
-        }
         
     	
     }
@@ -594,8 +587,38 @@ public class TestDataImpl {
 	    assertEquals("jane",emp.getName());
 	    assertEquals("mary",emp.getSurname());
 	    
-	    // try with an invalid id
-         try {
+	   
+	}
+    
+    @Test
+   	public void testUpdateEmployeeMissingParameters() throws Exception {
+   		dataImpl.reset();
+   		int id =-1;
+   		id=dataImpl.createEmployee("john","doe");
+   		
+   	//check that the object has not been updated
+   		dataImpl.updateEmployee(id, "", "");
+   	 Employee emp = database.getEmployeeData(id);
+	    assertEquals("john",emp.getName());
+	    assertEquals("doe",emp.getSurname());
+	    
+	    dataImpl.updateEmployee(id, "john", "");
+	    emp = database.getEmployeeData(id);
+	    assertEquals("john",emp.getName());
+	    assertEquals("doe",emp.getSurname());
+	    
+	    dataImpl.updateEmployee(id, "", "doe");
+	    emp = database.getEmployeeData(id);
+	    assertEquals("john",emp.getName());
+	    assertEquals("doe",emp.getSurname());
+    }
+    
+    @Test
+  	public void testUpdateEmployeeWrongId() throws Exception {
+  		dataImpl.reset();
+  		
+  	// try with an invalid id
+        try {
 	    	
 	    	dataImpl.updateEmployee(-1, "james", "roberts");
 	    	
@@ -603,8 +626,7 @@ public class TestDataImpl {
 	    	
 	    	System.out.println("correctly throws Exception for dataImpl.updateEmployee(-1, \"james\", \"roberts\"); because id is not valid");
 	    }
-	   
-	}
+    }
     
     @Test
 	public void testGetEmployeeName() throws EmployeeException {

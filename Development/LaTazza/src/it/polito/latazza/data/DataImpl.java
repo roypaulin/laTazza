@@ -511,6 +511,7 @@ public class DataImpl implements DataInterface {
 	@Override
 	/* @author roy paulin */
 	public void updateEmployee(Integer id, String name, String surname) throws EmployeeException {
+		if((name!="") && (surname!="") ) { 
 		try {
 			Employee emp = database.getEmployeeData(id);
 	         emp.setName(name);
@@ -520,6 +521,7 @@ public class DataImpl implements DataInterface {
 				throw new EmployeeException() ;
 				
 			}
+		}
 	}
 
 	@Override
