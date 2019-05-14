@@ -409,6 +409,7 @@ public class TestDataImpl {
         try {
         	 dataImpl.sellCapsules(id1, id2, 1, true);
         	 fail();
+        	 
         }catch(Exception e) {
         	 assertTrue(true);
         }
