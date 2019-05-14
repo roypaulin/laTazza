@@ -121,5 +121,15 @@ class TestDatabase {
     public void testDatabaseUpdateEmployee() throws Exception {
         database.updateEmployee(new Employee(1,"Morisio","Maurizio",1.99));
     }
+    
+
+    @Test
+    public void testDatabaseGetEmployeeRecord() throws Exception {
+        int id = database.addEmployee(new Employee(-1,"Antonio","Collaudatore",10000.99));
+        int trans_id = database.registerTransaction(new Transaction(id,getDate(2010, 8, 21, 10, 5, 3),'P',1,id,1,1, 1.0,true));
+        List<Transaction> trans = database.getEmployeeReport(id,getDate(2000, 8, 21, 10, 5, 3),getDate(2020, 8, 21, 10, 5, 3));
+        assertEquals(trans.size()>0, true);
+        assertEquals(trans.get(0).getTransactionDate().toLocaleString(),getDate(2010, 8, 21, 10, 5, 3).toLocaleString());
+    }
 
 }
