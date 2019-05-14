@@ -18,9 +18,6 @@ Version:
 
 # Black Box Unit Tests
 
-    <Define here criteria, predicates and the combination of predicates for each function of each class.
-    Define test cases to cover all equivalence classes and boundary conditions.
-    In the table, report the description of the black box test case and the correspondence with the JUnit black box test case name/number>
 
 
 
