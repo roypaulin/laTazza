@@ -500,8 +500,9 @@ public class TestDataImpl {
     
     try {
    	 dataImpl.sellCapsulesToVisitor(-1,-1);
+   	 fail();
   }catch(BeverageException be) {
-  	 System.out.println("correctly throws exception because Beverage id is not valid");
+  	assertTrue(true);
   }
     
     dataImpl.sellCapsulesToVisitor(id1, -1);
