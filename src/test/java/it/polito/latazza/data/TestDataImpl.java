@@ -675,8 +675,9 @@ public class TestDataImpl {
 		// throw an EmployeeException because the id is invalid
 		try {
 			dataImpl.getEmployeeBalance(-1);
+			fail();
 		}catch(EmployeeException e) {
-			System.out.println("correctly throws EmployeeException for dataImpl.getEmployeeBalance(-1) because id is not valid");
+			assertTrue(true);
 		}
     }
     
