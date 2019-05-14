@@ -1076,9 +1076,6 @@ alue is correct     |        yes   |
 ### Loop coverage analysis
 
 
-    <Identify significant loops in the units and reports the test cases
-    developed to cover zero, one or multiple iterations >
-
 |Unit name | Loop rows | Number of iterations | JUnit test case |
 |---|---|---|---|
 |DataImpl|321-376|0|testGetReportEmptyList|
