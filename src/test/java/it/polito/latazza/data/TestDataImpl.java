@@ -408,9 +408,9 @@ public class TestDataImpl {
         dataImpl.buyBoxes(id2, 1);
         try {
         	 dataImpl.sellCapsules(id1, id2, 1, true);
+        	 fail();
         }catch(Exception e) {
-        	 System.out.println("unable to complte the operation because there is no enough credit in the employee account");
-			    e.printStackTrace();
+        	 assertTrue(true);
         }
     }
     @Test
