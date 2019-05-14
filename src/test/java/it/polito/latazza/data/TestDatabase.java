@@ -76,6 +76,15 @@ class TestDatabase {
         assertEquals(1.1, balance);
     }
     
+
+    
+    @Test
+    public void testDatabaseAddBeverage() throws Exception {
+        int id = database.addBeverage(new Beverage(-1,10,10.1,50,"do you wanna a Kaffè noob?"));
+        assertEquals(id>0,true);
+    }
+    
+    
     
     
 
