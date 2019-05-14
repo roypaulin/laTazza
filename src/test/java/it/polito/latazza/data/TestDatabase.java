@@ -93,6 +93,13 @@ class TestDatabase {
         assertEquals(bev.size()>=1, true);
     }
     
+
+    @Test
+    public void testDatabaseGetBeverage() throws Exception {
+        Beverage bevan = database.getBeverageData(1);
+        assertNotEquals(bevan, null);
+    }
+    
     
 
 }
