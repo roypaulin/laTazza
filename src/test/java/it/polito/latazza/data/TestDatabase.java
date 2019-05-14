@@ -41,9 +41,12 @@ class TestDatabase {
         return date;
     }
     
-	@Test
-	public void testDatabase() throws ClassNotFoundException, SQLException, Exception {
-		
-	}
+
+    
+    @Test
+    public void testDatabaseTruncate() throws Exception {
+        database.truncateTables();
+        assertTrue(true);
+    }
 
 }
