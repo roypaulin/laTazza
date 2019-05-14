@@ -493,8 +493,9 @@ public class TestDataImpl {
    	dataImpl.buyBoxes(id1, 1);
     try {
     	 dataImpl.sellCapsulesToVisitor(-1,1);
+    	 fail();
    }catch(BeverageException be) {
-   	 System.out.println("correctly throws exception because Beverage id is not valid");
+   	assertTrue(true);
    }
     
     try {
