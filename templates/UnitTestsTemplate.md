@@ -1071,9 +1071,7 @@ alue is correct     |        yes   |
 
 ### Code coverage report
 
-    <Add here the screenshot report of the code and branch coverage obtained using
-    the Jacoco tool. >
-
+![](images/coverage.png)
 
 ### Loop coverage analysis
 
