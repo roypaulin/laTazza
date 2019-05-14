@@ -48,5 +48,13 @@ class TestDatabase {
         database.truncateTables();
         assertTrue(true);
     }
+    
+
+    @Test
+    public void testDatabaseAddEmployee() throws Exception {
+        int id = database.addEmployee(new Employee(-1,"Morisio","Maurizio",1000000.99));
+        assertEquals(id>=0, true);
+    }
+    
 
 }
