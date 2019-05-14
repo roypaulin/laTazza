@@ -2,7 +2,7 @@
 /**
  * 
  */
-package it.polito.latazza.test;
+package it.polito.latazza.data;
 
 import static org.junit.jupiter.api.Assertions.*;
 
