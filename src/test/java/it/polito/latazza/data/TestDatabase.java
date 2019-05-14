@@ -100,6 +100,10 @@ class TestDatabase {
         assertNotEquals(bevan, null);
     }
     
-    
+    @Test
+    public void testDatabaseAddTransaction() throws Exception {
+        int id = database.registerTransaction(new Transaction(1,getDate(2010, 8, 21, 10, 5, 3),'P',1,1,1,1, 1.0,true));
+        assertEquals(id>=0, true);
+    }
 
 }
