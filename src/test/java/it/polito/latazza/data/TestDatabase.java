@@ -68,6 +68,14 @@ class TestDatabase {
         assertNotEquals(null, emp);
     }
     
+
+    @Test
+    public void testDatabaseUpdateBalance() throws Exception {
+        database.updateBalance(1.1);
+        double balance = database.getBalance();
+        assertEquals(1.1, balance);
+    }
+    
     
     
 
