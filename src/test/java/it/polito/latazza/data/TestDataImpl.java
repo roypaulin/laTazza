@@ -532,7 +532,6 @@ public class TestDataImpl {
         	fail();
         }catch(EmployeeException e) {
         	assert(true);
-        	
         }
       //try recharge account with an invalid employee Id
         try {
