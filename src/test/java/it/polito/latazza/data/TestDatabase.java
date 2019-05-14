@@ -84,7 +84,14 @@ class TestDatabase {
         assertEquals(id>0,true);
     }
     
-    
+
+    @Test
+    public void testDatabaseGetListBeverage() throws Exception {
+        int id = database.addBeverage(new Beverage(-1,10,10.1,50,"do you wanna a Kaffè"));
+        ArrayList<Beverage> bev = (ArrayList<Beverage>) database.getListOfBeverages();
+        assertNotEquals(null, bev);
+        assertEquals(bev.size()>=1, true);
+    }
     
     
 
