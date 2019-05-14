@@ -131,5 +131,16 @@ class TestDatabase {
         assertEquals(trans.size()>0, true);
         assertEquals(trans.get(0).getTransactionDate().toLocaleString(),getDate(2010, 8, 21, 10, 5, 3).toLocaleString());
     }
+    
+
+    @Test
+    public void testDatabaseListOfTransactions() throws ClassNotFoundException, SQLException, Exception {
+        
+        List<Transaction> trans = database.getReport(getDate(2000, 8, 21, 10, 5, 3),getDate(2020, 8, 21, 10, 5, 3));
+        assertEquals(trans.size()==0, true);
+        
+        assertNotEquals(null, trans);
+
+    }
 
 }
