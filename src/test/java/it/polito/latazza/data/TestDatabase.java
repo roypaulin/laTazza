@@ -57,4 +57,18 @@ class TestDatabase {
     }
     
 
+    
+    @Test
+    public void testDatabaseGetEmployee() throws Exception {
+        int id = database.addEmployee(new Employee(-1,"Morisio","Maurizio",1000000.99));
+        List<Employee> list = null;
+        list = database.getListEmployee();
+        
+        Employee emp = database.getEmployeeData(id);
+        assertNotEquals(null, emp);
+    }
+    
+    
+    
+
 }
