@@ -409,7 +409,6 @@ public class TestDataImpl {
         try {
         	 dataImpl.sellCapsules(id1, id2, 1, true);
         	 fail();
-        	 
         }catch(Exception e) {
         	 assertTrue(true);
         }
@@ -425,14 +424,16 @@ public class TestDataImpl {
         dataImpl.rechargeAccount(id1, 10);
         try {
         	 dataImpl.sellCapsules(-1, id2, 1, true);
+        	 fail();
         }catch(EmployeeException em) {
-        	 System.out.println("correctly throws exception because Employee id is not valid");
+        	assertTrue(true);
         }
         
         try {
         	 dataImpl.sellCapsules(id1, -1, 1, true);
+        	 fail();
         }catch(BeverageException be) {
-        	 System.out.println("correctly throws exception because Beverage id is not valid");
+        	assertTrue(true);
         }
     	
         dataImpl.sellCapsules(id1, id2, -1, true);
@@ -478,8 +479,9 @@ public class TestDataImpl {
    	
     try {
         dataImpl.sellCapsulesToVisitor(id1,1);
+        fail();
         } catch(NotEnoughCapsules e) {
-      	  System.out.println("correctly throws exception because there in not enough capsules for this beverage");
+        	assertTrue(true);
         }
     }
     
