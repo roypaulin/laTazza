@@ -32,9 +32,6 @@ public class Beverage {
 		return name;
 	}
 	
-	public void setId(int id) {
-		this.id = id;
-	}
 	public void setQuantityAvailable(int quantityAvailable) {
 		this.quantityAvailable = quantityAvailable;
 	}
