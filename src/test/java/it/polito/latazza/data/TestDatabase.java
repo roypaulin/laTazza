@@ -115,5 +115,11 @@ class TestDatabase {
             System.out.println("works correctly, it launch an exception if id is wrong!");
         }
     }
+    
+
+    @Test
+    public void testDatabaseUpdateEmployee() throws Exception {
+        database.updateEmployee(new Employee(1,"Morisio","Maurizio",1.99));
+    }
 
 }
