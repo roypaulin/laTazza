@@ -43,54 +43,6 @@ class TestDatabase {
 	@Test
 	public void testDatabase() throws ClassNotFoundException, SQLException, Exception {
 		
-		database.truncateTables();
-		
-		int id = database.addEmployee(new Employee(-1,"Morisio","Maurizio",1000000.99));
-		
-		assertEquals(id>=0, true);
-		
-		List<Employee> list = null;
-		
-		list = database.getListEmployee();
-		
-		Employee emp = database.getEmployeeData(1);
-		assertNotEquals(null, emp);
-		
-		database.updateBalance(1.1);
-		double balance = database.getBalance();
-		assertEquals(1.1, balance);
-		
-
-		id = database.addBeverage(new Beverage(-1,10,10.1,50,"do you wanna a Kaffè"));
-		
-		ArrayList<Beverage> bev = (ArrayList<Beverage>) database.getListOfBeverages();
-		assertNotEquals(null, bev);
-		assertEquals(bev.size()>=1, true);
-		
-		Beverage bevan = database.getBeverageData(1);
-		assertNotEquals(bevan, null);
-		
-		id = database.registerTransaction(new Transaction(1,getDate(2010, 8, 21, 10, 5, 3),'P',1,1,1,1, 1.0,true));
-		assertEquals(id>=0, true);
-		
-		try {
-			database.updateBeverage(new Beverage(-1,0,1.4,50,"do you want a Kaffè!?!!!"));
-		} catch(BeverageException e) {
-			System.out.println("works correctly, it launch an exception if id is wrong!");
-		}
-		
-		
-		database.updateEmployee(new Employee(1,"Morisio","Maurizio",1.99));
-		
-		List<Transaction> trans = database.getEmployeeReport(1,getDate(2009, 8, 21, 10, 5, 3),getDate(2011, 8, 21, 10, 5, 3));
-		assertEquals(trans.size()>0, true);
-		assertEquals(trans.get(0).getTransactionDate().toLocaleString(),getDate(2010, 8, 21, 10, 5, 3).toLocaleString());
-		
-		trans = database.getReport(getDate(2011, 8, 21, 10, 5, 3),getDate(2013, 8, 21, 10, 5, 3));
-		assertEquals(trans.size()==0, true);
-		
-		assertNotEquals(null, list);
-
 	}
 
 }
