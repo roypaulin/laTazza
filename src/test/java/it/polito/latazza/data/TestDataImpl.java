@@ -384,16 +384,18 @@ public class TestDataImpl {
         
        dataImpl.rechargeAccount(id1, 10);
         
-        try {
-        dataImpl.sellCapsules(id1, id2, 1, true);
+	    try {
+	        dataImpl.sellCapsules(id1, id2, 1, true);
+	        fail();
         } catch(NotEnoughCapsules e) {
-      	  System.out.println("correctly throws exception because there in not enough capsules for this beverage");
+        	assertTrue(true);
         }
         
         try {
-            dataImpl.sellCapsules(id1, id2, 1, false);
+	            dataImpl.sellCapsules(id1, id2, 1, false);
+	            fail();
             } catch(NotEnoughCapsules e) {
-          	  System.out.println("correctly throws exception because there in not enough capsules for this beverage");
+            	assertTrue(true);
             }
     }
     
