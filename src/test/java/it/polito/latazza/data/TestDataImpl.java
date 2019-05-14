@@ -529,8 +529,9 @@ public class TestDataImpl {
     	//try recharge account with an invalid employee Id
         try {
         	dataImpl.rechargeAccount(-1, 1);
+        	fail();
         }catch(EmployeeException e) {
-        	System.out.println("correctly throws exception because Employee id is not valid");
+        	assert(true);
         }
       //try recharge account with an invalid employee Id
         try {
