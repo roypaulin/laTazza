@@ -105,5 +105,15 @@ class TestDatabase {
         int id = database.registerTransaction(new Transaction(1,getDate(2010, 8, 21, 10, 5, 3),'P',1,1,1,1, 1.0,true));
         assertEquals(id>=0, true);
     }
+    
+
+    @Test
+    public void testDatabaseUpdateBeverage() throws Exception {
+        try {
+            database.updateBeverage(new Beverage(-1,0,1.4,50,"do you want a Kaffè!?!!!"));
+        } catch(BeverageException e) {
+            System.out.println("works correctly, it launch an exception if id is wrong!");
+        }
+    }
 
 }
