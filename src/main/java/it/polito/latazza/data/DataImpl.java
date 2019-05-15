@@ -64,12 +64,6 @@ public class DataImpl implements DataInterface {
 		}
 		
 		
-			 try {
-				  balance=database.getBalance();
-			       
-		       } catch (Exception e1) {
-			     
-		      }
 		
 		Transaction tr=new Transaction(-1,new Date(),'C',-1,employeeId,beverageId,numberOfCapsules,-1,fromAccount);
 		try {
@@ -80,6 +74,7 @@ public class DataImpl implements DataInterface {
 				database.updateEmployee(emp);
 			
 		}else {
+			 balance=database.getBalance();
 			database.updateBalance(balance+d);
 		}
 		}catch(Exception e) {
@@ -112,13 +107,10 @@ public class DataImpl implements DataInterface {
 			}
 		
 		double d=(numberOfCapsules*(be.getBoxPrice()/be.getCapsulePerBox()));
-		 try {
-			balance=database.getBalance();
-		      
-	       } catch (Exception e1) {
-	      }
+
 		Transaction tr=new Transaction(-1,new Date(),'C',-1,-1,beverageId,numberOfCapsules,-1,false);
 		try {
+			balance=database.getBalance();
 			database.registerTransaction(tr);
 			database.updateBeverage(be);
 			 database.updateBalance(balance+d);
@@ -193,7 +185,7 @@ public class DataImpl implements DataInterface {
 				 balance = (float)database.getBalance();
 			 }catch(Exception e){
 				 
-				//these are specifics errors: is it correct to throw this exception??o or it's better to do nothing
+				//these are specifics errors:
 			 }
 			 
 			 if((balance-amount)< 0) {
