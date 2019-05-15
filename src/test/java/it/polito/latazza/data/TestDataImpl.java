@@ -384,16 +384,18 @@ public class TestDataImpl {
         
        dataImpl.rechargeAccount(id1, 10);
         
-        try {
-        dataImpl.sellCapsules(id1, id2, 1, true);
+	    try {
+	        dataImpl.sellCapsules(id1, id2, 1, true);
+	        fail();
         } catch(NotEnoughCapsules e) {
-      	  System.out.println("correctly throws exception because there in not enough capsules for this beverage");
+        	assertTrue(true);
         }
         
         try {
-            dataImpl.sellCapsules(id1, id2, 1, false);
+	            dataImpl.sellCapsules(id1, id2, 1, false);
+	            fail();
             } catch(NotEnoughCapsules e) {
-          	  System.out.println("correctly throws exception because there in not enough capsules for this beverage");
+            	assertTrue(true);
             }
     }
     
@@ -406,9 +408,9 @@ public class TestDataImpl {
         dataImpl.buyBoxes(id2, 1);
         try {
         	 dataImpl.sellCapsules(id1, id2, 1, true);
+        	 fail();
         }catch(Exception e) {
-        	 System.out.println("unable to complte the operation because there is no enough credit in the employee account");
-			    e.printStackTrace();
+        	 assertTrue(true);
         }
     }
     @Test
@@ -422,14 +424,16 @@ public class TestDataImpl {
         dataImpl.rechargeAccount(id1, 10);
         try {
         	 dataImpl.sellCapsules(-1, id2, 1, true);
+        	 fail();
         }catch(EmployeeException em) {
-        	 System.out.println("correctly throws exception because Employee id is not valid");
+        	assertTrue(true);
         }
         
         try {
         	 dataImpl.sellCapsules(id1, -1, 1, true);
+        	 fail();
         }catch(BeverageException be) {
-        	 System.out.println("correctly throws exception because Beverage id is not valid");
+        	assertTrue(true);
         }
     	
         dataImpl.sellCapsules(id1, id2, -1, true);
@@ -475,8 +479,9 @@ public class TestDataImpl {
    	
     try {
         dataImpl.sellCapsulesToVisitor(id1,1);
+        fail();
         } catch(NotEnoughCapsules e) {
-      	  System.out.println("correctly throws exception because there in not enough capsules for this beverage");
+        	assertTrue(true);
         }
     }
     
@@ -488,14 +493,16 @@ public class TestDataImpl {
    	dataImpl.buyBoxes(id1, 1);
     try {
     	 dataImpl.sellCapsulesToVisitor(-1,1);
+    	 fail();
    }catch(BeverageException be) {
-   	 System.out.println("correctly throws exception because Beverage id is not valid");
+   	assertTrue(true);
    }
     
     try {
    	 dataImpl.sellCapsulesToVisitor(-1,-1);
+   	 fail();
   }catch(BeverageException be) {
-  	 System.out.println("correctly throws exception because Beverage id is not valid");
+  	assertTrue(true);
   }
     
     dataImpl.sellCapsulesToVisitor(id1, -1);
@@ -529,14 +536,16 @@ public class TestDataImpl {
     	//try recharge account with an invalid employee Id
         try {
         	dataImpl.rechargeAccount(-1, 1);
+        	fail();
         }catch(EmployeeException e) {
-        	System.out.println("correctly throws exception because Employee id is not valid");
+        	assertTrue(true);
         }
       //try recharge account with an invalid employee Id
         try {
         	dataImpl.rechargeAccount(-1, -1);
+        	fail();
         }catch(EmployeeException e) {
-        	System.out.println("correctly throws exception because Employee id is not valid");
+        	assertTrue(true);
         }
       //try recharge account with a negative amount
         int credit=dataImpl.rechargeAccount(emp1, -1);
@@ -617,10 +626,10 @@ public class TestDataImpl {
         try {
 	    	
 	    	dataImpl.updateEmployee(-1, "james", "roberts");
+	    	fail();
 	    	
 	    }catch(Exception e) {
-	    	
-	    	System.out.println("correctly throws Exception for dataImpl.updateEmployee(-1, \"james\", \"roberts\"); because id is not valid");
+	    	assertTrue(true);
 	    }
     }
     
@@ -636,8 +645,9 @@ public class TestDataImpl {
 		// throw an EmployeeException because the id is invalid
 		try {
 			empName=dataImpl.getEmployeeName(-1);
+			fail();
 		}catch(EmployeeException e){
-			System.out.println("correctly throws EmployeeException for dataImpl.getEmployeeName(-1) because id is not valid");
+			assertTrue(true);
 		}
 	}
     
@@ -653,8 +663,9 @@ public class TestDataImpl {
 		// throw an EmployeeException because the id is invalid
 		try {
 			empSurname=dataImpl.getEmployeeSurname(-1);
+			fail();
 		}catch(EmployeeException e){
-			System.out.println("correctly throws EmployeeException for dataImpl.getEmployeeSurname(-1) because id is not valid");
+			assertTrue(true);
 		}
 	}
     
@@ -671,8 +682,9 @@ public class TestDataImpl {
 		// throw an EmployeeException because the id is invalid
 		try {
 			dataImpl.getEmployeeBalance(-1);
+			fail();
 		}catch(EmployeeException e) {
-			System.out.println("correctly throws EmployeeException for dataImpl.getEmployeeBalance(-1) because id is not valid");
+			assertTrue(true);
 		}
     }
     
