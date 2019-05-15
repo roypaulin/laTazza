@@ -71,16 +71,14 @@ public class DataImpl implements DataInterface {
 				 double balance=database.getBalance();
 			       database.updateBalance(balance+d);
 		       } catch (Exception e1) {
-			      // TODO Auto-generated catch block
-		    	   System.out.println("unable to update la tazza balance");
-			    e1.printStackTrace();
+			     
 		      }
 		}
 		Transaction tr=new Transaction(-1,new Date(),'C',-1,employeeId,beverageId,numberOfCapsules,-1,fromAccount);
 		try {
 			database.registerTransaction(tr);
 		}catch(Exception e) {
-			System.out.println("Unable to regsiter the transaction");
+			
 		}
 	}
 		
@@ -115,15 +113,12 @@ public class DataImpl implements DataInterface {
 			 double balance=database.getBalance();
 		       database.updateBalance(balance+d);
 	       } catch (Exception e1) {
-		      // TODO Auto-generated catch block
-	    	   System.out.println("unable to update la tazza balance");
-		    e1.printStackTrace();
 	      }
 		Transaction tr=new Transaction(-1,new Date(),'C',-1,-1,beverageId,numberOfCapsules,-1,false);
 		try {
 			database.registerTransaction(tr);
 		}catch(Exception e) {
-			System.out.println("Unable to regsiter the transaction");
+			
 		}
 	}
 		
@@ -151,9 +146,6 @@ public class DataImpl implements DataInterface {
 			 double balance=database.getBalance();
 		       database.updateBalance(balance+amountInCents);
 	       } catch (Exception e1) {
-		      // TODO Auto-generated catch block
-	    	   System.out.println("unable to update la tazza balance");
-		    e1.printStackTrace();
 	      }
 		Date date = new Date();
 		Transaction tr= new Transaction(-1,date,'R',-1,id,-1,-1,amountInCents, false);
@@ -161,7 +153,6 @@ public class DataImpl implements DataInterface {
 		try {
 		database.registerTransaction(tr);
 	}catch(Exception e) {
-		System.out.println("Unable to regsiter the transaction");
 	}
 	}
 		return Math.round((float)emp.getCredit());
@@ -191,8 +182,7 @@ public class DataImpl implements DataInterface {
 			 try {
 				 balance = (float)database.getBalance();
 			 }catch(Exception e){
-				 System.out.println("Unable to get la laTazza balance");
-				//throw new NotEnoughBalance();
+				 
 				//these are specifics errors: is it correct to throw this exception??o or it's better to do nothing
 			 }
 			 
@@ -200,19 +190,7 @@ public class DataImpl implements DataInterface {
 				 throw new NotEnoughBalance();
 			 }
 			 
-			 try {
-					database.updateBeverage(bev);
-			 }catch(Exception e) {
-				 //throw new BeverageException();
-			 }
 	
-            try {
-		       database.updateBalance(balance-amount);
-	       } catch (Exception e1) {
-		     
-	    	   System.out.println("unable to update la tazza balance");
-		    e1.printStackTrace();
-	      }
 		//i create the object transaction
 		Date date = new Date();
 		// for transactions of Type P, the attribute numberOfCapsules is irrelevant
@@ -220,8 +198,9 @@ public class DataImpl implements DataInterface {
 		Transaction transaction = new Transaction(-1,date,'P',boxQuantity,-1,beverageId,numberOfCapsules, amount,false);
 		try {
 		database.registerTransaction(transaction);
-		}catch(Exception e) {
-			System.out.println("Unable to regsiter the transaction");
+		database.updateBeverage(bev);
+		database.updateBalance(balance-amount);
+		}catch(Exception e) {	
 		}
 		return ;
 	}
@@ -263,7 +242,6 @@ public class DataImpl implements DataInterface {
 						bev = database.getBeverageData(t.getBeverageID());
 					} catch (Exception e) {
 						//if this happens, it's an internal error which means we did not well registered the transaction
-						System.out.println("unable to get beverage data for id"+t.getBeverageID());
 					}
 				 if(t.isFromAccount()==true) {
 					 s= s+" BALANCE";
@@ -285,8 +263,7 @@ public class DataImpl implements DataInterface {
 	//@author jean thibaut
 	
 	public List<String> getReport(Date startDate, Date endDate) throws DateException {
-		// TODO Auto-generated method stub
-
+		
 		/*getReport() //which returns a list of transactions to be formated
 		 */
 		if( startDate==null | endDate==null) {throw new DateException();}
@@ -302,7 +279,7 @@ public class DataImpl implements DataInterface {
        try {
 		transactionList = database.getReport(startDate, endDate);
 	  } catch (Exception e) {
-		e.printStackTrace();
+		
 	  }
        
        
@@ -315,8 +292,7 @@ public class DataImpl implements DataInterface {
     				 try {
     						bev = database.getBeverageData(t.getBeverageID());
     					} catch (Exception e) {
-    						//if this happens, it's an internal error which means we did not well registered the transaction
-    						System.out.println("unable to get beverage data for id"+t.getBeverageID());
+    						
     					}
     				 
     				 s= this.convDate(t.getTransactionDate());
@@ -324,8 +300,7 @@ public class DataImpl implements DataInterface {
     					   try {
     							emp= database.getEmployeeData(t.getEmployeeID());
     						} catch (Exception e) {
-    							//this should never happen,otherwise we did an error creating the transaction
-    							System.out.println("unable to get employee data from getReport");
+    							
     						}
     					   if(t.isFromAccount()==true) {
     	    					 s= s+" BALANCE";
@@ -344,8 +319,6 @@ public class DataImpl implements DataInterface {
     				 try {
 							emp= database.getEmployeeData(t.getEmployeeID());
 						} catch (Exception e) {
-							//this should never happen,otherwise we did an error creating the transaction
-							System.out.println("unable to get employee data from getReport");
 						}
     				 s= this.convDate(t.getTransactionDate())+" RECHARGE"+" "+emp.getName()+" "+emp.getSurname()+" "+this.convAmountWithCurrency(t.getAmount());
     			 }
@@ -527,9 +500,6 @@ public class DataImpl implements DataInterface {
 	@Override
 	/* @author roy paulin */
 	public String getEmployeeName(Integer id) throws EmployeeException {
-		// TODO Auto-generated method stub
-		/*getEmployeeData().getName()
-		 */
 		Employee emp;
 		try {
 		 emp = database.getEmployeeData(id);
@@ -550,9 +520,6 @@ public class DataImpl implements DataInterface {
 	}catch( Exception e) {
 		throw new EmployeeException();
 	}
-		// TODO Auto-generated method stub
-		/*getEmployeeData().getSurname()
-		 */
 		return emp.getSurname();
 	}
 
@@ -566,9 +533,6 @@ public class DataImpl implements DataInterface {
 	}catch( Exception e) {
 		throw new EmployeeException();
 	}
-		// TODO Auto-generated method stub
-	   /*getEmployeeData().getEmployeecredit()
-		 */
 		return (int)Math.round(emp.getCredit());
 	}
 
@@ -586,9 +550,6 @@ public class DataImpl implements DataInterface {
 		for(Employee emp : employees) {
 			employeesId.add(emp.getId());
 		}
-		// TODO Auto-generated method stub
-		  /*getEmployeeData().getEmployeeID()
-		 */
 		return employeesId;
 	}
 
@@ -605,9 +566,6 @@ public class DataImpl implements DataInterface {
 		for(Employee emp : employees) {
 			employeesMap.put(emp.getId(),emp.getName()+" "+emp.getSurname());
 		}
-		// TODO Auto-generated method stub
-		/*getListOfEmployee() //then transforms in Map
-		 */
 		return employeesMap;
 	}
 
@@ -620,22 +578,16 @@ public class DataImpl implements DataInterface {
 		}catch(Exception e) {
 			System.out.println("cannot get the Latazza account");
 		}
-		// TODO Auto-generated method stub
-		// getBalance()
 		return Math.round((float)d);
 	}
 
 	@Override
 	/* @author jean thibaut */
 	public void reset() {
-		// TODO Auto-generated method stub
-		/*truncateTables()
-		 */
 		try {
 			database.truncateTables();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		
 		}
 	}
 	
