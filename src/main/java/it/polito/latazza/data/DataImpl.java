@@ -35,6 +35,7 @@ public class DataImpl implements DataInterface {
 			throws EmployeeException, BeverageException, NotEnoughCapsules {
 		Employee emp;
 		Beverage be;
+		double balance=0;
 		try {
 			emp=database.getEmployeeData(employeeId);
 		
@@ -50,33 +51,37 @@ public class DataImpl implements DataInterface {
 		if(numberOfCapsules>0) {
 		double d=(numberOfCapsules*(be.getBoxPrice()/be.getCapsulePerBox()));
 		if(fromAccount) {
-			emp.updateCredit(-1.0*d);
-		}
-		be.updateCapsuleQuantity(-1*numberOfCapsules);
-		try {
-			database.updateBeverage(be);
-			
-		}catch(Exception e) {
-			throw new BeverageException();
-		}
-		if(fromAccount) {
-			try {
-				database.updateEmployee(emp);
+            try {
+            	emp.updateCredit(-1.0*d);
 			}catch(Exception e) {
 				throw new EmployeeException();
 			}
-			
-		}else {
+		}
+		try {
+			be.updateCapsuleQuantity(-1*numberOfCapsules);
+		}catch(NotEnoughCapsules e) {
+			throw new NotEnoughCapsules();
+		}
+		
+		
 			 try {
-				 double balance=database.getBalance();
-			       database.updateBalance(balance+d);
+				  balance=database.getBalance();
+			       
 		       } catch (Exception e1) {
 			     
 		      }
-		}
+		
 		Transaction tr=new Transaction(-1,new Date(),'C',-1,employeeId,beverageId,numberOfCapsules,-1,fromAccount);
 		try {
 			database.registerTransaction(tr);
+			
+			database.updateBeverage(be);
+			if(fromAccount) {
+				database.updateEmployee(emp);
+			
+		}else {
+			database.updateBalance(balance+d);
+		}
 		}catch(Exception e) {
 			
 		}
@@ -92,6 +97,7 @@ public class DataImpl implements DataInterface {
 	public void sellCapsulesToVisitor(Integer beverageId, Integer numberOfCapsules)
 			throws BeverageException, NotEnoughCapsules {
 		Beverage be;
+		double balance=0;
 		try {
 			be=database.getBeverageData(beverageId);
 		
@@ -99,24 +105,24 @@ public class DataImpl implements DataInterface {
 			throw new BeverageException();
 		}
 		if(numberOfCapsules>0) {
-		be.updateCapsuleQuantity(-1*numberOfCapsules);
-		try {
-			database.updateBeverage(be);
-			
-		}catch(Exception e) {
-			throw new BeverageException();
-		}
-		
+			try {
+				be.updateCapsuleQuantity(-1*numberOfCapsules);
+			}catch(NotEnoughCapsules e) {
+				throw new NotEnoughCapsules();
+			}
 		
 		double d=(numberOfCapsules*(be.getBoxPrice()/be.getCapsulePerBox()));
 		 try {
-			 double balance=database.getBalance();
-		       database.updateBalance(balance+d);
+			balance=database.getBalance();
+		      
 	       } catch (Exception e1) {
 	      }
 		Transaction tr=new Transaction(-1,new Date(),'C',-1,-1,beverageId,numberOfCapsules,-1,false);
 		try {
 			database.registerTransaction(tr);
+			database.updateBeverage(be);
+			 database.updateBalance(balance+d);
+			
 		}catch(Exception e) {
 			
 		}
@@ -129,6 +135,7 @@ public class DataImpl implements DataInterface {
 	public Integer rechargeAccount(Integer id, Integer amountInCents) throws EmployeeException {
 		
 		Employee emp;
+		double balance=0;
 		try {
 			emp=database.getEmployeeData(id);
 			
@@ -138,13 +145,13 @@ public class DataImpl implements DataInterface {
 		if(amountInCents>0) {
 		try {
 			emp.updateCredit(amountInCents);
-			database.updateEmployee(emp);
+			
 		}catch(Exception e) {
 			throw new EmployeeException();
 		}
 		try {
-			 double balance=database.getBalance();
-		       database.updateBalance(balance+amountInCents);
+			balance=database.getBalance();
+		     
 	       } catch (Exception e1) {
 	      }
 		Date date = new Date();
@@ -152,6 +159,9 @@ public class DataImpl implements DataInterface {
 		
 		try {
 		database.registerTransaction(tr);
+		database.updateEmployee(emp);
+		  database.updateBalance(balance+amountInCents);
+		  
 	}catch(Exception e) {
 	}
 	}
