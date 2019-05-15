@@ -982,8 +982,6 @@ alue is correct     |        yes   |
 | -------- | --------- |
 | Employee  id is valid        |    yes       |
 |          |    no      |
-
-
 |    range of amountInCents       |    >0     |
 |          |    <0     |
 
