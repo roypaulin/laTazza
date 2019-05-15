@@ -717,6 +717,25 @@ public class TestDataImpl {
     }
     
     @Test
+    public void testGetEmployeesIdEmptyList() throws EmployeeException {
+    	dataImpl.reset();
+    	List<Integer> returnList;
+		returnList= dataImpl.getEmployeesId();
+		assertTrue(returnList.isEmpty());
+    }
+    @Test
+    public void testGetEmployeesIdOneElement() throws EmployeeException {
+    	dataImpl.reset();
+		List<Integer> expectedList = new ArrayList<>();
+		List<Integer> returnList;
+		int id1;
+		id1=dataImpl.createEmployee("john","doe");
+		expectedList.add(id1);
+		returnList= dataImpl.getEmployeesId();
+		assertEquals(returnList,expectedList);
+    	
+    }
+    @Test
     public void testGetEmployees() throws EmployeeException {
     	dataImpl.reset();
     	Map<Integer, String> returnMap = new HashMap<>();
@@ -734,11 +753,21 @@ public class TestDataImpl {
     }
     
     @Test
-    public void testGetEmployeesEmptyMap() throws BeverageException {
+    public void testGetEmployeesEmptyMap() throws EmployeeException {
     	dataImpl.reset();
     	Map<Integer, String> returnMap = new HashMap<>();
 		returnMap= dataImpl.getEmployees();
 		assertTrue(returnMap.isEmpty());
+    }
+    @Test
+    public void testGetEmployeesOneElement() throws EmployeeException {
+    	dataImpl.reset();
+    	Map<Integer, String> returnMap = new HashMap<>();
+    	Map<Integer, String> expectedMap = new HashMap<>();
+    	int id1=dataImpl.createEmployee("john","doe");
+    	expectedMap.put(id1, "john "+"doe" );
+		returnMap= dataImpl.getEmployees();
+		assertEquals(expectedMap,returnMap);
     }
     @Test
     public void testGetBalance() throws Exception {
