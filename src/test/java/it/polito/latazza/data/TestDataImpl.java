@@ -53,7 +53,7 @@ public class TestDataImpl {
 		dataImpl.reset();
 		int id=-1;
 		try {
-		id=dataImpl.createBeverage("coffee",10, -100);
+		id=dataImpl.createBeverage("coffee",10,-100);
 		fail();
 		}catch(BeverageException be) {
 			//the id should not be updated so it's value should be -1
@@ -99,8 +99,11 @@ public class TestDataImpl {
 	    try {
 	    	dataImpl.updateBeverage(id, bev.getName(),-10,-2);
 	    	fail();
-	    }catch(Exception e) {
-	    	assertTrue(true);
+	    }catch(BeverageException e) {
+	    	//assertTrue(true);
+	    	assertTrue(e instanceof BeverageException);
+	    	assertEquals(bev.getCapsulePerBox(),10);
+	    	assertEquals(bev.boxPrice,200);
 	    }
 	}
 	@Test
