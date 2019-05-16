@@ -982,8 +982,6 @@ alue is correct     |        yes   |
 | -------- | --------- |
 | Employee  id is valid        |    yes       |
 |          |    no      |
-
-
 |    range of amountInCents       |    >0     |
 |          |    <0     |
 
@@ -1089,6 +1087,20 @@ there are some particular Exceptions raised when threre is a connection error wi
 |DataImpl|268-291|0|testGetEmployeeReport|
 |||1|testGetEmployeeReportOneElement|
 |||2+|testGetEmployeeReport|
+
+
+|Unit name | Loop rows | Number of iterations | JUnit test case |
+|---|---|---|---|
+|DataImpl|739-771|0|testEmployeesEmptyMap|
+|||1|testGetEmployeesOneElement|
+|||2+|testGetEmployees|
+
+|Unit name | Loop rows | Number of iterations | JUnit test case |
+|---|---|---|---|
+|DataImpl|703-737|0|testEmployeesIdEmptyList|
+|||1|testGetEmployeesOneElement|
+|||2+|testGetEmployeesId|
+
 
 
 
