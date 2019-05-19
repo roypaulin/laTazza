@@ -127,7 +127,8 @@ class TestDatabase {
     }
     
 
-    @Test
+    @SuppressWarnings("deprecation")
+	@Test
     public void testDatabaseGetEmployeeRecord() throws Exception {
         int id = database.addEmployee(new Employee(-1,"Antonio","Collaudatore",10000.99));
         database.registerTransaction(new Transaction(id,getDate(2010, 8, 21, 10, 5, 3),'P',1,id,1,1, 1.0,true));

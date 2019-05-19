@@ -30,7 +30,7 @@ public class DataImpl implements DataInterface {
 	 ****The amount of the recharge is in cent but in the report it should be printed in euros, is it correct to assume that all them operations related to amount
 	 *like(GetEmployeeBalance, buyCapsules ect..) are made in cent and only when we want to produce the report we have to divide by 100 to cnvert in euros rigth??
 	 ***** 
-	 ****** is it coorect to assume that an employee can buy capsules even if his account is <=0?
+	 ****** is it correct to assume that an employee can buy capsules even if his account is <=0?
 	 * of the error*/
 	public Integer sellCapsules(Integer employeeId, Integer beverageId, Integer numberOfCapsules, Boolean fromAccount)
 			throws EmployeeException, BeverageException, NotEnoughCapsules {
