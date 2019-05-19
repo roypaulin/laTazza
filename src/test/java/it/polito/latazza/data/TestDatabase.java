@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -35,10 +36,12 @@ class TestDatabase {
     public Date getDate(int year,int month,int day,int hour,int minute,int sec) {
         LocalDate d = LocalDateTime.of(year, month, day, hour, minute, sec).toLocalDate();
         Date date = Date.from(d.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        date.setHours(hour);
-        date.setMinutes(minute);
-        date.setSeconds(sec);
-        return date;
+        Calendar now = Calendar.getInstance();
+        now.setTime(date);
+        now.set(Calendar.HOUR_OF_DAY,hour);
+        now.set(Calendar.MINUTE,hour);
+        now.set(Calendar.SECOND,sec);
+        return now.getTime();
     }
     
 
