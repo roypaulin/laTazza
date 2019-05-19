@@ -3,9 +3,9 @@
  */
 package it.polito.latazza.data;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
+//import java.io.File;
+//import java.io.FileInputStream;
+//import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -17,7 +17,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.GregorianCalendar;
+//import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -176,7 +176,6 @@ public class Database {
 		int id_u = 0;
 		String name = null;
 		int capsulePerBox = 0;
-		float credit;
 		int quantityAvaiable = 0;
 		float price = 0;
 		boolean result=false;
@@ -458,7 +457,7 @@ public class Database {
 
 	public void updateBeverage(Beverage beverage) throws Exception {
 		connect();
-		int last_inserted_id = -1;
+		//int last_inserted_id = -1;
 		String sql = "UPDATE `Beverage` SET `quantityAvaiable`=?,`price`=?,`capsulePerBox`=?,`name`=? WHERE id=?;";
 
 		
@@ -481,7 +480,7 @@ public class Database {
 	public void updateEmployee(Employee employee) throws Exception {
 		connect();
 		
-		int last_inserted_id=-1;
+		//int last_inserted_id=-1;
 		
 		String sql = "UPDATE `Employee` SET `name`=?,`surname`=?,`credit`=? WHERE id=?;";
 		

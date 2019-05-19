@@ -66,6 +66,7 @@ class TestDatabase {
         
         Employee emp = database.getEmployeeData(id);
         assertNotEquals(null, emp);
+        assertNotEquals(list,null);
     }
     
 
@@ -87,7 +88,7 @@ class TestDatabase {
 
     @Test
     public void testDatabaseGetListBeverage() throws Exception {
-        int id = database.addBeverage(new Beverage(-1,10,10.1,50,"do you wanna a Kaffè"));
+        database.addBeverage(new Beverage(-1,10,10.1,50,"do you wanna a Kaffè"));
         ArrayList<Beverage> bev = (ArrayList<Beverage>) database.getListOfBeverages();
         assertNotEquals(null, bev);
         assertEquals(bev.size()>=1, true);
@@ -126,7 +127,7 @@ class TestDatabase {
     @Test
     public void testDatabaseGetEmployeeRecord() throws Exception {
         int id = database.addEmployee(new Employee(-1,"Antonio","Collaudatore",10000.99));
-        int trans_id = database.registerTransaction(new Transaction(id,getDate(2010, 8, 21, 10, 5, 3),'P',1,id,1,1, 1.0,true));
+        database.registerTransaction(new Transaction(id,getDate(2010, 8, 21, 10, 5, 3),'P',1,id,1,1, 1.0,true));
         List<Transaction> trans = database.getEmployeeReport(id,getDate(2000, 8, 21, 10, 5, 3),getDate(2020, 8, 21, 10, 5, 3));
         assertEquals(trans.size()>0, true);
         assertEquals(trans.get(0).getTransactionDate().toLocaleString(),getDate(2010, 8, 21, 10, 5, 3).toLocaleString());
