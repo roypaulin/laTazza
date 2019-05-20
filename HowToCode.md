@@ -48,4 +48,42 @@ After you modify the `pom.xml` file, you have to perform again a Maven Update of
 * Binaries;
 * IDE configuration files (e.g., `.project`, `.classpath`). Make sure to include them in the `.gitignore` file before committing;
 * Database files or other data files. 
+ 
+
+## Tests
+
+Test Classes must be placed in `src/test/java/it/polito/latazza/`. A test class example is `src/test/java/it/polito/latazza/data/TestDataImpl.java`.
+
+Test classes name must start with Test (e.g. TestDataImpl.java) and test methods should start with test (e.g. testCreateEmployee) and must have the @Test annotation before the method definition
+
+```java
+public class TestEmployee {
+  @Test
+  public void testCreateEmployee() {
+
+  }
+}
+```
+
+## Maven
+
+Maven is a build automation tool. The project contains a file called pom.xml, which specifies rules for:
+
+* managing dependencies, 
+* compiling the code,  
+* running tests.
+
+If maven is correctly configured on your machine you can input these commands on the console:
+
+```
+mvn clean
+mvn test
+mvn package
+```
+
+Clean: deletes all the compiled files
+
+Test: compiles the project, and executes the test
+
+Package: compiles the project, executes the tests, generates a standalone jar file (you can run the LaTazza app by double clicking on the file).
 
