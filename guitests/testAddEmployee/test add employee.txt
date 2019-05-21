@@ -1,0 +1,8 @@
+Click "{ImageFolder}/1558437545671.png" 23 33
+Click "{ImageFolder}/1558437485074.png" 42 69
+Click "{ImageFolder}/1558437834353.png" 58 69
+Type "Mario"
+Click "{ImageFolder}/1558437834353.png" 58 78
+Type "Rossi"
+Click "{ImageFolder}/1558437834353.png" 40 98
+Click "{ImageFolder}/1558438238385.png" 97 5

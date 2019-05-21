@@ -19,7 +19,7 @@ public class LaTazza {
 		DataInterface data = new DataImpl();
 		//Database database = new Database();
 		//Date date= new Date();
-		//data.reset();
+		data.reset();
 		//Integer id=data.createEmployee("ndjekoua", "sandjo");
 		//data.createBeverage("coffee",10, 100);
 		//data.getEmployeeReport(id,date, new Date());
