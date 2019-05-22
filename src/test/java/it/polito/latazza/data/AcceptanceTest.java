@@ -127,7 +127,7 @@ public class AcceptanceTest {
 	      dataImpl.sellCapsules(emp1, bev1, 1, false);
 	      emp=database.getEmployeeData(emp1);
 	      d=emp.getCredit();
-	      assertEquals(d,10-1);
+	      assertEquals(d,10-1,0.0000000001);
 	      bev=database.getBeverageData(bev1);
 	      q=bev.getQuantityAvailable();
 	      assertEquals(q,10-1-1-1);
