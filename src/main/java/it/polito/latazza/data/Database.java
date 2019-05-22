@@ -40,6 +40,9 @@ public class Database {
 				//String msg = "Exception, called connect on a non void connect object";
 				//throw new Exception(msg);
 			}
+			
+			System.out.println("Working Directory = " +
+		              System.getProperty("user.dir"));
 				
 			Class.forName("org.sqlite.JDBC");
 			connection = DriverManager.getConnection("jdbc:sqlite:./db/db_se");

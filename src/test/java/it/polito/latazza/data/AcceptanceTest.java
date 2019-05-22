@@ -27,8 +27,6 @@ public class AcceptanceTest {
 	
 	public AcceptanceTest() {}
 	
-	/*
-	
 	Database database = new Database();
 	DataImpl dataImpl = new DataImpl();
 	 @Test
@@ -411,8 +409,6 @@ public class AcceptanceTest {
 			end=System.currentTimeMillis();
 			assertTrue(end-begin <500);
 	    } 
-	    
-	    */
 	   
 	   
 	   
