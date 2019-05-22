@@ -41,7 +41,6 @@ public class TestDataImpl {
 	}
 	
 
-	/*
 		
 	@Test
 	public void testCreateBeverage() throws Exception{
@@ -54,6 +53,8 @@ public class TestDataImpl {
 		assertEquals(10,bev.getCapsulePerBox());
 		assertEquals(100,bev.getBoxPrice(),0.0000000001);
 	}
+
+	/*
 	
 	
 	@Test
