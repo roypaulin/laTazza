@@ -30,6 +30,9 @@ import it.polito.latazza.exceptions.NotEnoughCapsules;
 
 public class TestDataImpl {
 	/*can be used by other developper, no need to redefine thm again*/
+	
+	/*
+	
 	Database database = new Database();
 	DataImpl dataImpl = new DataImpl();
 	@Test
@@ -953,6 +956,9 @@ public class TestDataImpl {
     		assertTrue(true);
     	}
     }
+    
+    */
+	
 	private class sortById implements Comparator<Transaction>{
 
 		@Override
