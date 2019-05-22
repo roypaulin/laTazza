@@ -116,7 +116,7 @@ public class AcceptanceTest {
 	      //check the employee account
 	      Employee emp=database.getEmployeeData(emp1);
 	      double d=emp.getCredit();
-	      assertEquals(d,10-1);
+	      assertEquals(d,10-1,0.0000000001);
 	      
 	      //check that a transaction has been created for the employee
 	      List<Transaction> transactionList=database.getReport(shiftDate(-1), shiftDate(1));
