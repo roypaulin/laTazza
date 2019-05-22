@@ -39,6 +39,9 @@ public class TestDataImpl {
 		assertEquals(2, 1 + 1);
 
 	}
+	
+
+	/*
 		
 	@Test
 	public void testCreateBeverage() throws Exception{
@@ -67,7 +70,6 @@ public class TestDataImpl {
 		
 	}
 
-	/*
 	@Test
 	public void testUpdateBeverageWithSuccess() throws Exception {
 		dataImpl.reset();
