@@ -41,7 +41,6 @@ public class TestDataImpl {
 	}
 	
 
-	/*
 		
 	@Test
 	public void testCreateBeverage() throws Exception{
@@ -957,8 +956,6 @@ public class TestDataImpl {
     		assertTrue(true);
     	}
     }
-    
-    */
 	
 	private class sortById implements Comparator<Transaction>{
 
