@@ -1,13 +1,10 @@
-˙/**
+/**
  *
  */
 package it.polito.latazza.data;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-//import java.io.File;
-//import java.io.FileInputStream;
-//import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -19,7 +16,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-//import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -39,8 +35,8 @@ public class Database {
 		try {
 			if (connection != null) {
 				connection.close();
-				//String msg = "Exception, called connect on a non void connect object";
-				//throw new Exception(msg);
+				String msg = "Exception, called connect on a non void connect object";
+				throw new Exception(msg);
 			}
 
 			//System.out.println("before connection");
@@ -313,7 +309,7 @@ public class Database {
 		////System.out.println("converting: " + datePassed);
 
 		java.util.Date temp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
-                .parse(datePassed);
+				.parse(datePassed);
 
 		return temp;
 	}
@@ -347,10 +343,10 @@ public class Database {
 		prep.executeUpdate();
 
 		ResultSet rs = prep.getGeneratedKeys();
-        if(rs.next())
-        {
-            last_inserted_id = rs.getInt(1);
-        }
+		if(rs.next())
+		{
+			last_inserted_id = rs.getInt(1);
+		}
 
 		prep.close();
 
@@ -377,10 +373,10 @@ public class Database {
 		prep.executeUpdate();
 
 		ResultSet rs = prep.getGeneratedKeys();
-        if(rs.next())
-        {
-            last_inserted_id = rs.getInt(1);
-        }
+		if(rs.next())
+		{
+			last_inserted_id = rs.getInt(1);
+		}
 
 
 		prep.close();
@@ -405,10 +401,10 @@ public class Database {
 		prep.executeUpdate();
 
 		ResultSet rs = prep.getGeneratedKeys();
-        if(rs.next())
-        {
-            last_inserted_id = rs.getInt(1);
-        }
+		if(rs.next())
+		{
+			last_inserted_id = rs.getInt(1);
+		}
 
 		prep.close();
 
@@ -437,7 +433,7 @@ public class Database {
 				"	`surname`	TEXT NOT NULL,\n" +
 				"	`credit`	REAL NOT NULL DEFAULT 0 CHECK(credit >= 0)\n" +
 				");";
-	    String sql_create_3 = "CREATE TABLE IF NOT EXISTS `Beverage` (\n" +
+		String sql_create_3 = "CREATE TABLE IF NOT EXISTS `Beverage` (\n" +
 				"	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n" +
 				"	`quantityAvaiable`	INTEGER NOT NULL DEFAULT 0 CHECK(quantityAvaiable >= 0),\n" +
 				"	`price`	REAL NOT NULL CHECK(price > 0),\n" +
@@ -445,7 +441,7 @@ public class Database {
 				"	`name`	TEXT NOT NULL UNIQUE\n" +
 				");";
 
-	    String sql_create_4 = "insert into LaTazza values(0.0)";
+		String sql_create_4 = "insert into LaTazza values(0.0)";
 
 		String sqlDelete_1 = "drop table IF EXISTS `Transactions`;";
 		String sqlDelete_2 = "drop table IF EXISTS `Employee`;";
