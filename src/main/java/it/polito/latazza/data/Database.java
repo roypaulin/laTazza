@@ -43,35 +43,13 @@ public class Database {
 				//throw new Exception(msg);
 			}
 			
-			System.out.println("Working Directory = " +
-		              System.getProperty("user.dir"));
-			
-			try {
-			    String cmd = "ls -l -R";
-			    System.out.println("Executing command: " + cmd);
-			    Process p = Runtime.getRuntime().exec(cmd);
-			    int result = p.waitFor();
-			    
-			    System.out.println("Process exit code: " + result);
-			    System.out.println();
-			    System.out.println("Result:");
-			    BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-
-			    String line = "";
-			    while ((line = reader.readLine()) != null) {
-				System.out.println(line);
-			    }
-
-			} catch (Exception e) {
-			    e.printStackTrace();
-			}
-			
-			
+			System.out.println("before connection");
 				
 			Class.forName("org.sqlite.JDBC");
 			connection = DriverManager.getConnection("jdbc:sqlite:./db/db_se");
 			connection.createStatement().execute("PRAGMA foreign_keys=ON");
-			//System.out.println("Database connection opened.");
+			
+			System.out.println("Database connection opened.");
 		} catch(SQLException | ClassNotFoundException e) {
 			System.err.println("erroreeeeee");
 			throw new Exception();
