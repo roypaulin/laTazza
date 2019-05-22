@@ -7,9 +7,14 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.Test;
+
+import it.polito.latazza.exceptions.BeverageException;
+import it.polito.latazza.exceptions.EmployeeException;
 
 
 
@@ -20,11 +25,24 @@ class AcceptanceTest {
 	DataImpl dataImpl = new DataImpl();
 	 @Test
 	    public void testBuyBoxes() throws Exception {
+		 long begin,end;
+		 begin=System.currentTimeMillis();
 	    	dataImpl.reset();
+	    	end=System.currentTimeMillis();
+	    	assertTrue(end-begin < 500);
+	    	
 	    	database.updateBalance(500);
 	    	int id;
+	    	
+	    	begin=System.currentTimeMillis();
 			id=dataImpl.createBeverage("coffee",10, 100);
+			end=System.currentTimeMillis();
+			assertTrue(end-begin < 500);
+			
+			begin=System.currentTimeMillis();
 			dataImpl.buyBoxes(id,3);// so i will spend 3*100cent to buy 3*10 capsules
+			end=System.currentTimeMillis();
+			assertTrue(end-begin < 500);
 			
 			// check laTazza balance have been updated
 			double balance = database.getBalance();
@@ -55,18 +73,28 @@ class AcceptanceTest {
 	 @Test
 	    public void testSellCapsules()
 				throws Exception{
+		 long begin,end;
 	    	dataImpl.reset();
+	    	begin=System.currentTimeMillis();
 	      int emp1=dataImpl.createEmployee("john","doe");
+	      end=System.currentTimeMillis();
+	      assertTrue(end-begin < 500);
 	      int emp2=dataImpl.createEmployee("jane","roberts");
 	      int bev1=dataImpl.createBeverage("tea", 10, 10);
 	      //int bev2=dataImpl.createBeverage("lemon", 20, 15);
 	      
 	  	  database.updateBalance(400);
+	  	begin=System.currentTimeMillis();
 	      dataImpl.rechargeAccount(emp1, 10);
+	      end=System.currentTimeMillis();
+	      assertTrue(end-begin < 500);
 	      
 	      dataImpl.buyBoxes(bev1, 1);
-	      dataImpl.sellCapsules(emp1, bev1, 1, true);
 	      
+	      begin=System.currentTimeMillis();
+	      dataImpl.sellCapsules(emp1, bev1, 1, true);
+	      end=System.currentTimeMillis();
+	      assertTrue(end-begin <500);
 	      // check LaTazza balance
 	      double balance=database.getBalance();
 	      assertEquals(balance,400 -10 +10);
@@ -103,12 +131,15 @@ class AcceptanceTest {
 	 @Test 
      public void testSellCapsulesToVisitor() throws Exception {
     	dataImpl.reset();
-    	
+    	long begin,end;
     	int bev1=dataImpl.createBeverage("tea", 20, 40);
     	database.updateBalance(100);
     	dataImpl.buyBoxes(bev1, 2);
-    	dataImpl.sellCapsulesToVisitor(bev1, 2);
     	
+    	begin=System.currentTimeMillis();
+    	dataImpl.sellCapsulesToVisitor(bev1, 2);
+    	end=System.currentTimeMillis();
+    	assertTrue(end-begin < 500);
     	//check available quantity
     	Beverage bev=database.getBeverageData(bev1);
     	assertEquals(bev.getQuantityAvailable(),38);
@@ -157,6 +188,7 @@ class AcceptanceTest {
 	   @Test
 	    public void TestGetReport() throws Exception {
 	    	dataImpl.reset();
+	    	long begin,end;
 	    	List<String> returnReport = new ArrayList<>();
 	    	List<String> excpectedReport = new ArrayList<>();
 	    	List<Transaction> transactionList;
@@ -189,13 +221,17 @@ class AcceptanceTest {
 	        excpectedReport.add(s);
 	        s=dataImpl.convDate(transactionList.get(4).getTransactionDate())+" VISITOR"+" coffee"+" "+10;
 	        excpectedReport.add(s);//will be uncommented when pasty will terminate methods like RechargeAccoun, sellCapsules, ect....
+	        begin=System.currentTimeMillis();
 	    	returnReport = dataImpl.getReport(shiftDate(-1), shiftDate(+1));
+	    	end=System.currentTimeMillis();
+	    	assertTrue(end-begin < 500);
 	    	//System.out.println("returnreport "+returnReport+"  excpected report"+excpectedReport);
 	    	assertEquals(excpectedReport,returnReport);
 	    }
 	    
 	   @Test
 	    public void TestGetReportEmployee() throws Exception {
+		   long begin,end;
 	    	dataImpl.reset();
 	    	List<String> returnReport = new ArrayList<>();
 	    	List<String> excpectedReport = new ArrayList<>();
@@ -226,15 +262,147 @@ class AcceptanceTest {
 	        excpectedReport.add(s);
 	        s=dataImpl.convDate(transactionList.get(2).getTransactionDate())+" CASH"+" ndjekoua"+" sandjo"+" coffee"+" "+10;
 	        excpectedReport.add(s);
-	    
+	        begin=System.currentTimeMillis();
 	    	returnReport = dataImpl.getEmployeeReport(empId,shiftDate(-1),shiftDate(1));
+	    	end=System.currentTimeMillis();
+	    	assertTrue(end-begin < 500);
 	    	//System.out.println("returnreport "+returnReport+"  excpected report"+excpectedReport);
 	    	assertEquals(excpectedReport,returnReport);
 	    }
 	    
+	   @Test
+	    public void testGetBalance() throws Exception {
+	      long begin,end;
+	    	database.updateBalance(100.50);
+	    	  begin=System.currentTimeMillis();
+	    	dataImpl.getBalance();
+	    	  end=System.currentTimeMillis();
+	    	  assertTrue(end-begin < 500);
+	    }
+	   
+	   @Test
+	    public void testGetEmployees() throws EmployeeException {
+		   long begin,end;
+	    	dataImpl.reset();
+	    	dataImpl.createEmployee("john","doe");
+			dataImpl.createEmployee("chris","paul");
+			dataImpl.createEmployee("steven","adams");
+			begin=System.currentTimeMillis();
+		   dataImpl.getEmployees();
+			end=System.currentTimeMillis();
+			assertTrue(end-begin <500);
+	
+	    }
+	   
+	   @Test
+	    public void testGetEmployeesId() throws EmployeeException {
+	    	dataImpl.reset();
+			long begin,end;
+			dataImpl.createEmployee("john","doe");
+			dataImpl.createEmployee("chris","paul");
+			dataImpl.createEmployee("steven","adams");
+			begin=System.currentTimeMillis();
+			dataImpl.getEmployeesId();
+			end=System.currentTimeMillis();
+	    	assertTrue(end-begin < 500);
+	    }
 	   
 	   
+	   @Test
+	    public void testGetEmployeeBalance() throws EmployeeException {
+	    	dataImpl.reset();// used to clear everything before starting the Test
+			int id;
+			long begin,end;
+			
+			
+			id=dataImpl.createEmployee("john","doe");
+			
+			// check employee balance
+			dataImpl.rechargeAccount(id, 10);
+			begin=System.currentTimeMillis();
+			dataImpl.getEmployeeBalance(id);
+			end=System.currentTimeMillis();
+		    assertTrue(end-begin < 500);
+	    }
 	   
+	   @Test
+		public void testGetEmployeeSurName() throws EmployeeException {
+		   long begin,end;
+			dataImpl.reset();// used to clear everything before starting the Test
+			int id;
+			id=dataImpl.createEmployee("john","doe");
+			//i get the Surname of the created string
+			begin=System.currentTimeMillis();
+			 dataImpl.getEmployeeSurname(id);
+			end=System.currentTimeMillis();
+			
+			assertTrue(end-begin < 500);
+	         
+			
+		}
+	   
+	   
+	   @Test
+		public void testGetEmployeeName() throws EmployeeException {
+		   long begin,end;
+			dataImpl.reset();// used to clear everything before starting the Test
+			int id;
+			id=dataImpl.createEmployee("john","doe");
+			//i get the Surname of the created string
+			begin=System.currentTimeMillis();
+			 dataImpl.getEmployeeName(id);
+			end=System.currentTimeMillis();
+			
+			assertTrue(end-begin < 500);
+	         
+			
+		}
+	   
+	   @Test
+		public void testUpdateEmployee() throws Exception {
+		   long begin,end;
+			dataImpl.reset();
+			int id ;
+			id=dataImpl.createEmployee("john","doe");
+		    
+			begin=System.currentTimeMillis();
+		    dataImpl.updateEmployee(id, "jane", "mary");
+		    end=System.currentTimeMillis();
+             assertTrue(end-begin < 500 );
+		   
+		}
+	   
+	   
+	   @Test
+	    public void testGetBeverageCapsulesSuccess() throws Exception {
+		   long begin,end;
+	    	dataImpl.reset();
+	    	int id;
+			id=dataImpl.createBeverage("coffee",10, 100);
+			Beverage bev = database.getBeverageData(id);
+			bev.setQuantityAvailable(10);
+			database.updateBeverage(bev);
+			begin=System.currentTimeMillis();
+			 dataImpl.getBeverageCapsules(id);
+			end=System.currentTimeMillis();
+			assertTrue(end-begin < 500);
+	    }
+	   
+	   
+	   @Test
+	    public void testGetBeverages() throws BeverageException {
+	    	dataImpl.reset();
+	    	long end,begin;
+	    
+			dataImpl.createBeverage("coffee",10, 100);
+			dataImpl.createBeverage("Tea",10, 100);
+			dataImpl.createBeverage("Lemon", 20,150);
+		
+			begin=System.currentTimeMillis();
+			dataImpl.getBeverages();
+			end=System.currentTimeMillis();
+			assertTrue(end-begin <500);
+	    } 
 	   
 	   
 	   
