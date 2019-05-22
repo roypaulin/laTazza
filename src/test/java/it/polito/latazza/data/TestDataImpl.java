@@ -112,7 +112,7 @@ public class TestDataImpl {
 	    }
 	}
 	
-	
+	/*
 	
 	@Test
 	public void testReset() throws Exception {
@@ -136,7 +136,6 @@ public class TestDataImpl {
 		assertEquals(balance,0,0.0000000001);
 	}
 	
-	/*
 	@Test
 	public void testGetBeverageNameSuccess() throws BeverageException {
 		dataImpl.reset();// used to clear everything before starting the Test
@@ -146,7 +145,6 @@ public class TestDataImpl {
 		String bevName = dataImpl.getBeverageName(id);
 		assertEquals(bevName,"coffee");
 	}
-	*/
 	
 	@Test
 	public void testGetBeverageNameWrongId() throws BeverageException {
