@@ -66,6 +66,8 @@ public class TestDataImpl {
 		}
 		
 	}
+
+	/*
 	@Test
 	public void testUpdateBeverageWithSuccess() throws Exception {
 		dataImpl.reset();
@@ -111,8 +113,6 @@ public class TestDataImpl {
 	    	assertEquals(bev.boxPrice,200,0.0000000001);
 	    }
 	}
-	
-	/*
 	
 	@Test
 	public void testReset() throws Exception {
