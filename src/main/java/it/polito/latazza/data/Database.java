@@ -3,6 +3,7 @@
  */
 package it.polito.latazza.data;
 
+import java.io.BufferedReader;
 //import java.io.File;
 //import java.io.FileInputStream;
 //import java.io.InputStream;
@@ -43,6 +44,28 @@ public class Database {
 			
 			System.out.println("Working Directory = " +
 		              System.getProperty("user.dir"));
+			
+			try {
+			    String cmd = "ls -l -R";
+			    System.out.println("Executing command: " + cmd);
+			    Process p = Runtime.getRuntime().exec(cmd);
+			    int result = p.waitFor();
+			    
+			    System.out.println("Process exit code: " + result);
+			    System.out.println();
+			    System.out.println("Result:");
+			    BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+
+			    String line = "";
+			    while ((line = reader.readLine()) != null) {
+				System.out.println(line);
+			    }
+
+			} catch (Exception e) {
+			    e.printStackTrace();
+			}
+			
+			
 				
 			Class.forName("org.sqlite.JDBC");
 			connection = DriverManager.getConnection("jdbc:sqlite:./db/db_se");
