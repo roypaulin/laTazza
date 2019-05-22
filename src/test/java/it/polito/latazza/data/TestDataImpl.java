@@ -41,6 +41,12 @@ public class TestDataImpl {
 	}
 	
 
+	@Test
+	public void testTruncate() throws Exception{
+		database.truncateTables();
+		assertTrue(true);
+	}
+
 		
 	@Test
 	public void testCreateBeverage() throws Exception{
