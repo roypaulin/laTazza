@@ -588,7 +588,7 @@ public class DataImpl implements DataInterface {
 	/* @author jean thibaut */
 	public void reset() {
 		try {
-			database.truncateTables();
+			//database.truncateTables();
 		} catch (Exception e) {
 		
 		}
