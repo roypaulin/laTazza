@@ -52,7 +52,7 @@ public class AcceptanceTest {
 			
 			// check laTazza balance have been updated
 			double balance = database.getBalance();
-			assertEquals(balance,500-300);
+			assertEquals(balance,500-300,0.0000000001);
 			
 			// check the Quantity available for this Beverage has been correctly updated
 			Integer quantityAvailable = database.getBeverageData(id).getQuantityAvailable();
@@ -73,7 +73,7 @@ public class AcceptanceTest {
 			Beverage bev = database.getBeverageData(id);
 			assertEquals("coffee",bev.getName());
 			assertEquals(10,bev.getCapsulePerBox());
-			assertEquals(100,bev.getBoxPrice());
+			assertEquals(100,bev.getBoxPrice(),0.0000000001);
 		}
 		
 	 @Test
@@ -103,10 +103,10 @@ public class AcceptanceTest {
 	      assertTrue(end-begin <500);
 	      // check LaTazza balance
 	      double balance=database.getBalance();
-	      assertEquals(balance,400 -10 +10);
+	      assertEquals(balance,400 -10 +10,0.0000000001);
 	      dataImpl.sellCapsules(emp2, bev1, 1, false);
 	      balance=database.getBalance();
-	      assertEquals(balance,400 -10 +10 +1);
+	      assertEquals(balance,400 -10 +10 +1,0.0000000001);
 	      
 	      // check the beverage available quantity
 	      Beverage bev=database.getBeverageData(bev1);
@@ -151,7 +151,7 @@ public class AcceptanceTest {
     	assertEquals(bev.getQuantityAvailable(),38);
     	
     	// check the LaTazza Account
-    	assertEquals(database.getBalance(),100-80+4);
+    	assertEquals(database.getBalance(),100-80+4,0.0000000001);
     	
     	//check transactions have been created
     	 List<Transaction> transactionList=database.getReport(shiftDate(-1), shiftDate(1));
@@ -169,7 +169,7 @@ public class AcceptanceTest {
 	    	
 	    	//check employee credit
 	    	Employee emp=database.getEmployeeData(emp1);
-	    	assertEquals(emp.getCredit(),10);
+	    	assertEquals(emp.getCredit(),10,0.0000000001);
 	    	assertEquals(credit,10);
 	    	//check that transactions have been created 
 	        List<Transaction> transactionList=database.getReport(shiftDate(-1), shiftDate(1));
@@ -187,7 +187,7 @@ public class AcceptanceTest {
 			Employee emp = database.getEmployeeData(id);
 			assertEquals("john",emp.getName());
 			assertEquals("doe",emp.getSurname());
-			assertEquals(0,emp.getCredit());
+			assertEquals(0,emp.getCredit(),0.0000000001);
 			
 		}
 	   

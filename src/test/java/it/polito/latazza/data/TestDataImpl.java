@@ -356,7 +356,7 @@ public class TestDataImpl {
       //check the employee account
       Employee emp=database.getEmployeeData(emp1);
       double d=emp.getCredit();
-      assertEquals(d,10-1);
+      assertEquals(d,10-1,0.0000000001);
       
       //check that a transaction has been created for the employee
       List<Transaction> transactionList=database.getReport(shiftDate(-1), shiftDate(1));
@@ -367,7 +367,7 @@ public class TestDataImpl {
       dataImpl.sellCapsules(emp1, bev1, 1, false);
       emp=database.getEmployeeData(emp1);
       d=emp.getCredit();
-      assertEquals(d,10-1);
+      assertEquals(d,10-1,0.0000000001);
       bev=database.getBeverageData(bev1);
       q=bev.getQuantityAvailable();
       assertEquals(q,10-1-1-1);

@@ -80,7 +80,7 @@ public class TestDatabase {
     public void testDatabaseUpdateBalance() throws Exception {
         database.updateBalance(1.1);
         double balance = database.getBalance();
-        assertEquals(1.1, balance);
+        assertEquals(1.1, balance,0.0000000001);
     }
     
 
