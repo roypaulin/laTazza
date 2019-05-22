@@ -31,7 +31,6 @@ import it.polito.latazza.exceptions.NotEnoughCapsules;
 public class TestDataImpl {
 	/*can be used by other developper, no need to redefine thm again*/
 	
-	/*
 	
 	Database database = new Database();
 	DataImpl dataImpl = new DataImpl();
@@ -41,6 +40,8 @@ public class TestDataImpl {
 
 	}
 	
+
+	/*
 		
 	@Test
 	public void testCreateBeverage() throws Exception{
