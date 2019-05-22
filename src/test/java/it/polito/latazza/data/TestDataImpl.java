@@ -71,7 +71,7 @@ public class TestDataImpl {
 	}
 
 
-	/*
+	
 	@Test
 	public void testUpdateBeverageWithSuccess() throws Exception {
 		dataImpl.reset();
