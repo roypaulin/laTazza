@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
-
 import it.polito.latazza.data.Beverage;
 import it.polito.latazza.data.DataImpl;
 import it.polito.latazza.data.Database;
@@ -23,6 +22,7 @@ import it.polito.latazza.exceptions.DateException;
 import it.polito.latazza.exceptions.EmployeeException;
 import it.polito.latazza.exceptions.NotEnoughBalance;
 import it.polito.latazza.exceptions.NotEnoughCapsules;
+
 
 public class TestDataImpl {
 	/*can be used by other developper, no need to redefine thm again*/
@@ -240,17 +240,7 @@ public class TestDataImpl {
 		Integer capsulesQuantity = bev.getQuantityAvailable();
 		assertEquals(capsulesQuantity,0,0.0000000001);
     }
-    @Test
-    public void testGetBeverageCapsules() throws Exception {
-    	dataImpl.reset();
-    	int id;
-		id=dataImpl.createBeverage("coffee",10, 100);
-		Beverage bev = database.getBeverageData(id);
-		bev.setQuantityAvailable(10);
-		database.updateBeverage(bev);
-		Integer capsulesQuantity = bev.getQuantityAvailable();
-		assertEquals(capsulesQuantity,10,0.0000000001);
-    }
+  
     @Test
     public void testGetBeverageCapsulesSuccess() throws Exception {
     	dataImpl.reset();
