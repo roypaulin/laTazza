@@ -346,7 +346,7 @@ public class TestDataImpl {
       assertEquals(balance,400 -10 +10,0.0000000001);
       dataImpl.sellCapsules(emp2, bev1, 1, false);
       balance=database.getBalance();
-      assertEquals(balance,400 -10 +10 +1);
+      assertEquals(balance,400 -10 +10 +1,0.0000000001);
       
       // check the beverage available quantity
       Beverage bev=database.getBeverageData(bev1);
@@ -442,7 +442,7 @@ public class TestDataImpl {
         dataImpl.sellCapsules(id1, id2, -1, false);
         emp=database.getEmployeeData(id1);
         bev=database.getBeverageData(id2);
-        assertEquals(emp.getCredit(),10);
+        assertEquals(emp.getCredit(),10,0.0000000001);
         assertEquals(bev.getQuantityAvailable(),10);
     }
     @Test 

@@ -29,7 +29,9 @@ import it.polito.latazza.exceptions.BeverageException;
  * @author jean thibaut
  *
  */
-class TestDatabase {
+public class TestDatabase {
+	
+	public TestDatabase() {}
 
 	Database database = new Database();
     DataImpl dataImpl = new DataImpl();

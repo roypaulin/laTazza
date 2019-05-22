@@ -23,7 +23,10 @@ import it.polito.latazza.exceptions.EmployeeException;
 
 
 
-class AcceptanceTest {
+public class AcceptanceTest {
+	
+	public AcceptanceTest() {}
+	
 	Database database = new Database();
 	DataImpl dataImpl = new DataImpl();
 	 @Test
