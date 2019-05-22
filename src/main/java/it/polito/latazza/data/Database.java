@@ -57,12 +57,14 @@ public class Database {
 	}
 	
 	private void closeConnection() throws Exception {
+		System.out.println("before close connection");
 		connection.close();
 		connection = null;
-		//System.out.println("Database connection closed.");
+		System.out.println("Database connection closed.");
 	}
 	
-	public List<Employee> getListEmployee() throws Exception{
+	public List<Employee> getListEmployee() throws Exception {
+		System.out.println("before get list employee");
 		connect();
 		
 		List<Employee> returnList = new LinkedList<Employee>();
@@ -83,22 +85,18 @@ public class Database {
 		rs.close();
 		stmt.close();
 		
+
+		System.out.println("end get list employee");
+		
 		closeConnection();
 		
 		return returnList;
 	}
-	
-	
-	/* for security purpose */
-	@Override
-	protected void finalize() throws Throwable {
-		connection.close();
-		connection = null;
-		super.finalize();
-	}
 
 	public Employee getEmployeeData(int i) throws Exception {
 		connect();
+		
+		System.out.println("before get employee");
 		
 		String sql = "SELECT * FROM Employee WHERE id = ?";
 		
@@ -119,6 +117,9 @@ public class Database {
 			result = true;
 		}
 		
+
+		System.out.println("end get employee");
+		
 		closeConnection();
 		
 		if (!result)
@@ -129,18 +130,25 @@ public class Database {
 
 
 	public void updateBalance(double d) throws Exception {
+
+		System.out.println("before update balance");
+		
 		String sql = "update LaTazza set balance=?";
 		connect();
 		
 		PreparedStatement prep = connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
 		prep.setDouble(1, d);
 		prep.execute();
+
+		System.out.println("end update balance");
 		
 		closeConnection();
 	}
 
 	public List<Beverage> getListOfBeverages() throws Exception {
 		List<Beverage> returnList = new ArrayList<Beverage>();
+		
+		System.out.println("before list of beverage");
 		
 		connect();
 		
@@ -162,6 +170,9 @@ public class Database {
 		
 		rs.close();
 		stmt.close();
+		
+
+		System.out.println("end list of beverage");
 		
 		closeConnection();
 		
