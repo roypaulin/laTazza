@@ -20,6 +20,7 @@ import java.util.List;
 
 import it.polito.latazza.data.DataImpl;
 import it.polito.latazza.data.Database;
+import it.polito.latazza.exceptions.BeverageException;
 
 /**
  * @author migliore elia
