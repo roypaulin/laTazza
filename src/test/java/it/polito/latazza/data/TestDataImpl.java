@@ -39,14 +39,6 @@ public class TestDataImpl {
 		assertEquals(2, 1 + 1);
 
 	}
-	
-
-	@Test
-	public void testTruncate() throws Exception{
-		database.truncateTables();
-		assertTrue(true);
-	}
-
 		
 	@Test
 	public void testCreateBeverage() throws Exception{
@@ -119,6 +111,9 @@ public class TestDataImpl {
 	    	assertEquals(bev.boxPrice,200,0.0000000001);
 	    }
 	}
+	
+	
+	/*
 	@Test
 	public void testReset() throws Exception {
 		
@@ -140,6 +135,8 @@ public class TestDataImpl {
 		assertEquals(true,empList.isEmpty());
 		assertEquals(balance,0,0.0000000001);
 	}
+	*/
+	
 	@Test
 	public void testGetBeverageNameSuccess() throws BeverageException {
 		dataImpl.reset();// used to clear everything before starting the Test
