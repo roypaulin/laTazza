@@ -4,7 +4,10 @@
  */
 package it.polito.latazza.data;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
+import org.junit.Test;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -14,8 +17,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
-import org.junit.jupiter.api.Test;
 
 import it.polito.latazza.data.Beverage;
 import it.polito.latazza.data.DataImpl;

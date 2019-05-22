@@ -1,6 +1,11 @@
 package it.polito.latazza.data;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -11,7 +16,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.jupiter.api.Test;
 import it.polito.latazza.data.Beverage;
 import it.polito.latazza.data.DataImpl;
 import it.polito.latazza.data.Database;
@@ -44,7 +48,7 @@ public class TestDataImpl {
 		Beverage bev = database.getBeverageData(id);
 		assertEquals("coffee",bev.getName());
 		assertEquals(10,bev.getCapsulePerBox());
-		assertEquals(100,bev.getBoxPrice());
+		assertEquals(100,bev.getBoxPrice(),0.0000000001);
 	}
 	
 	
@@ -70,7 +74,7 @@ public class TestDataImpl {
 	    bev.setBoxPrice(200);
 	    dataImpl.updateBeverage(id, bev.getName(),bev.getCapsulePerBox() , (int)Math.round(bev.getBoxPrice()));
 	    //everything is correct so the object should be updated
-	    assertEquals(200,database.getBeverageData(id).getBoxPrice());
+	    assertEquals(200,database.getBeverageData(id).getBoxPrice(),0.0000000001);
 	}
 	
 	@Test
@@ -103,7 +107,7 @@ public class TestDataImpl {
 	    	//assertTrue(true);
 	    	assertTrue(e instanceof BeverageException);
 	    	assertEquals(bev.getCapsulePerBox(),10);
-	    	assertEquals(bev.boxPrice,200);
+	    	assertEquals(bev.boxPrice,200,0.0000000001);
 	    }
 	}
 	@Test
@@ -125,7 +129,7 @@ public class TestDataImpl {
 		
 		assertEquals(true,bevList.isEmpty());
 		assertEquals(true,empList.isEmpty());
-		assertEquals(balance,0);
+		assertEquals(balance,0,0.0000000001);
 	}
 	@Test
 	public void testGetBeverageNameSuccess() throws BeverageException {
@@ -278,7 +282,7 @@ public class TestDataImpl {
 		
 		// check laTazza balance have been updated
 		double balance = database.getBalance();
-		assertEquals(balance,500-300);
+		assertEquals(balance,500-300,0.00000001);
 		
 		// check the Quantity available for this Beverage has been correctly updated
 		Integer quantityAvailable = database.getBeverageData(id).getQuantityAvailable();
@@ -339,7 +343,7 @@ public class TestDataImpl {
       
       // check LaTazza balance
       double balance=database.getBalance();
-      assertEquals(balance,400 -10 +10);
+      assertEquals(balance,400 -10 +10,0.0000000001);
       dataImpl.sellCapsules(emp2, bev1, 1, false);
       balance=database.getBalance();
       assertEquals(balance,400 -10 +10 +1);
@@ -432,7 +436,7 @@ public class TestDataImpl {
         dataImpl.sellCapsules(id1, id2, -1, true);
         Employee emp=database.getEmployeeData(id1);
         Beverage bev=database.getBeverageData(id2);
-        assertEquals(emp.getCredit(),10);
+        assertEquals(emp.getCredit(),10,0.0000000001);
        assertEquals(bev.getQuantityAvailable(),10);
        
         dataImpl.sellCapsules(id1, id2, -1, false);
@@ -455,7 +459,7 @@ public class TestDataImpl {
     	assertEquals(bev.getQuantityAvailable(),38);
     	
     	// check the LaTazza Account
-    	assertEquals(database.getBalance(),100-80+4);
+    	assertEquals(database.getBalance(),100-80+4,0.0000000001);
     	
     	//check transactions have been created
     	 List<Transaction> transactionList=database.getReport(shiftDate(-1), shiftDate(1));
@@ -512,7 +516,7 @@ public class TestDataImpl {
     	
     	//check employee credit
     	Employee emp=database.getEmployeeData(emp1);
-    	assertEquals(emp.getCredit(),10);
+    	assertEquals(emp.getCredit(),10,0.0000000001);
     	assertEquals(credit,10);
     	//check that transactions have been created 
         List<Transaction> transactionList=database.getReport(shiftDate(-1), shiftDate(1));
@@ -553,7 +557,7 @@ public class TestDataImpl {
 		Employee emp = database.getEmployeeData(id);
 		assertEquals("john",emp.getName());
 		assertEquals("doe",emp.getSurname());
-		assertEquals(0,emp.getCredit());
+		assertEquals(0,emp.getCredit(),0.0000000001);
 		
 	}
     
@@ -690,7 +694,7 @@ public class TestDataImpl {
 		//check that the initial employee balance is zero
 	
 		double credit = emp.getCredit();
-		assertEquals(credit,0);
+		assertEquals(credit,0,0.0000000001);
     }
     @Test
     public void testGetEmployeesId() throws EmployeeException {
