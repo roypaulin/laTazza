@@ -31,6 +31,7 @@
 			    <argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
 			  </configuration>
 			</plugin>
+			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.7.0</version>
 				<configuration>
