@@ -32,9 +32,9 @@ public class AcceptanceTest {
 	 @Test
 	    public void testBuyBoxes() throws Exception {
 		 long begin,end;
+	    	dataImpl.reset();
 		 System.gc();
 begin=System.currentTimeMillis();
-	    	dataImpl.reset();
 	    	end=System.currentTimeMillis();
 	    	assertTrue(end-begin < 500);
 
