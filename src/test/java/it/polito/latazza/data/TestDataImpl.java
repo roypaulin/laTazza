@@ -298,7 +298,6 @@ public class TestDataImpl {
 		assertEquals(quantityAvailable,0+30,0.0000000001);
 		
 		 //check the Transaction has been created
-		 Date date = new Date();
 		   List<Transaction> transactionList = database.getReport(shiftDate(-1),new Date());
 		   assertEquals(1,transactionList.size());
 	  }
