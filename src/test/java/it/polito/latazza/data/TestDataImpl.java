@@ -299,7 +299,7 @@ public class TestDataImpl {
 		
 		 //check the Transaction has been created
 		 Date date = new Date();
-		   List<Transaction> transactionList = database.getReport(date,new Date());
+		   List<Transaction> transactionList = database.getReport(shiftDate(-1),new Date());
 		   assertEquals(1,transactionList.size());
 	  }
      
