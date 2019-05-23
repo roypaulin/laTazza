@@ -33,10 +33,7 @@ public class AcceptanceTest {
 	    public void testBuyBoxes() throws Exception {
 		 long begin,end;
 	    	dataImpl.reset();
-		 System.gc();
-begin=System.currentTimeMillis();
-	    	end=System.currentTimeMillis();
-	    	assertTrue(end-begin < 500);
+	    	System.gc();
 
 	    	database.updateBalance(500);
 	    	int id;
