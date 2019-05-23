@@ -1,0 +1,9 @@
+Click "{ImageFolder}/1558444649378.png" 17 15
+Click "{ImageFolder}/1558444682288.png" 50 46
+Click "{ImageFolder}/1558444737452.png" 81 68
+Click "{ImageFolder}/1558444776965.png" 23 93
+Click "{ImageFolder}/1558444823258.png"
+Click "{ImageFolder}/1558444837700.png" 99 4
+Click "{ImageFolder}/1558445241880.png" 95 10
+
+

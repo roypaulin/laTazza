@@ -4,7 +4,10 @@
  */
 package it.polito.latazza.data;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
+import org.junit.Test;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -15,20 +18,17 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import org.junit.jupiter.api.Test;
-
-import it.polito.latazza.data.Beverage;
 import it.polito.latazza.data.DataImpl;
 import it.polito.latazza.data.Database;
-import it.polito.latazza.data.Employee;
-import it.polito.latazza.data.Transaction;
 import it.polito.latazza.exceptions.BeverageException;
 
 /**
- * @author jean thibaut
+ * @author migliore elia
  *
  */
-class TestDatabase {
+public class TestDatabase {
+	
+	public TestDatabase() {}
 
 	Database database = new Database();
     DataImpl dataImpl = new DataImpl();
@@ -45,7 +45,6 @@ class TestDatabase {
     }
     
 
-    
     @Test
     public void testDatabaseTruncate() throws Exception {
         database.truncateTables();
@@ -77,7 +76,7 @@ class TestDatabase {
     public void testDatabaseUpdateBalance() throws Exception {
         database.updateBalance(1.1);
         double balance = database.getBalance();
-        assertEquals(1.1, balance);
+        assertEquals(1.1, balance,0.0000000001);
     }
     
 
@@ -147,5 +146,6 @@ class TestDatabase {
         assertNotEquals(null, trans);
 
     }
-
+    
+    
 }
