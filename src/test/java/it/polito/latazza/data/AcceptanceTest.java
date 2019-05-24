@@ -484,6 +484,22 @@ begin=System.currentTimeMillis();
 		 
 	   
 	   
+	   @Test
+		public void testUpdateBeverage() throws Exception {
+			dataImpl.reset();
+			int id =-1;
+			long begin,end;
+			id=dataImpl.createBeverage("Tea",10, 100);
+		    Beverage bev = database.getBeverageData(id);
+		    bev.setBoxPrice(200);
+		    begin=System.currentTimeMillis();
+		    dataImpl.updateBeverage(id, bev.getName(),bev.getCapsulePerBox() , (int)Math.round(bev.getBoxPrice()));
+		    end=System.currentTimeMillis();
+		    assertTrue(end-begin < 500);
+		    //everything is correct so the object should be updated
+		    assertEquals(200,database.getBeverageData(id).getBoxPrice(),0.0000000001);
+		}
+	   
 	   
 	   
 	   
