@@ -468,6 +468,22 @@ begin=System.currentTimeMillis();
 		}
 		
 	   
+	   @Test
+		public void testGetBeverageName() throws BeverageException {
+			dataImpl.reset();// used to clear everything before starting the Test
+			int id=-1;
+			long begin,end;
+			
+			id=dataImpl.createBeverage("coffee",10, 100);
+			
+			begin=System.currentTimeMillis();
+			dataImpl.getBeverageName(id);
+			end=System.currentTimeMillis();
+			assertTrue(end-begin < 500);
+		}
+		 
+	   
+	   
 	   
 	   
 	   
