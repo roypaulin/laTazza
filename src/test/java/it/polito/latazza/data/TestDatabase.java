@@ -18,15 +18,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import it.polito.latazza.data.Beverage;
 import it.polito.latazza.data.DataImpl;
 import it.polito.latazza.data.Database;
-import it.polito.latazza.data.Employee;
-import it.polito.latazza.data.Transaction;
 import it.polito.latazza.exceptions.BeverageException;
 
 /**
- * @author jean thibaut
+ * @author migliore elia
  *
  */
 public class TestDatabase {
@@ -48,7 +45,6 @@ public class TestDatabase {
     }
     
 
-    /*
     @Test
     public void testDatabaseTruncate() throws Exception {
         database.truncateTables();
@@ -150,6 +146,6 @@ public class TestDatabase {
         assertNotEquals(null, trans);
 
     }
-    */
+    
     
 }

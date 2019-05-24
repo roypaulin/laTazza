@@ -30,6 +30,8 @@ import it.polito.latazza.exceptions.NotEnoughCapsules;
 
 public class TestDataImpl {
 	/*can be used by other developper, no need to redefine thm again*/
+	
+	
 	Database database = new Database();
 	DataImpl dataImpl = new DataImpl();
 	@Test
@@ -38,6 +40,7 @@ public class TestDataImpl {
 
 	}
 	
+
 		
 	@Test
 	public void testCreateBeverage() throws Exception{
@@ -50,6 +53,7 @@ public class TestDataImpl {
 		assertEquals(10,bev.getCapsulePerBox());
 		assertEquals(100,bev.getBoxPrice(),0.0000000001);
 	}
+
 	
 	
 	@Test
@@ -65,6 +69,9 @@ public class TestDataImpl {
 		}
 		
 	}
+
+
+	
 	@Test
 	public void testUpdateBeverageWithSuccess() throws Exception {
 		dataImpl.reset();
@@ -110,6 +117,7 @@ public class TestDataImpl {
 	    	assertEquals(bev.boxPrice,200,0.0000000001);
 	    }
 	}
+	
 	@Test
 	public void testReset() throws Exception {
 		
@@ -131,6 +139,7 @@ public class TestDataImpl {
 		assertEquals(true,empList.isEmpty());
 		assertEquals(balance,0,0.0000000001);
 	}
+	
 	@Test
 	public void testGetBeverageNameSuccess() throws BeverageException {
 		dataImpl.reset();// used to clear everything before starting the Test
@@ -289,8 +298,7 @@ public class TestDataImpl {
 		assertEquals(quantityAvailable,0+30,0.0000000001);
 		
 		 //check the Transaction has been created
-		 Date date = new Date();
-		   List<Transaction> transactionList = database.getReport(date,new Date());
+		   List<Transaction> transactionList = database.getReport(shiftDate(-1),new Date());
 		   assertEquals(1,transactionList.size());
 	  }
      
@@ -953,6 +961,7 @@ public class TestDataImpl {
     		assertTrue(true);
     	}
     }
+	
 	private class sortById implements Comparator<Transaction>{
 
 		@Override
