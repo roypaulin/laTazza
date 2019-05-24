@@ -452,7 +452,21 @@ begin=System.currentTimeMillis();
 			end=System.currentTimeMillis();
 			assertTrue(end-begin <500);
 		}  
+	  
 	   
+	   @Test
+		public void testGetBeverageCapsulesPerBox() throws BeverageException {
+			dataImpl.reset();
+			int id=-1;
+			long begin,end;
+			
+			id=dataImpl.createBeverage("coffee",10, 100);
+			begin=System.currentTimeMillis();
+			 dataImpl.getBeverageCapsulesPerBox(id);
+			 end=System.currentTimeMillis();
+			assertTrue(end-begin < 500);
+		}
+		
 	   
 	   
 	   
