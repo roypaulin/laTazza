@@ -441,6 +441,18 @@ begin=System.currentTimeMillis();
 	   
 	   
 	   
+	   @Test
+		public void getBeverageBoxPrice() throws BeverageException {
+			dataImpl.reset();
+			int id=-1;
+			long begin,end;
+			id=dataImpl.createBeverage("coffee",10, 100);
+			begin=System.currentTimeMillis();
+			dataImpl.getBeverageBoxPrice(id);
+			end=System.currentTimeMillis();
+			assertTrue(end-begin <500);
+		}  
+	   
 	   
 	   
 	   
