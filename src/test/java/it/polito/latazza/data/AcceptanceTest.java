@@ -426,7 +426,25 @@ begin=System.currentTimeMillis();
 	    }
 
 
-
+	   @Test
+		public void testGetBeveragesId() throws BeverageException {
+			dataImpl.reset();
+			long begin,end;
+			dataImpl.createBeverage("coffee",10, 100);
+			dataImpl.createBeverage("Tea",10, 100);
+			dataImpl.createBeverage("Lemon", 20,150);
+			begin=System.currentTimeMillis();
+			 dataImpl.getBeveragesId();
+			 end=System.currentTimeMillis();
+			assertTrue(end-begin < 500);
+		}
+	   
+	   
+	   
+	   
+	   
+	   
+	   
 	   private class sortById implements Comparator<Transaction>{
 
 			@Override
