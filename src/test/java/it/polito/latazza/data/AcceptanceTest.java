@@ -59,8 +59,8 @@ begin=System.currentTimeMillis();
 			assertEquals(quantityAvailable,0+30,0.0000000001);
 
 			 //check the Transaction has been created
-			 Date date = new Date();
-			   List<Transaction> transactionList = database.getReport(date,new Date());
+			 //Date date = new Date();
+			   List<Transaction> transactionList = database.getReport(shiftDate(-1),new Date());
 			   assertEquals(1,transactionList.size());
 		  }
 
