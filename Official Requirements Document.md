@@ -2,9 +2,9 @@
 
 Authors: Maurizio Morisio, Luca Ardito, Riccardo Coppola
 
-Date: 19/04/2019
+Date: 27/05/2019
 
-Version: 2
+Version: 3
 
 Change history
 
@@ -13,6 +13,8 @@ Change history
 | 2 | Fixed defect in [scenario 2](#scenario-2): precondition was wrong  |
 | | Fixed defect in scenario [format](#relevant-scenarios): added post conditions |
 | | Fixed defect in [use case 2](#use-cases): variants text canceled |
+| 3 | Fixed defect in [use case 3]: recharge only positive|
+| |  Added Non functional requirement NFR5 |
 
 # Contents
 - [Abstract](#abstract)
@@ -99,6 +101,7 @@ Mr. Guest is a visitor in the office. As such he does not have the privilege of 
 |  NFR2     | Performance | All functions should complete in < 0.5 sec  | All FR |
 |  NFR3     | Portability | The application runs on MS Windows (7 and more recent)  | All FR |
 |  NFR4     | Portability | The application (functions and data) should be portable from a PC to another PC in less than 5 minutes | All FR |
+|  NFR5     | Localisation | Decimal numbers use . (dot) as decimal separator ||
 
 
 # Use case diagram and use cases
@@ -141,9 +144,9 @@ a -- (FR6 Produce report on all consumptions)
 
 | Actors Involved        | Administrator |
 | ------------- |:-------------:| 
-|  Precondition     | Account A exists |  
+|  Precondition     | Account A exists , quantity >0 |  
 |  Post condition     | A.amount_post > A.amount_pre |
-|  Nominal Scenario     | Administrator selects account A of colleague C, Increase account of a certain quantity|
+|  Nominal Scenario     | Administrator selects account A of colleague C, Increase account of  quantity|
 |  Variants     |  |
 
 ### Use case 4, UC4 - FR4 Record purchase of capsules
