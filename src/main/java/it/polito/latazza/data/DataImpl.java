@@ -346,6 +346,15 @@ public class DataImpl implements DataInterface {
 	/* @author jean thibaut */
 	public Integer createBeverage(String name, Integer capsulesPerBox, Integer boxPrice) throws BeverageException {
 	
+		 if(name.isEmpty()) {
+			 throw new BeverageException();
+		 }
+		 if(String.valueOf(capsulesPerBox) == null) {
+			 throw new BeverageException();
+		 }
+		 if(String.valueOf(boxPrice) == null) {
+			 throw new BeverageException();
+		 }
 		Integer id=-1;
 		Beverage b= new Beverage(-1,0,boxPrice,capsulesPerBox,name);
 		try{
@@ -361,6 +370,9 @@ public class DataImpl implements DataInterface {
 	public void updateBeverage(Integer id, String name, Integer capsulesPerBox, Integer boxPrice)
 			throws BeverageException {
 		try {
+			if(name.isEmpty()) {
+				throw new BeverageException();
+			}
 		 Beverage bev = database.getBeverageData(id);
          bev.setName(name);
 		 bev.setCapsulePerBox(capsulesPerBox);
