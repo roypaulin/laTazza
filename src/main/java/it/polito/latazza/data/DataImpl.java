@@ -346,13 +346,11 @@ public class DataImpl implements DataInterface {
 	/* @author jean thibaut */
 	public Integer createBeverage(String name, Integer capsulesPerBox, Integer boxPrice) throws BeverageException {
 	
+		
+		 if(name==null | capsulesPerBox == null | boxPrice == null) {
+			 throw new BeverageException();
+		 }
 		 if(name.isEmpty()) {
-			 throw new BeverageException();
-		 }
-		 if(String.valueOf(capsulesPerBox) == null) {
-			 throw new BeverageException();
-		 }
-		 if(String.valueOf(boxPrice) == null) {
 			 throw new BeverageException();
 		 }
 		Integer id=-1;
