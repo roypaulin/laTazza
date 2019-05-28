@@ -605,7 +605,7 @@ public class DataImpl implements DataInterface {
 	public String convAmountWithCurrency(double amount) {
 		DecimalFormat df = new DecimalFormat("#.##");
 		double a = Double.valueOf(df.format(amount/100));
-		return DecimalFormat.getCurrencyInstance(Locale.GERMANY).format(a);
+		return DecimalFormat.getCurrencyInstance(Locale.GERMANY).format(a).replace(",",".");
 	}
 
 }
