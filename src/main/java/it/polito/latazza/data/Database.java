@@ -39,7 +39,7 @@ public class Database {
 			//System.out.println("before connection");
 
 			Class.forName("org.sqlite.JDBC");
-			connection = DriverManager.getConnection("jdbc:sqlite:./db/db_se");
+			connection = DriverManager.getConnection("jdbc:sqlite:./db/db_se.sqlite");
 			connection.createStatement().execute("PRAGMA foreign_keys=ON");
 
 			//System.out.println("Database connection opened.");
@@ -450,8 +450,10 @@ public class Database {
 		stmt_drop_tables.addBatch(sqlDelete_1);
 		stmt_drop_tables.addBatch(sqlDelete_2);
 		stmt_drop_tables.addBatch(sqlDelete_3);
+		try {
 		stmt_drop_tables.executeBatch();
-
+		} catch(Exception e) {}
+		
 		Statement stmt_create_tables = connection.createStatement();
 		stmt_create_tables.addBatch(sql_create_1);
 		stmt_create_tables.addBatch(sql_create_2);
