@@ -56,11 +56,8 @@ public class DataImpl implements DataInterface {
 		if(numberOfCapsules>0) {
 		double d=(numberOfCapsules*(be.getBoxPrice()/be.getCapsulePerBox()));
 		if(fromAccount) {
-            try {
             	emp.updateCredit(-1.0*d);
-			}catch(Exception e) {
-				throw new NotEnoughCapsules();
-			}
+			
 		}
 		try {
 			be.updateCapsuleQuantity(-1*numberOfCapsules);
@@ -504,7 +501,7 @@ public class DataImpl implements DataInterface {
 	@Override
 	/* @author roy paulin */
 	public void updateEmployee(Integer id, String name, String surname) throws EmployeeException {
-		if((name!="") && (surname!="") ) { 
+		if(((name!="") && (surname!="")) && ((name!=null) && (surname!=null)) ) { 
 		try {
 			Employee emp = database.getEmployeeData(id);
 	         emp.setName(name);
@@ -514,6 +511,8 @@ public class DataImpl implements DataInterface {
 				throw new EmployeeException() ;
 				
 			}
+		} else {
+			throw new EmployeeException();
 		}
 	}
 
