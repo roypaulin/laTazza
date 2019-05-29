@@ -69,7 +69,14 @@ cd src/main && find . -name *.java -exec grep '^.*$' {} \; | wc -l
 
 |         Activity name    | Estimated effort    |
 | ----------- | ------------------------------- |
-| | |
+| database module creation | 19%  |
+| database module testing | 22% |
+| data binding module creation | 20% |
+| data binding module testing | 21% |
+| merge of work | 1% |
+| system test | 7% |
+| acceptance test | 8% |
+| gui test | 2% |
 
 
 ###

@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.Test;
 
@@ -411,12 +412,11 @@ public class TestDataImpl {
         int id2=dataImpl.createBeverage("tea", 10, 10);
     	database.updateBalance(400);
         dataImpl.buyBoxes(id2, 1);
-        try {
-        	 dataImpl.sellCapsules(id1, id2, 1, true);
-        	 fail();
-        }catch(Exception e) {
-        	 assertTrue(true);
-        }
+       
+        	Integer balance= dataImpl.sellCapsules(id1, id2, 1, true);
+        	assertEquals(-1,balance,0);
+        	
+        
     }
     @Test
     public void testSellCapsulesWrongAttributes() throws Exception {
@@ -441,13 +441,13 @@ public class TestDataImpl {
         	assertTrue(true);
         }
     	
-        dataImpl.sellCapsules(id1, id2, -1, true);
+        assertThrows(NotEnoughCapsules.class, () -> dataImpl.sellCapsules(id1, id2, -1, true));
         Employee emp=database.getEmployeeData(id1);
         Beverage bev=database.getBeverageData(id2);
         assertEquals(emp.getCredit(),10,0.0000000001);
        assertEquals(bev.getQuantityAvailable(),10);
        
-        dataImpl.sellCapsules(id1, id2, -1, false);
+       assertThrows(NotEnoughCapsules.class, () -> dataImpl.sellCapsules(id1, id2, -1, false));
         emp=database.getEmployeeData(id1);
         bev=database.getBeverageData(id2);
         assertEquals(emp.getCredit(),10,0.0000000001);
@@ -510,9 +510,8 @@ public class TestDataImpl {
   	assertTrue(true);
   }
     
-    dataImpl.sellCapsulesToVisitor(id1, -1);
-    Beverage bev=database.getBeverageData(id1);
-   assertEquals(bev.getQuantityAvailable(),10);
+    assertThrows(NotEnoughCapsules.class, () -> dataImpl.sellCapsulesToVisitor(id1, -1));
+   
     }
     
     @Test
@@ -573,11 +572,11 @@ public class TestDataImpl {
     @Test
    	public void testCreateEmployeeMissingParameters() throws Exception{
    		dataImpl.reset();
-   		int id=-1;
-   		id=dataImpl.createEmployee("john", "");
-   		assertEquals(id,-1);
-   		dataImpl.createEmployee("", "doe");
-   		dataImpl.createEmployee("", "");
+   		
+   		assertThrows(EmployeeException.class, () -> dataImpl.createEmployee("john", ""));
+   		assertThrows(EmployeeException.class, () -> dataImpl.createEmployee("", "doe"));
+   		assertThrows(EmployeeException.class, () -> dataImpl.createEmployee("", ""));
+   		
    		
    		assertEquals(dataImpl.getEmployeesId().size(),0);
    		
@@ -603,22 +602,22 @@ public class TestDataImpl {
     @Test
    	public void testUpdateEmployeeMissingParameters() throws Exception {
    		dataImpl.reset();
-   		int id =-1;
-   		id=dataImpl.createEmployee("john","doe");
+   		//Integer id =-1;
+   		final int id=dataImpl.createEmployee("john","doe");
    		
    	//check that the object has not been updated
-   		dataImpl.updateEmployee(id, "", "");
+   		assertThrows(EmployeeException.class, () -> dataImpl.updateEmployee(id, "", ""));
+   		//assertThrows(EmployeeException.class, () -> data.updateEmployee(id, null, null));
    	 Employee emp = database.getEmployeeData(id);
 	    assertEquals("john",emp.getName());
 	    assertEquals("doe",emp.getSurname());
 	    
-	    dataImpl.updateEmployee(id, "john", "");
+	    assertThrows(EmployeeException.class, () -> dataImpl.updateEmployee(id, "john", ""));
 	    emp = database.getEmployeeData(id);
 	    assertEquals("john",emp.getName());
 	    assertEquals("doe",emp.getSurname());
 	    
-	    dataImpl.updateEmployee(id, "", "doe");
-	    emp = database.getEmployeeData(id);
+	    assertThrows(EmployeeException.class, () -> dataImpl.updateEmployee(id, "", "doe"));
 	    assertEquals("john",emp.getName());
 	    assertEquals("doe",emp.getSurname());
     }
