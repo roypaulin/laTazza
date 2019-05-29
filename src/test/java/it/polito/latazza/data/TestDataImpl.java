@@ -412,12 +412,11 @@ public class TestDataImpl {
         int id2=dataImpl.createBeverage("tea", 10, 10);
     	database.updateBalance(400);
         dataImpl.buyBoxes(id2, 1);
-        try {
-        	 dataImpl.sellCapsules(id1, id2, 1, true);
-        	 fail();
-        }catch(Exception e) {
-        	 assertTrue(true);
-        }
+       
+        	Integer balance= dataImpl.sellCapsules(id1, id2, 1, true);
+        	assertEquals(-1,balance,0);
+        	
+        
     }
     @Test
     public void testSellCapsulesWrongAttributes() throws Exception {
