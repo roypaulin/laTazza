@@ -29,8 +29,13 @@ Version:
 **nb:** we had used an automated command for calculating that lines, it is
 replicable and works also in the future, following the code:
 ```bash
-cd src/main && find . -name *.java -exec grep [a-zA-Z0-9{}] {} \; | wc -l
+cd src/main && find . -name *.java -exec grep '^.*$' {} \; | wc -l
 ```
+
+<!--
+    to keep only the non blank lines:
+    cd src/main && find . -name *.java -exec grep [a-zA-Z0-9{}] {} \; | wc -l
+-->
 
 # Estimate by product decomposition
 
