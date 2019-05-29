@@ -45,7 +45,7 @@ cd src/main && find . -name *.java -exec grep '^.*$' {} \; | wc -l
 | ----------- | ------------------------------- |
 | Estimated n classes   |         1                    |
 | Estimated LOC per class      |       515                       |
-| Estimated effort  (person days)   |     $\frac{515}{26.82}=19.2$                           |
+| Estimated effort  (person days)   |     $$\frac{515}{26.82}=19.2$$                           |
 | Estimated calendar time (calendar weeks) (Assume team of 4 people, 8 hours per day, 5 days per week ) |          less than one          |
 
 
@@ -54,7 +54,7 @@ cd src/main && find . -name *.java -exec grep '^.*$' {} \; | wc -l
 |             | Estimate                        |
 | ----------- | ------------------------------- |
 | Estimated n classes   |              9               |
-| Estimated LOC per class        |             $\frac{1183}{26.82}=44.1 $                |
+| Estimated LOC per class        |             $$\frac{1183}{26.82}=44.1$$                |
 | Estimated effort  (person days) (Here use productivity P)  |                                      |
 | Estimated calendar time (calendar weeks) (Assume team of 4 people, 8 hours per day, 5 days per week ) |   0.275 so again less than one                 |
 
