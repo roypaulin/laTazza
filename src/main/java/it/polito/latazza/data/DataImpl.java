@@ -55,7 +55,7 @@ public class DataImpl implements DataInterface {
             try {
             	emp.updateCredit(-1.0*d);
 			}catch(Exception e) {
-				throw new EmployeeException();
+				throw new NotEnoughCapsules();
 			}
 		}
 		try {
