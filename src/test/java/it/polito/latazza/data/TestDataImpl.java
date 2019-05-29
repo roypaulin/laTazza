@@ -573,11 +573,11 @@ public class TestDataImpl {
     @Test
    	public void testCreateEmployeeMissingParameters() throws Exception{
    		dataImpl.reset();
-   		int id=-1;
-   		id=dataImpl.createEmployee("john", "");
-   		assertEquals(id,-1);
-   		dataImpl.createEmployee("", "doe");
-   		dataImpl.createEmployee("", "");
+   		
+   		assertThrows(EmployeeException.class, () -> dataImpl.createEmployee("john", ""));
+   		assertThrows(EmployeeException.class, () -> dataImpl.createEmployee("", "doe"));
+   		assertThrows(EmployeeException.class, () -> dataImpl.createEmployee("", ""));
+   		
    		
    		assertEquals(dataImpl.getEmployeesId().size(),0);
    		
@@ -603,22 +603,22 @@ public class TestDataImpl {
     @Test
    	public void testUpdateEmployeeMissingParameters() throws Exception {
    		dataImpl.reset();
-   		int id =-1;
-   		id=dataImpl.createEmployee("john","doe");
+   		//Integer id =-1;
+   		final int id=dataImpl.createEmployee("john","doe");
    		
    	//check that the object has not been updated
-   		dataImpl.updateEmployee(id, "", "");
+   		assertThrows(EmployeeException.class, () -> dataImpl.updateEmployee(id, "", ""));
+   		//assertThrows(EmployeeException.class, () -> data.updateEmployee(id, null, null));
    	 Employee emp = database.getEmployeeData(id);
 	    assertEquals("john",emp.getName());
 	    assertEquals("doe",emp.getSurname());
 	    
-	    dataImpl.updateEmployee(id, "john", "");
+	    assertThrows(EmployeeException.class, () -> dataImpl.updateEmployee(id, "john", ""));
 	    emp = database.getEmployeeData(id);
 	    assertEquals("john",emp.getName());
 	    assertEquals("doe",emp.getSurname());
 	    
-	    dataImpl.updateEmployee(id, "", "doe");
-	    emp = database.getEmployeeData(id);
+	    assertThrows(EmployeeException.class, () -> dataImpl.updateEmployee(id, "", "doe"));
 	    assertEquals("john",emp.getName());
 	    assertEquals("doe",emp.getSurname());
     }
