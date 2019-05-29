@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.Test;
 
@@ -510,9 +511,8 @@ public class TestDataImpl {
   	assertTrue(true);
   }
     
-    dataImpl.sellCapsulesToVisitor(id1, -1);
-    Beverage bev=database.getBeverageData(id1);
-   assertEquals(bev.getQuantityAvailable(),10);
+    assertThrows(NotEnoughCapsules.class, () -> dataImpl.sellCapsulesToVisitor(id1, -1));
+   
     }
     
     @Test
