@@ -442,13 +442,13 @@ public class TestDataImpl {
         	assertTrue(true);
         }
     	
-        dataImpl.sellCapsules(id1, id2, -1, true);
+        assertThrows(NotEnoughCapsules.class, () -> dataImpl.sellCapsules(id1, id2, -1, true));
         Employee emp=database.getEmployeeData(id1);
         Beverage bev=database.getBeverageData(id2);
         assertEquals(emp.getCredit(),10,0.0000000001);
        assertEquals(bev.getQuantityAvailable(),10);
        
-        dataImpl.sellCapsules(id1, id2, -1, false);
+       assertThrows(NotEnoughCapsules.class, () -> dataImpl.sellCapsules(id1, id2, -1, false));
         emp=database.getEmployeeData(id1);
         bev=database.getBeverageData(id2);
         assertEquals(emp.getCredit(),10,0.0000000001);
