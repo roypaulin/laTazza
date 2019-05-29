@@ -38,7 +38,7 @@ public class DataImpl implements DataInterface {
 		Employee emp;
 		Beverage be;
 		double balance=0;
-		if(numberOfCapsules == null) {
+		if(numberOfCapsules == null ||  numberOfCapsules <0) {
 			throw new NotEnoughCapsules();
 		}
 		try {
@@ -85,7 +85,7 @@ public class DataImpl implements DataInterface {
 		}catch(Exception e) {
 			
 		}
-	}
+	} 
 		
 		
 		
