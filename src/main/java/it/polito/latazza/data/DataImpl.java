@@ -98,6 +98,9 @@ public class DataImpl implements DataInterface {
 			throws BeverageException, NotEnoughCapsules {
 		Beverage be;
 		double balance=0;
+		if(numberOfCapsules == null ||  numberOfCapsules <0) {
+			throw new NotEnoughCapsules();
+		}
 		try {
 			be=database.getBeverageData(beverageId);
 		
