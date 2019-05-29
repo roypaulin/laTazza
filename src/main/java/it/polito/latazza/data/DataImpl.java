@@ -38,6 +38,9 @@ public class DataImpl implements DataInterface {
 		Employee emp;
 		Beverage be;
 		double balance=0;
+		if(numberOfCapsules == null) {
+			throw new NotEnoughCapsules();
+		}
 		try {
 			emp=database.getEmployeeData(employeeId);
 		
