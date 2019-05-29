@@ -489,7 +489,7 @@ public class DataImpl implements DataInterface {
 				throw new EmployeeException();
 			}
 	} else {
-		return -1;
+		throw new EmployeeException();
 	}
 		return id;
 		
