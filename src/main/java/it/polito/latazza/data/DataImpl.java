@@ -22,6 +22,7 @@ import it.polito.latazza.data.Transaction;
 
 public class DataImpl implements DataInterface {
      Database database = new Database();
+     
 	@Override
 	/* @author roy paulin */
 	/***is it correct to throw the EmployeeException when the employee balance is not  enough to buy capsules?

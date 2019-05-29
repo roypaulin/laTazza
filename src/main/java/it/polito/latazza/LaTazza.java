@@ -17,6 +17,7 @@ public class LaTazza {
 	// double balance=0;
 	public static void main(String[] args) throws ClassNotFoundException, SQLException, Exception {
 
+		java.util.Locale.setDefault(java.util.Locale.US);
 		DataInterface data = new DataImpl();
 		// Database database = new Database();
 		// Date date= new Date();
