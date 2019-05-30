@@ -46,8 +46,7 @@ cd src/main && find . -name *.java -exec grep '^.*$' {} \; | wc -l
 | Estimated n classes   |         1                    |
 | Estimated LOC per class      |       515                       |
 | Estimated effort  (person days)   |    515/26.82=19.2$$                           |
-| Estimated calendar time (calendar weeks) (Assume team of 4 people, 8 hours per day, 5 days per week ) |          less than one          |
-
+| Estimated calendar time (calendar weeks) (Assume team of 4 people, 8 hours per day, 5 days per week ) |          121/(3*8*5)=1.008         |
 
 ### module data binding
 
@@ -56,9 +55,11 @@ cd src/main && find . -name *.java -exec grep '^.*$' {} \; | wc -l
 | Estimated n classes   |              9               |
 | Estimated LOC per class        |             $$1183/26.82=44.1$$                |
 | Estimated effort  (person days) (Here use productivity P)  |                                      |
-| Estimated calendar time (calendar weeks) (Assume team of 4 people, 8 hours per day, 5 days per week ) |   0.275 so again less than one                 |
+| Estimated calendar time (calendar weeks) (Assume team of 4 people, 8 hours per day, 5 days per week ) |   103/(3*8*5)=0.85 so less than one week                 |
 
 
+**nb:** we had used 3 as number of team partecipant because we are in 3 because one colleague
+has left the team near the beginning of the course.
 
 
 # Estimate by activity decomposition
@@ -69,19 +70,17 @@ cd src/main && find . -name *.java -exec grep '^.*$' {} \; | wc -l
 
 |         Activity name    | Estimated effort    |
 | ----------- | ------------------------------- |
-| database module creation | 19%  |
-| database module testing | 22% |
-| data binding module creation | 20% |
-| data binding module testing | 21% |
-| merge of work | 1% |
-| system test | 7% |
-| acceptance test | 8% |
-| gui test | 2% |
+| database module creation | 19%=53.77 h  |
+| database module testing | 22%=62.26 h |
+| data binding module creation | 20%=56.6 h |
+| data binding module testing | 21%=59.43 h |
+| merge of work | 1%=2.83 h |
+| system test | 7%=19.8 h |
+| acceptance test | 8%=22.6 h |
+| gui test | 2%=5.6 h |
 
 
-###
-Insert here Gantt chart with above activities
-
+![](images/gant.png)
 
 
 
