@@ -84,7 +84,6 @@ has left the team near the beginning of the course.
 
 ## gantt diagram of activity decomposition:
 
-
 <br>
 
 ![](images/gantt.png)
