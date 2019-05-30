@@ -80,7 +80,7 @@ has left the team near the beginning of the course.
 | gui test | 2%=5.6 h |
 
 
-![](images/gant.png)
+![](images/gantt.png)
 
 
 
