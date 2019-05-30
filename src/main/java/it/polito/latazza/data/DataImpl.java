@@ -22,6 +22,7 @@ import it.polito.latazza.data.Transaction;
 
 public class DataImpl implements DataInterface {
      Database database = new Database();
+     
 	@Override
 	/* @author roy paulin */
 	/***is it correct to throw the EmployeeException when the employee balance is not  enough to buy capsules?
@@ -37,6 +38,9 @@ public class DataImpl implements DataInterface {
 		Employee emp;
 		Beverage be;
 		double balance=0;
+		if(numberOfCapsules == null ||  numberOfCapsules <0) {
+			throw new NotEnoughCapsules();
+		}
 		try {
 			emp=database.getEmployeeData(employeeId);
 		
@@ -52,11 +56,8 @@ public class DataImpl implements DataInterface {
 		if(numberOfCapsules>0) {
 		double d=(numberOfCapsules*(be.getBoxPrice()/be.getCapsulePerBox()));
 		if(fromAccount) {
-            try {
             	emp.updateCredit(-1.0*d);
-			}catch(Exception e) {
-				throw new EmployeeException();
-			}
+			
 		}
 		try {
 			be.updateCapsuleQuantity(-1*numberOfCapsules);
@@ -81,7 +82,7 @@ public class DataImpl implements DataInterface {
 		}catch(Exception e) {
 			
 		}
-	}
+	} 
 		
 		
 		
@@ -94,11 +95,15 @@ public class DataImpl implements DataInterface {
 			throws BeverageException, NotEnoughCapsules {
 		Beverage be;
 		double balance=0;
+		
 		try {
 			be=database.getBeverageData(beverageId);
 		
 		}catch(Exception e) {
 			throw new BeverageException();
+		}
+		if(numberOfCapsules == null ||  numberOfCapsules <0) {
+			throw new NotEnoughCapsules();
 		}
 		if(numberOfCapsules>0) {
 			try {
@@ -488,7 +493,7 @@ public class DataImpl implements DataInterface {
 				throw new EmployeeException();
 			}
 	} else {
-		return -1;
+		throw new EmployeeException();
 	}
 		return id;
 		
@@ -497,7 +502,7 @@ public class DataImpl implements DataInterface {
 	@Override
 	/* @author roy paulin */
 	public void updateEmployee(Integer id, String name, String surname) throws EmployeeException {
-		if((name!="") && (surname!="") ) { 
+		if(((name!="") && (surname!="")) && ((name!=null) && (surname!=null)) ) { 
 		try {
 			Employee emp = database.getEmployeeData(id);
 	         emp.setName(name);
@@ -507,6 +512,8 @@ public class DataImpl implements DataInterface {
 				throw new EmployeeException() ;
 				
 			}
+		} else {
+			throw new EmployeeException();
 		}
 	}
 

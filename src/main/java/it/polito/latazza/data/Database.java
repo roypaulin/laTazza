@@ -428,7 +428,7 @@ public class Database {
 				"	`id`	INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
 				"	`name`	TEXT NOT NULL,\n" +
 				"	`surname`	TEXT NOT NULL,\n" +
-				"	`credit`	REAL NOT NULL DEFAULT 0 CHECK(credit >= 0)\n" +
+				"	`credit`	REAL NOT NULL DEFAULT 0\n" + //  CHECK(credit >= 0) removed for incompatibility with the requirement
 				");";
 		String sql_create_3 = "CREATE TABLE IF NOT EXISTS `Beverage` (\n" +
 				"	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n" +
