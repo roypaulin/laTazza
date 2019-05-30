@@ -554,7 +554,8 @@ public class TestDataImpl {
       //try recharge account with a negative amount
        
         assertThrows(EmployeeException.class, () -> dataImpl.rechargeAccount(emp1, -1));
-        
+       
+    }
     @Test
 	public void testCreateEmployee() throws Exception{
 		dataImpl.reset();
