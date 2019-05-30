@@ -82,7 +82,7 @@ has left the team near the beginning of the course.
 <br>
 <br>
 
-### gantt diagram of activity decomposition
+## gantt diagram of activity decomposition:
 
 
 <br>
