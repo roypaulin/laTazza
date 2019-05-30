@@ -163,6 +163,9 @@ public class DataImpl implements DataInterface {
 	}catch(Exception e) {
 	}
 	}
+		else {
+			throw new EmployeeException();
+		}
 		return Math.round((float)emp.getCredit());
 		
 	}
