@@ -19,7 +19,7 @@ Version:
 
 ###
 
-|         Total person days worked by your  team, considering period March 5 to April 26 (1 person day == 8 person hours)     |   |
+|         Total person days worked by your  team, considering period March 5 to April 26 (1 person day == 8 person hours)     |  55 |
 | ----------- | ------------------------------- |
 |Total Java LoC delivered on April 26 (only code, no Junit code) |1698 |
 | Total number of Java classes delivered on April 26 (only code, no Junit code)|10 |
