@@ -47,8 +47,8 @@
 				  <artifactId>junit</artifactId>
 				  <version>4.13-beta-1</version>
 					<scope>test</scope>
-				</dependency>
 			    </dependencies>
+				</dependency>
 			    <configuration>
 			        <testFailureIgnore>true</testFailureIgnore>
 			    </configuration>
