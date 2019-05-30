@@ -298,6 +298,8 @@ public class TestDataImplOfficial {
 
 	@Test
 	public void testRechargeAccountInvalid() throws EmployeeException {
+		Integer employee = data.createEmployee(MARCO, ROSSI);
+		assertThrows(EmployeeException.class, () -> data.rechargeAccount(employee, -1));
 		assertThrows(EmployeeException.class, () -> data.rechargeAccount(-1, -1));
 		assertThrows(EmployeeException.class, () -> data.rechargeAccount(-1, 100));
 	}
