@@ -11,6 +11,11 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <junit-jupiter.version>5.1.0</junit-jupiter.version>
+        <!-- optional : if we want to use a junit4 specific version -->
+        <junit.version>4.12</junit.version>
 	</properties>
 	<repositories>
 		<repository>
