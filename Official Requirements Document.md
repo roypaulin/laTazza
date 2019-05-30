@@ -2,9 +2,9 @@
 
 Authors: Maurizio Morisio, Luca Ardito, Riccardo Coppola
 
-Date: 27/05/2019
+Date: 29/05/2019
 
-Version: 3
+Version: 4
 
 Change history
 
@@ -15,6 +15,8 @@ Change history
 | | Fixed defect in [use case 2](#use-cases): variants text canceled |
 | 3 | Fixed defect in [use case 3]: recharge only positive|
 | |  Added Non functional requirement NFR5 |
+| 4 | Fixed defect in [use case 3]: post condition is on Colleague account, and LaTazza|
+| | Fixed defect in [use case 1]: post condition is on Colleague account, not LaTazza|
 
 # Contents
 - [Abstract](#abstract)
@@ -126,7 +128,7 @@ a -- (FR6 Produce report on all consumptions)
 | ------------- |:-------------:| 
 |  Precondition     | Capsule T exists, colleague C exists |  
 |  Post condition     | T.quantity_post < T.quantity_pre |
-| | LaTazzaAccount.amount_post > LaTazzaAccount.amount_pre |
+| | C.PersonalAccount.balance_post < C.PersonalAccount.balance_pre |
 |  Nominal Scenario     | Administrator selects capsule type T, selects colleague C, Deduce quantity for capsule T, deduce price of T by account of colleague C|
 |  Variants     | Account of colleague C has not enough money, issue warning |
 
@@ -144,9 +146,10 @@ a -- (FR6 Produce report on all consumptions)
 
 | Actors Involved        | Administrator |
 | ------------- |:-------------:| 
-|  Precondition     | Account A exists , quantity >0 |  
-|  Post condition     | A.amount_post > A.amount_pre |
-|  Nominal Scenario     | Administrator selects account A of colleague C, Increase account of  quantity|
+|  Precondition     | Personal Account PA exists , quantity >0 |  
+|  Post condition     | PA.balance_post = PA.balance_pre + quantity |
+|  | LaTazzaAccount.balance_post = LaTazzaAccount.balance_pre + quantity  |
+|  Nominal Scenario     | Administrator selects account PA of colleague C, increase account of  quantity, increase LaTazza account of quantity|
 |  Variants     |  |
 
 ### Use case 4, UC4 - FR4 Record purchase of capsules

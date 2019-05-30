@@ -580,7 +580,7 @@ public class TestDataImplOfficial {
 		tomorrow.add(Calendar.DATE, 1);
 		List<String> report = data.getReport(yesterday.getTime(), tomorrow.getTime());
 		assertEquals(5, report.size());
-		assertTrue(report.get(0).contains("RECHARGE Marco Rossi " + String.format("%.2f \u20ac", 15.0)));
+		assertTrue(report.get(0).contains("RECHARGE Marco Rossi 15.00 \u20ac"));
 		assertTrue(report.get(1).contains("BUY Coffee 2"));
 		assertTrue(report.get(2).contains("CASH Marco Rossi Coffee 1"));
 		assertTrue(report.get(3).contains("VISITOR Coffee 2"));
@@ -630,7 +630,7 @@ public class TestDataImplOfficial {
 		tomorrow.add(Calendar.DATE, 1);
 		List<String> report = data.getEmployeeReport(employee, yesterday.getTime(), tomorrow.getTime());
 		assertEquals(3, report.size());
-		assertTrue(report.get(0).contains("RECHARGE Marco Rossi " + String.format("%.2f \u20ac", 15.0)));
+		assertTrue(report.get(0).contains("RECHARGE Marco Rossi 15.00 \u20ac"));
 		assertTrue(report.get(1).contains("CASH Marco Rossi Coffee 1"));
 		assertTrue(report.get(2).contains("BALANCE Marco Rossi Coffee 3"));
 	}
