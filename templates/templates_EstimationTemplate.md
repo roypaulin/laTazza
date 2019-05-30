@@ -79,7 +79,11 @@ has left the team near the beginning of the course.
 | acceptance test | 8%=22.6 h |
 | gui test | 2%=5.6 h |
 
+
+
 ### gantt diagram of activity decomposition
+
+
 
 ![](images/gantt.png)
 
