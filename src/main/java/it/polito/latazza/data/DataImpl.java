@@ -75,10 +75,10 @@ public class DataImpl implements DataInterface {
 			if(fromAccount) {
 				database.updateEmployee(emp);
 			
-		}else {
-			 balance=database.getBalance();
-			database.updateBalance(balance+d);
-		}
+		     }else {
+			   balance=database.getBalance();
+			   database.updateBalance(balance+d);
+		     }
 		}catch(Exception e) {
 			
 		}
