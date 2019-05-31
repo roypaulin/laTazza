@@ -1,10 +1,13 @@
 # Acceptance Testing Documentation template
 
 Authors:
+- Elia migliore s267552
+- Ndjekoua sandjo jean thibaut s256770
+- Roy Paulin Justo Nguetsop Kenfack Djouaka s257855
 
-Date:
+Date: 26/05/2019
 
-Version:
+Version: final
 
 # Contents
 
