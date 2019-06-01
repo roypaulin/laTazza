@@ -95,7 +95,7 @@ begin=System.currentTimeMillis();
 begin=System.currentTimeMillis();
 	      dataImpl.rechargeAccount(emp1, 10);
 	      end=System.currentTimeMillis();
-	      assertTrue(end-begin < 500);
+	      assertTrue(end-begin < 3000);
 
 	      dataImpl.buyBoxes(bev1, 1);
 
