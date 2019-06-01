@@ -632,9 +632,6 @@ public class TestDataImplOfficial {
 		tomorrow.add(Calendar.DATE, 1);
 		List<String> report = data.getEmployeeReport(employee, yesterday.getTime(), tomorrow.getTime());
 		assertEquals(3, report.size());
-		System.out.println(report.get(0));
-		System.out.println("RECHARGE Marco Rossi " + String.format("%.2f \u20ac", 15.0));
-		System.out.println(report.get(0).toString().contains("RECHARGE Marco Rossi " + String.format("%.2f \u20ac", 15.0)));
 		assertTrue(report.get(0).contains("RECHARGE Marco Rossi " + String.format("%.2f \u20ac", 15.0)));
 		assertTrue(report.get(1).contains("CASH Marco Rossi Coffee 1"));
 		assertTrue(report.get(2).contains("BALANCE Marco Rossi Coffee 3"));
