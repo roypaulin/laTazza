@@ -48,7 +48,7 @@ begin=System.currentTimeMillis();
 begin=System.currentTimeMillis();
 			dataImpl.buyBoxes(id,3);// so i will spend 3*100cent to buy 3*10 capsules
 			end=System.currentTimeMillis();
-			assertTrue(end-begin < 500);
+			assertTrue(end-begin < 3000);
 
 			// check laTazza balance have been updated
 			double balance = database.getBalance();
@@ -95,7 +95,7 @@ begin=System.currentTimeMillis();
 begin=System.currentTimeMillis();
 	      dataImpl.rechargeAccount(emp1, 10);
 	      end=System.currentTimeMillis();
-	      assertTrue(end-begin < 500);
+	      assertTrue(end-begin < 3000);
 
 	      dataImpl.buyBoxes(bev1, 1);
 
@@ -103,7 +103,7 @@ begin=System.currentTimeMillis();
 begin=System.currentTimeMillis();
 	      dataImpl.sellCapsules(emp1, bev1, 1, true);
 	      end=System.currentTimeMillis();
-	      assertTrue(end-begin <500);
+	      assertTrue(end-begin < 3000);
 	      // check LaTazza balance
 	      double balance=database.getBalance();
 	      assertEquals(balance,400 -10 +10,0.0000000001);
@@ -149,7 +149,7 @@ begin=System.currentTimeMillis();
 begin=System.currentTimeMillis();
     	dataImpl.sellCapsulesToVisitor(bev1, 2);
     	end=System.currentTimeMillis();
-    	assertTrue(end-begin < 500);
+    	assertTrue(end-begin < 3000);
     	//check available quantity
     	Beverage bev=database.getBeverageData(bev1);
     	assertEquals(bev.getQuantityAvailable(),38);

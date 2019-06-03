@@ -49,9 +49,7 @@ public class Employee {
 
 	public void updateCredit(double amount) throws EmployeeException{
 		// TODO Auto-generated method stub
-		if(this.credit+amount<0) {
-			throw new EmployeeException();
-		}
+		
 		this.credit+=amount;
 	}
 	

@@ -22,6 +22,7 @@ import it.polito.latazza.data.Transaction;
 
 public class DataImpl implements DataInterface {
      Database database = new Database();
+     
 	@Override
 	/* @author roy paulin */
 	/***is it correct to throw the EmployeeException when the employee balance is not  enough to buy capsules?
@@ -37,6 +38,9 @@ public class DataImpl implements DataInterface {
 		Employee emp;
 		Beverage be;
 		double balance=0;
+		if(numberOfCapsules == null ||  numberOfCapsules <0) {
+			throw new NotEnoughCapsules();
+		}
 		try {
 			emp=database.getEmployeeData(employeeId);
 		
@@ -52,11 +56,8 @@ public class DataImpl implements DataInterface {
 		if(numberOfCapsules>0) {
 		double d=(numberOfCapsules*(be.getBoxPrice()/be.getCapsulePerBox()));
 		if(fromAccount) {
-            try {
             	emp.updateCredit(-1.0*d);
-			}catch(Exception e) {
-				throw new EmployeeException();
-			}
+			
 		}
 		try {
 			be.updateCapsuleQuantity(-1*numberOfCapsules);
@@ -74,14 +75,14 @@ public class DataImpl implements DataInterface {
 			if(fromAccount) {
 				database.updateEmployee(emp);
 			
-		}else {
-			 balance=database.getBalance();
-			database.updateBalance(balance+d);
-		}
+		     }else {
+			   balance=database.getBalance();
+			   database.updateBalance(balance+d);
+		     }
 		}catch(Exception e) {
 			
 		}
-	}
+	} 
 		
 		
 		
@@ -94,11 +95,15 @@ public class DataImpl implements DataInterface {
 			throws BeverageException, NotEnoughCapsules {
 		Beverage be;
 		double balance=0;
+		
 		try {
 			be=database.getBeverageData(beverageId);
 		
 		}catch(Exception e) {
 			throw new BeverageException();
+		}
+		if(numberOfCapsules == null ||  numberOfCapsules <0) {
+			throw new NotEnoughCapsules();
 		}
 		if(numberOfCapsules>0) {
 			try {
@@ -158,6 +163,9 @@ public class DataImpl implements DataInterface {
 	}catch(Exception e) {
 	}
 	}
+		else {
+			throw new EmployeeException();
+		}
 		return Math.round((float)emp.getCredit());
 		
 	}
@@ -346,6 +354,13 @@ public class DataImpl implements DataInterface {
 	/* @author jean thibaut */
 	public Integer createBeverage(String name, Integer capsulesPerBox, Integer boxPrice) throws BeverageException {
 	
+		
+		 if(name==null | capsulesPerBox == null | boxPrice == null) {
+			 throw new BeverageException();
+		 }
+		 if(name.isEmpty()) {
+			 throw new BeverageException();
+		 }
 		Integer id=-1;
 		Beverage b= new Beverage(-1,0,boxPrice,capsulesPerBox,name);
 		try{
@@ -361,6 +376,9 @@ public class DataImpl implements DataInterface {
 	public void updateBeverage(Integer id, String name, Integer capsulesPerBox, Integer boxPrice)
 			throws BeverageException {
 		try {
+			if(name.isEmpty()) {
+				throw new BeverageException();
+			}
 		 Beverage bev = database.getBeverageData(id);
          bev.setName(name);
 		 bev.setCapsulePerBox(capsulesPerBox);
@@ -478,7 +496,7 @@ public class DataImpl implements DataInterface {
 				throw new EmployeeException();
 			}
 	} else {
-		return -1;
+		throw new EmployeeException();
 	}
 		return id;
 		
@@ -487,7 +505,7 @@ public class DataImpl implements DataInterface {
 	@Override
 	/* @author roy paulin */
 	public void updateEmployee(Integer id, String name, String surname) throws EmployeeException {
-		if((name!="") && (surname!="") ) { 
+		if(((name!="") && (surname!="")) && ((name!=null) && (surname!=null)) ) { 
 		try {
 			Employee emp = database.getEmployeeData(id);
 	         emp.setName(name);
@@ -497,6 +515,8 @@ public class DataImpl implements DataInterface {
 				throw new EmployeeException() ;
 				
 			}
+		} else {
+			throw new EmployeeException();
 		}
 	}
 
@@ -605,7 +625,7 @@ public class DataImpl implements DataInterface {
 	public String convAmountWithCurrency(double amount) {
 		DecimalFormat df = new DecimalFormat("#.##");
 		double a = Double.valueOf(df.format(amount/100));
-		return DecimalFormat.getCurrencyInstance(Locale.GERMANY).format(a);
+		return DecimalFormat.getCurrencyInstance(Locale.GERMANY).format(a).replace(",",".");
 	}
 
 }
