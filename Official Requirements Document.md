@@ -2,9 +2,9 @@
 
 Authors: Maurizio Morisio, Luca Ardito, Riccardo Coppola
 
-Date: 19/04/2019
+Date: 29/05/2019
 
-Version: 2
+Version: 4
 
 Change history
 
@@ -13,6 +13,10 @@ Change history
 | 2 | Fixed defect in [scenario 2](#scenario-2): precondition was wrong  |
 | | Fixed defect in scenario [format](#relevant-scenarios): added post conditions |
 | | Fixed defect in [use case 2](#use-cases): variants text canceled |
+| 3 | Fixed defect in [use case 3]: recharge only positive|
+| |  Added Non functional requirement NFR5 |
+| 4 | Fixed defect in [use case 3]: post condition is on Colleague account, and LaTazza|
+| | Fixed defect in [use case 1]: post condition is on Colleague account, not LaTazza|
 
 # Contents
 - [Abstract](#abstract)
@@ -99,6 +103,7 @@ Mr. Guest is a visitor in the office. As such he does not have the privilege of 
 |  NFR2     | Performance | All functions should complete in < 0.5 sec  | All FR |
 |  NFR3     | Portability | The application runs on MS Windows (7 and more recent)  | All FR |
 |  NFR4     | Portability | The application (functions and data) should be portable from a PC to another PC in less than 5 minutes | All FR |
+|  NFR5     | Localisation | Decimal numbers use . (dot) as decimal separator ||
 
 
 # Use case diagram and use cases
@@ -123,7 +128,7 @@ a -- (FR6 Produce report on all consumptions)
 | ------------- |:-------------:| 
 |  Precondition     | Capsule T exists, colleague C exists |  
 |  Post condition     | T.quantity_post < T.quantity_pre |
-| | LaTazzaAccount.amount_post > LaTazzaAccount.amount_pre |
+| | C.PersonalAccount.balance_post < C.PersonalAccount.balance_pre |
 |  Nominal Scenario     | Administrator selects capsule type T, selects colleague C, Deduce quantity for capsule T, deduce price of T by account of colleague C|
 |  Variants     | Account of colleague C has not enough money, issue warning |
 
@@ -141,9 +146,10 @@ a -- (FR6 Produce report on all consumptions)
 
 | Actors Involved        | Administrator |
 | ------------- |:-------------:| 
-|  Precondition     | Account A exists |  
-|  Post condition     | A.amount_post > A.amount_pre |
-|  Nominal Scenario     | Administrator selects account A of colleague C, Increase account of a certain quantity|
+|  Precondition     | Personal Account PA exists , quantity >0 |  
+|  Post condition     | PA.balance_post = PA.balance_pre + quantity |
+|  | LaTazzaAccount.balance_post = LaTazzaAccount.balance_pre + quantity  |
+|  Nominal Scenario     | Administrator selects account PA of colleague C, increase account of  quantity, increase LaTazza account of quantity|
 |  Variants     |  |
 
 ### Use case 4, UC4 - FR4 Record purchase of capsules
