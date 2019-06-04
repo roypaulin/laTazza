@@ -680,4 +680,19 @@ public class TestDataImplOfficial {
 		assertEquals(Integer.valueOf(30), other.getBeverageCapsules(beverage));
 	}
 
+	@Test
+	public void testPriceVariation() throws EmployeeException, BeverageException, NotEnoughBalance, NotEnoughCapsules {
+		Integer employee = data.createEmployee(MARCO, ROSSI);
+		data.rechargeAccount(employee, 1500);
+		Integer beverage = data.createBeverage(COFFEE, 5, 500);
+		data.buyBoxes(beverage, 1);
+		data.updateBeverage(beverage, COFFEE, 20, 1000);
+		data.buyBoxes(beverage, 1);
+		Integer balance = data.sellCapsules(employee, beverage, 15, true);
+		assertEquals(Integer.valueOf(500), balance);
+		assertEquals(Integer.valueOf(500), data.getEmployeeBalance(employee));
+		assertEquals(Integer.valueOf(0), data.getBalance());
+		assertEquals(Integer.valueOf(10), data.getBeverageCapsules(beverage));
+	}
+
 }
