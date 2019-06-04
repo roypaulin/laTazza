@@ -129,14 +129,31 @@ public class DataImpl implements DataInterface {
 			throw new NotEnoughCapsules();
 		}
 		if(numberOfCapsules>0) {
-			try {
-				be.updateCapsuleQuantity(-1*numberOfCapsules);
-			}catch(NotEnoughCapsules e) {
-				throw new NotEnoughCapsules();
-			}
-		
-		double d=(numberOfCapsules*(be.getBoxPrice()/be.getCapsulePerBox()));
+			
 
+			double d = 0;
+			
+			if (numberOfCapsules-be.getQuantityAvailable() <= 0) {
+				d = (numberOfCapsules*(be.getBoxPrice()/be.getCapsulePerBox()));
+				try {
+				be.updateCapsuleQuantity(-1*numberOfCapsules);
+				}catch(NotEnoughCapsules e) {
+					throw new NotEnoughCapsules();
+				}
+				// update quantity avaiable ONLY OLD VALUE
+			} else {
+				d = (be.getQuantityAvailable()*(be.getBoxPrice()/be.getCapsulePerBox()));
+				int to_buy = (numberOfCapsules-be.getQuantityAvailable());
+				if (to_buy > be.getBoxPriceNew())
+					throw new NotEnoughCapsules();
+				
+				d+= to_buy*(be.getBoxPriceNew()/be.getCapsulePerBoxNew());
+				
+
+				be.updateCapsuleQuantity(be.getQuantityAvailable());
+				be.updateCapsuleQuantityNew(-1*to_buy);
+				
+			}
 		Transaction tr=new Transaction(-1,new Date(),'C',-1,-1,beverageId,numberOfCapsules,-1,false);
 		try {
 			balance=database.getBalance();
