@@ -465,7 +465,7 @@ public class Database {
 		try {
 		stmt_drop_tables.executeBatch();
 		} catch(Exception e) {}
-		
+
 		Statement stmt_create_tables = connection.createStatement();
 		stmt_create_tables.addBatch(sql_create_1);
 		stmt_create_tables.addBatch(sql_create_2);
