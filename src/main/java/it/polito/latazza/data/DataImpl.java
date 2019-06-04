@@ -54,7 +54,32 @@ public class DataImpl implements DataInterface {
 			throw new BeverageException();
 		}
 		if(numberOfCapsules>0) {
-		double d=(numberOfCapsules*(be.getBoxPrice()/be.getCapsulePerBox()));
+			
+			double d = 0;
+			
+			if (numberOfCapsules-be.getQuantityAvailable() <= 0) {
+				d = (numberOfCapsules*(be.getBoxPrice()/be.getCapsulePerBox()));
+				
+				be.updateCapsuleQuantity(be.getQuantityAvailable()-numberOfCapsules);
+				
+				// update quantity avaiable ONLY OLD VALUE
+			} else {
+				d = (be.getQuantityAvailable()*(be.getBoxPrice()/be.getCapsulePerBox()));
+				int to_buy = (numberOfCapsules-be.getQuantityAvailable());
+				if (to_buy > be.getBoxPriceNew())
+					throw new NotEnoughCapsules();
+				
+				d+= to_buy*(be.getBoxPriceNew()/be.getCapsulePerBoxNew());
+				
+
+				be.updateCapsuleQuantity(0);
+				be.updateCapsuleQuantityNew(be.getQuantityAvailableNew()-to_buy);
+				
+			}
+		//int old_buyed_capsule = numberOfCapsules - be.get
+				
+		//		(old_buyed_capsule*(be.getBoxPrice()/be.getCapsulePerBox()));
+		//double d=
 		if(fromAccount) {
             	emp.updateCredit(-1.0*d);
 			
@@ -179,15 +204,33 @@ public class DataImpl implements DataInterface {
 		Beverage bev ;
 		float amount;
 		try {
-			 bev = database.getBeverageData(beverageId);
-			bev.updateCapsuleQuantity(boxQuantity*bev.getCapsulePerBox());
+
+			bev = database.getBeverageData(beverageId);
+			
+			int capsulePerBox = bev.getCapsulePerBoxNew();
+			
+			if (capsulePerBox <= 0) {
+				capsulePerBox = bev.getCapsulePerBox();
+				int numberOfCapsules = boxQuantity*capsulePerBox;
+				
+				bev.updateCapsuleQuantity(boxQuantity*capsulePerBox);
+			} else {
+				
+			int numberOfCapsules = boxQuantity*capsulePerBox;
+			
+			bev.updateCapsuleQuantityNew(boxQuantity*capsulePerBox);
+			}// bev.getCapsulePerBox()
 			
 		}catch(Exception be) {
 			
 			throw new BeverageException();
 		}
 		//then i update latazza account
-			float boxPrice = (float)bev.getBoxPrice();
+			float boxPrice = (float) bev.getBoxPriceNew();
+			
+			if (boxPrice <= 0)
+				boxPrice = (float)bev.getBoxPrice();
+			 
 			 amount = boxPrice * boxQuantity;
 			 float balance = 0;
 			 try {
@@ -205,7 +248,13 @@ public class DataImpl implements DataInterface {
 		//i create the object transaction
 		Date date = new Date();
 		// for transactions of Type P, the attribute numberOfCapsules is irrelevant
-		int numberOfCapsules = boxQuantity*bev.getCapsulePerBox();
+		
+		int capsulePerBox = bev.getCapsulePerBoxNew();
+		
+		if (capsulePerBox <= 0)
+			capsulePerBox = bev.getCapsulePerBox();
+		
+		int numberOfCapsules = boxQuantity*capsulePerBox;
 		Transaction transaction = new Transaction(-1,date,'P',boxQuantity,-1,beverageId,numberOfCapsules, amount,false);
 		try {
 		database.registerTransaction(transaction);
@@ -381,8 +430,18 @@ public class DataImpl implements DataInterface {
 			}
 		 Beverage bev = database.getBeverageData(id);
          bev.setName(name);
-		 bev.setCapsulePerBox(capsulesPerBox);
-		 bev.setBoxPrice(boxPrice);
+		 
+
+		int quantityAvaiable = bev.getQuantityAvailable();
+         
+         if (quantityAvaiable > 0 && (bev.getBoxPrice() != boxPrice || bev.getCapsulePerBox() != capsulesPerBox)) {
+        	 bev.setBoxPriceNew(boxPrice);
+        	 bev.setCapsulePerBoxNew(capsulesPerBox);
+         } else {
+             bev.setCapsulePerBox(capsulesPerBox);
+    		 bev.setBoxPrice(boxPrice); 
+         }
+		 
 		 database.updateBeverage(bev);
 		}catch(Exception be) {
 			throw new BeverageException() ;

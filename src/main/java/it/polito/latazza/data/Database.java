@@ -156,8 +156,11 @@ public class Database {
 			int capsulePerBox = rs.getInt("capsulePerBox");
 			int quantityAvaiable = rs.getInt("quantityAvaiable");
 			float price = rs.getFloat("price");
+			float priceNew = rs.getFloat("priceNew");
+			int capsulePerBoxNew = rs.getInt("capsulePerBoxNew");
+			int quantityAvaiableNew = rs.getInt("quantityAvaiableNew");
 
-			returnList.add(new Beverage(id,quantityAvaiable,price,capsulePerBox,name));
+			returnList.add(new Beverage(id,quantityAvaiable,price,capsulePerBox,name,priceNew,capsulePerBoxNew,quantityAvaiableNew));
 
 		}
 
@@ -187,7 +190,10 @@ public class Database {
 		int capsulePerBox = 0;
 		int quantityAvaiable = 0;
 		float price = 0;
+		float priceNew = 0;
+		int capsulePerBoxNew=0;
 		boolean result=false;
+		int quantityAvaiableNew=0;
 
 		if (rs.next()) {
 			id_u = rs.getInt("id");
@@ -195,6 +201,9 @@ public class Database {
 			capsulePerBox = rs.getInt("capsulePerBox");
 			quantityAvaiable = rs.getInt("quantityAvaiable");
 			price = rs.getFloat("price");
+			priceNew = rs.getFloat("priceNew");
+			capsulePerBoxNew = rs.getInt("capsulePerBoxNew");
+			quantityAvaiableNew = rs.getInt("quantityAvaiableNew");
 
 			result=true;
 		}
@@ -204,7 +213,7 @@ public class Database {
 		if (!result)
 			throw new BeverageException();
 
-		return new Beverage(id_u,quantityAvaiable,price,capsulePerBox,name);
+		return new Beverage(id_u,quantityAvaiable,price,capsulePerBox,name,priceNew,capsulePerBoxNew,quantityAvaiableNew);
 	}
 
 	public double getBalance() throws Exception {
@@ -358,7 +367,7 @@ public class Database {
 
 		connect();
 		int last_inserted_id = -1;
-		String sql = "INSERT INTO Beverage VALUES (NULL,?,?,?,?);";
+		String sql = "INSERT INTO Beverage VALUES (NULL,?,?,?,?,0,0,0);";
 
 
 
@@ -435,7 +444,10 @@ public class Database {
 				"	`quantityAvaiable`	INTEGER NOT NULL DEFAULT 0 CHECK(quantityAvaiable >= 0),\n" +
 				"	`price`	REAL NOT NULL CHECK(price > 0),\n" +
 				"	`capsulePerBox`	INTEGER NOT NULL CHECK(capsulePerBox > 0),\n" +
-				"	`name`	TEXT NOT NULL UNIQUE\n" +
+				"	`name`	TEXT NOT NULL UNIQUE,\n" +
+				"   `capsulePerBoxNew` 	INTEGER NOT NULL DEFAULT 0 CHECK(capsulePerBoxNew >= 0)," +
+				"   `priceNew`	REAL NOT NULL DEFAULT 0 CHECK(priceNew >= 0), " +
+				"   `quantityAvaiableNew`  	INTEGER NOT NULL DEFAULT 0 CHECK(quantityAvaiableNew >= 0)" +
 				");";
 
 		String sql_create_4 = "insert into LaTazza values(0.0)";
@@ -469,7 +481,7 @@ public class Database {
 	public void updateBeverage(Beverage beverage) throws Exception {
 		connect();
 		//int last_inserted_id = -1;
-		String sql = "UPDATE `Beverage` SET `quantityAvaiable`=?,`price`=?,`capsulePerBox`=?,`name`=? WHERE id=?;";
+		String sql = "UPDATE `Beverage` SET `quantityAvaiable`=?,`price`=?,`capsulePerBox`=?,`name`=?,`capsulePerBoxNew`=?,`priceNew`=?,`quantityAvaiableNew`=? WHERE id=?;";
 
 
 		PreparedStatement prep = connection.prepareStatement(sql);
@@ -477,7 +489,10 @@ public class Database {
 		prep.setDouble(2, beverage.getBoxPrice());
 		prep.setInt(3, beverage.getCapsulePerBox());
 		prep.setString(4, beverage.getName());
-		prep.setInt(5, beverage.getId());
+		prep.setInt(5, beverage.getCapsulePerBoxNew());
+		prep.setDouble(6, beverage.getBoxPriceNew());
+		prep.setInt(7, beverage.getQuantityAvailableNew());
+		prep.setInt(8, beverage.getId());
 		int count = prep.executeUpdate();
 
 		prep.close();

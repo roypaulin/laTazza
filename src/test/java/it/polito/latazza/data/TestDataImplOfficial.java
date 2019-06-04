@@ -582,7 +582,7 @@ public class TestDataImplOfficial {
 		tomorrow.add(Calendar.DATE, 1);
 		List<String> report = data.getReport(yesterday.getTime(), tomorrow.getTime());
 		assertEquals(5, report.size());
-		assertTrue(report.get(0).contains("RECHARGE Marco Rossi " + String.format("%.2f \u20ac", 15.0)));
+		assertTrue(report.get(0).contains("RECHARGE Marco Rossi 15.00 \u20ac"));
 		assertTrue(report.get(1).contains("BUY Coffee 2"));
 		assertTrue(report.get(2).contains("CASH Marco Rossi Coffee 1"));
 		assertTrue(report.get(3).contains("VISITOR Coffee 2"));
@@ -632,7 +632,7 @@ public class TestDataImplOfficial {
 		tomorrow.add(Calendar.DATE, 1);
 		List<String> report = data.getEmployeeReport(employee, yesterday.getTime(), tomorrow.getTime());
 		assertEquals(3, report.size());
-		assertTrue(report.get(0).contains("RECHARGE Marco Rossi " + String.format("%.2f \u20ac", 15.0)));
+		assertTrue(report.get(0).contains("RECHARGE Marco Rossi 15.00 \u20ac"));
 		assertTrue(report.get(1).contains("CASH Marco Rossi Coffee 1"));
 		assertTrue(report.get(2).contains("BALANCE Marco Rossi Coffee 3"));
 	}
@@ -678,6 +678,21 @@ public class TestDataImplOfficial {
 		assertEquals(Integer.valueOf(1500), other.getEmployeeBalance(employee));
 		assertEquals(Integer.valueOf(750), other.getBalance());
 		assertEquals(Integer.valueOf(30), other.getBeverageCapsules(beverage));
+	}
+
+	@Test
+	public void testPriceVariation() throws EmployeeException, BeverageException, NotEnoughBalance, NotEnoughCapsules {
+		Integer employee = data.createEmployee(MARCO, ROSSI);
+		data.rechargeAccount(employee, 1500);
+		Integer beverage = data.createBeverage(COFFEE, 5, 500);
+		data.buyBoxes(beverage, 1);
+		data.updateBeverage(beverage, COFFEE, 20, 1000);
+		data.buyBoxes(beverage, 1);
+		Integer balance = data.sellCapsules(employee, beverage, 15, true);
+		assertEquals(Integer.valueOf(500), balance);
+		assertEquals(Integer.valueOf(500), data.getEmployeeBalance(employee));
+		assertEquals(Integer.valueOf(0), data.getBalance());
+		assertEquals(Integer.valueOf(10), data.getBeverageCapsules(beverage));
 	}
 
 }
