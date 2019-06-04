@@ -59,9 +59,11 @@ public class DataImpl implements DataInterface {
 			
 			if (numberOfCapsules-be.getQuantityAvailable() <= 0) {
 				d = (numberOfCapsules*(be.getBoxPrice()/be.getCapsulePerBox()));
-				
-				be.updateCapsuleQuantity(be.getQuantityAvailable()-numberOfCapsules);
-				
+				try {
+				be.updateCapsuleQuantity(-1*numberOfCapsules);
+				}catch(NotEnoughCapsules e) {
+					throw new NotEnoughCapsules();
+				}
 				// update quantity avaiable ONLY OLD VALUE
 			} else {
 				d = (be.getQuantityAvailable()*(be.getBoxPrice()/be.getCapsulePerBox()));
@@ -72,8 +74,8 @@ public class DataImpl implements DataInterface {
 				d+= to_buy*(be.getBoxPriceNew()/be.getCapsulePerBoxNew());
 				
 
-				be.updateCapsuleQuantity(0);
-				be.updateCapsuleQuantityNew(be.getQuantityAvailableNew()-to_buy);
+				be.updateCapsuleQuantity(be.getQuantityAvailable());
+				be.updateCapsuleQuantityNew(-1*to_buy);
 				
 			}
 		//int old_buyed_capsule = numberOfCapsules - be.get
@@ -84,11 +86,7 @@ public class DataImpl implements DataInterface {
             	emp.updateCredit(-1.0*d);
 			
 		}
-		try {
-			be.updateCapsuleQuantity(-1*numberOfCapsules);
-		}catch(NotEnoughCapsules e) {
-			throw new NotEnoughCapsules();
-		}
+		
 		
 		
 		
