@@ -56,9 +56,9 @@ public class DataImpl implements DataInterface {
 		if(numberOfCapsules>0) {
 			
 			double d = 0;
-			
+			double capsulePrice=be.getBoxPrice()/be.getCapsulePerBox();
 			if (numberOfCapsules-be.getQuantityAvailable() <= 0) {
-				d = (numberOfCapsules*(be.getBoxPrice()/be.getCapsulePerBox()));
+				d = (numberOfCapsules*capsulePrice);
 				try {
 				be.updateCapsuleQuantity(-1*numberOfCapsules);
 				}catch(NotEnoughCapsules e) {
@@ -66,9 +66,9 @@ public class DataImpl implements DataInterface {
 				}
 				// update quantity avaiable ONLY OLD VALUE
 			} else {
-				d = (be.getQuantityAvailable()*(be.getBoxPrice()/be.getCapsulePerBox()));
+				d = (be.getQuantityAvailable()*capsulePrice);
 				int to_buy = (numberOfCapsules-be.getQuantityAvailable());
-				if (to_buy > be.getBoxPriceNew())
+				if (to_buy > be.getQuantityAvailableNew())
 					throw new NotEnoughCapsules();
 				
 				d+= to_buy*(be.getBoxPriceNew()/be.getCapsulePerBoxNew());
@@ -118,7 +118,7 @@ public class DataImpl implements DataInterface {
 			throws BeverageException, NotEnoughCapsules {
 		Beverage be;
 		double balance=0;
-		
+		int numCapsules=0;
 		try {
 			be=database.getBeverageData(beverageId);
 		
@@ -129,31 +129,35 @@ public class DataImpl implements DataInterface {
 			throw new NotEnoughCapsules();
 		}
 		if(numberOfCapsules>0) {
-			
-
-			double d = 0;
-			
+              double d = 0;
+              double capsulePriceNew=be.getBoxPriceNew()/be.getCapsulePerBoxNew();
 			if (numberOfCapsules-be.getQuantityAvailable() <= 0) {
 				d = (numberOfCapsules*(be.getBoxPrice()/be.getCapsulePerBox()));
-				try {
-				be.updateCapsuleQuantity(-1*numberOfCapsules);
-				}catch(NotEnoughCapsules e) {
-					throw new NotEnoughCapsules();
-				}
+				numCapsules=numberOfCapsules;
+			
 				// update quantity avaiable ONLY OLD VALUE
 			} else {
 				d = (be.getQuantityAvailable()*(be.getBoxPrice()/be.getCapsulePerBox()));
 				int to_buy = (numberOfCapsules-be.getQuantityAvailable());
-				if (to_buy > be.getBoxPriceNew())
-					throw new NotEnoughCapsules();
-				
-				d+= to_buy*(be.getBoxPriceNew()/be.getCapsulePerBoxNew());
+			
+				d+= to_buy*(capsulePriceNew);
 				
 
-				be.updateCapsuleQuantity(be.getQuantityAvailable());
+				//be.updateCapsuleQuantity(-1*be.getQuantityAvailable());
+				numCapsules=be.getQuantityAvailable();
+				try {
 				be.updateCapsuleQuantityNew(-1*to_buy);
-				
+				}catch(NotEnoughCapsules e) {
+					throw new NotEnoughCapsules();
+				}
 			}
+			
+			try {
+				be.updateCapsuleQuantity(-1*numCapsules);
+				}catch(NotEnoughCapsules e) {
+					throw new NotEnoughCapsules();
+				}
+			
 		Transaction tr=new Transaction(-1,new Date(),'C',-1,-1,beverageId,numberOfCapsules,-1,false);
 		try {
 			balance=database.getBalance();
