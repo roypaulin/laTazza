@@ -78,10 +78,7 @@ public class DataImpl implements DataInterface {
 				be.updateCapsuleQuantityNew(-1*to_buy);
 				
 			}
-		//int old_buyed_capsule = numberOfCapsules - be.get
-				
-		//		(old_buyed_capsule*(be.getBoxPrice()/be.getCapsulePerBox()));
-		//double d=
+		
 		if(fromAccount) {
             	emp.updateCredit(-1.0*d);
 			
