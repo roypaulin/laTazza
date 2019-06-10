@@ -4,7 +4,7 @@ Authors: Maurizio Morisio, Luca Ardito, Riccardo Coppola
 
 Date: 29/05/2019
 
-Version: 4
+Version: 5
 
 Change history
 
@@ -17,6 +17,7 @@ Change history
 | |  Added Non functional requirement NFR5 |
 | 4 | Fixed defect in [use case 3]: post condition is on Colleague account, and LaTazza|
 | | Fixed defect in [use case 1]: post condition is on Colleague account, not LaTazza|
+| 5 | Fized defect in [use case 4]: precondition modified |
 
 # Contents
 - [Abstract](#abstract)
@@ -156,7 +157,7 @@ a -- (FR6 Produce report on all consumptions)
 
 | Actors Involved        | Administrator |
 | ------------- |:-------------:| 
-|  Precondition     | Capsule type CT exists |  
+|  Precondition     | Capsule type CT exists,  LaTazzaAccount.balance has enough money for the purchase|  
 |  Post condition     | CT.quantity_post > CT.quantity _pre |
 | | LaTazzaAccount.balance_post < LaTazzaAccount.balance_pre|
 |  Nominal Scenario     | At time of order Administrator records money spent for order. At time of reception administrator selects capsule type CT, increases its quantity by a given number|
