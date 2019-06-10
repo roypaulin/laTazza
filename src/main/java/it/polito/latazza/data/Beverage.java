@@ -15,6 +15,25 @@ public class Beverage {
 	int id,quantityAvailable;
 	double boxPrice;
 	int capsulePerBox;
+	int capsulePerBoxNew;
+	double boxPriceNew;
+	int quantityAvaiableNew;
+	
+	public void setBoxPriceNew(double boxPriceNew) {
+		this.boxPriceNew = boxPriceNew;
+	}
+	
+	public void setCapsulePerBoxNew(int capsulePerBoxNew) {
+		this.capsulePerBoxNew = capsulePerBoxNew;
+	}
+	
+	public double getBoxPriceNew() {
+		return boxPriceNew;
+	}
+	
+	public int getCapsulePerBoxNew() {
+		return capsulePerBoxNew;
+	}
 	
 	public int getId() {
 		return id;
@@ -46,6 +65,18 @@ public class Beverage {
 	}
 
 	String name;
+	public Beverage(int id, int quantityAvailable, double boxPrice, int capsulePerBox, String name, float priceNew, int capsulePerBoxNew, int quantityAvaiableNew) {
+		super();
+		this.id = id;
+		this.quantityAvailable = quantityAvailable;
+		this.boxPrice = boxPrice;
+		this.capsulePerBox = capsulePerBox;
+		this.name = name;
+		this.capsulePerBoxNew = capsulePerBoxNew;
+		this.boxPriceNew = priceNew;
+		this.quantityAvaiableNew = quantityAvaiableNew;
+	}
+	
 	public Beverage(int id, int quantityAvailable, double boxPrice, int capsulePerBox, String name) {
 		super();
 		this.id = id;
@@ -53,6 +84,9 @@ public class Beverage {
 		this.boxPrice = boxPrice;
 		this.capsulePerBox = capsulePerBox;
 		this.name = name;
+		this.capsulePerBoxNew = 0;
+		this.boxPriceNew = 0;
+		this.quantityAvaiableNew = 0;
 	}
 
     /*The Quantity can be either positive buying capsules or negative selling*/
@@ -62,5 +96,17 @@ public class Beverage {
 		}
 		 this.quantityAvailable += quantity ;
 		 return ;
+	}
+	
+	public void updateCapsuleQuantityNew(int quantity)throws NotEnoughCapsules {
+		if((this.quantityAvaiableNew +quantity)< 0) {
+			throw new NotEnoughCapsules() ;
+		}
+		 this.quantityAvaiableNew += quantity ;
+		 return ;
+	}
+
+	public int getQuantityAvailableNew() {
+		return quantityAvaiableNew;
 	}
 }
