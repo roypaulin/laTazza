@@ -1,0 +1,2 @@
+Click "{ImageFolder}/1558443319967.png" 8 86
+Click "{ImageFolder}/1558443348209.png" 52 80
