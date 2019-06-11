@@ -101,6 +101,11 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>it.polito.latazza</groupId>
+				<artifactId>latazza-gui</artifactId>
+				<version>1.1.0</version>
+			</plugin>
 		</plugins>
 	</build>
 	<dependencies>
@@ -138,7 +143,13 @@
 		<dependency>
 			<groupId>it.polito.latazza</groupId>
 			<artifactId>latazza-gui</artifactId>
-			<version>1.0.1</version>
+			<version>1.1.0</version>
         </dependency>
+		<!-- <dependency>
+			<groupId>it.polito.latazza</groupId>
+			<artifactId>latazza-gui</artifactId>
+			<version>1.1.0</version>
+		</dependency>
+		 -->
 	</dependencies>
 </project>
