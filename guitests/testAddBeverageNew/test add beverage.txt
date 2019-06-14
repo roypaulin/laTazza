@@ -1,0 +1,12 @@
+
+Click "{ImageFolder}/1558437545671.png" 33 34
+Click "{ImageFolder}/1558437485074.png" 43 43
+Click "{ImageFolder}/1558438709686.png" 55 68
+Type "Coffie"
+Click "{ImageFolder}/1558438709686.png" 55 79
+Type "50"
+Click "{ImageFolder}/1558438709686.png" 53 88
+Type "10"
+Click "{ImageFolder}/1558438709686.png" 53 88
+Click "{ImageFolder}/1558438709686.png" 36 98
+Click "{ImageFolder}/1558438894687.png" 65 37
