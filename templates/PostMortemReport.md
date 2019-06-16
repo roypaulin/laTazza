@@ -49,7 +49,8 @@ The tools used were during all the phases(Requirements,Design,Coding,Testing)wer
 
 <Report here any other comment or suggestion >
 
-We think that the course in general was well structured and the project very helpfull because we faced a lot of issues NOT only related to coding but often also to coding or testing enviroment and also to the build ebviroment; We now understand better the famous sentence "Software is not only about coding!!", it has also been a way for us to develop our team wok skill. However in order to improve the student experince during the project, we will suggest the following:
+We think that the course in general was well structured and the project very helpfull because we faced a lot of issues NOT only related to coding but often also to testing and build ebviroment; 
+We now understand better the famous sentence "Software is not only about coding!!", it has also been a way for us to develop our team wok skill. However in order to improve the student experince during the project, we will suggest the following:
 
 
 *Improve the response time on slack, especially during the week-end when we are closed to the deadline; or if it's not possible for you teachers to be available during the wee-end, it may be a good idea to posticipate the deadline and put in working days.
