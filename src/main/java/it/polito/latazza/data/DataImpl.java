@@ -79,7 +79,7 @@ public class DataImpl implements DataInterface {
 				
 			}
 		//int old_buyed_capsule = numberOfCapsules - be.get
-				
+
 		//		(old_buyed_capsule*(be.getBoxPrice()/be.getCapsulePerBox()));
 		//double d=
 		if(fromAccount) {
